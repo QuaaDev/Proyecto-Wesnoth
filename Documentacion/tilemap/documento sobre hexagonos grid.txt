@@ -1,0 +1,3 @@
+https://www.redblobgames.com/grids/hexagons/
+
+informacion relacionada a un grid hecho con hexagonos
