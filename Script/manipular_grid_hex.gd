@@ -4,13 +4,8 @@ var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadri
 @onready var tile_map_hud: TileMapLayer = $tile_map_hud
 @onready var label_coordenadas: Label = $"../coordenadas_local"
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT: #Si se apreta el mouse izq
-			if event.pressed:
-				#print(get_viewport().get_mouse_position()) #obtiene la posicion del mouse
-				#print(coordenada_global_del_mouse_a_tilemap())
-				pass
+func _input(_event):
+	pass
 
 func _ready() -> void:
 	pass
