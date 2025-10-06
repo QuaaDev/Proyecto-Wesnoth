@@ -10,10 +10,6 @@ func _input(event):
 				print(get_viewport().get_mouse_position()) #obtiene la posicion del mouse
 				print(coordenada_global_del_mouse_a_tilemap())
 
-func coordenada_global_del_mouse_a_tilemap() -> Vector2:
-	#devuelve la ubicacion global del mouse convertida en las coordenadas del tilemap
-	return tile_map_hud.local_to_map(get_viewport().get_mouse_position())
-
 func _ready() -> void:
 	pass
 func _process(_delta: float) -> void:
@@ -23,3 +19,8 @@ func _process(_delta: float) -> void:
 		tile_map_hud.set_cell(cuadricula_seleccionada_mouse, 0, Vector2i(0,0), 0) #Dibuja el hud de la cuadricula seleccionada
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------
 		
+
+func coordenada_global_del_mouse_a_tilemap() -> Vector2:
+	#devuelve la ubicacion global del mouse convertida en las coordenadas del tilemap
+	return tile_map_hud.local_to_map(get_viewport().get_mouse_position())
+	
