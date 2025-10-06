@@ -18,7 +18,7 @@ func _ready() -> void:
 	pass
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
-		tile_map_hud.erase_cell(cuadricula_seleccionada_mouse) #Desactiva el hud de la anterior coordenada
+		tile_map_hud.set_cell(cuadricula_seleccionada_mouse,2,Vector2(0,0),0)#Dibuja el tilemap  de contorno
 		cuadricula_seleccionada_mouse = coordenada_global_del_mouse_a_tilemap() #Actualiza la coordenada de la nueva seleccionada
 		tile_map_hud.set_cell(cuadricula_seleccionada_mouse, 0, Vector2i(0,0), 0) #Dibuja el hud de la cuadricula seleccionada
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------

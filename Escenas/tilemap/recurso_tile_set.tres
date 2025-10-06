@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b7fkkp3w8rnq2"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://b7fkkp3w8rnq2"]
 
 [ext_resource type="Texture2D" uid="uid://cjj6fff3bcfc" path="res://Assets/tilemap/contorno_hex_tilemap.png" id="1_tea86"]
 [ext_resource type="Texture2D" uid="uid://dxwuph5467cgt" path="res://Assets/tilemap/tilemap-hex-prueba.png" id="2_civ2t"]
+[ext_resource type="Texture2D" uid="uid://c1j0j7durtvji" path="res://Assets/tilemap/grid.png" id="3_civ2t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1lnfd"]
 texture = ExtResource("1_tea86")
@@ -20,9 +21,15 @@ texture_region_size = Vector2i(72, 72)
 6:0/0 = 0
 7:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x7alg"]
+texture = ExtResource("3_civ2t")
+texture_region_size = Vector2i(72, 72)
+0:0/0 = 0
+
 [resource]
 tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(72, 72)
 sources/1 = SubResource("TileSetAtlasSource_ie3gl")
 sources/0 = SubResource("TileSetAtlasSource_1lnfd")
+sources/2 = SubResource("TileSetAtlasSource_x7alg")
