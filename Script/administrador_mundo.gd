@@ -2,6 +2,8 @@ extends Node
 var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
 @onready var tile_map: Node2D = $TileMap
+@onready var label_unidad_moviendose: Label = $VBoxContainer/nombre_unidad_moviendose
+
 var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas junto a sus unidades
 
 func _ready() -> void:
@@ -21,13 +23,15 @@ func _input(event):
 						unidad_a_mover = mouse_sobre_unidad
 						unidad_a_mover.siendo_movido()
 						print("Almaceno unidad")
+						label_unidad_moviendose.text = unidad_a_mover.name
 					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 						#Se selecciona la casilla a moverse
 						print("muevo unidad a espacio vacio")
 						unidad_a_mover.ya_no_me_mueven()
 						mover_unidad(unidad_a_mover)
-						unidad_a_mover = null
+						label_unidad_moviendose.text = "null"
+						unidad_a_mover = null #<--- ultimo en ejecutar
 					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
 						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
 						if verificar_si_son_aliados():
@@ -35,15 +39,20 @@ func _input(event):
 							print("Son aliadas las unidades, no puedes mover aqui")
 						else:
 							#Si son enemigos, lo ataca >:)
+							print("Te ataco!")
 							ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
 							ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
 							mover_unidad(unidad_a_mover)
+							unidad_a_mover.ya_no_me_mueven()
+							label_unidad_moviendose.text = "null"
+							unidad_a_mover = null#<--- ultimo en ejecutar
 						pass
 					elif mouse_sobre_unidad != null and mouse_sobre_unidad == unidad_a_mover:
 						#If el mouse esta arriba de una unidad AND la unidad es la propia unidad que se mueve:
 						#Se cancela el movimiento
 						print("Cancelo movimiento")
 						unidad_a_mover.ya_no_me_mueven()
+						label_unidad_moviendose.text = "null"
 						unidad_a_mover = null
 					else:
 						#Error

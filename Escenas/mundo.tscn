@@ -7,18 +7,24 @@
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="coordenadas_local" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="nombre_unidad_moviendose" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="TileMap" parent="." instance=ExtResource("1_wxucn")]
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(395, 169)
 
-[node name="coordenadas_local" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(140, 176)
-equipo = 1
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(252, 86)

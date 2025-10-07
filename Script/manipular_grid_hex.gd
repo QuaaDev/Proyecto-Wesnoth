@@ -2,7 +2,7 @@ extends Node2D
 var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadricula que fue seleccionada por el codigo
 
 @onready var tile_map_hud: TileMapLayer = $tile_map_hud
-@onready var label_coordenadas: Label = $"../coordenadas_local"
+@onready var label_coordenadas: Label = $"../VBoxContainer/coordenadas_local"
 
 func _input(_event):
 	pass
