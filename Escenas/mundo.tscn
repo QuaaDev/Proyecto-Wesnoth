@@ -11,7 +11,6 @@ script = ExtResource("1_bqhdr")
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(395, 169)
-equipo = 3
 
 [node name="coordenadas_local" type="Label" parent="."]
 offset_right = 40.0

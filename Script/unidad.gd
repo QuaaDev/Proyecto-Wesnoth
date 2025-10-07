@@ -14,6 +14,8 @@ func _ready() -> void:
 	#Terminar esto luego, el codigo no funciona prq el nodo "tilemap" es un node2d, no un nodo XD
 	pass
 
+func morir():
+	self.queue_free()
 
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap
 	coordenada_local_tilemap = tile_map.local_to_map(position)#Posicion local del tilemap
@@ -25,11 +27,11 @@ func ya_no_me_mueven() -> void:
 	self.modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 
-func _on_area_2d_mouse_entered() -> void:
+func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administrador mundo para informarle de que esta unidad esta bajo el mouse
 	nodo_mundo.obtener_unidad_bajo_mouse(self)
 
 
-func _on_area_2d_mouse_exited() -> void:
+func _on_area_2d_mouse_exited() -> void:#Actualiza la informacion de administrador mundo para informarle de que esta unidad ya no esta bajo el mouse
 	nodo_mundo.limpiar_unidad_bajo_mouse()
 
 func get_coordenada_local_tilemap() -> Vector2:
