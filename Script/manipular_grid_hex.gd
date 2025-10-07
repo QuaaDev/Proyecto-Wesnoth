@@ -28,3 +28,6 @@ func local_to_map(valor : Vector2):
 	
 func map_to_local(valor : Vector2):
 	return tile_map_hud.map_to_local(valor)
+
+# 4-0 bosquesitos
+#5-0
