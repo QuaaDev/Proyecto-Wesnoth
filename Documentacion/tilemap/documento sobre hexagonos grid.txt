@@ -3,3 +3,6 @@ https://www.redblobgames.com/grids/hexagons/
 informacion relacionada a un grid hecho con hexagonos
 Este proyecto organiza los hexagonos con el diseño vertical "odd-q", desplaza las columnas verticales hacia abajo
 Coordenadas de desplazamiento
+
+guia de pathfinding:
+https://www.redblobgames.com/pathfinding/a-star/introduction.html

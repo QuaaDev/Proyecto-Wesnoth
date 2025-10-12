@@ -33,6 +33,7 @@ func moviendo_unidad(unidad : Node2D) -> void:
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
 				#await get_tree().create_timer(1.0).timeout
 		dibujando_tile_map(reached)
+		
 func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de X tile hex
 	var vecinos = []
 	#even = par , odd = impar
