@@ -2,7 +2,7 @@ extends Node2D
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
-@export var puntos_movimiento = 5
+@export var puntos_movimiento = 2
 @export var equipo : int = 0
 
 func _ready() -> void:

@@ -21,7 +21,7 @@ layout_mode = 2
 [node name="TileMap" parent="." instance=ExtResource("1_wxucn")]
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
-position = Vector2(395, 169)
+position = Vector2(577, 317)
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(140, 176)
