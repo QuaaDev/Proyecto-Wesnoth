@@ -8,7 +8,9 @@ func _input(_event):
 	pass
 
 func _ready() -> void:
-	pass
+	AlgoritmoDijkstra.tile_map = self
+	AlgoritmoDijkstra.tile_map_hud = tile_map_hud
+	
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
 		tile_map_hud.set_cell(cuadricula_seleccionada_mouse,2,Vector2(0,0),0)#Dibuja el tilemap  de contorno
@@ -17,6 +19,7 @@ func _process(_delta: float) -> void:
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------
 	label_coordenadas.text = "coordenadas del tilemap: " + str(coordenada_global_del_mouse_a_tilemap())
 	#imprime en la pantalla las coordenadas exactas segun la posicion del mouse
+	
 func coordenada_global_del_mouse_a_tilemap() -> Vector2:
 	#devuelve la ubicacion global del mouse convertida en las coordenadas del tilemap
 	return tile_map_hud.local_to_map(get_viewport().get_mouse_position())
@@ -28,6 +31,3 @@ func local_to_map(valor : Vector2):
 	
 func map_to_local(valor : Vector2):
 	return tile_map_hud.map_to_local(valor)
-
-# 4-0 bosquesitos
-#5-0

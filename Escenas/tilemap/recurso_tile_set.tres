@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://b7fkkp3w8rnq2"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b7fkkp3w8rnq2"]
 
 [ext_resource type="Texture2D" uid="uid://cjj6fff3bcfc" path="res://Assets/tilemap/contorno_hex_tilemap.png" id="1_tea86"]
 [ext_resource type="Texture2D" uid="uid://dxwuph5467cgt" path="res://Assets/tilemap/tilemap-hex-prueba.png" id="2_civ2t"]
 [ext_resource type="Texture2D" uid="uid://c1j0j7durtvji" path="res://Assets/tilemap/grid.png" id="3_civ2t"]
+[ext_resource type="Texture2D" uid="uid://c47aehovk22mn" path="res://Assets/tilemap/ui_can_move_here.png" id="4_1lnfd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1lnfd"]
 texture = ExtResource("1_tea86")
@@ -13,16 +14,29 @@ texture_region_size = Vector2i(72, 72)
 texture = ExtResource("2_civ2t")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
+0:0/0/custom_data_2 = 1
 1:0/0 = 0
+1:0/0/custom_data_2 = 1
 2:0/0 = 0
+2:0/0/custom_data_2 = 1
 3:0/0 = 0
+3:0/0/custom_data_2 = 2
 4:0/0 = 0
+4:0/0/custom_data_2 = 2
 5:0/0 = 0
+5:0/0/custom_data_2 = 2
 6:0/0 = 0
+6:0/0/custom_data_2 = 4
 7:0/0 = 0
+7:0/0/custom_data_2 = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x7alg"]
 texture = ExtResource("3_civ2t")
+texture_region_size = Vector2i(72, 72)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iepl6"]
+texture = ExtResource("4_1lnfd")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
 
@@ -34,6 +48,9 @@ custom_data_layer_0/name = "tipo_terreno_id"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "terreno_caminale"
 custom_data_layer_1/type = 2
+custom_data_layer_2/name = "resistencia_movimiento"
+custom_data_layer_2/type = 2
 sources/1 = SubResource("TileSetAtlasSource_ie3gl")
 sources/0 = SubResource("TileSetAtlasSource_1lnfd")
 sources/2 = SubResource("TileSetAtlasSource_x7alg")
+sources/3 = SubResource("TileSetAtlasSource_iepl6")
