@@ -31,22 +31,14 @@ func moviendo_unidad(unidad : Node2D) -> void:
 			if not reached.has(next):#Si el nodo ya fue explorado, lo omite
 				reached[next] = distancia_actual + 1#Almacena la ubicacion como ya explorada y aumenta los puntos de movimiento utilizados
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
-				await get_tree().create_timer(1.0).timeout
-				dibujando_tile_individual(next)
+				#await get_tree().create_timer(1.0).timeout
+		dibujando_tile_map(reached)
 func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de X tile hex
 	var vecinos = []
-	if int(origen.x + origen.y) % 2 == 0:
+	#even = par , odd = impar
+	if int(origen.x) % 2 == 0: #Si la columna es par
 		print("Columna par")
-		#[[+1, +1], [+1,  0], [ 0, -1], 
-	 	#[-1,  0], [-1, +1], [ 0, +1]]
-		vecinos.append(Vector2(origen.x + 1 , origen.y + 1))
-		vecinos.append(Vector2(origen.x + 1, origen.y))
-		vecinos.append(Vector2(origen.x , origen.y - 1))
-		vecinos.append(Vector2(origen.x- 1 , origen.y))
-		vecinos.append(Vector2(origen.x - 1, origen.y + 1))
-		vecinos.append(Vector2(origen.x , origen.y + 1))
-	else:
-		print("columna impar")
+		#-------------------
 		#[[+1,  0], [+1, -1], [ 0, -1], 
 		# [-1, -1], [-1,  0], [ 0, +1]],
 		vecinos.append(Vector2(origen.x + 1 , origen.y))
@@ -54,6 +46,16 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 		vecinos.append(Vector2(origen.x , origen.y - 1))
 		vecinos.append(Vector2(origen.x - 1, origen.y - 1))
 		vecinos.append(Vector2(origen.x - 1, origen.y))
+		vecinos.append(Vector2(origen.x , origen.y + 1))
+	else:
+		print("columna impar")
+		#[[+1, +1], [+1,  0], [ 0, -1], 
+	 	#[-1,  0], [-1, +1], [ 0, +1]]
+		vecinos.append(Vector2(origen.x + 1 , origen.y + 1))
+		vecinos.append(Vector2(origen.x + 1, origen.y))
+		vecinos.append(Vector2(origen.x , origen.y - 1))
+		vecinos.append(Vector2(origen.x- 1 , origen.y))
+		vecinos.append(Vector2(origen.x - 1, origen.y + 1))
 		vecinos.append(Vector2(origen.x , origen.y + 1))
 	#print(vecinos)
 	return vecinos
