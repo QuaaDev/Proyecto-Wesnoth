@@ -25,10 +25,8 @@ func moviendo_unidad(unidad : Node2D) -> void:
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
 	var frontier = [] #Almacena las fronteras que hay que explorar
 	frontier.append(start) #Donde empieza la ejecucion
-	
 	var reached = {} #Almacena las casillas ya exploradas
 	reached[start] = 0#Almacena la cantidad de puntos de movimiento que consume
-	
 	while frontier.size() > 0: #Mientras existan mas fronteras:
 		var current = frontier.pop_front() #Selecciona la primera frontera y la elimina del array
 		
@@ -38,8 +36,9 @@ func moviendo_unidad(unidad : Node2D) -> void:
 			continue#Omite esta ejecucion del while
 		
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
-			if not reached.has(next):#Si el nodo ya fue explorado, lo omite
-				reached[next] = distancia_actual + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento del siguiente tile y aumenta la cantidad de movimientos usados
+			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
+			if not reached.has(next) or nuevo_costo < reached[next]:#Si el nodo ya fue explorado, lo omite
+				reached[next] = nuevo_costo
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
 	dibujando_tile_map(reached)
 	movimientos_disponibles = reached.duplicate() #Almacena los movimientos disponibles
