@@ -34,7 +34,7 @@ func moviendo_unidad(unidad : Node2D) -> void:
 		
 		var distancia_actual = reached[current]#Almacena la distancia que se recorrio desde start
 		
-		if distancia_actual > cantidad_de_movimiento_maximo: #Si alcanza el limite de movimiento
+		if distancia_actual >= cantidad_de_movimiento_maximo: #Si alcanza el limite de movimiento
 			continue#Omite esta ejecucion del while
 		
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
