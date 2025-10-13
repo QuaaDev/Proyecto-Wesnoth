@@ -80,6 +80,8 @@ func mover_unidad(unidad : Node2D):
 	var interruptor_while := true
 	var coordenada_origen = coordenadas_mouse #El origen es desde la posicion que se calcula los tiles vecinos
 	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
+	print("Coordenada del error: 6,5")
+	print(AlgoritmoDijkstra.movimientos_disponibles[Vector2(6,5)])
 	while interruptor_while: #Mientras el interruptor sea verdadero
 		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
 		for i in opciones:#Explora todos los posibles vecinos
@@ -90,14 +92,23 @@ func mover_unidad(unidad : Node2D):
 					coordenada_mas_barata_actual = i #Almacena temporalmente la coordenada mas barata actual
 			else:
 				print(i , "Opcion no esta dentro de movimientos validos")
+		print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
 		camino_a_seguir.append(coordenada_mas_barata_actual)#Luego de explorar todas las opciones, almacena la que fue mas barato
 		coordenada_origen = coordenada_mas_barata_actual#Actualiza la coordenada origen para la siguiente ejecucion
 		if opcion_mas_barata <= 0:#Si el valor es 0 o menos, significa que se llego al final del recorrido
 			interruptor_while = false#Apaga el while
 	#--------actualiza la posicion de la unidad----------
-	unidad.position = nueva_posicion_unidad #Mueve a la unidad
-	#print(ubicaciones_ocupadas)
+	#unidad.position = nueva_posicion_unidad #Mueve a la unidad
+	camino_a_seguir.reverse() #Invierte el orden del array
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	for i in camino_a_seguir:
+		var new_position = tile_map.map_to_local(i)
+		tween.tween_property(unidad,"position",new_position, .7)
+	#Objeto a aplicar / propiedad a editar / ubicacion objetivo / velocidad de la animacion
 	print(camino_a_seguir)
+	#print(ubicaciones_ocupadas)
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
 	if mouse_sobre_unidad.equipo == unidad_a_mover.equipo:

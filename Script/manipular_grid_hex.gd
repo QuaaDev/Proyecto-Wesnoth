@@ -28,8 +28,8 @@ func coordenada_global_del_mouse_a_tilemap() -> Vector2:
 	
 	
 #---------func de tilemap-----------
-func local_to_map(valor : Vector2):
+func local_to_map(valor : Vector2) -> Vector2:
 	return tile_map_hud.local_to_map(valor)
 	
-func map_to_local(valor : Vector2):
+func map_to_local(valor : Vector2) -> Vector2:
 	return tile_map_hud.map_to_local(valor)
