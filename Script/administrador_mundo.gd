@@ -67,15 +67,36 @@ func _input(event):
 						print("Click Izquierdo condicion no reconocida, valores: ")
 						
 func mover_unidad(unidad : Node2D):
+	#AlgoritmoDijkstra.movimientos_disponibles
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
 	var nueva_posicion_unidad = tile_map.map_to_local(coordenadas_mouse)
 	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
 	unidad.coordenada_local_tilemap = coordenadas_mouse #Actualiza la informacion q tiene la unidad
 	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
-	unidad.position = nueva_posicion_unidad #Mueve a la unidad
-	
-	print(ubicaciones_ocupadas)
+	#--------------obtener las coordenadas para el camino--------
+	var coordenada_mas_barata_actual : Vector2
+	var opcion_mas_barata := 100 
+	var camino_a_seguir = [] #Almacena las coordenadas en orden del camino de destino -> origen
+	var interruptor_while := true
+	var coordenada_origen = coordenadas_mouse
+	camino_a_seguir.append(coordenada_origen)
+	while interruptor_while:
+		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)
+		for i in opciones:
+			if AlgoritmoDijkstra.movimientos_disponibles.has(i):
+				if AlgoritmoDijkstra.movimientos_disponibles[i] < opcion_mas_barata:
+					opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i]
+					coordenada_mas_barata_actual = i
+			else:
+				print(i , "Opcion no esta dentro de movimientos validos")
+		camino_a_seguir.append(coordenada_mas_barata_actual)
+		coordenada_origen = coordenada_mas_barata_actual
+		if opcion_mas_barata <= 0:
+			interruptor_while = false
 	#--------actualiza la posicion de la unidad----------
+	unidad.position = nueva_posicion_unidad #Mueve a la unidad
+	#print(ubicaciones_ocupadas)
+	print(camino_a_seguir)
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
 	if mouse_sobre_unidad.equipo == unidad_a_mover.equipo:
