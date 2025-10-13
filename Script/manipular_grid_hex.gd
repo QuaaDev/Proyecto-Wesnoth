@@ -2,6 +2,7 @@ extends Node2D
 var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadricula que fue seleccionada por el codigo
 
 @onready var tile_map_hud: TileMapLayer = $tile_map_hud
+@onready var tile_map_base: TileMapLayer = $tile_map_base
 @onready var label_coordenadas: Label = $"../VBoxContainer/coordenadas_local"
 
 func _input(_event):
@@ -10,6 +11,7 @@ func _input(_event):
 func _ready() -> void:
 	AlgoritmoDijkstra.tile_map = self
 	AlgoritmoDijkstra.tile_map_hud = tile_map_hud
+	AlgoritmoDijkstra.tile_map_base = tile_map_base
 	
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada

@@ -1,6 +1,7 @@
 extends Node
 var tile_map : Node2D
 var tile_map_hud : TileMapLayer
+var tile_map_base : TileMapLayer
 
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
@@ -9,6 +10,15 @@ func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 func dibujando_tile_individual(ubicacion : Vector2) -> void:
 	tile_map_hud.set_cell(ubicacion,3,Vector2(0,0),0)
 	
+func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int:
+	var data = tile_map_base.get_cell_tile_data(coordenadas)
+	if data:
+		print(data.get_custom_data("resistencia_movimiento"))
+		return data.get_custom_data("resistencia_movimiento")
+	else:
+		print("Error data no encontrada obtener_coste_movimiento_tile")
+		return 1
+
 func moviendo_unidad(unidad : Node2D) -> void:
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
@@ -29,7 +39,8 @@ func moviendo_unidad(unidad : Node2D) -> void:
 		
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
 			if not reached.has(next):#Si el nodo ya fue explorado, lo omite
-				reached[next] = distancia_actual + 1#Almacena la ubicacion como ya explorada y aumenta los puntos de movimiento utilizados
+				#reached[next] = distancia_actual + 1#Almacena la ubicacion como ya explorada y aumenta los puntos de movimiento utilizados
+				reached[next] = distancia_actual + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento del siguiente tile y aumenta la cantidad de movimientos usados
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
 				#await get_tree().create_timer(1.0).timeout
 		dibujando_tile_map(reached)
