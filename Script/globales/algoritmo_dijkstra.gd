@@ -20,7 +20,7 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		return 1
 
 func moviendo_unidad(unidad : Node2D) -> void:
-	movimientos_disponibles.clear() #Limpia la anterior lista de movimientos
+	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
 	var frontier = [] #Almacena las fronteras que hay que explorar
@@ -74,3 +74,6 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 		vecinos.append(Vector2(origen.x , origen.y + 1))
 	#print(vecinos)
 	return vecinos
+
+func limpiar_movimientos() -> void:
+	movimientos_disponibles.clear()

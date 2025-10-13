@@ -23,16 +23,23 @@ func _input(event):
 						unidad_a_mover.siendo_movido()
 						print("Almaceno unidad")
 						label_unidad_moviendose.text = unidad_a_mover.name
-						#AlgoritmoDijkstra.get_neighbors(unidad_a_mover.coordenada_local_tilemap)
 						AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
 					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 						#Se selecciona la casilla a moverse
-						print("muevo unidad a espacio vacio")
-						unidad_a_mover.ya_no_me_mueven()
-						mover_unidad(unidad_a_mover)
-						label_unidad_moviendose.text = "null"
-						unidad_a_mover = null #<--- ultimo en ejecutar
+						if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):
+							#If el tile al que intento mover ESTA DENTRO del diccionario de movimientos:
+							print("muevo unidad a espacio vacio")
+							unidad_a_mover.ya_no_me_mueven()
+							mover_unidad(unidad_a_mover)
+							label_unidad_moviendose.text = "null"
+							unidad_a_mover = null #<--- ultimo en ejecutar
+						else:
+							print("Cancelo movimiento por intentar moverme fuera del rango")
+							unidad_a_mover.ya_no_me_mueven()
+							label_unidad_moviendose.text = "null"
+							unidad_a_mover = null
+							
 					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
 						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
 						if verificar_si_son_aliados():
