@@ -22,7 +22,7 @@ layout_mode = 2
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(577, 317)
-puntos_movimiento = 7
+puntos_movimiento = 1000
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(140, 176)
