@@ -2,6 +2,7 @@ extends Node
 var tile_map : Node2D
 var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
+var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Dijkstra para su posterior uso
 
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
@@ -10,16 +11,16 @@ func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 func dibujando_tile_individual(ubicacion : Vector2) -> void:
 	tile_map_hud.set_cell(ubicacion,3,Vector2(0,0),0)
 	
-func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int:
+func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el coste de movimiento de cada tile
 	var data = tile_map_base.get_cell_tile_data(coordenadas)
 	if data:
-		print(data.get_custom_data("resistencia_movimiento"))
 		return data.get_custom_data("resistencia_movimiento")
 	else:
 		print("Error data no encontrada obtener_coste_movimiento_tile")
 		return 1
 
 func moviendo_unidad(unidad : Node2D) -> void:
+	movimientos_disponibles.clear() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
 	var frontier = [] #Almacena las fronteras que hay que explorar
@@ -30,7 +31,7 @@ func moviendo_unidad(unidad : Node2D) -> void:
 	
 	while frontier.size() > 0: #Mientras existan mas fronteras:
 		var current = frontier.pop_front() #Selecciona la primera frontera y la elimina del array
-		print("Visitando:", current, reached[current])
+		#print("Visitando:", current, reached[current])
 		
 		var distancia_actual = reached[current]#Almacena la distancia que se recorrio desde start
 		
@@ -43,13 +44,15 @@ func moviendo_unidad(unidad : Node2D) -> void:
 				reached[next] = distancia_actual + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento del siguiente tile y aumenta la cantidad de movimientos usados
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
 				#await get_tree().create_timer(1.0).timeout
-		dibujando_tile_map(reached)
+	dibujando_tile_map(reached)
+	movimientos_disponibles = reached.duplicate() #Almacena los movimientos disponibles
 		
 func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de X tile hex
+	#Modelo odd-q
 	var vecinos = []
 	#even = par , odd = impar
 	if int(origen.x) % 2 == 0: #Si la columna es par
-		print("Columna par")
+		#print("Columna par")
 		#-------------------
 		#[[+1,  0], [+1, -1], [ 0, -1], 
 		# [-1, -1], [-1,  0], [ 0, +1]],
@@ -60,7 +63,7 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 		vecinos.append(Vector2(origen.x - 1, origen.y))
 		vecinos.append(Vector2(origen.x , origen.y + 1))
 	else:
-		print("columna impar")
+		#print("columna impar")
 		#[[+1, +1], [+1,  0], [ 0, -1], 
 	 	#[-1,  0], [-1, +1], [ 0, +1]]
 		vecinos.append(Vector2(origen.x + 1 , origen.y + 1))
