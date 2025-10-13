@@ -80,8 +80,6 @@ func mover_unidad(unidad : Node2D):
 	var interruptor_while := true
 	var coordenada_origen = coordenadas_mouse #El origen es desde la posicion que se calcula los tiles vecinos
 	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
-	print("Coordenada del error: 6,5")
-	print(AlgoritmoDijkstra.movimientos_disponibles[Vector2(6,5)])
 	while interruptor_while: #Mientras el interruptor sea verdadero
 		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
 		for i in opciones:#Explora todos los posibles vecinos
