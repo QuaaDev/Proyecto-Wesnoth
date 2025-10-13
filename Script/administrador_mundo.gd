@@ -78,21 +78,22 @@ func mover_unidad(unidad : Node2D):
 	var opcion_mas_barata := 100 
 	var camino_a_seguir = [] #Almacena las coordenadas en orden del camino de destino -> origen
 	var interruptor_while := true
-	var coordenada_origen = coordenadas_mouse
-	camino_a_seguir.append(coordenada_origen)
-	while interruptor_while:
-		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)
-		for i in opciones:
-			if AlgoritmoDijkstra.movimientos_disponibles.has(i):
+	var coordenada_origen = coordenadas_mouse #El origen es desde la posicion que se calcula los tiles vecinos
+	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
+	while interruptor_while: #Mientras el interruptor sea verdadero
+		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
+		for i in opciones:#Explora todos los posibles vecinos
+			if AlgoritmoDijkstra.movimientos_disponibles.has(i):#Verifica si el vecino esta dentro de los movimientos validos
 				if AlgoritmoDijkstra.movimientos_disponibles[i] < opcion_mas_barata:
-					opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i]
-					coordenada_mas_barata_actual = i
+					#Si la opcion actual consume menos movimientos que la anterior significa que es mas optima
+					opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i] #Almacena el nuevo valor mas barato 
+					coordenada_mas_barata_actual = i #Almacena temporalmente la coordenada mas barata actual
 			else:
 				print(i , "Opcion no esta dentro de movimientos validos")
-		camino_a_seguir.append(coordenada_mas_barata_actual)
-		coordenada_origen = coordenada_mas_barata_actual
-		if opcion_mas_barata <= 0:
-			interruptor_while = false
+		camino_a_seguir.append(coordenada_mas_barata_actual)#Luego de explorar todas las opciones, almacena la que fue mas barato
+		coordenada_origen = coordenada_mas_barata_actual#Actualiza la coordenada origen para la siguiente ejecucion
+		if opcion_mas_barata <= 0:#Si el valor es 0 o menos, significa que se llego al final del recorrido
+			interruptor_while = false#Apaga el while
 	#--------actualiza la posicion de la unidad----------
 	unidad.position = nueva_posicion_unidad #Mueve a la unidad
 	#print(ubicaciones_ocupadas)
