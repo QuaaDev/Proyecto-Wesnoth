@@ -3,7 +3,7 @@ var tile_map : Node2D
 var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
 var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Dijkstra para su posterior uso
-
+#patata
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
 		tile_map_hud.set_cell(i,3,Vector2(0,0),0)
