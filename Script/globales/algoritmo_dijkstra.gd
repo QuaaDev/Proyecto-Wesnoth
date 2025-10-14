@@ -16,7 +16,7 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 	if data:
 		return data.get_custom_data("resistencia_movimiento")
 	else:
-		print("Error data no encontrada obtener_coste_movimiento_tile")
+		#print("Error data no encontrada obtener_coste_movimiento_tile")
 		return 1
 
 func moviendo_unidad(unidad : Node2D) -> void:

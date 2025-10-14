@@ -39,21 +39,29 @@ func _input(event):
 							unidad_a_mover.ya_no_me_mueven()
 							label_unidad_moviendose.text = "null"
 							unidad_a_mover = null
-							
+						tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
 					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
 						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
 						if verificar_si_son_aliados():
 							#Si son aliados, no ataca
 							print("Son aliadas las unidades, no puedes mover aqui")
 						else:
-							#Si son enemigos, lo ataca >:)
-							print("Te ataco!")
-							ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
-							ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
-							mover_unidad(unidad_a_mover)
-							unidad_a_mover.ya_no_me_mueven()
-							label_unidad_moviendose.text = "null"
-							unidad_a_mover = null#<--- ultimo en ejecutar
+							if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):#Verifica si es un movimiento valido
+								#Si son enemigos, lo ataca >:)
+								print("Te ataco!")
+								ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
+								ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
+								mover_unidad(unidad_a_mover)
+								print("debug")
+								unidad_a_mover.ya_no_me_mueven()
+								label_unidad_moviendose.text = "null"
+								unidad_a_mover = null#<--- ultimo en ejecutar
+							else:
+								print("Cancelo movimiento por intentar moverme fuera del rango(version ataque)")
+								unidad_a_mover.ya_no_me_mueven()
+								label_unidad_moviendose.text = "null"
+								unidad_a_mover = null
+							tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
 						pass
 					elif mouse_sobre_unidad != null and mouse_sobre_unidad == unidad_a_mover:
 						#If el mouse esta arriba de una unidad AND la unidad es la propia unidad que se mueve:
@@ -62,6 +70,7 @@ func _input(event):
 						unidad_a_mover.ya_no_me_mueven()
 						label_unidad_moviendose.text = "null"
 						unidad_a_mover = null
+						tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
 					else:
 						#Error
 						print("Click Izquierdo condicion no reconocida, valores: ")
@@ -69,7 +78,6 @@ func _input(event):
 func mover_unidad(unidad : Node2D):
 	#AlgoritmoDijkstra.movimientos_disponibles
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
-	var nueva_posicion_unidad = tile_map.map_to_local(coordenadas_mouse)
 	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
 	unidad.coordenada_local_tilemap = coordenadas_mouse #Actualiza la informacion q tiene la unidad
 	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
@@ -81,6 +89,7 @@ func mover_unidad(unidad : Node2D):
 	var coordenada_origen = coordenadas_mouse #El origen es desde la posicion que se calcula los tiles vecinos
 	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
 	while interruptor_while: #Mientras el interruptor sea verdadero
+		var contador_seguridad := 0
 		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
 		for i in opciones:#Explora todos los posibles vecinos
 			if AlgoritmoDijkstra.movimientos_disponibles.has(i):#Verifica si el vecino esta dentro de los movimientos validos
@@ -89,8 +98,13 @@ func mover_unidad(unidad : Node2D):
 					opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i] #Almacena el nuevo valor mas barato 
 					coordenada_mas_barata_actual = i #Almacena temporalmente la coordenada mas barata actual
 			else:
-				print(i , "Opcion no esta dentro de movimientos validos")
-		print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
+				contador_seguridad += 1
+				#print(i , "Opcion no esta dentro de movimientos validos")
+				pass
+		#print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
+		if contador_seguridad >= 6:#Si el contador de seguridad llega a 6 significa que ningun vecino del origen es valido, por lo tanto el bucle es infinito.
+			print("Error Rojo, Bucle infinito detectado funcion administrador_mundo.mover_unidad(), deteniendo loop")
+			break
 		camino_a_seguir.append(coordenada_mas_barata_actual)#Luego de explorar todas las opciones, almacena la que fue mas barato
 		coordenada_origen = coordenada_mas_barata_actual#Actualiza la coordenada origen para la siguiente ejecucion
 		if opcion_mas_barata <= 0:#Si el valor es 0 o menos, significa que se llego al final del recorrido

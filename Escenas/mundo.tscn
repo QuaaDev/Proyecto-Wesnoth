@@ -26,6 +26,7 @@ puntos_movimiento = 7
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(140, 176)
+puntos_movimiento = 3
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(252, 86)

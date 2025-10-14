@@ -33,3 +33,7 @@ func local_to_map(valor : Vector2) -> Vector2:
 	
 func map_to_local(valor : Vector2) -> Vector2:
 	return tile_map_hud.map_to_local(valor)
+#---------func de tilemap-----------
+func limpiar_tiles_movimiento(tiles : Dictionary) -> void: #Limpia el tilemap de los tile de movimiento
+	for i in tiles:
+		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
