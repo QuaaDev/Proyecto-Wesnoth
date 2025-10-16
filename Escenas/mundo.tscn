@@ -7,16 +7,40 @@
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 z_index = 1
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 50.0
 
-[node name="coordenadas_local" type="Label" parent="VBoxContainer"]
+[node name="coordenadas_local" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="nombre_unidad_moviendose" type="Label" parent="VBoxContainer"]
+[node name="nombre_unidad_moviendose" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+
+[node name="hud_derecho" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -323.0
+offset_bottom = 323.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.5729883, 0.5729883, 0.5729883, 1)
+
+[node name="proximo_turno" type="Button" parent="CanvasLayer/hud_derecho"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 565.0
+offset_right = 196.0
+offset_bottom = 596.0
+mouse_filter = 1
+text = "Pasar Turno"
 
 [node name="TileMap" parent="." instance=ExtResource("1_wxucn")]
 

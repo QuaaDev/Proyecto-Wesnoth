@@ -2,7 +2,12 @@ extends Node
 var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
 @onready var tile_map: Node2D = $TileMap
-@onready var label_unidad_moviendose: Label = $VBoxContainer/nombre_unidad_moviendose
+@onready var label_unidad_moviendose: Label = $CanvasLayer/VBoxContainer/nombre_unidad_moviendose
+
+@onready var hud_derecho: ColorRect = $CanvasLayer/hud_derecho
+
+
+
 
 var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas junto a sus unidades
 
@@ -11,6 +16,9 @@ func _ready() -> void:
 		if i.name.contains("Unidad"):
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i
 	print(ubicaciones_ocupadas)
+	
+	hud_derecho.mouse_entered.connect(mouse_en_hud)
+	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -144,3 +152,9 @@ func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a 
 func limpiar_unidad_bajo_mouse() -> void:
 	mouse_sobre_unidad = null
 	#print("salgo")
+#------------------señañes-----------------------
+func mouse_en_hud() -> void:
+	print("El mouse entra al hud")
+func mouse_sale_del_hud() -> void:
+	print("El mouse sale del hud")
+#------------------señañes-----------------------

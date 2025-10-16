@@ -3,7 +3,7 @@ var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadri
 
 @onready var tile_map_hud: TileMapLayer = $tile_map_hud
 @onready var tile_map_base: TileMapLayer = $tile_map_base
-@onready var label_coordenadas: Label = $"../VBoxContainer/coordenadas_local"
+@onready var label_coordenadas: Label = $"../CanvasLayer/VBoxContainer/coordenadas_local"
 
 func _input(_event):
 	pass
