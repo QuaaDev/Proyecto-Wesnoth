@@ -3,9 +3,8 @@ var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
 @onready var tile_map: Node2D = $TileMap
 @onready var label_unidad_moviendose: Label = $CanvasLayer/VBoxContainer/nombre_unidad_moviendose
-
 @onready var hud_derecho: ColorRect = $CanvasLayer/hud_derecho
-
+var mouse_sobre_hud : bool = false
 
 
 
@@ -24,65 +23,66 @@ func _input(event):
 	if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT: #Si se apreta el mouse izq
 				if event.pressed:
-					if mouse_sobre_unidad != null and unidad_a_mover == null:
-						#If el mouse esta sobre una unidad AND no hay unidad para mover:
-						#Se selecciona la unidad a interactuar
-						unidad_a_mover = mouse_sobre_unidad
-						unidad_a_mover.siendo_movido()
-						print("Almaceno unidad")
-						label_unidad_moviendose.text = unidad_a_mover.name
-						AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
-					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
-						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
-						#Se selecciona la casilla a moverse
-						if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):
-							#If el tile al que intento mover ESTA DENTRO del diccionario de movimientos:
-							print("muevo unidad a espacio vacio")
-							unidad_a_mover.ya_no_me_mueven()
-							mover_unidad(unidad_a_mover)
-							label_unidad_moviendose.text = "null"
-							unidad_a_mover = null #<--- ultimo en ejecutar
-						else:
-							print("Cancelo movimiento por intentar moverme fuera del rango")
-							unidad_a_mover.ya_no_me_mueven()
-							label_unidad_moviendose.text = "null"
-							unidad_a_mover = null
-						tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
-					elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
-						#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
-						if verificar_si_son_aliados():
-							#Si son aliados, no ataca
-							print("Son aliadas las unidades, no puedes mover aqui")
-						else:
-							if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):#Verifica si es un movimiento valido
-								#Si son enemigos, lo ataca >:)
-								print("Te ataco!")
-								ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
-								ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
-								mover_unidad(unidad_a_mover)
-								print("debug")
+					if !mouse_sobre_hud: #Si el mouse esta sobre el hud evita interactuar con unidades y grid
+						if mouse_sobre_unidad != null and unidad_a_mover == null:
+							#If el mouse esta sobre una unidad AND no hay unidad para mover:
+							#Se selecciona la unidad a interactuar
+							unidad_a_mover = mouse_sobre_unidad
+							unidad_a_mover.siendo_movido()
+							print("Almaceno unidad")
+							label_unidad_moviendose.text = unidad_a_mover.name
+							AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
+						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
+							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
+							#Se selecciona la casilla a moverse
+							if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):
+								#If el tile al que intento mover ESTA DENTRO del diccionario de movimientos:
+								print("muevo unidad a espacio vacio")
 								unidad_a_mover.ya_no_me_mueven()
+								mover_unidad(unidad_a_mover)
 								label_unidad_moviendose.text = "null"
-								unidad_a_mover = null#<--- ultimo en ejecutar
+								unidad_a_mover = null #<--- ultimo en ejecutar
 							else:
-								print("Cancelo movimiento por intentar moverme fuera del rango(version ataque)")
+								print("Cancelo movimiento por intentar moverme fuera del rango")
 								unidad_a_mover.ya_no_me_mueven()
 								label_unidad_moviendose.text = "null"
 								unidad_a_mover = null
 							tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
-						pass
-					elif mouse_sobre_unidad != null and mouse_sobre_unidad == unidad_a_mover:
-						#If el mouse esta arriba de una unidad AND la unidad es la propia unidad que se mueve:
-						#Se cancela el movimiento
-						print("Cancelo movimiento")
-						unidad_a_mover.ya_no_me_mueven()
-						label_unidad_moviendose.text = "null"
-						unidad_a_mover = null
-						tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
-					else:
-						#Error
-						print("Click Izquierdo condicion no reconocida, valores: ")
-						
+						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
+							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
+							if verificar_si_son_aliados():
+								#Si son aliados, no ataca
+								print("Son aliadas las unidades, no puedes mover aqui")
+							else:
+								if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):#Verifica si es un movimiento valido
+									#Si son enemigos, lo ataca >:)
+									print("Te ataco!")
+									ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
+									ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
+									mover_unidad(unidad_a_mover)
+									print("debug")
+									unidad_a_mover.ya_no_me_mueven()
+									label_unidad_moviendose.text = "null"
+									unidad_a_mover = null#<--- ultimo en ejecutar
+								else:
+									print("Cancelo movimiento por intentar moverme fuera del rango(version ataque)")
+									unidad_a_mover.ya_no_me_mueven()
+									label_unidad_moviendose.text = "null"
+									unidad_a_mover = null
+								tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
+							pass
+						elif mouse_sobre_unidad != null and mouse_sobre_unidad == unidad_a_mover:
+							#If el mouse esta arriba de una unidad AND la unidad es la propia unidad que se mueve:
+							#Se cancela el movimiento
+							print("Cancelo movimiento")
+							unidad_a_mover.ya_no_me_mueven()
+							label_unidad_moviendose.text = "null"
+							unidad_a_mover = null
+							tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
+						else:
+							#Error
+							print("Click Izquierdo condicion no reconocida, valores: ")
+							
 func mover_unidad(unidad : Node2D):
 	#AlgoritmoDijkstra.movimientos_disponibles
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
@@ -154,7 +154,9 @@ func limpiar_unidad_bajo_mouse() -> void:
 	#print("salgo")
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
+	mouse_sobre_hud = true
 	print("El mouse entra al hud")
 func mouse_sale_del_hud() -> void:
+	mouse_sobre_hud = false
 	print("El mouse sale del hud")
 #------------------señañes-----------------------
