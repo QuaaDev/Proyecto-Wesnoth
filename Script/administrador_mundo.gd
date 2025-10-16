@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	hud_derecho.mouse_entered.connect(mouse_en_hud)
 	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
+	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -125,7 +126,7 @@ func mover_unidad(unidad : Node2D):
 	tween.set_trans(Tween.TRANS_SINE)
 	for i in camino_a_seguir:
 		var new_position = tile_map.map_to_local(i)
-		tween.tween_property(unidad,"position",new_position, .7)
+		tween.tween_property(unidad,"position",new_position, .5)
 	#Objeto a aplicar / propiedad a editar / ubicacion objetivo / velocidad de la animacion
 	print(camino_a_seguir)
 	#print(ubicaciones_ocupadas)
@@ -159,4 +160,6 @@ func mouse_en_hud() -> void:
 func mouse_sale_del_hud() -> void:
 	mouse_sobre_hud = false
 	print("El mouse sale del hud")
+func boton_pasar_turno() -> void:
+	print("Pasando turno")
 #------------------señañes-----------------------

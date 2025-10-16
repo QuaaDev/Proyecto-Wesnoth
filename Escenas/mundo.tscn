@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpkd4wjvywj2s"]
+[gd_scene load_steps=5 format=3 uid="uid://bpkd4wjvywj2s"]
 
 [ext_resource type="Script" uid="uid://c3wqpj3vn01p5" path="res://Script/administrador_mundo.gd" id="1_bqhdr"]
 [ext_resource type="PackedScene" uid="uid://bqqysniprka80" path="res://Escenas/tilemap/tile_map.tscn" id="1_wxucn"]
 [ext_resource type="PackedScene" uid="uid://dmebkus7j77fl" path="res://Escenas/unidad.tscn" id="2_5sfon"]
+[ext_resource type="Script" uid="uid://jph5j1dvrr1k" path="res://Script/controlador_camara.gd" id="4_ly0wt"]
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
@@ -49,7 +50,7 @@ position = Vector2(577, 317)
 puntos_movimiento = 7
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
-position = Vector2(140, 176)
+position = Vector2(302, 496)
 puntos_movimiento = 3
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
@@ -58,3 +59,4 @@ equipo = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 323)
+script = ExtResource("4_ly0wt")
