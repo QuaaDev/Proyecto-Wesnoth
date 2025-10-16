@@ -15,5 +15,5 @@ func _process(delta):
 		direction.x += 1
 
 	if direction != Vector2.ZERO:
-		direction = direction.normalized()
+		#direction = direction.normalized()
 		position += direction * speed * delta

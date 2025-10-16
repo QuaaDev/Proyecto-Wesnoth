@@ -24,8 +24,9 @@ func _process(_delta: float) -> void:
 	
 func coordenada_global_del_mouse_a_tilemap() -> Vector2:
 	#devuelve la ubicacion global del mouse convertida en las coordenadas del tilemap
-	return tile_map_hud.local_to_map(get_viewport().get_mouse_position())
-	
+	return tile_map_hud.local_to_map(tile_map_hud.to_local(get_global_mouse_position()))
+	#obtiene la posicion global del mouse, convierte las coordenadas a las locales de tilemap
+	#y luego lo convierte a las coordenadas de las celdas
 	
 #---------func de tilemap-----------
 func local_to_map(valor : Vector2) -> Vector2:
