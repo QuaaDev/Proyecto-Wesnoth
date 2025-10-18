@@ -3,8 +3,8 @@ extends Node2D
 @onready var tile_map: Node2D = $"../TileMap"
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
-@export var puntos_movimiento_maximo = 2
-var puntos_movimiento : int
+@export var puntos_movimiento_maximo = 2 #Cantidad maxima de movimientos por turno
+var puntos_movimiento : int #Cantidad de movimientos en ejecucion
 @export var equipo : int = 0
 
 func _ready() -> void:
@@ -33,7 +33,9 @@ func termino_mi_turno() -> void:
 func empezo_mi_turno() -> void:
 	puntos_movimiento = puntos_movimiento_maximo
 	es_mi_turno = true
-	
+
+func restar_puntos_movimiento(cantidad : int) -> void: #Resta la cantidad de movimientos dispomible
+	puntos_movimiento -= cantidad
 	
 func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administrador mundo para informarle de que esta unidad esta bajo el mouse
 	nodo_mundo.obtener_unidad_bajo_mouse(self)

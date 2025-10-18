@@ -38,12 +38,16 @@ func _input(event):
 						if mouse_sobre_unidad != null and unidad_a_mover == null:
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
 							if mouse_sobre_unidad.es_mi_turno:
-								#Se selecciona la unidad a interactuar
-								unidad_a_mover = mouse_sobre_unidad
-								unidad_a_mover.siendo_movido()
-								print("Almaceno unidad")
-								rellenar_labels(unidad_a_mover)
-								AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
+								if mouse_sobre_unidad.puntos_movimiento <= 0:
+									#If sus puntos de movimiento actual es igual menor 0
+									print("No tengo mas puntos de movimiento loco")
+								else:
+									#Se selecciona la unidad a interactuar
+									unidad_a_mover = mouse_sobre_unidad
+									unidad_a_mover.siendo_movido()
+									print("Almaceno unidad")
+									rellenar_labels(unidad_a_mover)
+									AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
 							else:
 								print("No es mi turno pibe...")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
@@ -84,6 +88,10 @@ func mover_unidad(unidad : Node2D):
 	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
 	unidad.coordenada_local_tilemap = coordenadas_mouse #Actualiza la informacion q tiene la unidad
 	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
+	#-----coste de movimiento a la unidad------
+	#var coste_movimiento = AlgoritmoDijkstra.movimientos_disponibles[tile_map.coordenada_global_del_mouse_a_tilemap()]
+	#obtiene el coste de movimiento de la ubicacion objetivo
+	unidad.restar_puntos_movimiento(AlgoritmoDijkstra.movimientos_disponibles[tile_map.coordenada_global_del_mouse_a_tilemap()])#Resta los puntos de movimiento
 	#--------------obtener las coordenadas para el camino--------
 	var coordenada_mas_barata_actual : Vector2
 	var opcion_mas_barata := 100 
