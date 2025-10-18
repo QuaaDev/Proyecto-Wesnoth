@@ -50,6 +50,9 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "brr"
 
+[node name="puntos_movimiento" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
+layout_mode = 2
+
 [node name="equipo_unidad_moviendose" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
 text = "brrr"
@@ -61,12 +64,11 @@ layout_mode = 2
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(577, 317)
-puntos_movimiento = 7
+puntos_movimiento_maximo = 5
 equipo = 1
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(302, 496)
-puntos_movimiento = 3
 equipo = 1
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
