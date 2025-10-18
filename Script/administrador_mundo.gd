@@ -89,8 +89,7 @@ func mover_unidad(unidad : Node2D):
 	unidad.coordenada_local_tilemap = coordenadas_mouse #Actualiza la informacion q tiene la unidad
 	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
 	#-----coste de movimiento a la unidad------
-	#var coste_movimiento = AlgoritmoDijkstra.movimientos_disponibles[tile_map.coordenada_global_del_mouse_a_tilemap()]
-	#obtiene el coste de movimiento de la ubicacion objetivo
+	#obtiene el coste de movimiento de la ubicacion objetivo y luego resta los movimientos a unidad
 	unidad.restar_puntos_movimiento(AlgoritmoDijkstra.movimientos_disponibles[tile_map.coordenada_global_del_mouse_a_tilemap()])#Resta los puntos de movimiento
 	#--------------obtener las coordenadas para el camino--------
 	var coordenada_mas_barata_actual : Vector2
