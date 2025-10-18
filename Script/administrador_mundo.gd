@@ -36,12 +36,15 @@ func _input(event):
 					if !mouse_sobre_hud: #Si el mouse esta sobre el hud evita interactuar con unidades y grid
 						if mouse_sobre_unidad != null and unidad_a_mover == null:
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
-							#Se selecciona la unidad a interactuar
-							unidad_a_mover = mouse_sobre_unidad
-							unidad_a_mover.siendo_movido()
-							print("Almaceno unidad")
-							rellenar_labels(unidad_a_mover)
-							AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
+							if mouse_sobre_unidad.es_mi_turno:
+								#Se selecciona la unidad a interactuar
+								unidad_a_mover = mouse_sobre_unidad
+								unidad_a_mover.siendo_movido()
+								print("Almaceno unidad")
+								rellenar_labels(unidad_a_mover)
+								AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
+							else:
+								print("No es mi turno pibe...")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 							#Se selecciona la casilla a moverse
