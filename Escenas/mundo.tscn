@@ -7,6 +7,7 @@
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
+cantidad_total_equipos = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -53,15 +54,20 @@ text = "brr"
 layout_mode = 2
 text = "brrr"
 
+[node name="turno_actual_y_equipo" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
+layout_mode = 2
+
 [node name="TileMap" parent="." instance=ExtResource("1_wxucn")]
 
 [node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(577, 317)
 puntos_movimiento = 7
+equipo = 1
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(302, 496)
 puntos_movimiento = 3
+equipo = 1
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
 position = Vector2(252, 86)

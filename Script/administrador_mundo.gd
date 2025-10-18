@@ -5,22 +5,30 @@ var unidad_a_mover : Node2D
 @onready var label_unidad_moviendose: Label = $CanvasLayer/hud_derecho/VBoxContainer/nombre_unidad_moviendose
 @onready var hud_derecho: ColorRect = $CanvasLayer/hud_derecho
 @onready var label_equipo_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/equipo_unidad_moviendose
+@onready var turno_actual_y_equipo: Label = $CanvasLayer/hud_derecho/VBoxContainer/turno_actual_y_equipo
 
 var mouse_sobre_hud : bool = false
 
-
-
+@export var empieza_x_equipo : int = 1
+@export var cantidad_total_equipos : int = 0
+var equipo_actual : int
+var turno_actual : int = 0
 var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas junto a sus unidades
 
 func _ready() -> void:
 	for i in get_children():
 		if i.name.contains("Unidad"):
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i
-	print(ubicaciones_ocupadas)
+	#print(ubicaciones_ocupadas)
 	hud_derecho.mouse_entered.connect(mouse_en_hud)
 	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
-
+	
+	#Prepara los grupos de unidades con su respectivo turno
+	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
+	equipo_actual = empieza_x_equipo
+	turno_actual_y_equipo.text = "turno actual 0, equipo actual: " + str(equipo_actual)
+	
 func _input(event):
 	if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT: #Si se apreta el mouse izq
@@ -158,10 +166,22 @@ func limpiar_labels() -> void:
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
-	print("El mouse entra al hud")
+	#print("El mouse entra al hud")
 func mouse_sale_del_hud() -> void:
 	mouse_sobre_hud = false
-	print("El mouse sale del hud")
+	#print("El mouse sale del hud")
 func boton_pasar_turno() -> void:
-	print("Pasando turno")
+	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
+	equipo_actual += 1 #Avanza al siguiente equipo
+	if equipo_actual > cantidad_total_equipos:#Si es mayor significa que ya jugaron todos los equipos
+		print("terminando turno")
+		turno_actual += 1
+		equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
+	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
+	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
+	#for i in range(1,cantidad_total_equipos+1):
+	#	print("------------")
+	#	for node in get_tree().get_nodes_in_group(str(i)):
+	#		print(node.name, node.equipo, node.es_mi_turno)
+	#	get_tree().call_group(str(i), "termino_mi_turno")
 #------------------señañes-----------------------
