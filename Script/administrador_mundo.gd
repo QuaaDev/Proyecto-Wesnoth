@@ -2,8 +2,10 @@ extends Node
 var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
 @onready var tile_map: Node2D = $TileMap
-@onready var label_unidad_moviendose: Label = $CanvasLayer/VBoxContainer/nombre_unidad_moviendose
+@onready var label_unidad_moviendose: Label = $CanvasLayer/hud_derecho/VBoxContainer/nombre_unidad_moviendose
 @onready var hud_derecho: ColorRect = $CanvasLayer/hud_derecho
+@onready var label_equipo_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/equipo_unidad_moviendose
+
 var mouse_sobre_hud : bool = false
 
 
@@ -15,7 +17,6 @@ func _ready() -> void:
 		if i.name.contains("Unidad"):
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i
 	print(ubicaciones_ocupadas)
-	
 	hud_derecho.mouse_entered.connect(mouse_en_hud)
 	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
@@ -31,7 +32,7 @@ func _input(event):
 							unidad_a_mover = mouse_sobre_unidad
 							unidad_a_mover.siendo_movido()
 							print("Almaceno unidad")
-							label_unidad_moviendose.text = unidad_a_mover.name
+							rellenar_labels(unidad_a_mover)
 							AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
@@ -41,13 +42,12 @@ func _input(event):
 								print("muevo unidad a espacio vacio")
 								unidad_a_mover.ya_no_me_mueven()
 								mover_unidad(unidad_a_mover)
-								label_unidad_moviendose.text = "null"
 								unidad_a_mover = null #<--- ultimo en ejecutar
 							else:
 								print("Cancelo movimiento por intentar moverme fuera del rango")
 								unidad_a_mover.ya_no_me_mueven()
-								label_unidad_moviendose.text = "null"
 								unidad_a_mover = null
+							limpiar_labels()
 							tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and !verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan ocupadas:
@@ -61,23 +61,19 @@ func _input(event):
 									ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
 									ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
 									mover_unidad(unidad_a_mover)
-									print("debug")
-									unidad_a_mover.ya_no_me_mueven()
-									label_unidad_moviendose.text = "null"
-									unidad_a_mover = null#<--- ultimo en ejecutar
 								else:
 									print("Cancelo movimiento por intentar moverme fuera del rango(version ataque)")
-									unidad_a_mover.ya_no_me_mueven()
-									label_unidad_moviendose.text = "null"
-									unidad_a_mover = null
+								print("es que no entiendo tio")
+								limpiar_labels()
+								unidad_a_mover.ya_no_me_mueven()
+								unidad_a_mover = null
 								tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
-							pass
 						elif mouse_sobre_unidad != null and mouse_sobre_unidad == unidad_a_mover:
 							#If el mouse esta arriba de una unidad AND la unidad es la propia unidad que se mueve:
 							#Se cancela el movimiento
 							print("Cancelo movimiento")
 							unidad_a_mover.ya_no_me_mueven()
-							label_unidad_moviendose.text = "null"
+							limpiar_labels()
 							unidad_a_mover = null
 							tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)
 						else:
@@ -153,6 +149,12 @@ func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a 
 func limpiar_unidad_bajo_mouse() -> void:
 	mouse_sobre_unidad = null
 	#print("salgo")
+func rellenar_labels(unidad : Node2D) ->void:
+	label_unidad_moviendose.text = "nombre: " + unidad_a_mover.name
+	label_equipo_unidad.text = "equipo: " + str(unidad.equipo)
+func limpiar_labels() -> void:
+	label_unidad_moviendose.text = "null"
+	label_equipo_unidad.text = "null"
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
