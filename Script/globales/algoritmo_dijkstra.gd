@@ -19,7 +19,7 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		#print("Error data no encontrada obtener_coste_movimiento_tile")
 		return 1
 
-func moviendo_unidad(unidad : Node2D) -> void:
+func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary) -> void:
 	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
@@ -37,7 +37,8 @@ func moviendo_unidad(unidad : Node2D) -> void:
 		
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
 			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
-			if not reached.has(next) or nuevo_costo < reached[next]:#Si el nodo ya fue explorado, lo omite
+			if (not reached.has(next) or nuevo_costo < reached[next]) and !(ubicaciones_ocupadas.has(next)):
+				#(Si el nodo ya fue explorado, lo omite) AND (Si la ubicacion ya fue ocupada, la omite)
 				reached[next] = nuevo_costo
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
 	dibujando_tile_map(reached)

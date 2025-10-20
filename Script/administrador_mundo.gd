@@ -15,7 +15,7 @@ var mouse_sobre_hud : bool = false
 var equipo_actual : int
 var turno_actual : int = 0
 var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas junto a sus unidades
-
+var casillas_a_atacar = {} #Diccionario que almacena las ubicaciones que se pueden atacar junto a su unidad
 func _ready() -> void:
 	for i in get_children():
 		if i.name.contains("Unidad"):
@@ -47,7 +47,7 @@ func _input(event):
 									unidad_a_mover.siendo_movido()
 									print("Almaceno unidad")
 									rellenar_labels(unidad_a_mover)
-									AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover)
+									AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas)
 							else:
 								print("No es mi turno pibe...")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
@@ -142,9 +142,10 @@ func verificar_si_coordenadas_estan_libres() -> bool:
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap() #Coordenada del tilemap
 	if ubicaciones_ocupadas.has(coordenadas_mouse): #Verifica si la ubicacion esta dentro del diccionario
 		print("Posicion ocupada por " + ubicaciones_ocupadas[coordenadas_mouse].name)
+		print("verificar_si_coordenadas_estan_libres()")
 		return false
 	else:
-		print("Devuelvo true")
+		#print("Devuelvo true")
 		return true
 	
 func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a la unidad bajo el mouse
