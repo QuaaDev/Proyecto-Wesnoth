@@ -42,8 +42,14 @@ func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administr
 	nodo_mundo.obtener_unidad_bajo_mouse(self)
 
 
-func _on_area_2d_mouse_exited() -> void:#Actualiza la informacion de administrador mundo para informarle de que esta unidad ya no esta bajo el mouse
-	nodo_mundo.limpiar_unidad_bajo_mouse()
+func _on_area_2d_mouse_exited() -> void:
+	#Actualiza la informacion de administrador mundo para informarle de que esta unidad ya no esta bajo el mouse
+	if nodo_mundo.mouse_sobre_unidad == self:
+		#Si el actual foco lo tiene otra unidad, no aplica el exited
+		nodo_mundo.limpiar_unidad_bajo_mouse()
+	else:
+		#print("Que atrevimiento aplicar exited cuando no soy yo el foco che")
+		pass
 
 func get_coordenada_local_tilemap() -> Vector2:
 	return coordenada_local_tilemap
