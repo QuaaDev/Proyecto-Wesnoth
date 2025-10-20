@@ -43,16 +43,17 @@ func _input(event):
 										if ubicaciones_ocupadas[i].equipo != mouse_sobre_unidad.equipo: #Y si son de diferente equipo
 											casillas_a_atacar[i] = ubicaciones_ocupadas[i]
 											print(casillas_a_atacar)
-								if mouse_sobre_unidad.puntos_movimiento <= 0:
-									#If sus puntos de movimiento actual es igual menor 0
-									print("No tengo mas puntos de movimiento loco")
+											
+								if !casillas_a_atacar.is_empty() and !mouse_sobre_unidad.puntos_movimiento <= 0:
+									print("Movimiento y ataque")
+									almacenar_unidad()
+								elif !casillas_a_atacar.is_empty():
+									print("Solo ataque")
+								elif !mouse_sobre_unidad.puntos_movimiento <= 0:
+									print("Solo movimiento")
+									almacenar_unidad()
 								else:
-									#Se selecciona la unidad a interactuar
-									unidad_a_mover = mouse_sobre_unidad
-									unidad_a_mover.siendo_movido()
-									print("Almaceno unidad")
-									rellenar_labels(unidad_a_mover)
-									AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas)
+									print("No hay ataque ni movimiento")
 							else:
 								print("No es mi turno pibe...")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
@@ -156,6 +157,14 @@ func verificar_si_coordenadas_estan_libres() -> bool:
 func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a la unidad bajo el mouse
 	mouse_sobre_unidad = unidad
 	#print("entro")
+	
+func almacenar_unidad() -> void:
+	print("Almaceno unidad")
+	unidad_a_mover = mouse_sobre_unidad
+	unidad_a_mover.siendo_movido()
+	rellenar_labels(unidad_a_mover)
+	AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas)
+	
 	
 func limpiar_unidad_bajo_mouse() -> void:
 	mouse_sobre_unidad = null
