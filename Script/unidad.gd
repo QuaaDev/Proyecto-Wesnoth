@@ -16,6 +16,7 @@ func _ready() -> void:
 	#Terminar esto luego, el codigo no funciona prq el nodo "tilemap" es un node2d, no un nodo XD
 
 func morir():
+	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
 	self.queue_free()
 
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap

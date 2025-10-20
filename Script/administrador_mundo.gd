@@ -49,6 +49,7 @@ func _input(event):
 									almacenar_unidad()
 								elif !casillas_a_atacar.is_empty():
 									print("Solo ataque")
+									almacenar_unidad()
 								elif !mouse_sobre_unidad.puntos_movimiento <= 0:
 									print("Solo movimiento")
 									almacenar_unidad()
@@ -56,6 +57,12 @@ func _input(event):
 									print("No hay ataque ni movimiento")
 							else:
 								print("No es mi turno pibe...")
+						elif !casillas_a_atacar.is_empty() and mouse_sobre_unidad != null:
+							if casillas_a_atacar.has(mouse_sobre_unidad.coordenada_local_tilemap):
+								print("Le rompo la cabeza a este triplehijueremil buta")
+								mouse_sobre_unidad.morir()
+								limpiar_unidad_seleccionada()
+								
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 							#Se selecciona la casilla a moverse
@@ -139,6 +146,9 @@ func mover_unidad(unidad : Node2D):
 	#print(ubicaciones_ocupadas)
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
+	if mouse_sobre_unidad == null:
+		print("Error fatal verificar_si_son_aliados variable mouse_sobre_unidad == null, se procede a devolver false")
+		return false
 	if mouse_sobre_unidad.equipo == unidad_a_mover.equipo:
 		return true
 	else: 
@@ -160,9 +170,9 @@ func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a 
 	
 func almacenar_unidad() -> void:
 	print("Almaceno unidad")
-	unidad_a_mover = mouse_sobre_unidad
-	unidad_a_mover.siendo_movido()
-	rellenar_labels(unidad_a_mover)
+	unidad_a_mover = mouse_sobre_unidad #Almacena la unidad que se va a mover
+	unidad_a_mover.siendo_movido() #Efecto de color nomas
+	rellenar_labels(unidad_a_mover)#Actualiza los labels
 	AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas)
 	
 	
