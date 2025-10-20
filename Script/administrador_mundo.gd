@@ -38,6 +38,11 @@ func _input(event):
 						if mouse_sobre_unidad != null and unidad_a_mover == null:
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
 							if mouse_sobre_unidad.es_mi_turno:
+								for i in AlgoritmoDijkstra.get_neighbors(mouse_sobre_unidad.coordenada_local_tilemap):
+									if ubicaciones_ocupadas.has(i):#Si X casilla vecina tiene una unidad:
+										if ubicaciones_ocupadas[i].equipo != mouse_sobre_unidad.equipo: #Y si son de diferente equipo
+											casillas_a_atacar[i] = ubicaciones_ocupadas[i]
+											print(casillas_a_atacar)
 								if mouse_sobre_unidad.puntos_movimiento <= 0:
 									#If sus puntos de movimiento actual es igual menor 0
 									print("No tengo mas puntos de movimiento loco")
@@ -129,7 +134,7 @@ func mover_unidad(unidad : Node2D):
 		var new_position = tile_map.map_to_local(i)
 		tween.tween_property(unidad,"position",new_position, .5)
 	#Objeto a aplicar / propiedad a editar / ubicacion objetivo / velocidad de la animacion
-	print(camino_a_seguir)
+	#print(camino_a_seguir)
 	#print(ubicaciones_ocupadas)
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
@@ -141,8 +146,8 @@ func verificar_si_son_aliados() -> bool:
 func verificar_si_coordenadas_estan_libres() -> bool:
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap() #Coordenada del tilemap
 	if ubicaciones_ocupadas.has(coordenadas_mouse): #Verifica si la ubicacion esta dentro del diccionario
-		print("Posicion ocupada por " + ubicaciones_ocupadas[coordenadas_mouse].name)
-		print("verificar_si_coordenadas_estan_libres()")
+		#print("Posicion ocupada por " + ubicaciones_ocupadas[coordenadas_mouse].name)
+		#print("verificar_si_coordenadas_estan_libres()")
 		return false
 	else:
 		#print("Devuelvo true")
@@ -166,6 +171,7 @@ func limpiar_labels() -> void:
 	label_puntos_movimiento.text = "null"
 	
 func limpiar_unidad_seleccionada() -> void:
+	casillas_a_atacar.clear()#Limpia los posibles ataques almacenados
 	unidad_a_mover.ya_no_me_mueven() #<-- solo actualiza el color 
 	limpiar_labels() #<--- actualiza labels
 	tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)#<-- limpia los tilemaps de movimiento
