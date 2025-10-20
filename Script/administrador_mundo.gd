@@ -36,6 +36,7 @@ func _input(event):
 				if event.pressed:
 					if !mouse_sobre_hud: #Si el mouse esta sobre el hud evita interactuar con unidades y grid
 						if mouse_sobre_unidad != null and unidad_a_mover == null:
+							#print("Patata two")
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
 							if mouse_sobre_unidad.es_mi_turno:
 								for i in AlgoritmoDijkstra.get_neighbors(mouse_sobre_unidad.coordenada_local_tilemap):
@@ -47,22 +48,27 @@ func _input(event):
 								if !casillas_a_atacar.is_empty() and !mouse_sobre_unidad.puntos_movimiento <= 0:
 									print("Movimiento y ataque")
 									almacenar_unidad()
+									tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)
 								elif !casillas_a_atacar.is_empty():
 									print("Solo ataque")
 									almacenar_unidad()
+									tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)
 								elif !mouse_sobre_unidad.puntos_movimiento <= 0:
 									print("Solo movimiento")
 									almacenar_unidad()
 								else:
 									print("No hay ataque ni movimiento")
+								print("Buscando el error")
 							else:
 								print("No es mi turno pibe...")
-						elif !casillas_a_atacar.is_empty() and mouse_sobre_unidad != null:
+						elif (!casillas_a_atacar.is_empty() and mouse_sobre_unidad != null) and !mouse_sobre_unidad == unidad_a_mover:
+							#If hay casillas para atacar AND mouse esta sobre una unidad AND no es si mismo
 							if casillas_a_atacar.has(mouse_sobre_unidad.coordenada_local_tilemap):
 								print("Le rompo la cabeza a este triplehijueremil buta")
 								mouse_sobre_unidad.morir()
 								limpiar_unidad_seleccionada()
-								
+							else:
+								print("Error raro a la hora de atacar al buta")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 							#Se selecciona la casilla a moverse
@@ -195,6 +201,7 @@ func limpiar_unidad_seleccionada() -> void:
 	limpiar_labels() #<--- actualiza labels
 	tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)#<-- limpia los tilemaps de movimiento
 	unidad_a_mover = null#<---actualiza el estado del script
+
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
