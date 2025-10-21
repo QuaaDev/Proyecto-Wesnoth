@@ -48,18 +48,27 @@ offset_bottom = 40.0
 
 [node name="nombre_unidad_moviendose" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
-text = "brr"
+text = "nombre unidad"
 
 [node name="puntos_movimiento" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
-text = "brr"
+text = "puntos movimiento"
+
+[node name="vida_unidad" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
+layout_mode = 2
+text = "vida unidad"
+
+[node name="daño_unidad" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
+layout_mode = 2
+text = "daño unidad"
 
 [node name="equipo_unidad_moviendose" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
-text = "brrr"
+text = "equipo unidad"
 
 [node name="turno_actual_y_equipo" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
+text = "turno actual"
 
 [node name="TileMap" parent="." instance=ExtResource("1_wxucn")]
 

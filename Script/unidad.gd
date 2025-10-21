@@ -7,13 +7,17 @@ var es_mi_turno : bool = false
 var puntos_movimiento : int #Cantidad de movimientos en ejecucion
 @export var equipo : int = 0
 
+@export var vida_maxima : int = 10
+var vida_actual : int
+
+@export var daño : int = 5
 func _ready() -> void:
 	self.add_to_group(str(equipo))
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()
 	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)
 	self.position = coordenada_global #Centra a la unidad en la celda
-	#Terminar esto luego, el codigo no funciona prq el nodo "tilemap" es un node2d, no un nodo XD
+	vida_actual = vida_maxima
 
 func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
