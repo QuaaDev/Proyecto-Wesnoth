@@ -23,6 +23,15 @@ func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
 	self.queue_free()
 
+func infligir_daño() -> int:
+	puntos_movimiento = 0 #Evita que la unidad se mueva luego de atacar
+	return daño
+	
+func recibir_daño(cantidad : int) -> void:
+	vida_actual -= cantidad
+	if vida_actual <= 0:
+		morir()
+
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap
 	coordenada_local_tilemap = tile_map.local_to_map(position)#Posicion local del tilemap
 	

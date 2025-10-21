@@ -51,12 +51,10 @@ func _input(event):
 											
 								if !casillas_a_atacar.is_empty() and !mouse_sobre_unidad.puntos_movimiento <= 0:
 									print("Movimiento y ataque")
-									almacenar_unidad()
-									tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)
+									unidad_prepara_ataque()
 								elif !casillas_a_atacar.is_empty():
 									print("Solo ataque")
-									almacenar_unidad()
-									tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)
+									unidad_prepara_ataque()
 								elif !mouse_sobre_unidad.puntos_movimiento <= 0:
 									print("Solo movimiento")
 									almacenar_unidad()
@@ -68,9 +66,7 @@ func _input(event):
 						elif (!casillas_a_atacar.is_empty() and mouse_sobre_unidad != null) and !mouse_sobre_unidad == unidad_a_mover:
 							#If hay casillas para atacar AND mouse esta sobre una unidad AND no es si mismo
 							if casillas_a_atacar.has(mouse_sobre_unidad.coordenada_local_tilemap):
-								print("Le rompo la cabeza a este triplehijueremil buta")
-								mouse_sobre_unidad.morir()
-								limpiar_unidad_seleccionada()
+								ejecutando_ataque()
 							else:
 								print("Error raro a la hora de atacar al buta")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
@@ -163,6 +159,15 @@ func verificar_si_son_aliados() -> bool:
 		return true
 	else: 
 		return false
+
+func unidad_prepara_ataque() -> void:
+	almacenar_unidad()#Almacena la unidad como seleccionada
+	tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)#Dibuja las casillas de ataque
+
+func ejecutando_ataque() -> void:
+	print("Le rompo la cabeza a este triplehijueremil buta")
+	mouse_sobre_unidad.recibir_daño(unidad_a_mover.infligir_daño())#La unidad seleccionada le inflige daño a la que esta bajo el mouse
+	limpiar_unidad_seleccionada()
 	
 func verificar_si_coordenadas_estan_libres() -> bool:
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap() #Coordenada del tilemap
