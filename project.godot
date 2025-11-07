@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 AlgoritmoDijkstra="*res://Script/globales/algoritmo_dijkstra.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [file_customization]
 
 folder_colors={

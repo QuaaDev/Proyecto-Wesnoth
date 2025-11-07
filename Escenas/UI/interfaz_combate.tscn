@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://hc1lgndklm3y"]
+[gd_scene load_steps=11 format=3 uid="uid://hc1lgndklm3y"]
 
 [ext_resource type="Texture2D" uid="uid://dbwsvvj26dt18" path="res://Assets/UI/ui combate/combate_ui.png" id="1_l02sy"]
 [ext_resource type="Texture2D" uid="uid://defvnc1llcvr1" path="res://Assets/UI/ui combate/fondo_ui_combate.png" id="1_p4ajo"]
-[ext_resource type="LabelSettings" uid="uid://b7ghds8yybglq" path="res://Escenas/UI/interfaz combate/fuente_letra_ui_combate.tres" id="3_ilj5w"]
+[ext_resource type="Script" uid="uid://cjpa4s4eelqyk" path="res://Script/HUD/v_box_prueba.gd" id="3_p4ajo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p4ajo"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7ndl"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_ilj5w"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_oeqjn"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_jvbsn"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_d3lju"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fctw"]
+font_size = 12
 
 [node name="interfaz_combate" type="Control"]
 layout_mode = 3
@@ -25,42 +46,42 @@ texture = ExtResource("1_l02sy")
 
 [node name="VBoxEnemigoPerfil" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 2.0
 offset_top = -195.0
-offset_right = 124.0
-offset_bottom = -52.0
+offset_right = 161.0
+offset_bottom = -18.0
+script = ExtResource("3_p4ajo")
 
 [node name="Nombre" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
-text = "Nombre unidadddddddddddddddddddddd"
-label_settings = ExtResource("3_ilj5w")
+text = "Nombre unidad"
+label_settings = SubResource("LabelSettings_p4ajo")
 
 [node name="Identificador" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Identificador_Unidad"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_o7ndl")
 
 [node name="Nivel" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Nivel Unidad"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_ilj5w")
 
 [node name="Vida" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Vida Unidad"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_oeqjn")
 
 [node name="Moral" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Moral Unidad"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_jvbsn")
 
 [node name="Experiencia" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Experiencia"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_d3lju")
 
 [node name="Equipo" type="Label" parent="VBoxEnemigoPerfil"]
 layout_mode = 2
 text = "Equipo"
-label_settings = ExtResource("3_ilj5w")
+label_settings = SubResource("LabelSettings_3fctw")
