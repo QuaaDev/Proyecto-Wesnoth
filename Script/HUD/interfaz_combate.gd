@@ -1,16 +1,14 @@
 extends Control
-@onready var v_box_combate: VBoxContainer = $VBoxCombate
+@onready var v_box_combate: VBoxContainer = $FondoUiCombate/VBoxCombate
 const COLOR_RECT_EJEMPLO = preload("uid://c06dt336pm34x")
 @onready var fondo_ui_combate: TextureRect = $FondoUiCombate
-@onready var atacar_button: Button = $AtacarButton
-@onready var cancelar_button: Button = $CancelarButton
+@onready var atacar_button: Button = $FondoUiCombate/AtacarButton
+@onready var cancelar_button: Button = $FondoUiCombate/CancelarButton
+
 
 
 func _ready() -> void:
-	prueba()
-	prueba()
-	prueba()
-	recalcular_tamaño()
+	pass
 	
 func prueba():
 	var nuevo_rect = COLOR_RECT_EJEMPLO.instantiate()
