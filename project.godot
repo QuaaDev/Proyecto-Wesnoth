@@ -23,6 +23,7 @@ AlgoritmoDijkstra="*res://Script/globales/algoritmo_dijkstra.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [file_customization]
 
