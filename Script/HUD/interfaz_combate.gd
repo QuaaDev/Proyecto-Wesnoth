@@ -1,5 +1,5 @@
 extends Control
-@onready var v_box_combate: VBoxContainer = $FondoUiCombate/PanelCombate/VBoxCombate
+@onready var v_box_combate: VBoxContainer = $FondoUiCombate/PanelCombate/ScrollContainer/VBoxContainer
 const OPCION_COMBATE = preload("uid://dv866k7yhc510")
 @onready var fondo_ui_combate: TextureRect = $FondoUiCombate
 @onready var atacar_button: Button = $FondoUiCombate/AtacarButton

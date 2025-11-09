@@ -188,16 +188,21 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PanelCombate" type="PanelContainer" parent="FondoUiCombate"]
 modulate = Color(8.414, 8.414, 8.414, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.008012821
 anchor_top = 0.4527132
 anchor_right = 1.0016025
 anchor_bottom = 0.91317827
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxCombate" type="VBoxContainer" parent="FondoUiCombate/PanelCombate"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FondoUiCombate/PanelCombate"]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FondoUiCombate/PanelCombate/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [node name="CombateUi" type="Sprite2D" parent="."]
 visible = false
