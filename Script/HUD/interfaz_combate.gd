@@ -1,6 +1,6 @@
 extends Control
-@onready var v_box_combate: VBoxContainer = $FondoUiCombate/VBoxCombate
-const COLOR_RECT_EJEMPLO = preload("uid://c06dt336pm34x")
+@onready var v_box_combate: VBoxContainer = $FondoUiCombate/PanelCombate/VBoxCombate
+const OPCION_COMBATE = preload("uid://dv866k7yhc510")
 @onready var fondo_ui_combate: TextureRect = $FondoUiCombate
 @onready var atacar_button: Button = $FondoUiCombate/AtacarButton
 @onready var cancelar_button: Button = $FondoUiCombate/CancelarButton
@@ -8,10 +8,14 @@ const COLOR_RECT_EJEMPLO = preload("uid://c06dt336pm34x")
 
 
 func _ready() -> void:
-	pass
+	prueba()
+	prueba()
+	prueba()
+	prueba()
+	prueba()
 	
 func prueba():
-	var nuevo_rect = COLOR_RECT_EJEMPLO.instantiate()
+	var nuevo_rect = OPCION_COMBATE.instantiate()
 	nuevo_rect.custom_minimum_size = Vector2(500,120)
 	v_box_combate.add_child(nuevo_rect)
 	

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dv866k7yhc510"]
+
+[node name="OpcionCombate" type="Panel"]
+offset_right = 55.0
+offset_bottom = 31.0
+size_flags_horizontal = 4
