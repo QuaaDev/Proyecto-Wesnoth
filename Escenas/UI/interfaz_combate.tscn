@@ -39,6 +39,101 @@ size_flags_vertical = 0
 script = ExtResource("1_o7ndl")
 metadata/_edit_use_anchors_ = true
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 103.0
+offset_right = 771.0
+offset_bottom = 246.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxEnemigoPerfil" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_p4ajo")
+
+[node name="Nombre" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Nombre unidad"
+label_settings = SubResource("LabelSettings_p4ajo")
+horizontal_alignment = 2
+
+[node name="Identificador" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Identificador_Unidad"
+label_settings = SubResource("LabelSettings_o7ndl")
+horizontal_alignment = 2
+
+[node name="Nivel" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Nivel Unidad"
+label_settings = SubResource("LabelSettings_ilj5w")
+horizontal_alignment = 2
+
+[node name="Vida" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Vida Unidad"
+label_settings = SubResource("LabelSettings_oeqjn")
+horizontal_alignment = 2
+
+[node name="Moral" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Moral Unidad"
+label_settings = SubResource("LabelSettings_jvbsn")
+horizontal_alignment = 2
+
+[node name="Experiencia" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Experiencia"
+label_settings = SubResource("LabelSettings_d3lju")
+horizontal_alignment = 2
+
+[node name="Equipo" type="Label" parent="HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Equipo"
+label_settings = SubResource("LabelSettings_3fctw")
+horizontal_alignment = 2
+
+[node name="VBoxAliadoPerfil2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_p4ajo")
+metadata/_edit_use_anchors_ = true
+
+[node name="Nombre" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Nombre unidad"
+label_settings = SubResource("LabelSettings_p4ajo")
+
+[node name="Identificador" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Identificador_Unidad"
+label_settings = SubResource("LabelSettings_o7ndl")
+
+[node name="Nivel" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Nivel Unidad"
+label_settings = SubResource("LabelSettings_ilj5w")
+
+[node name="Vida" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Vida Unidad"
+label_settings = SubResource("LabelSettings_oeqjn")
+
+[node name="Moral" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Moral Unidad"
+label_settings = SubResource("LabelSettings_jvbsn")
+
+[node name="Experiencia" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Experiencia"
+label_settings = SubResource("LabelSettings_d3lju")
+
+[node name="Equipo" type="Label" parent="HBoxContainer/VBoxAliadoPerfil2"]
+layout_mode = 2
+text = "Equipo"
+label_settings = SubResource("LabelSettings_3fctw")
+
 [node name="FondoUiCombate" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(624, 480)
 layout_mode = 1
@@ -55,114 +150,29 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_p4ajo")
 
-[node name="PanelPerfil" type="PanelContainer" parent="FondoUiCombate"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0016025641
-anchor_right = 0.9983974
-anchor_bottom = 0.43958333
-grow_horizontal = 2
+[node name="ScrollContainer" type="ScrollContainer" parent="FondoUiCombate"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 623.0
+offset_bottom = 283.53125
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FondoUiCombate/PanelPerfil"]
+[node name="PNGAliado" type="TextureRect" parent="FondoUiCombate/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxEnemigoPerfil" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_p4ajo")
-
-[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Nombre unidad"
-label_settings = SubResource("LabelSettings_p4ajo")
-horizontal_alignment = 2
-
-[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Identificador_Unidad"
-label_settings = SubResource("LabelSettings_o7ndl")
-horizontal_alignment = 2
-
-[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Nivel Unidad"
-label_settings = SubResource("LabelSettings_ilj5w")
-horizontal_alignment = 2
-
-[node name="Vida" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Vida Unidad"
-label_settings = SubResource("LabelSettings_oeqjn")
-horizontal_alignment = 2
-
-[node name="Moral" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Moral Unidad"
-label_settings = SubResource("LabelSettings_jvbsn")
-horizontal_alignment = 2
-
-[node name="Experiencia" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Experiencia"
-label_settings = SubResource("LabelSettings_d3lju")
-horizontal_alignment = 2
-
-[node name="Equipo" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Equipo"
-label_settings = SubResource("LabelSettings_3fctw")
-horizontal_alignment = 2
-
-[node name="VBoxAliadoPerfil2" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_p4ajo")
-metadata/_edit_use_anchors_ = true
-
-[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Nombre unidad"
-label_settings = SubResource("LabelSettings_p4ajo")
-
-[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Identificador_Unidad"
-label_settings = SubResource("LabelSettings_o7ndl")
-
-[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Nivel Unidad"
-label_settings = SubResource("LabelSettings_ilj5w")
-
-[node name="Vida" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Vida Unidad"
-label_settings = SubResource("LabelSettings_oeqjn")
-
-[node name="Moral" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Moral Unidad"
-label_settings = SubResource("LabelSettings_jvbsn")
-
-[node name="Experiencia" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Experiencia"
-label_settings = SubResource("LabelSettings_d3lju")
-
-[node name="Equipo" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Equipo"
-label_settings = SubResource("LabelSettings_3fctw")
-
-[node name="PNGEnemigo" type="TextureRect" parent="FondoUiCombate/PanelPerfil"]
-layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 texture = ExtResource("4_ilj5w")
 stretch_mode = 5
 
-[node name="PNGAliado" type="TextureRect" parent="FondoUiCombate/PanelPerfil"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FondoUiCombate/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="PNGEnemigo" type="TextureRect" parent="FondoUiCombate"]
+layout_mode = 0
+offset_left = 551.0
+offset_right = 623.0
+offset_bottom = 283.53125
+size_flags_horizontal = 8
 texture = ExtResource("4_ilj5w")
 stretch_mode = 5
 
@@ -185,24 +195,6 @@ anchor_right = 0.9887822
 anchor_bottom = 0.98333335
 text = "Cancelar"
 metadata/_edit_use_anchors_ = true
-
-[node name="PanelCombate" type="PanelContainer" parent="FondoUiCombate"]
-modulate = Color(8.414, 8.414, 8.414, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.008012821
-anchor_top = 0.4527132
-anchor_right = 1.0016025
-anchor_bottom = 0.91317827
-metadata/_edit_use_anchors_ = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="FondoUiCombate/PanelCombate"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="FondoUiCombate/PanelCombate/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
 
 [node name="CombateUi" type="Sprite2D" parent="."]
 visible = false
