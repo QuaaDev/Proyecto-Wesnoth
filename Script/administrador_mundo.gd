@@ -2,6 +2,8 @@ extends Node
 var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
 @onready var tile_map: Node2D = $TileMap
+
+#----------Seccion hud derecho----------
 @onready var label_unidad_moviendose: Label = $CanvasLayer/hud_derecho/VBoxContainer/nombre_unidad_moviendose
 @onready var hud_derecho: ColorRect = $CanvasLayer/hud_derecho
 @onready var label_equipo_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/equipo_unidad_moviendose
@@ -9,8 +11,12 @@ var unidad_a_mover : Node2D
 @onready var label_puntos_movimiento: Label = $CanvasLayer/hud_derecho/VBoxContainer/puntos_movimiento
 @onready var label_vida_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/vida_unidad
 @onready var label_daño_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/daño_unidad
-@onready var interfaz_combate: Control = $CanvasLayer/interfaz_combate
+@onready var label_turnos_de_ataques: Label = $CanvasLayer/hud_derecho/VBoxContainer/turnos_de_ataques
 
+#----------Seccion hud derecho----------
+#---------Seccion Interfaz combate----------
+@onready var interfaz_combate: Control = $CanvasLayer/interfaz_combate
+#---------Seccion Interfaz combate----------
 
 
 var mouse_sobre_hud : bool = false
@@ -162,7 +168,7 @@ func mover_unidad(unidad : Node2D):
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
 	if mouse_sobre_unidad == null:
-		print("Error fatal verificar_si_son_aliados variable mouse_sobre_unidad == null, se procede a devolver false")
+		print("❌Error fatal verificar_si_son_aliados variable mouse_sobre_unidad == null, se procede a devolver false")
 		return false
 	if mouse_sobre_unidad.equipo == unidad_a_mover.equipo:
 		return true
@@ -209,6 +215,7 @@ func rellenar_labels(unidad : Node2D) ->void:
 	label_equipo_unidad.text = "equipo: " + str(unidad.equipo)
 	label_vida_unidad.text = "Vida: "+str(unidad.vida_actual)+" / "+str(unidad.vida_maxima)
 	label_daño_unidad.text = "Daño: " + str(unidad.daño)
+	label_turnos_de_ataques.text = "Turnos de ataque: " + str(unidad.turnos_de_ataque_actual) + " / " + str(unidad.turnos_de_ataque_maximo)
 	
 func limpiar_labels() -> void:
 	label_unidad_moviendose.text = "null"
@@ -216,6 +223,7 @@ func limpiar_labels() -> void:
 	label_puntos_movimiento.text = "null"
 	label_vida_unidad.text = "null"
 	label_daño_unidad.text = "null"
+	label_turnos_de_ataques.text = "null"
 	
 func limpiar_unidad_seleccionada() -> void:
 	casillas_a_atacar.clear()#Limpia los posibles ataques almacenados
