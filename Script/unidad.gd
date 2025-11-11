@@ -7,6 +7,9 @@ var es_mi_turno : bool = false
 var puntos_movimiento : int #Cantidad de movimientos en ejecucion
 @export var equipo : int = 0
 
+@export var turnos_de_ataque_maximo : int = 1 #Cantidad de acciones maximas de ataque en un turno
+var turnos_de_ataque_actual : int
+
 @export var vida_maxima : int = 10
 var vida_actual : int
 
@@ -25,6 +28,7 @@ func morir():
 
 func infligir_daño() -> int:
 	puntos_movimiento = 0 #Evita que la unidad se mueva luego de atacar
+	turnos_de_ataque_actual -= 1#Gasta un turno de ataque
 	return daño
 	
 func recibir_daño(cantidad : int) -> void:
@@ -45,7 +49,9 @@ func termino_mi_turno() -> void:
 	es_mi_turno = false
 
 func empezo_mi_turno() -> void:
+	#Reseteas estadisticas y activa el turno
 	puntos_movimiento = puntos_movimiento_maximo
+	turnos_de_ataque_actual = turnos_de_ataque_maximo
 	es_mi_turno = true
 
 func restar_puntos_movimiento(cantidad : int) -> void: #Resta la cantidad de movimientos dispomible

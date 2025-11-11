@@ -52,7 +52,10 @@ func _input(event):
 										if ubicaciones_ocupadas[i].equipo != mouse_sobre_unidad.equipo: #Y si son de diferente equipo
 											casillas_a_atacar[i] = ubicaciones_ocupadas[i]
 											print(casillas_a_atacar)
-											
+								if !mouse_sobre_unidad.turnos_de_ataque_actual >= 1:
+									#Si la unidad no tiene turnos de ataque, elimina todos los posibles ataques.
+									print("Unidad sin turnos de ataque, cancelando posibles ataques")
+									casillas_a_atacar.clear()
 								if !casillas_a_atacar.is_empty() and !mouse_sobre_unidad.puntos_movimiento <= 0:
 									#If las casillas a atacar no estan vacias AND la unidad tiene mas de 1 movimientos
 									print("Movimiento y ataque")
@@ -74,7 +77,7 @@ func _input(event):
 							if casillas_a_atacar.has(mouse_sobre_unidad.coordenada_local_tilemap):
 								ejecutando_ataque()
 							else:
-								print("Error raro a la hora de atacar al buta")
+								print("⚠Error raro a la hora de atacar al buta")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 							#Se selecciona la casilla a moverse
