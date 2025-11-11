@@ -46,6 +46,7 @@ func _input(event):
 							#print("Patata two")
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
 							if mouse_sobre_unidad.es_mi_turno:
+							#IF es el turno de la unidad
 								for i in AlgoritmoDijkstra.get_neighbors(mouse_sobre_unidad.coordenada_local_tilemap):
 									if ubicaciones_ocupadas.has(i):#Si X casilla vecina tiene una unidad:
 										if ubicaciones_ocupadas[i].equipo != mouse_sobre_unidad.equipo: #Y si son de diferente equipo
@@ -53,17 +54,19 @@ func _input(event):
 											print(casillas_a_atacar)
 											
 								if !casillas_a_atacar.is_empty() and !mouse_sobre_unidad.puntos_movimiento <= 0:
+									#If las casillas a atacar no estan vacias AND la unidad tiene mas de 1 movimientos
 									print("Movimiento y ataque")
 									unidad_prepara_ataque()
 								elif !casillas_a_atacar.is_empty():
+									#ELIF las casillas para atacar no estan vacias
 									print("Solo ataque")
 									unidad_prepara_ataque()
 								elif !mouse_sobre_unidad.puntos_movimiento <= 0:
+									#ELIF la unidad tiene mas de 1 movimiento
 									print("Solo movimiento")
 									almacenar_unidad()
 								else:
 									print("No hay ataque ni movimiento")
-								print("Buscando el error")
 							else:
 								print("No es mi turno pibe...")
 						elif (!casillas_a_atacar.is_empty() and mouse_sobre_unidad != null) and !mouse_sobre_unidad == unidad_a_mover:
