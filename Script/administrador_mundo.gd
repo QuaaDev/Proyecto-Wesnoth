@@ -182,6 +182,7 @@ func unidad_prepara_ataque() -> void:
 
 func iniciar_interfaz_combate() ->void: 
 	#Inicia la interfaz de combate duh
+	interfaz_combate.iniciar_combate(unidad_a_mover, mouse_sobre_unidad)
 	interfaz_combate.visible = true
 
 func ejecutando_ataque() -> void: #<----------- Version antigua, es descartable

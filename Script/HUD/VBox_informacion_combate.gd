@@ -10,7 +10,7 @@ extends VBoxContainer
 
 var texto_test = "identificador_unidad" #Texto que se aplicara al label
 func _ready() -> void:
-	salto_de_linea_texto(texto_test)
+	pass
 func salto_de_linea_texto(texto : String) -> String:
 	var text_to_print = "" #Variable temporal que almacena el texto del label
 	var x = 1#Contador de ejecuciones
@@ -27,3 +27,21 @@ func salto_de_linea_texto(texto : String) -> String:
 #-----------set texto--------------
 func set_nombre(texto : String):
 	nombre.text = salto_de_linea_texto(texto)
+	
+func set_identificador(texto : String):
+	identificador.text = salto_de_linea_texto(texto)
+	
+func set_nivel(texto : String):
+	nivel.text = salto_de_linea_texto(texto)
+	
+func set_vida(texto : String):
+	vida.text = salto_de_linea_texto(texto)
+	
+func set_moral(texto : String):
+	moral.text = salto_de_linea_texto(texto)
+	
+func set_experiencia(texto : String):
+	experiencia.text = salto_de_linea_texto(texto)
+	
+func set_equipo(texto : String):
+	equipo.text = salto_de_linea_texto(texto)

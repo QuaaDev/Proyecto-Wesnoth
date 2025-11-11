@@ -79,94 +79,94 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="VBoxEnemigoPerfil" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer"]
+[node name="VBoxAliadoPerfil" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("3_p4ajo")
 
-[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
 layout_mode = 2
 text = "Nombre unidad"
 label_settings = SubResource("LabelSettings_p4ajo")
 horizontal_alignment = 2
 
-[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
 layout_mode = 2
 text = "Identificador_Unidad"
 label_settings = SubResource("LabelSettings_o7ndl")
 horizontal_alignment = 2
 
-[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
 layout_mode = 2
 text = "Nivel Unidad"
 label_settings = SubResource("LabelSettings_ilj5w")
 horizontal_alignment = 2
+
+[node name="Vida" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
+self_modulate = Color(0.09803922, 1, 0.19215687, 1)
+layout_mode = 2
+text = "Vida Unidad"
+label_settings = SubResource("LabelSettings_oeqjn")
+horizontal_alignment = 2
+
+[node name="Moral" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
+self_modulate = Color(0.6367873, 0.00030149103, 0.63678306, 1)
+layout_mode = 2
+text = "Moral Unidad"
+label_settings = SubResource("LabelSettings_jvbsn")
+horizontal_alignment = 2
+
+[node name="Experiencia" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
+self_modulate = Color(0, 0.923279, 0.9232789, 1)
+layout_mode = 2
+text = "Experiencia"
+label_settings = SubResource("LabelSettings_d3lju")
+horizontal_alignment = 2
+
+[node name="Equipo" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil"]
+layout_mode = 2
+text = "Equipo"
+label_settings = SubResource("LabelSettings_3fctw")
+horizontal_alignment = 2
+
+[node name="VBoxEnemigoPerfil" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_p4ajo")
+metadata/_edit_use_anchors_ = true
+
+[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Nombre unidad"
+label_settings = SubResource("LabelSettings_p4ajo")
+
+[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Identificador_Unidad"
+label_settings = SubResource("LabelSettings_o7ndl")
+
+[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
+layout_mode = 2
+text = "Nivel Unidad"
+label_settings = SubResource("LabelSettings_ilj5w")
 
 [node name="Vida" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
 self_modulate = Color(0.09803922, 1, 0.19215687, 1)
 layout_mode = 2
 text = "Vida Unidad"
 label_settings = SubResource("LabelSettings_oeqjn")
-horizontal_alignment = 2
 
 [node name="Moral" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
 self_modulate = Color(0.6367873, 0.00030149103, 0.63678306, 1)
 layout_mode = 2
 text = "Moral Unidad"
 label_settings = SubResource("LabelSettings_jvbsn")
-horizontal_alignment = 2
 
 [node name="Experiencia" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
 self_modulate = Color(0, 0.923279, 0.9232789, 1)
 layout_mode = 2
 text = "Experiencia"
 label_settings = SubResource("LabelSettings_d3lju")
-horizontal_alignment = 2
 
 [node name="Equipo" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil"]
-layout_mode = 2
-text = "Equipo"
-label_settings = SubResource("LabelSettings_3fctw")
-horizontal_alignment = 2
-
-[node name="VBoxAliadoPerfil2" type="VBoxContainer" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_p4ajo")
-metadata/_edit_use_anchors_ = true
-
-[node name="Nombre" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Nombre unidad"
-label_settings = SubResource("LabelSettings_p4ajo")
-
-[node name="Identificador" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Identificador_Unidad"
-label_settings = SubResource("LabelSettings_o7ndl")
-
-[node name="Nivel" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-layout_mode = 2
-text = "Nivel Unidad"
-label_settings = SubResource("LabelSettings_ilj5w")
-
-[node name="Vida" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-self_modulate = Color(0.09803922, 1, 0.19215687, 1)
-layout_mode = 2
-text = "Vida Unidad"
-label_settings = SubResource("LabelSettings_oeqjn")
-
-[node name="Moral" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-self_modulate = Color(0.6367873, 0.00030149103, 0.63678306, 1)
-layout_mode = 2
-text = "Moral Unidad"
-label_settings = SubResource("LabelSettings_jvbsn")
-
-[node name="Experiencia" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
-self_modulate = Color(0, 0.923279, 0.9232789, 1)
-layout_mode = 2
-text = "Experiencia"
-label_settings = SubResource("LabelSettings_d3lju")
-
-[node name="Equipo" type="Label" parent="FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil2"]
 layout_mode = 2
 text = "Equipo"
 label_settings = SubResource("LabelSettings_3fctw")
