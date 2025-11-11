@@ -63,6 +63,7 @@ anchor_left = 0.0016025641
 anchor_right = 0.9983974
 anchor_bottom = 0.43958333
 grow_horizontal = 2
+mouse_filter = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="FondoUiCombate/PanelPerfil"]
 layout_mode = 2
@@ -183,6 +184,7 @@ anchor_left = 0.7483974
 anchor_top = 0.91875
 anchor_right = 0.846835
 anchor_bottom = 0.98333335
+mouse_filter = 1
 text = "Atacar"
 metadata/_edit_use_anchors_ = true
 
@@ -193,6 +195,7 @@ anchor_left = 0.86698717
 anchor_top = 0.9187499
 anchor_right = 0.9887822
 anchor_bottom = 0.98333335
+mouse_filter = 1
 text = "Cancelar"
 metadata/_edit_use_anchors_ = true
 
@@ -204,6 +207,7 @@ anchor_left = 0.009615385
 anchor_top = 0.4527132
 anchor_right = 0.99358976
 anchor_bottom = 0.91317827
+mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="FondoUiCombate/PanelCombate"]

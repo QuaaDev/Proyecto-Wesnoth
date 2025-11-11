@@ -9,6 +9,7 @@ var unidad_a_mover : Node2D
 @onready var label_puntos_movimiento: Label = $CanvasLayer/hud_derecho/VBoxContainer/puntos_movimiento
 @onready var label_vida_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/vida_unidad
 @onready var label_daño_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/daño_unidad
+@onready var interfaz_combate: Control = $CanvasLayer/interfaz_combate
 
 
 
@@ -26,7 +27,9 @@ func _ready() -> void:
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i
 	#print(ubicaciones_ocupadas)
 	hud_derecho.mouse_entered.connect(mouse_en_hud)
+	interfaz_combate.mouse_entered.connect(mouse_en_hud)
 	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
+	interfaz_combate.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
 	
 	#Prepara los grupos de unidades con su respectivo turno
@@ -218,10 +221,10 @@ func limpiar_unidad_seleccionada() -> void:
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
-	#print("El mouse entra al hud")
+	print("El mouse entra al hud")
 func mouse_sale_del_hud() -> void:
 	mouse_sobre_hud = false
-	#print("El mouse sale del hud")
+	print("El mouse sale del hud")
 func boton_pasar_turno() -> void:
 	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
 	equipo_actual += 1 #Avanza al siguiente equipo

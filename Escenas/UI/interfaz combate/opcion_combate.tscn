@@ -19,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+mouse_filter = 1
 text = "
 "
 
@@ -29,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -39,7 +40,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado"]
 layout_mode = 2
@@ -77,7 +78,7 @@ text = "2"
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 6
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="PanelContainer/HBoxContainer/PanelMitad"]
 layout_mode = 2
@@ -89,7 +90,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelEnemigo"]
 layout_mode = 2
