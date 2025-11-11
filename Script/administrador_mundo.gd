@@ -81,7 +81,8 @@ func _input(event):
 						elif (!casillas_a_atacar.is_empty() and mouse_sobre_unidad != null) and !mouse_sobre_unidad == unidad_a_mover:
 							#If hay casillas para atacar AND mouse esta sobre una unidad AND no es si mismo
 							if casillas_a_atacar.has(mouse_sobre_unidad.coordenada_local_tilemap):
-								ejecutando_ataque()
+								#ejecutando_ataque()
+								iniciar_interfaz_combate()
 							else:
 								print("⚠Error raro a la hora de atacar al buta")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
@@ -174,16 +175,20 @@ func verificar_si_son_aliados() -> bool:
 		return true
 	else: 
 		return false
-
-func unidad_prepara_ataque() -> void:
+#-------Seccion Combate-----------
+func unidad_prepara_ataque() -> void: 
 	almacenar_unidad()#Almacena la unidad como seleccionada
 	tile_map.dibujar_tiles_de_ataque(casillas_a_atacar)#Dibuja las casillas de ataque
 
-func ejecutando_ataque() -> void:
+func iniciar_interfaz_combate() ->void: 
+	#Inicia la interfaz de combate duh
+	interfaz_combate.visible = true
+
+func ejecutando_ataque() -> void: #<----------- Version antigua, es descartable
 	print("Le rompo la cabeza a este triplehijueremil buta")
 	mouse_sobre_unidad.recibir_daño(unidad_a_mover.infligir_daño())#La unidad seleccionada le inflige daño a la que esta bajo el mouse
 	limpiar_unidad_seleccionada()
-	
+#-------Seccion Combate-----------
 func verificar_si_coordenadas_estan_libres() -> bool:
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap() #Coordenada del tilemap
 	if ubicaciones_ocupadas.has(coordenadas_mouse): #Verifica si la ubicacion esta dentro del diccionario

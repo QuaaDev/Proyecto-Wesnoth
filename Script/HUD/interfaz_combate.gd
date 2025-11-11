@@ -23,3 +23,6 @@ func prueba():
 func recalcular_tamaño():
 	var tamaño_base_fondo_altura = 480
 	fondo_ui_combate.custom_minimum_size.y = tamaño_base_fondo_altura + (v_box_combate.get_child_count() * 120)
+
+func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
+	pass
