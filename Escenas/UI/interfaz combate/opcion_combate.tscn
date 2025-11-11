@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv866k7yhc510"]
+[gd_scene load_steps=3 format=3 uid="uid://dv866k7yhc510"]
+
+[ext_resource type="Texture2D" uid="uid://cliquijfulqcx" path="res://Assets/UI/ui combate/assets/axe.png" id="1_mdl8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gpdml"]
 font_size = 12
@@ -21,7 +23,6 @@ text = "
 "
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-modulate = Color(1, 0, 1, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,12 +44,12 @@ mouse_filter = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado"]
 layout_mode = 2
 
-[node name="PNG" type="ColorRect" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer"]
+[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
-color = Color(0.011764706, 1, 1, 1)
+texture = ExtResource("1_mdl8y")
 
 [node name="Stats" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
@@ -119,9 +120,9 @@ layout_mode = 2
 text = "3"
 horizontal_alignment = 2
 
-[node name="PNG" type="ColorRect" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer"]
+[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("1_mdl8y")

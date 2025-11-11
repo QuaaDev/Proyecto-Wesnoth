@@ -3,7 +3,7 @@ extends VBoxContainer
 @onready var nombre: Label = $Nombre
 @onready var identificador: Label = $Identificador
 
-var word = "Pepe pica palos pero pepe no sabe de palos asique pepe se queda sin palo" #Texto que se aplicara al label
+var word = "identificador_unidad" #Texto que se aplicara al label
 func _ready() -> void:
 	var text_to_print = "" #Variable temporal que almacena el texto del label
 	var x = 1#Contador de ejecuciones
