@@ -22,15 +22,16 @@ cantidad_daño : int, cantidad_ataques : int, equipo : bool):
 	if equipo: #If es aliado:
 		label_nombre_ataque_aliado.text = nombre_ataque
 		label_tipo_daño_aliado.text = tipo_daño
-		label_cantidad_daño_aliado.text = str(cantidad_daño)
-		label_cantidad_ataques_aliado.text = str(cantidad_ataques)
+		label_cantidad_daño_aliado.text = "daño " + str(cantidad_daño)
+		label_cantidad_ataques_aliado.text = "cantidad " + str(cantidad_ataques)
 		png_aliado.texture = load(png_path)
 	else:
 		label_nombre_ataque_enemigo.text = nombre_ataque
 		label_tipo_daño_enemigo.text = tipo_daño
-		label_cantidad_daño_enemigo.text = str(cantidad_daño)
-		label_cantidad_ataques_enemigo.text = str(cantidad_ataques)
+		label_cantidad_daño_enemigo.text = "daño "+str(cantidad_daño)
+		label_cantidad_ataques_enemigo.text = "cantidad "+str(cantidad_ataques)
 		png_enemigo.texture = load(png_path)
+		
 func constructor_panel_medio(texto : String):
 	modo_combate.text = texto
 

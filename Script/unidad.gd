@@ -14,13 +14,27 @@ var turnos_de_ataque_actual : int
 var vida_actual : int
 
 @export var daño : int = 5
+#-----------Informacion combate---------------------
+var opciones_de_combate = {}
+#	(png_path : String, nombre_ataque : String, tipo_daño : String,
+	#cantidad_daño : int, cantidad_ataques : int, equipo : bool):
+
+
+
+
 func _ready() -> void:
+	var stats_combate = ["uid://c47aehovk22mn","Espada de satan","Fogo",10,1]
+	opciones_de_combate[0] = stats_combate
+	stats_combate = ["uid://c47aehovk22mn","Espada deCRISTO","awa",11,1]
+	opciones_de_combate[1] = stats_combate
+	#nombre ataque,tipo daño, cantidad daño, cantidad ataques, ruta png
 	self.add_to_group(str(equipo))
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()
 	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)
 	self.position = coordenada_global #Centra a la unidad en la celda
 	vida_actual = vida_maxima
+	print(opciones_de_combate)
 
 func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo

@@ -91,7 +91,7 @@ puntos_movimiento_maximo = 5
 equipo = 1
 
 [node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
-position = Vector2(302, 496)
+position = Vector2(308, 142)
 equipo = 1
 
 [node name="Unidad3" parent="." instance=ExtResource("2_5sfon")]
