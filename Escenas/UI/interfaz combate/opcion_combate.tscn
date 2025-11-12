@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv866k7yhc510"]
+[gd_scene load_steps=4 format=3 uid="uid://dv866k7yhc510"]
 
+[ext_resource type="Script" uid="uid://dny4jsxxywr3j" path="res://Script/HUD/opcion_combate.gd" id="1_l0vp7"]
 [ext_resource type="Texture2D" uid="uid://cliquijfulqcx" path="res://Assets/UI/ui combate/assets/axe.png" id="1_mdl8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gpdml"]
@@ -22,6 +23,7 @@ size_flags_vertical = 6
 mouse_filter = 1
 text = "
 "
+script = ExtResource("1_l0vp7")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -80,7 +82,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 mouse_filter = 1
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/PanelMitad"]
+[node name="modo_combate" type="Label" parent="PanelContainer/HBoxContainer/PanelMitad"]
 layout_mode = 2
 text = "Mele"
 label_settings = SubResource("LabelSettings_gpdml")
