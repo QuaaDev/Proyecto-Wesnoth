@@ -1,0 +1,82 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Página-1" id="z12K7auUw-BqIPfH_iea">
+    <mxGraphModel dx="812" dy="873" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-1" target="vNO_7WRw-EaGRzKcKIvj-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-1" value="Unidad" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-2" target="vNO_7WRw-EaGRzKcKIvj-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-2" value="EstadisticasAtaque" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-3" target="vNO_7WRw-EaGRzKcKIvj-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-3" value="EstadisticasDefensa" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.583;entryY=-0.017;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-1" target="vNO_7WRw-EaGRzKcKIvj-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-7" value="Nombre Ataque&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Nombre del ataque&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="540" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-8" value="Tipo Daño&lt;div&gt;Tipo de daño(arcano, fuego, cortante,etc)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="640" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-9" value="Cantidad Daño&lt;div&gt;&lt;br&gt;&lt;div&gt;Cantidad de daño que inflige una instancia&lt;/div&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="730" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-10" value="Cantidad Ataques&lt;div&gt;&lt;br&gt;&lt;div&gt;Cantidad de instancias de daño&lt;/div&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="850" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-11" value="Ruta PNG&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Representacion visual del ataque&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="980" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-17" target="vNO_7WRw-EaGRzKcKIvj-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-17" target="vNO_7WRw-EaGRzKcKIvj-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-17" value="OpcionAtaque" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.375;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-17" target="vNO_7WRw-EaGRzKcKIvj-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.003;entryY=0.394;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-17" target="vNO_7WRw-EaGRzKcKIvj-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.003;entryY=0.417;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-17" target="vNO_7WRw-EaGRzKcKIvj-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-24" value="El objeto EstadisticasAtaque almacena Opciones de ataque" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="445" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-25" target="vNO_7WRw-EaGRzKcKIvj-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-25" value="OpcionDefensa" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-26" value="Tipo Daño&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Se utiliza para identificar que tipo de armadura aplicar&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="520" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-27" value="Reduccion del daño&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Utiliza un porcentaje para el calculo&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="630" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vNO_7WRw-EaGRzKcKIvj-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.974;entryY=0.32;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vNO_7WRw-EaGRzKcKIvj-25" target="vNO_7WRw-EaGRzKcKIvj-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
