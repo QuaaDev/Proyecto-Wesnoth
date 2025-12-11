@@ -1,0 +1,5 @@
+opcion_ataque_res es el script basico para el recurso
+Se puede crear nuevas instancias en base a esa clase 
+opcion_ataque importa el opcion_ataque_res 
+
+De esta forma, diferentes unidades pueden utilizar un mismo recurso sin crear nuevas instancias inutiles

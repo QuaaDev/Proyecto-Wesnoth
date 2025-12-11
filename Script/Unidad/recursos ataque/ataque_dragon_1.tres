@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="OpcionAtaqueRes" load_steps=2 format=3 uid="uid://bjabsba0riubd"]
+
+[ext_resource type="Script" uid="uid://cfq5cl8ihg6n8" path="res://Script/Unidad/opcion_ataque_res.gd" id="1_s64s7"]
+
+[resource]
+script = ExtResource("1_s64s7")
+nombre_ataque = "Piña do dragon"
+"cantidad_daño" = 1000
+cantidad_ataques = 2
+ruta_png = "null"
+metadata/_custom_type_script = "uid://cfq5cl8ihg6n8"
