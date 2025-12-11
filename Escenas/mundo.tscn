@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3wqpj3vn01p5" path="res://Script/administrador_mundo.gd" id="1_bqhdr"]
 [ext_resource type="PackedScene" uid="uid://bqqysniprka80" path="res://Escenas/tilemap/tile_map.tscn" id="1_wxucn"]
-[ext_resource type="PackedScene" uid="uid://dmebkus7j77fl" path="res://Escenas/unidad.tscn" id="2_5sfon"]
+[ext_resource type="PackedScene" uid="uid://dmebkus7j77fl" path="res://Escenas/Unidad/unidad.tscn" id="2_5sfon"]
 [ext_resource type="PackedScene" uid="uid://hc1lgndklm3y" path="res://Escenas/UI/interfaz_combate.tscn" id="2_rxj15"]
 [ext_resource type="Script" uid="uid://jph5j1dvrr1k" path="res://Script/controlador_camara.gd" id="4_ly0wt"]
 

@@ -1,13 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmebkus7j77fl"]
 
 [ext_resource type="Texture2D" uid="uid://bksfnvk2kclfb" path="res://Assets/arbiter.png" id="1_idnxp"]
-[ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/unidad.gd" id="1_w64r7"]
+[ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_w64r7"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_w64r7"]
 points = PackedVector2Array(36, 0, 18, 36, -18, 36, -36, 0, -18, -36, 18, -36)
 
 [node name="Unidad" type="Node2D"]
 script = ExtResource("1_w64r7")
+
+[node name="EstadisticasAtaque" type="Node" parent="."]
+
+[node name="EstadisticasDefensa" type="Node" parent="."]
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_idnxp")

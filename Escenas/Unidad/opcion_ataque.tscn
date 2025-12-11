@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yyskw2qgmlbs"]
+
+[ext_resource type="Script" uid="uid://c5g8o7um40762" path="res://Script/Unidad/opcion_ataque.gd" id="1_0eq7w"]
+
+[node name="OpcionAtaque" type="Node"]
+script = ExtResource("1_0eq7w")
