@@ -24,6 +24,7 @@ func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	editar_labels(unidad_enemiga, v_box_enemigo_perfil)
 	#(png_path : String, nombre_ataque : String, tipo_daño : String,
 	#cantidad_daño : int, cantidad_ataques : int, equipo : bool):
+	#------------Codigo a editar here---------
 	for i in unidad_aliada.opciones_de_combate:
 		var nuevo_panel_combate = OPCION_COMBATE.instantiate()
 		var informacion = unidad_aliada.opciones_de_combate[i].duplicate()

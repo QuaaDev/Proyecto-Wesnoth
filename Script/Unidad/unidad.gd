@@ -23,10 +23,10 @@ var opciones_de_combate = {}
 
 
 func _ready() -> void:
-	var stats_combate = ["uid://c47aehovk22mn","Espada de satan","Fogo",10,1]
-	opciones_de_combate[0] = stats_combate
-	stats_combate = ["uid://c47aehovk22mn","Espada deCRISTO","awa",11,1]
-	opciones_de_combate[1] = stats_combate
+	#var stats_combate = ["uid://c47aehovk22mn","Espada de satan","Fogo",10,1]
+	#opciones_de_combate[0] = stats_combate
+	#stats_combate = ["uid://c47aehovk22mn","Espada deCRISTO","awa",11,1]
+	#opciones_de_combate[1] = stats_combate
 	#nombre ataque,tipo daño, cantidad daño, cantidad ataques, ruta png
 	self.add_to_group(str(equipo))
 	#print(self.get_groups())
