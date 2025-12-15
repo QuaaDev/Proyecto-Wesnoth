@@ -16,25 +16,25 @@ extends Button
 #-------------Seccion mitad-----------------
 @onready var modo_combate: Label = $PanelContainer/HBoxContainer/PanelMitad/modo_combate
 
-func constructor_estadisticas(png_path : String, nombre_ataque : String, tipo_daño : String,
-cantidad_daño : int, cantidad_ataques : int, equipo : bool):
+func constructor_estadisticas(nombre_ataque : String, tipo_daño : int, cantidad_daño : int,cantidad_ataques : int, ruta_png : String, equipo : bool):
 	#png_path usa el UID del recurso, luego se le asigna con load()
 	if equipo: #If es aliado:
 		label_nombre_ataque_aliado.text = nombre_ataque
-		label_tipo_daño_aliado.text = tipo_daño
+		label_tipo_daño_aliado.text = str(tipo_daño)
 		label_cantidad_daño_aliado.text = "daño " + str(cantidad_daño)
 		label_cantidad_ataques_aliado.text = "cantidad " + str(cantidad_ataques)
-		png_aliado.texture = load(png_path)
+		png_aliado.texture = load(ruta_png)
 	else:
 		label_nombre_ataque_enemigo.text = nombre_ataque
-		label_tipo_daño_enemigo.text = tipo_daño
+		label_tipo_daño_enemigo.text = str(tipo_daño)
 		label_cantidad_daño_enemigo.text = "daño "+str(cantidad_daño)
 		label_cantidad_ataques_enemigo.text = "cantidad "+str(cantidad_ataques)
-		png_enemigo.texture = load(png_path)
+		png_enemigo.texture = load(ruta_png)
 		
 func constructor_panel_medio(texto : String):
 	modo_combate.text = texto
 
 func _ready() -> void:
-	constructor_estadisticas("uid://bksfnvk2kclfb","x","x",0,0,true)
-	constructor_estadisticas("uid://c26runelcofr0","x","x",0,0,false)
+	#constructor_estadisticas("uid://bksfnvk2kclfb","x","x",0,0,true)
+	#constructor_estadisticas("uid://c26runelcofr0","x","x",0,0,false)
+	pass

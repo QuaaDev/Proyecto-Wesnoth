@@ -22,19 +22,16 @@ func prueba():
 func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	editar_labels(unidad_aliada,v_box_aliado_perfil)
 	editar_labels(unidad_enemiga, v_box_enemigo_perfil)
-	#(png_path : String, nombre_ataque : String, tipo_daño : String,
-	#cantidad_daño : int, cantidad_ataques : int, equipo : bool):
-	#------------Codigo a editar here---------
-	for i in unidad_aliada.opciones_de_combate:
-		var nuevo_panel_combate = OPCION_COMBATE.instantiate()
-		var informacion = unidad_aliada.opciones_de_combate[i].duplicate()
+	for i in unidad_aliada.get_node("EstadisticasAtaque").get_children(): 
+		#Obtiene todos los hijos de estadisticasataque
+		var nuevo_panel_combate = OPCION_COMBATE.instantiate() 
+		var opcion_ataque = i.opcion_ataque_res #Obtiene los valores del recurso de ataque
 		v_box_combate.add_child(nuevo_panel_combate)
-		print(informacion)
 		nuevo_panel_combate.custom_minimum_size = Vector2(500,120)
-		nuevo_panel_combate.constructor_estadisticas(informacion[0],informacion[1],informacion[2],
-		informacion[3],informacion[4],true)
+		nuevo_panel_combate.constructor_estadisticas(opcion_ataque.nombre_ataque,opcion_ataque.tipo_daño,opcion_ataque.cantidad_daño,
+		opcion_ataque.cantidad_ataques,opcion_ataque.ruta_png,true)
 		#constructor_estadisticas
-
+		
 func editar_labels(unidad : Node2D, box_objetivo : VBoxContainer):
 	box_objetivo.set_nombre(unidad.name)
 	box_objetivo.set_identificador("No tienen identificador")
