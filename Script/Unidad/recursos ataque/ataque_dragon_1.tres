@@ -7,5 +7,5 @@ script = ExtResource("1_s64s7")
 nombre_ataque = "Piña do dragon"
 "cantidad_daño" = 1000
 cantidad_ataques = 2
-ruta_png = "null"
+ruta_png = "uid://cliquijfulqcx"
 metadata/_custom_type_script = "uid://cfq5cl8ihg6n8"
