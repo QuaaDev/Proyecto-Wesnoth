@@ -22,14 +22,14 @@ func prueba():
 func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	editar_labels(unidad_aliada,v_box_aliado_perfil)
 	editar_labels(unidad_enemiga, v_box_enemigo_perfil)
+	var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(0)
+	#Variable temporal hasta tener una IA que eliga el ataque mas eficiente
 	for i in unidad_aliada.get_node("EstadisticasAtaque").get_children(): 
 		#Obtiene todos los hijos de estadisticasataque
 		var nuevo_panel_combate = OPCION_COMBATE.instantiate() 
-		var opcion_ataque = i.opcion_ataque_res #Obtiene los valores del recurso de ataque
 		v_box_combate.add_child(nuevo_panel_combate)
 		nuevo_panel_combate.custom_minimum_size = Vector2(500,120)
-		nuevo_panel_combate.constructor_estadisticas(opcion_ataque.nombre_ataque,opcion_ataque.tipo_daño,opcion_ataque.cantidad_daño,
-		opcion_ataque.cantidad_ataques,opcion_ataque.ruta_png,true)
+		nuevo_panel_combate.constructor_estadisticas(i, ejemplo_ataque_enemigo)
 		#constructor_estadisticas
 		nuevo_panel_combate.presionado_con_origen.connect(panel_presionado) 
 		#Conecta la señal para detectar el pressed + origen de la señal
