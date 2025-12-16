@@ -129,3 +129,5 @@ layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
 texture = ExtResource("1_mdl8y")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

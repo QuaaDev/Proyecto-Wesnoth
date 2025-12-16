@@ -1,4 +1,7 @@
 extends Button
+
+signal presionado_con_origen(origen : Button) 
+#Envia una señal cuando se presiona el boton incluyendo el origen de la señal como argumento
 #---------Seccion Aliado---------------
 @onready var png_aliado: TextureRect = $PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/PNG
 @onready var label_nombre_ataque_aliado: Label = $PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats/NombreAtaque
@@ -38,3 +41,9 @@ func _ready() -> void:
 	#constructor_estadisticas("uid://bksfnvk2kclfb","x","x",0,0,true)
 	#constructor_estadisticas("uid://c26runelcofr0","x","x",0,0,false)
 	pass
+
+#------------señales---------------
+
+
+func _on_pressed() -> void:
+	presionado_con_origen.emit(self)

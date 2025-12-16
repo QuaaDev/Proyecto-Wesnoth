@@ -31,6 +31,8 @@ func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 		nuevo_panel_combate.constructor_estadisticas(opcion_ataque.nombre_ataque,opcion_ataque.tipo_daño,opcion_ataque.cantidad_daño,
 		opcion_ataque.cantidad_ataques,opcion_ataque.ruta_png,true)
 		#constructor_estadisticas
+		nuevo_panel_combate.presionado_con_origen.connect(panel_presionado) 
+		#Conecta la señal para detectar el pressed + origen de la señal
 		
 func editar_labels(unidad : Node2D, box_objetivo : VBoxContainer):
 	box_objetivo.set_nombre(unidad.name)
@@ -41,7 +43,7 @@ func editar_labels(unidad : Node2D, box_objetivo : VBoxContainer):
 	box_objetivo.set_experiencia("No tienen experiencia")
 	box_objetivo.set_equipo("Equipo: " + str(unidad.equipo))
 
-func limpiar_labels(box_objetivo : VBoxContainer):
+func limpiar_labels(box_objetivo : VBoxContainer): #Resetea los labels
 	box_objetivo.set_nombre("null")
 	box_objetivo.set_identificador("null")
 	box_objetivo.set_nivel("null")
@@ -50,9 +52,12 @@ func limpiar_labels(box_objetivo : VBoxContainer):
 	box_objetivo.set_experiencia("null")
 	box_objetivo.set_equipo("null")
 	
-func limpiar_panel_combate():
+func limpiar_panel_combate():#Limpia todas las opciones de combate del panel combate
 	for i in v_box_combate.get_children():
 		i.queue_free()
+		
+		
+
 #-----------Señales------------
 
 func boton_atacar_presionado() -> void:
@@ -68,3 +73,6 @@ func boton_cancelar_presionado() -> void:
 	limpiar_labels(v_box_aliado_perfil)
 	limpiar_labels(v_box_enemigo_perfil)
 	limpiar_panel_combate()
+
+func panel_presionado(origen : Button):
+	print(origen.name)
