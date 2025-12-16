@@ -8,6 +8,7 @@ const OPCION_COMBATE = preload("uid://dv866k7yhc510")
 @onready var v_box_enemigo_perfil: VBoxContainer = $FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil
 @onready var v_box_aliado_perfil: VBoxContainer = $FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil
 
+var opcion_elegida #Almacena la opcion elegida para ejecutar el combate
 
 func _ready() -> void:
 	pass
@@ -61,18 +62,24 @@ func limpiar_panel_combate():#Limpia todas las opciones de combate del panel com
 #-----------Señales------------
 
 func boton_atacar_presionado() -> void:
-	print("UI ATACAR!")
-	self.visible = false
-	limpiar_labels(v_box_aliado_perfil)
-	limpiar_labels(v_box_enemigo_perfil)
-	limpiar_panel_combate()
+	if opcion_elegida == null:
+		print("Elige una opcion de combate")
+	else:
+		self.visible = false
+		opcion_elegida = null
+		limpiar_labels(v_box_aliado_perfil)
+		limpiar_labels(v_box_enemigo_perfil)
+		limpiar_panel_combate()
+		print("Ejecutando ataque")
 
 func boton_cancelar_presionado() -> void:
 	print("UI CANCELAR PELEA!")
+	opcion_elegida = null
 	self.visible = false
 	limpiar_labels(v_box_aliado_perfil)
 	limpiar_labels(v_box_enemigo_perfil)
 	limpiar_panel_combate()
 
 func panel_presionado(origen : Button):
+	opcion_elegida = origen
 	print(origen.name)
