@@ -222,3 +222,6 @@ size_flags_vertical = 4
 visible = false
 position = Vector2(646, 273)
 texture = ExtResource("1_l02sy")
+
+[connection signal="pressed" from="FondoUiCombate/AtacarButton" to="." method="boton_atacar_presionado"]
+[connection signal="pressed" from="FondoUiCombate/CancelarButton" to="." method="boton_cancelar_presionado"]

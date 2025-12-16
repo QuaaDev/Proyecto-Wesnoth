@@ -40,4 +40,31 @@ func editar_labels(unidad : Node2D, box_objetivo : VBoxContainer):
 	box_objetivo.set_moral("No tienen moral")
 	box_objetivo.set_experiencia("No tienen experiencia")
 	box_objetivo.set_equipo("Equipo: " + str(unidad.equipo))
+
+func limpiar_labels(box_objetivo : VBoxContainer):
+	box_objetivo.set_nombre("null")
+	box_objetivo.set_identificador("null")
+	box_objetivo.set_nivel("null")
+	box_objetivo.set_vida("null")
+	box_objetivo.set_moral("null")
+	box_objetivo.set_experiencia("null")
+	box_objetivo.set_equipo("null")
 	
+func limpiar_panel_combate():
+	for i in v_box_combate.get_children():
+		i.queue_free()
+#-----------Señales------------
+
+func boton_atacar_presionado() -> void:
+	print("UI ATACAR!")
+	self.visible = false
+	limpiar_labels(v_box_aliado_perfil)
+	limpiar_labels(v_box_enemigo_perfil)
+	limpiar_panel_combate()
+
+func boton_cancelar_presionado() -> void:
+	print("UI CANCELAR PELEA!")
+	self.visible = false
+	limpiar_labels(v_box_aliado_perfil)
+	limpiar_labels(v_box_enemigo_perfil)
+	limpiar_panel_combate()
