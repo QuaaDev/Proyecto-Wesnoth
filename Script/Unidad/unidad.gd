@@ -1,6 +1,8 @@
 extends Node2D
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
+@onready var sprite: Sprite2D = $sprite
+
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
 @export var puntos_movimiento_maximo = 2 #Cantidad maxima de movimientos por turno
@@ -13,7 +15,9 @@ var turnos_de_ataque_actual : int
 @export var vida_maxima : int = 10
 var vida_actual : int
 
-@export var daño : int = 5
+@export var daño : int = 5 
+@export var sprite_unidad_UID : String
+
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
 #	(png_path : String, nombre_ataque : String, tipo_daño : String,
@@ -23,17 +27,13 @@ var opciones_de_combate = {}
 
 
 func _ready() -> void:
-	#var stats_combate = ["uid://c47aehovk22mn","Espada de satan","Fogo",10,1]
-	#opciones_de_combate[0] = stats_combate
-	#stats_combate = ["uid://c47aehovk22mn","Espada deCRISTO","awa",11,1]
-	#opciones_de_combate[1] = stats_combate
-	#nombre ataque,tipo daño, cantidad daño, cantidad ataques, ruta png
 	self.add_to_group(str(equipo))
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()
 	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)
 	self.position = coordenada_global #Centra a la unidad en la celda
 	vida_actual = vida_maxima
+	sprite.texture = load(sprite_unidad_UID)
 	print(opciones_de_combate)
 
 func morir():
