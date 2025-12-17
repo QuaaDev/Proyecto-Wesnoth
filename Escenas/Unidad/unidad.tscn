@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmebkus7j77fl"]
+[gd_scene load_steps=9 format=3 uid="uid://dmebkus7j77fl"]
 
 [ext_resource type="Texture2D" uid="uid://bksfnvk2kclfb" path="res://Assets/arbiter.png" id="1_idnxp"]
 [ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_w64r7"]
-[ext_resource type="Script" uid="uid://c5g8o7um40762" path="res://Script/Unidad/opcion_ataque.gd" id="2_jbfm1"]
+[ext_resource type="Script" uid="uid://c5g8o7um40762" path="res://Script/Unidad/recursos ataque/opcion_ataque.gd" id="2_jbfm1"]
 [ext_resource type="Resource" uid="uid://bjabsba0riubd" path="res://Script/Unidad/recursos ataque/ataque_dragon_1.tres" id="3_cy8yn"]
 [ext_resource type="Resource" uid="uid://ch8csri2tt4up" path="res://Script/Unidad/recursos ataque/ataque_dragon_2.tres" id="4_cy8yn"]
+[ext_resource type="Script" uid="uid://ccys5pti63ga4" path="res://Script/Unidad/recursos defensa/estadisticas_defensa.gd" id="5_o2ghx"]
+[ext_resource type="Resource" uid="uid://c607epioylg4d" path="res://Script/Unidad/recursos defensa/defensa_dragoncito.tres" id="6_14lmo"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_w64r7"]
 points = PackedVector2Array(36, 0, 18, 36, -18, 36, -36, 0, -18, -36, 18, -36)
@@ -24,7 +26,10 @@ script = ExtResource("2_jbfm1")
 opcion_ataque_res = ExtResource("4_cy8yn")
 metadata/_custom_type_script = "uid://c5g8o7um40762"
 
-[node name="EstadisticasDefensa" type="Node" parent="."]
+[node name="estadisticas_defensa" type="Node" parent="."]
+script = ExtResource("5_o2ghx")
+informacion_defensa = ExtResource("6_14lmo")
+metadata/_custom_type_script = "uid://ccys5pti63ga4"
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_idnxp")

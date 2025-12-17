@@ -1,19 +1,19 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Página-1" id="7gHP1lX9ln-AfeaerXCV">
-    <mxGraphModel dx="1090" dy="742" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="834" dy="742" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="IdRokj1I2Q9tpA8yOWbx-1" value="Interacciones Armadura - Daño" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=22;" vertex="1" parent="1">
-          <mxGeometry x="220" y="40" width="330" height="70" as="geometry" />
+        <mxCell id="IdRokj1I2Q9tpA8yOWbx-1" value="Armadura - identificador - tipo daño" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=22;" parent="1" vertex="1">
+          <mxGeometry x="220" y="40" width="420" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="IdRokj1I2Q9tpA8yOWbx-2" value="Punzante" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="IdRokj1I2Q9tpA8yOWbx-2" value="Punzante - 0" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="120" width="120" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="IdRokj1I2Q9tpA8yOWbx-3" value="Cortante" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="IdRokj1I2Q9tpA8yOWbx-3" value="Cortante - 1" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="190" y="120" width="130" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="IdRokj1I2Q9tpA8yOWbx-4" value="Contundente" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="IdRokj1I2Q9tpA8yOWbx-4" value="Contundente - 2" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="120" width="120" height="70" as="geometry" />
         </mxCell>
       </root>
