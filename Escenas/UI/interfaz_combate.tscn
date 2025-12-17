@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bprlwbp7iipk" path="res://Script/HUD/interfaz_combate.gd" id="1_o7ndl"]
 [ext_resource type="Texture2D" uid="uid://defvnc1llcvr1" path="res://Assets/UI/ui combate/fondo_ui_combate.png" id="1_p4ajo"]
 [ext_resource type="Script" uid="uid://cjpa4s4eelqyk" path="res://Script/HUD/VBox_informacion_combate.gd" id="3_p4ajo"]
-[ext_resource type="Texture2D" uid="uid://bksfnvk2kclfb" path="res://Assets/arbiter.png" id="4_ilj5w"]
+[ext_resource type="Texture2D" uid="uid://bksfnvk2kclfb" path="res://Assets/Unidades/arbiter.png" id="4_ilj5w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p4ajo"]
 font_size = 12

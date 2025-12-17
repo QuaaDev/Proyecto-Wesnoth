@@ -1,32 +1,39 @@
 extends Node2D
+
+class_name unidad_base
+
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
 @onready var sprite: Sprite2D = $sprite
 
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
-@export var puntos_movimiento_maximo = 2 #Cantidad maxima de movimientos por turno
+@export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno
 var puntos_movimiento : int #Cantidad de movimientos en ejecucion
-@export var equipo : int = 0
+@export var equipo : int
 
-@export var turnos_de_ataque_maximo : int = 1 #Cantidad de acciones maximas de ataque en un turno
+@export var turnos_de_ataque_maximo : int #Cantidad de acciones maximas de ataque en un turno
 var turnos_de_ataque_actual : int
 
-@export var vida_maxima : int = 10
+@export var vida_maxima : int
 var vida_actual : int
 
-@export var daño : int = 5 
+@export var daño : int
 @export var sprite_unidad_UID : String
 
+@export var area2d : Area2D
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
 #	(png_path : String, nombre_ataque : String, tipo_daño : String,
 	#cantidad_daño : int, cantidad_ataques : int, equipo : bool):
 
 
-
+func instanciar_cosas_esenciales():
+	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
+	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
 
 func _ready() -> void:
+	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()

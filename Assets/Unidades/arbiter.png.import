@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bksfnvk2kclfb"
-path="res://.godot/imported/arbiter.png-baaedd1717e8c11507a5ce5e8cc78a3e.ctex"
+path="res://.godot/imported/arbiter.png-8192e252e9680ccae91e4ddaac172ad0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/arbiter.png"
-dest_files=["res://.godot/imported/arbiter.png-baaedd1717e8c11507a5ce5e8cc78a3e.ctex"]
+source_file="res://Assets/Unidades/arbiter.png"
+dest_files=["res://.godot/imported/arbiter.png-8192e252e9680ccae91e4ddaac172ad0.ctex"]
 
 [params]
 

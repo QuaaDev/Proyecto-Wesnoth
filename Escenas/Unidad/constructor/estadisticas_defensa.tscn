@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://l88811c1duh2"]
+
+[ext_resource type="Script" uid="uid://ccys5pti63ga4" path="res://Script/Unidad/recursos defensa/estadisticas_defensa.gd" id="1_imkv8"]
+[ext_resource type="Resource" uid="uid://c607epioylg4d" path="res://Script/Unidad/recursos defensa/defensa_dragoncito.tres" id="2_3xxhp"]
+
+[node name="estadisticas_defensa" type="Node"]
+script = ExtResource("1_imkv8")
+informacion_defensa = ExtResource("2_3xxhp")
+metadata/_custom_type_script = "uid://ccys5pti63ga4"
