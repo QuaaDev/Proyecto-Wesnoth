@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccyln6xtlndhn"]
+
+[ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_m7mam"]
+[ext_resource type="PackedScene" uid="uid://bha06lvm3so0o" path="res://Escenas/Unidad/constructor/estadisticas_ataque.tscn" id="2_ji2ur"]
+[ext_resource type="Script" uid="uid://c5g8o7um40762" path="res://Script/Unidad/recursos ataque/opcion_ataque.gd" id="3_e0lx4"]
+[ext_resource type="PackedScene" uid="uid://l88811c1duh2" path="res://Escenas/Unidad/constructor/estadisticas_defensa.tscn" id="3_t1uk2"]
+[ext_resource type="Resource" uid="uid://d2l7b74cq0i6w" path="res://Escenas/Unidad/murcielago/ataque_mordida.tres" id="4_nkd6b"]
+[ext_resource type="Resource" uid="uid://bpycgrqcr80df" path="res://Escenas/Unidad/murcielago/defensa_murcielago.tres" id="4_t1uk2"]
+[ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="4_wj0xx"]
+[ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="5_e0lx4"]
+
+[node name="murcielago_unidad" type="Node2D" node_paths=PackedStringArray("area2d")]
+script = ExtResource("1_m7mam")
+puntos_movimiento_maximo = 8
+turnos_de_ataque_maximo = 3
+vida_maxima = 5
+"daño" = 2
+sprite_unidad_UID = "uid://dk1ou87ug2tcj"
+area2d = NodePath("Area2D")
+metadata/_custom_type_script = "uid://dvc4cvxoyf372"
+
+[node name="EstadisticasAtaque" parent="." instance=ExtResource("2_ji2ur")]
+
+[node name="OpcionAtaque" type="Node" parent="EstadisticasAtaque"]
+script = ExtResource("3_e0lx4")
+opcion_ataque_res = ExtResource("4_nkd6b")
+metadata/_custom_type_script = "uid://c5g8o7um40762"
+
+[node name="estadisticas_defensa" parent="." instance=ExtResource("3_t1uk2")]
+informacion_defensa = ExtResource("4_t1uk2")
+
+[node name="sprite" parent="." instance=ExtResource("4_wj0xx")]
+
+[node name="Area2D" parent="." instance=ExtResource("5_e0lx4")]

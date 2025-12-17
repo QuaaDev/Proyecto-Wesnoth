@@ -29,7 +29,8 @@ var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas
 var casillas_a_atacar = {} #Diccionario que almacena las ubicaciones que se pueden atacar junto a su unidad
 func _ready() -> void:
 	for i in get_children():
-		if i.name.contains("Unidad"):
+		#if i.name.contains("Unidad"):
+		if i is unidad_base: #En vez de verificar los nombres, ahora verifica la clase
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i
 	#print(ubicaciones_ocupadas)
 	hud_derecho.mouse_entered.connect(mouse_en_hud)

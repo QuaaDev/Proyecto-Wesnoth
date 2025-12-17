@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c3wqpj3vn01p5" path="res://Script/administrador_mundo.gd" id="1_bqhdr"]
 [ext_resource type="PackedScene" uid="uid://bqqysniprka80" path="res://Escenas/tilemap/tile_map.tscn" id="1_wxucn"]
-[ext_resource type="PackedScene" uid="uid://dmebkus7j77fl" path="res://Escenas/Unidad/constructor/unidad.tscn" id="2_5sfon"]
 [ext_resource type="PackedScene" uid="uid://hc1lgndklm3y" path="res://Escenas/UI/interfaz_combate.tscn" id="2_rxj15"]
 [ext_resource type="Script" uid="uid://jph5j1dvrr1k" path="res://Script/controlador_camara.gd" id="4_ly0wt"]
+[ext_resource type="PackedScene" uid="uid://ccyln6xtlndhn" path="res://Escenas/Unidad/murcielago/murcielago_unidad.tscn" id="6_f4s1m"]
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
@@ -89,20 +89,10 @@ anchor_bottom = 0.5
 position = Vector2(576, 323)
 script = ExtResource("4_ly0wt")
 
-[node name="Unidad" parent="." instance=ExtResource("2_5sfon")]
-position = Vector2(472, 611)
-puntos_movimiento_maximo = 5
+[node name="murcielago_unidad" parent="." instance=ExtResource("6_f4s1m")]
+position = Vector2(575, 606)
 equipo = 1
-turnos_de_ataque_maximo = 1
-vida_maxima = 5
-"daño" = 1
-sprite_unidad_UID = "uid://bksfnvk2kclfb"
 
-[node name="Unidad2" parent="." instance=ExtResource("2_5sfon")]
-position = Vector2(689, 543)
-puntos_movimiento_maximo = 5
+[node name="murcielago_unidad2" parent="." instance=ExtResource("6_f4s1m")]
+position = Vector2(200, 433)
 equipo = 2
-turnos_de_ataque_maximo = 5
-vida_maxima = 5
-"daño" = 5
-sprite_unidad_UID = "uid://bksfnvk2kclfb"

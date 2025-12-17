@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="4_p7tnc"]
 [ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="5_033al"]
 
-[node name="Unidad" type="Node2D" node_paths=PackedStringArray("area2d")]
+[node name="Unidad" type="Node2D"]
 script = ExtResource("1_w64r7")
-area2d = NodePath("Area2D")
 
 [node name="EstadisticasAtaque" parent="." instance=ExtResource("2_huqs5")]
 

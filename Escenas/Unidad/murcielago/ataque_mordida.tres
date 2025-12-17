@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="OpcionAtaqueRes" load_steps=2 format=3 uid="uid://d2l7b74cq0i6w"]
+
+[ext_resource type="Script" uid="uid://cfq5cl8ihg6n8" path="res://Script/Unidad/recursos ataque/opcion_ataque_res.gd" id="1_n0wam"]
+
+[resource]
+script = ExtResource("1_n0wam")
+nombre_ataque = "mordida"
+"tipo_daño" = 1
+"cantidad_daño" = 2
+cantidad_ataques = 5
+ruta_png = "uid://d36edy0peaim8"
+metadata/_custom_type_script = "uid://cfq5cl8ihg6n8"

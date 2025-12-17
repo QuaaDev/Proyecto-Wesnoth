@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk1ou87ug2tcj"
-path="res://.godot/imported/bat-se-2.png-898848c174d8bec360022b9e67098d2b.ctex"
+uid="uid://d36edy0peaim8"
+path="res://.godot/imported/fangs-animal.png-53fb88858be40d52e60b690f779bc9dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Unidades/bat-se-2.png"
-dest_files=["res://.godot/imported/bat-se-2.png-898848c174d8bec360022b9e67098d2b.ctex"]
+source_file="res://Escenas/Unidad/murcielago/fangs-animal.png"
+dest_files=["res://.godot/imported/fangs-animal.png-53fb88858be40d52e60b690f779bc9dc.ctex"]
 
 [params]
 
