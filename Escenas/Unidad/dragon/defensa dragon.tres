@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EstadisticaDefensaRes" load_steps=2 format=3 uid="uid://b15ei6frk5q7y"]
+
+[ext_resource type="Script" uid="uid://dxhlsiw45q6kr" path="res://Script/Unidad/recursos defensa/estadisticas_defensa_res.gd" id="1_6lax3"]
+
+[resource]
+script = ExtResource("1_6lax3")
+punzante = 40
+cortante = 80
+contundente = 60
+metadata/_custom_type_script = "uid://dxhlsiw45q6kr"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dv866k7yhc510"]
 
 [ext_resource type="Script" uid="uid://dny4jsxxywr3j" path="res://Script/HUD/opcion_combate.gd" id="1_l0vp7"]
-[ext_resource type="Texture2D" uid="uid://cliquijfulqcx" path="res://Assets/UI/ui combate/assets/axe.png" id="1_mdl8y"]
+[ext_resource type="Texture2D" uid="uid://cliquijfulqcx" path="res://Escenas/Unidad/dragon/axe.png" id="1_mdl8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gpdml"]
 font_size = 12

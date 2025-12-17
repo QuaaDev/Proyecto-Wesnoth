@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpkd4wjvywj2s"]
+[gd_scene load_steps=7 format=3 uid="uid://bpkd4wjvywj2s"]
 
 [ext_resource type="Script" uid="uid://c3wqpj3vn01p5" path="res://Script/administrador_mundo.gd" id="1_bqhdr"]
 [ext_resource type="PackedScene" uid="uid://bqqysniprka80" path="res://Escenas/tilemap/tile_map.tscn" id="1_wxucn"]
 [ext_resource type="PackedScene" uid="uid://hc1lgndklm3y" path="res://Escenas/UI/interfaz_combate.tscn" id="2_rxj15"]
 [ext_resource type="Script" uid="uid://jph5j1dvrr1k" path="res://Script/controlador_camara.gd" id="4_ly0wt"]
 [ext_resource type="PackedScene" uid="uid://ccyln6xtlndhn" path="res://Escenas/Unidad/murcielago/murcielago_unidad.tscn" id="6_f4s1m"]
+[ext_resource type="PackedScene" uid="uid://btdj0ckytx6lu" path="res://Escenas/Unidad/dragon/unidad_dragon.tscn" id="6_gv8d2"]
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
@@ -95,4 +96,16 @@ equipo = 1
 
 [node name="murcielago_unidad2" parent="." instance=ExtResource("6_f4s1m")]
 position = Vector2(200, 433)
+equipo = 1
+
+[node name="unidad_dragon" parent="." instance=ExtResource("6_gv8d2")]
+position = Vector2(627, 354)
+equipo = 2
+
+[node name="unidad_dragon2" parent="." instance=ExtResource("6_gv8d2")]
+position = Vector2(577, 320)
+equipo = 2
+
+[node name="unidad_dragon3" parent="." instance=ExtResource("6_gv8d2")]
+position = Vector2(632, 278)
 equipo = 2
