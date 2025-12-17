@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccyln6xtlndhn"]
+[gd_scene load_steps=10 format=3 uid="uid://ccyln6xtlndhn"]
 
 [ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_m7mam"]
 [ext_resource type="PackedScene" uid="uid://bha06lvm3so0o" path="res://Escenas/Unidad/constructor/estadisticas_ataque.tscn" id="2_ji2ur"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bpycgrqcr80df" path="res://Escenas/Unidad/murcielago/defensa_murcielago.tres" id="4_t1uk2"]
 [ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="4_wj0xx"]
 [ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="5_e0lx4"]
+[ext_resource type="Resource" uid="uid://dufolgde5qn6v" path="res://Escenas/Unidad/murcielago/mirada_del_abismo.tres" id="5_nkd6b"]
 
 [node name="murcielago_unidad" type="Node2D" node_paths=PackedStringArray("area2d")]
 script = ExtResource("1_m7mam")
@@ -24,6 +25,11 @@ metadata/_custom_type_script = "uid://dvc4cvxoyf372"
 [node name="OpcionAtaque" type="Node" parent="EstadisticasAtaque"]
 script = ExtResource("3_e0lx4")
 opcion_ataque_res = ExtResource("4_nkd6b")
+metadata/_custom_type_script = "uid://c5g8o7um40762"
+
+[node name="OpcionAtaque2" type="Node" parent="EstadisticasAtaque"]
+script = ExtResource("3_e0lx4")
+opcion_ataque_res = ExtResource("5_nkd6b")
 metadata/_custom_type_script = "uid://c5g8o7um40762"
 
 [node name="estadisticas_defensa" parent="." instance=ExtResource("3_t1uk2")]
