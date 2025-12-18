@@ -95,11 +95,11 @@ position = Vector2(575, 606)
 equipo = 1
 
 [node name="murcielago_unidad2" parent="." instance=ExtResource("6_f4s1m")]
-position = Vector2(200, 433)
+position = Vector2(415, 431)
 equipo = 1
 
 [node name="unidad_dragon" parent="." instance=ExtResource("6_gv8d2")]
-position = Vector2(627, 354)
+position = Vector2(472, 393)
 equipo = 2
 
 [node name="unidad_dragon2" parent="." instance=ExtResource("6_gv8d2")]

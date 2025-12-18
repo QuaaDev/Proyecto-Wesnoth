@@ -29,7 +29,9 @@ func constructor_estadisticas(aliado, enemigo):
 	#-------Seccion Aliado---------------
 	label_nombre_ataque_aliado.text = recurso_aliado.nombre_ataque
 	label_tipo_daño_aliado.text = str(recurso_aliado.tipo_daño)
-	label_cantidad_daño_aliado.text = "daño" + str(recurso_aliado.cantidad_daño)
+	
+	#label_cantidad_daño_aliado.text = "daño" + str(AlgoritmoCombate.calcular_daño_total((cantidad_daño : int,cantidad_armadura : int))
+	#label_cantidad_daño_aliado.text = "daño" + str(recurso_aliado.cantidad_daño)
 	label_cantidad_ataques_aliado.text = "cantidad " + str(recurso_aliado.cantidad_ataques)
 	png_aliado.texture = load(recurso_aliado.ruta_png)
 	ataque_index_aliado = aliado.get_index()

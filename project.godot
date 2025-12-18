@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AlgoritmoDijkstra="*res://Script/globales/algoritmo_dijkstra.gd"
+AlgoritmoCombate="*res://Script/globales/algoritmo_combate.gd"
 
 [display]
 
