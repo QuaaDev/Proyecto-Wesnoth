@@ -8,6 +8,9 @@ const OPCION_COMBATE = preload("uid://dv866k7yhc510")
 @onready var v_box_enemigo_perfil: VBoxContainer = $FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxEnemigoPerfil
 @onready var v_box_aliado_perfil: VBoxContainer = $FondoUiCombate/PanelPerfil/HBoxContainer2/HBoxContainer/VBoxAliadoPerfil
 
+@onready var png_aliado: TextureRect = $FondoUiCombate/PanelPerfil/HBoxContainer2/PNGAliado
+@onready var png_enemigo: TextureRect = $FondoUiCombate/PanelPerfil/HBoxContainer2/PNGEnemigo
+
 var opcion_elegida #Almacena la opcion elegida para ejecutar el combate
 
 func _ready() -> void:
@@ -23,6 +26,9 @@ func prueba():
 func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	editar_labels(unidad_aliada,v_box_aliado_perfil)
 	editar_labels(unidad_enemiga, v_box_enemigo_perfil)
+	png_aliado.texture = load(unidad_aliada.sprite_unidad_UID)
+	png_enemigo.texture = load(unidad_enemiga.sprite_unidad_UID)
+	#Carga el png de las unidades en combate
 	var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(0)
 	var defensa_aliada = unidad_aliada.get_node("estadisticas_defensa")
 	var defensa_enemiga = unidad_enemiga.get_node("estadisticas_defensa")
