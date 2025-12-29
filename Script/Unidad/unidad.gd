@@ -41,7 +41,7 @@ func _ready() -> void:
 	self.position = coordenada_global #Centra a la unidad en la celda
 	vida_actual = vida_maxima
 	sprite.texture = load(sprite_unidad_UID)
-	print(opciones_de_combate)
+	#print(opciones_de_combate)
 
 func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo

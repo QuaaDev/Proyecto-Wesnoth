@@ -22,20 +22,20 @@ signal presionado_con_origen(origen : Button)
 var ataque_index_aliado 
 var ataque_index_enemigo
 
-func constructor_estadisticas(aliado, enemigo):
+func constructor_estadisticas(aliado : OpcionAtaque, enemigo : OpcionAtaque, defensa_aliada : estadisticas_defensa, defensa_enemiga : estadisticas_defensa):
 	var recurso_aliado = aliado.opcion_ataque_res
 	var recurso_enemigo = enemigo.opcion_ataque_res
 	#png_path usa el UID del recurso, luego se le asigna con load()
 	#-------Seccion Aliado---------------
 	label_nombre_ataque_aliado.text = recurso_aliado.nombre_ataque
 	label_tipo_daño_aliado.text = str(recurso_aliado.tipo_daño)
-	
-	#label_cantidad_daño_aliado.text = "daño" + str(AlgoritmoCombate.calcular_daño_total((cantidad_daño : int,cantidad_armadura : int))
+	label_cantidad_daño_aliado.text = "daño " + str(AlgoritmoCombate.calcular_daño_total(recurso_aliado.cantidad_daño, recurso_aliado.tipo_daño, defensa_enemiga))
+	#calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objetivo : estadisticas_defensa)
 	#label_cantidad_daño_aliado.text = "daño" + str(recurso_aliado.cantidad_daño)
 	label_cantidad_ataques_aliado.text = "cantidad " + str(recurso_aliado.cantidad_ataques)
 	png_aliado.texture = load(recurso_aliado.ruta_png)
 	ataque_index_aliado = aliado.get_index()
-	print(ataque_index_aliado)
+	#print(ataque_index_aliado)
 	
 	#----------------Seccion Enemigo-----------------
 	label_nombre_ataque_enemigo.text = recurso_enemigo.nombre_ataque
@@ -44,7 +44,7 @@ func constructor_estadisticas(aliado, enemigo):
 	label_cantidad_ataques_enemigo.text = "cantidad "+str(recurso_enemigo.cantidad_ataques)
 	png_enemigo.texture = load(recurso_enemigo.ruta_png)
 	ataque_index_enemigo = enemigo.get_index()
-	print(str(ataque_index_enemigo)+"index enemigo")
+	#print(str(ataque_index_enemigo)+"index enemigo")
 #nuevo_panel_combate.constructor_estadisticas(opcion_ataque.nombre_ataque,opcion_ataque.tipo_daño,opcion_ataque.cantidad_daño,
 #opcion_ataque.cantidad_ataques,opcion_ataque.ruta_png,true)
 func constructor_panel_medio(texto : String):
