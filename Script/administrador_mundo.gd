@@ -12,8 +12,9 @@ var unidad_a_mover : Node2D
 @onready var label_vida_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/vida_unidad
 @onready var label_daño_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/daño_unidad
 @onready var label_turnos_de_ataques: Label = $CanvasLayer/hud_derecho/VBoxContainer/turnos_de_ataques
-
 #----------Seccion hud derecho----------
+@onready var label_mouse_en_hud: Label = $CanvasLayer/VBoxContainer/mouse_en_hud
+
 #---------Seccion Interfaz combate----------
 @onready var interfaz_combate: Control = $CanvasLayer/interfaz_combate
 #---------Seccion Interfaz combate----------
@@ -242,10 +243,12 @@ func limpiar_unidad_seleccionada() -> void:
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
-	print("El mouse entra al hud")
+	label_mouse_en_hud.modulate = Color(0.0, 0.725, 0.0, 1.0)
+	#print("El mouse entra al hud")
 func mouse_sale_del_hud() -> void:
 	mouse_sobre_hud = false
-	print("El mouse sale del hud")
+	label_mouse_en_hud.modulate = Color(0.671, 0.0, 0.0, 1.0)
+	#print("El mouse sale del hud")
 func boton_pasar_turno() -> void:
 	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
 	equipo_actual += 1 #Avanza al siguiente equipo

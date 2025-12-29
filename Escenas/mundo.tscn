@@ -21,6 +21,10 @@ offset_bottom = 50.0
 [node name="coordenadas_local" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
+[node name="mouse_en_hud" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Mouse En HUD"
+
 [node name="hud_derecho" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 6
 anchor_left = 1.0
