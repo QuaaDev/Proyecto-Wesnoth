@@ -4,7 +4,7 @@ var mostrar_resultados : bool = false
 func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objetivo : estadisticas_defensa) -> int:
 	var indice_y_armadura = armadura_objetivo.obtener_estadisticas_defensa().duplicate() #Diccionario
 	if !indice_y_armadura.has(tipo_daño):
-		print("❌Error fatal, estadisticas_defensa no tiene la key "+ str(tipo_daño)+ " devolviendo 0")
+		push_error("❌Error fatal, estadisticas_defensa no tiene la key "+ str(tipo_daño)+ " devolviendo 0")
 		return 0
 	var armadura = (float(indice_y_armadura[tipo_daño])) / 100
 	#obtiene el daño que coincide con su armadura indice_y_armadura[tipo_daño]
