@@ -252,6 +252,8 @@ func mouse_sale_del_hud() -> void:
 	label_mouse_en_hud.modulate = Color(0.671, 0.0, 0.0, 1.0)
 	#print("El mouse sale del hud")
 func boton_pasar_turno() -> void:
+	if unidad_a_mover != null:
+		limpiar_unidad_seleccionada()
 	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
 	equipo_actual += 1 #Avanza al siguiente equipo
 	if equipo_actual > cantidad_total_equipos:#Si es mayor significa que ya jugaron todos los equipos
