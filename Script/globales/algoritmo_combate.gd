@@ -19,3 +19,35 @@ func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objet
 		print("Cantidad daño: " + str(cantidad_daño))
 		print("Daño total es: " + str(daño_total))
 	return daño_total
+
+func obtener_mejor_ataque(unidad_atacante : Node2D, unidad_objetivo : Node2D) -> int:
+	var opcion_y_resultado : Dictionary #Key almacena Indice de ataque y contenido el resultado del ataque
+	var defensa_objetivo = unidad_objetivo.get_node("estadisticas_defensa")
+	var contador : int = 0
+	for i in unidad_atacante.get_node("EstadisticasAtaque").get_children():
+		opcion_y_resultado[contador] = calcular_daño_total(i.cantidad_daño, i.tipo_daño, defensa_objetivo)
+		contador += 1
+	
+	return obtener_valor_mayor(opcion_y_resultado)
+	
+func obtener_valor_mayor(Diccionario : Dictionary) -> int:
+	if Diccionario.is_empty():
+		push_error("❌Error obtener_valor_mayor el diccionario esta vacio, devolviendo error")
+		return -1
+		
+	var index_con_mas_valor = 0
+	var valor_actual = -INF
+	for i in Diccionario:
+		if Diccionario[i] > valor_actual:
+			valor_actual = Diccionario[i]
+			index_con_mas_valor = i
+	return index_con_mas_valor
+
+func _ready() -> void:
+	pass
+	var ejemplo = { 0: -8, 1: -1231, 2: -888 }
+	var ejemplo2 = {0 : 10, 1 : 25, 2:0}
+	var ejemplo3 = {}
+	print(obtener_valor_mayor(ejemplo))
+	print(obtener_valor_mayor(ejemplo2))
+	print(obtener_valor_mayor(ejemplo3))

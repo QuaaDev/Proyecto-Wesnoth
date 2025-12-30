@@ -86,7 +86,7 @@ func _input(event):
 								#ejecutando_ataque()
 								iniciar_interfaz_combate()
 							else:
-								print("⚠Error raro a la hora de atacar al buta")
+								push_error("⚠Error raro a la hora de atacar al buta")
 						elif mouse_sobre_unidad != unidad_a_mover and unidad_a_mover != null and verificar_si_coordenadas_estan_libres():
 							#If La unidad a mover es diferente a la unidad que esta debajo del mouse AND unidad a mover tiene algun valor AND las coordenadas estan libres:
 							#Se selecciona la casilla a moverse
@@ -150,7 +150,7 @@ func mover_unidad(unidad : Node2D):
 				pass
 		#print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
 		if contador_seguridad >= 6:#Si el contador de seguridad llega a 6 significa que ningun vecino del origen es valido, por lo tanto el bucle es infinito.
-			print("Error Rojo, Bucle infinito detectado funcion administrador_mundo.mover_unidad(), deteniendo loop")
+			push_error("Error Rojo, Bucle infinito detectado funcion administrador_mundo.mover_unidad(), deteniendo loop")
 			break
 		camino_a_seguir.append(coordenada_mas_barata_actual)#Luego de explorar todas las opciones, almacena la que fue mas barato
 		coordenada_origen = coordenada_mas_barata_actual#Actualiza la coordenada origen para la siguiente ejecucion
@@ -171,7 +171,7 @@ func mover_unidad(unidad : Node2D):
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
 	if mouse_sobre_unidad == null:
-		print("❌Error fatal verificar_si_son_aliados variable mouse_sobre_unidad == null, se procede a devolver false")
+		push_error("❌Error fatal verificar_si_son_aliados variable mouse_sobre_unidad == null, se procede a devolver false")
 		return false
 	if mouse_sobre_unidad.equipo == unidad_a_mover.equipo:
 		return true
