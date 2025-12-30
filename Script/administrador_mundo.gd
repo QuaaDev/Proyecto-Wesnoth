@@ -186,6 +186,7 @@ func iniciar_interfaz_combate() ->void:
 	#Inicia la interfaz de combate duh
 	interfaz_combate.iniciar_combate(unidad_a_mover, mouse_sobre_unidad)
 	interfaz_combate.visible = true
+	limpiar_unidad_seleccionada()
 
 func ejecutando_ataque() -> void: #<----------- Version antigua, es descartable
 	print("Le rompo la cabeza a este triplehijueremil buta")
