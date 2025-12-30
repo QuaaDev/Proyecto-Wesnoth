@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="OpcionAtaqueRes" load_steps=2 format=3 uid="uid://bbq2assr0bj12"]
+
+[ext_resource type="Script" uid="uid://cfq5cl8ihg6n8" path="res://Script/Unidad/recursos ataque/opcion_ataque_res.gd" id="1_f1jfx"]
+
+[resource]
+script = ExtResource("1_f1jfx")
+nombre_ataque = "Aliento De Fuego"
+"tipo_daño" = 3
+"cantidad_daño" = 20
+cantidad_ataques = 1
+ruta_png = "uid://b2ypu3iplw8sp"
+metadata/_custom_type_script = "uid://cfq5cl8ihg6n8"
