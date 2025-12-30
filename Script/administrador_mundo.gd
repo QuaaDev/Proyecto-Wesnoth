@@ -235,6 +235,7 @@ func limpiar_labels() -> void:
 	label_turnos_de_ataques.text = "null"
 	
 func limpiar_unidad_seleccionada() -> void:
+	tile_map.limpiar_tiles_movimiento(casillas_a_atacar) #Limpia los tilemaps de ataque
 	casillas_a_atacar.clear()#Limpia los posibles ataques almacenados
 	unidad_a_mover.ya_no_me_mueven() #<-- solo actualiza el color 
 	limpiar_labels() #<--- actualiza labels
