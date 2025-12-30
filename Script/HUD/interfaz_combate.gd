@@ -29,7 +29,9 @@ func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	png_aliado.texture = load(unidad_aliada.sprite_unidad_UID)
 	png_enemigo.texture = load(unidad_enemiga.sprite_unidad_UID)
 	#Carga el png de las unidades en combate
-	var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(0)
+	#var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(0)
+	var indice_mejor_ataque_enemigo = AlgoritmoCombate.obtener_mejor_ataque(unidad_enemiga, unidad_aliada)
+	var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(indice_mejor_ataque_enemigo)
 	var defensa_aliada = unidad_aliada.get_node("estadisticas_defensa")
 	var defensa_enemiga = unidad_enemiga.get_node("estadisticas_defensa")
 	#Variable temporal hasta tener una IA que eliga el ataque mas eficiente

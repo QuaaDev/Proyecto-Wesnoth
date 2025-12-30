@@ -25,7 +25,8 @@ func obtener_mejor_ataque(unidad_atacante : Node2D, unidad_objetivo : Node2D) ->
 	var defensa_objetivo = unidad_objetivo.get_node("estadisticas_defensa") #Obtiene el recurso de defensa
 	var contador : int = 0 #Inicia contador
 	for i in unidad_atacante.get_node("EstadisticasAtaque").get_children():#Explora todas las opciones de combate
-		opcion_y_resultado[contador] = calcular_daño_total(i.cantidad_daño, i.tipo_daño, defensa_objetivo)
+		var opcion_ataque_recurso = i.opcion_ataque_res
+		opcion_y_resultado[contador] = calcular_daño_total(opcion_ataque_recurso.cantidad_daño, opcion_ataque_recurso.tipo_daño, defensa_objetivo)
 		#Agrega el daño total de este ataque
 		contador += 1
 	
