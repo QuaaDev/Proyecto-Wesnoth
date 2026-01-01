@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://dgi0x5d4nwbis"]
+[gd_scene load_steps=2 format=3 uid="uid://dgi0x5d4nwbis"]
+
+[ext_resource type="Script" uid="uid://dswc5xfqmiofd" path="res://Script/Unidad/sprite_recolorizado.gd" id="1_8ipnn"]
 
 [node name="sprite" type="Sprite2D"]
+script = ExtResource("1_8ipnn")

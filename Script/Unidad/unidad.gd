@@ -40,6 +40,7 @@ func _ready() -> void:
 	self.position = coordenada_global #Centra a la unidad en la celda
 	vida_actual = vida_maxima
 	sprite.texture = load(sprite_unidad_UID)
+	sprite.cambiar_color()
 	#print(opciones_de_combate)
 
 func morir():
