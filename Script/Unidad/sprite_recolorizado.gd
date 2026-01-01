@@ -1,9 +1,19 @@
 extends Sprite2D
 @onready var sprite: Sprite2D = $"."
-
-func cambiar_color():
+#recolorización por máscara de color
+#Codigo hecho por chatgpt, completamente temporal y descartable a futuro.
+const paletas_colores := [Color("5770faff"), Color("fb0038ff"), Color("cd6c01ff"), Color("009d3cff")]
+func cambiar_color(equipo : int):
 	# Color del equipo (ejemplo: azul)
 	var team_color := Color(0.0, 0.0, 0.0, 1.0)
+	if equipo == 1:
+		team_color = paletas_colores[0]
+	elif equipo == 2:
+		team_color = paletas_colores[1]
+	elif equipo == 3:
+		team_color = paletas_colores[2]
+	elif equipo == 4:
+		team_color = paletas_colores[3]
 
 	sprite.texture = recolor_texture(sprite.texture, team_color)
 
