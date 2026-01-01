@@ -21,6 +21,9 @@ signal presionado_con_origen(origen : Button)
 #-----------Indices del origen del ataque---------------
 var ataque_index_aliado 
 var ataque_index_enemigo
+#-------------- maybe borrar lo de arriba?
+var daño_aliado : int #Almacenan el daño resultante de los calculos
+var daño_enemigo : int
 
 func constructor_estadisticas(aliado : OpcionAtaque, enemigo : OpcionAtaque, defensa_aliada : estadisticas_defensa, defensa_enemiga : estadisticas_defensa):
 	var recurso_aliado = aliado.opcion_ataque_res
@@ -29,7 +32,8 @@ func constructor_estadisticas(aliado : OpcionAtaque, enemigo : OpcionAtaque, def
 	#-------Seccion Aliado---------------
 	label_nombre_ataque_aliado.text = recurso_aliado.nombre_ataque
 	label_tipo_daño_aliado.text = str(recurso_aliado.tipo_daño)
-	label_cantidad_daño_aliado.text = "daño " + str(AlgoritmoCombate.calcular_daño_total(recurso_aliado.cantidad_daño, recurso_aliado.tipo_daño, defensa_enemiga))
+	daño_aliado = AlgoritmoCombate.calcular_daño_total(recurso_aliado.cantidad_daño, recurso_aliado.tipo_daño, defensa_enemiga)
+	label_cantidad_daño_aliado.text = "daño " + str(daño_aliado)
 	label_cantidad_ataques_aliado.text = "cantidad " + str(recurso_aliado.cantidad_ataques)
 	png_aliado.texture = load(recurso_aliado.ruta_png)
 	ataque_index_aliado = aliado.get_index()
@@ -38,7 +42,8 @@ func constructor_estadisticas(aliado : OpcionAtaque, enemigo : OpcionAtaque, def
 	#----------------Seccion Enemigo-----------------
 	label_nombre_ataque_enemigo.text = recurso_enemigo.nombre_ataque
 	label_tipo_daño_enemigo.text = str(recurso_enemigo.tipo_daño)
-	label_cantidad_daño_enemigo.text = "daño " + str(AlgoritmoCombate.calcular_daño_total(recurso_enemigo.cantidad_daño, recurso_enemigo.tipo_daño, defensa_aliada))
+	daño_enemigo = AlgoritmoCombate.calcular_daño_total(recurso_enemigo.cantidad_daño, recurso_enemigo.tipo_daño, defensa_aliada)
+	label_cantidad_daño_enemigo.text = "daño " + str(daño_enemigo)
 	label_cantidad_ataques_enemigo.text = "cantidad "+str(recurso_enemigo.cantidad_ataques)
 	png_enemigo.texture = load(recurso_enemigo.ruta_png)
 	ataque_index_enemigo = enemigo.get_index()

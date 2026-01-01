@@ -10,7 +10,6 @@ var unidad_a_mover : Node2D
 @onready var turno_actual_y_equipo: Label = $CanvasLayer/hud_derecho/VBoxContainer/turno_actual_y_equipo
 @onready var label_puntos_movimiento: Label = $CanvasLayer/hud_derecho/VBoxContainer/puntos_movimiento
 @onready var label_vida_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/vida_unidad
-@onready var label_daño_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/daño_unidad
 @onready var label_turnos_de_ataques: Label = $CanvasLayer/hud_derecho/VBoxContainer/turnos_de_ataques
 #----------Seccion hud derecho----------
 @onready var label_mouse_en_hud: Label = $CanvasLayer/VBoxContainer/mouse_en_hud
@@ -223,7 +222,6 @@ func rellenar_labels(unidad : Node2D) ->void:
 	label_unidad_moviendose.text = "nombre: " + unidad_a_mover.name
 	label_equipo_unidad.text = "equipo: " + str(unidad.equipo)
 	label_vida_unidad.text = "Vida: "+str(unidad.vida_actual)+" / "+str(unidad.vida_maxima)
-	label_daño_unidad.text = "Daño: " + str(unidad.daño)
 	label_turnos_de_ataques.text = "Turnos de ataque: " + str(unidad.turnos_de_ataque_actual) + " / " + str(unidad.turnos_de_ataque_maximo)
 	
 func limpiar_labels() -> void:
@@ -231,7 +229,6 @@ func limpiar_labels() -> void:
 	label_equipo_unidad.text = "null"
 	label_puntos_movimiento.text = "null"
 	label_vida_unidad.text = "null"
-	label_daño_unidad.text = "null"
 	label_turnos_de_ataques.text = "null"
 	
 func limpiar_unidad_seleccionada() -> void:

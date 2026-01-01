@@ -20,11 +20,11 @@ func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objet
 		print("Daño total es: " + str(daño_total))
 	return daño_total
 
-func obtener_mejor_ataque(unidad_atacante : Node2D, unidad_objetivo : Node2D) -> int:
+func obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D) -> int:
 	var opcion_y_resultado : Dictionary #Key almacena Indice de ataque y contenido el resultado del ataque
 	var defensa_objetivo = unidad_objetivo.get_node("estadisticas_defensa") #Obtiene el recurso de defensa
 	var contador : int = 0 #Inicia contador
-	for i in unidad_atacante.get_node("EstadisticasAtaque").get_children():#Explora todas las opciones de combate
+	for i in unidad_atacanteX.get_node("EstadisticasAtaque").get_children():#Explora todas las opciones de combate
 		var opcion_ataque_recurso = i.opcion_ataque_res
 		opcion_y_resultado[contador] = calcular_daño_total(opcion_ataque_recurso.cantidad_daño, opcion_ataque_recurso.tipo_daño, defensa_objetivo)
 		#Agrega el daño total de este ataque
@@ -53,3 +53,27 @@ func _ready() -> void:
 	#print(obtener_valor_mayor(ejemplo))
 	#print(obtener_valor_mayor(ejemplo2))
 	#print(obtener_valor_mayor(ejemplo3))
+#---------Seccion combate activo-----------------
+#Infligir daños, animaciones, en general ejecutar el combate en si.
+var unidad_atacante : Node2D
+var unidad_defensor : Node2D
+func obtener_unidades_en_combate(atacante : Node2D, defensor : Node2D):
+	#Almacena las unidades que entran en combate
+	unidad_atacante = atacante
+	unidad_defensor = defensor
+func limpiar_unidades_en_combate():
+	#Limpia las referencias de unidades en combate
+	unidad_atacante = null
+	unidad_defensor = null
+
+func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
+	unidad_atacante.infligir_daño() #Activa el evento de infligir daño de la unidad
+	unidad_defensor.recibir_daño(daño_atacante)#Aplica el daño sobre el enemigo
+	print("Unidad atacante inflige: " + str(daño_atacante))
+	if !unidad_defensor.is_queued_for_deletion():
+		unidad_defensor.infligir_daño()
+		unidad_atacante.recibir_daño(daño_defensor)
+		print("Unidad defensora inflige: " + str(daño_defensor))
+	else:
+		print("Unidad ya muerta, no puede atacar")
+	limpiar_unidades_en_combate()

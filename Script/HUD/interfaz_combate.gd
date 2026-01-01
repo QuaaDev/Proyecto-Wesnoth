@@ -24,6 +24,7 @@ func prueba():
 
 
 func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
+	AlgoritmoCombate.obtener_unidades_en_combate(unidad_aliada, unidad_enemiga)
 	editar_labels(unidad_aliada,v_box_aliado_perfil)
 	editar_labels(unidad_enemiga, v_box_enemigo_perfil)
 	png_aliado.texture = load(unidad_aliada.sprite_unidad_UID)
@@ -75,13 +76,14 @@ func boton_atacar_presionado() -> void:
 	if opcion_elegida == null:
 		print("Elige una opcion de combate")
 	else:
+		AlgoritmoCombate.ejecutar_ataque(opcion_elegida.daño_aliado, opcion_elegida.daño_enemigo)
 		self.visible = false
 		opcion_elegida = null
 		limpiar_labels(v_box_aliado_perfil)
 		limpiar_labels(v_box_enemigo_perfil)
 		limpiar_panel_combate()
 		print("Ejecutando ataque")
-
+	
 func boton_cancelar_presionado() -> void:
 	print("UI CANCELAR PELEA!")
 	opcion_elegida = null
@@ -89,7 +91,8 @@ func boton_cancelar_presionado() -> void:
 	limpiar_labels(v_box_aliado_perfil)
 	limpiar_labels(v_box_enemigo_perfil)
 	limpiar_panel_combate()
+	AlgoritmoCombate.limpiar_unidades_en_combate()
 
 func panel_presionado(origen : Button):
-	opcion_elegida = origen
+	opcion_elegida = origen #Almacena la referencia
 	print(origen.name)

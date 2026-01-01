@@ -64,10 +64,6 @@ text = "puntos movimiento"
 layout_mode = 2
 text = "vida unidad"
 
-[node name="daño_unidad" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
-layout_mode = 2
-text = "daño unidad"
-
 [node name="equipo_unidad_moviendose" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer"]
 layout_mode = 2
 text = "equipo unidad"

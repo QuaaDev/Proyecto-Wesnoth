@@ -18,7 +18,6 @@ var turnos_de_ataque_actual : int
 @export var vida_maxima : int
 var vida_actual : int
 
-@export var daño : int
 @export var sprite_unidad_UID : String
 
 @export var area2d : Area2D
@@ -47,10 +46,9 @@ func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
 	self.queue_free()
 
-func infligir_daño() -> int:
+func infligir_daño():
 	puntos_movimiento = 0 #Evita que la unidad se mueva luego de atacar
 	turnos_de_ataque_actual -= 1#Gasta un turno de ataque
-	return daño
 	
 func recibir_daño(cantidad : int) -> void:
 	vida_actual -= cantidad
