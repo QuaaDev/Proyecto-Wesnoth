@@ -70,7 +70,7 @@ func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
 	unidad_atacante.infligir_daño() #Activa el evento de infligir daño de la unidad
 	unidad_defensor.recibir_daño(daño_atacante)#Aplica el daño sobre el enemigo
 	aplicar_animacion_combate(unidad_atacante)
-	await unidad_atacante.animacion_terminada
+	await unidad_atacante.animacion_terminada #Espera a que la animacion termine para seguir ejecutando el combate
 	print("Unidad atacante inflige: " + str(daño_atacante))
 	if !unidad_defensor.consulta_si_estoy_muerto():#Si esta muerto no inflige daño
 		unidad_defensor.infligir_daño()
@@ -83,9 +83,10 @@ func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
 
 func aplicar_animacion_combate(unidad_objetivo : Node2D):
 	#Le aplica la animacion de combate a las unidades segun las coordenadas del enemigo
-	#N,NE,SE,S,SO,NO
-	#var celdas_adyacentes = AlgoritmoDijkstra.get_neighbors(unidad_objetivo.coordenada_local_tilemap)
 	var resultado_posicion_local : Vector2
+	#Segun si es atacante o defensor, calcula la posicion de uno o otro
+	#Resta las coordenadas de la unidad objetivo con las de la unidad que esta atacando
+	#El resultado se envia a la unidad objetivo para ejecutar animacion
 	if unidad_objetivo == unidad_atacante:
 		print("Aplicando animacion a unidad atacante")
 		resultado_posicion_local = unidad_defensor.coordenada_local_tilemap - unidad_objetivo.coordenada_local_tilemap

@@ -1,6 +1,6 @@
 extends Node2D
 class_name unidad_base
-signal animacion_terminada
+signal animacion_terminada #Conectada a algoritmo_combate
 #region parametros esenciales
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
@@ -76,19 +76,25 @@ func recibir_daño(cantidad : int) -> void:
 		morir()
 
 func aplicar_animacion_combate(coordenadas : Vector2):
-	var cantidad_pixeles = 36
-	var posicion_original = self.position
-	var posicion_objetivo : Vector2
+	var cantidad_pixeles = 36 #Cantidad de pixeles a moverse
+	var posicion_original = self.position #Posicion para volver al terminar la animacion
+	var posicion_objetivo : Vector2 #Posicion a la que ira
 	var coordenadas_globales = Vector2(cantidad_pixeles * coordenadas.x, cantidad_pixeles * coordenadas.y)
-	print(coordenadas_globales)
-	posicion_objetivo = posicion_original + coordenadas_globales
+	#Convierte las coordenadas del tilemap a coordenadas en pixeles
+	#Contiene la cantidad de pixeles a moverse, no las coordenadas objetivo
+	posicion_objetivo = posicion_original + coordenadas_globales 
+	#Suma la posicion actual con la cantidad de pixeles que necesita para moverse
+	#Aplica Tween
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self,"position",posicion_objetivo, .3)
+	#Primero va a la posicion del enemigo
 	tween.tween_property(self,"position",posicion_original, .3)
+	#Al terminar, vuelve a su posicion original
 	await tween.finished
 	animacion_terminada.emit()
+	#Cuando toda la animacion termina, emite la señal para que algoritmo_combate se siga ejecutando
 
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap
 	coordenada_local_tilemap = tile_map.local_to_map(position)#Posicion local del tilemap
