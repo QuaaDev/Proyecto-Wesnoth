@@ -79,7 +79,30 @@ func aplicar_animacion_combate(coordenadas : Vector2):
 	var cantidad_pixeles = 36 #Cantidad de pixeles a moverse
 	var posicion_original = self.position #Posicion para volver al terminar la animacion
 	var posicion_objetivo : Vector2 #Posicion a la que ira
-	var coordenadas_globales = Vector2(cantidad_pixeles * coordenadas.x, cantidad_pixeles * coordenadas.y)
+	var posicion_es_par : bool
+	var coordenadas_arregladas : Vector2
+#region Correccion de coordenadas
+#Se tratan casos aislados, aca se arreglan para que la animacion sea correcta
+	if int(coordenada_local_tilemap.x) % 2 == 0:
+		posicion_es_par = true
+	else:
+		posicion_es_par = false
+	if posicion_es_par: #Si es par
+		if coordenadas == Vector2(-1,0):
+			coordenadas_arregladas = Vector2(-1,1)
+		elif coordenadas == Vector2(1,0):
+			coordenadas_arregladas = Vector2(1,1)
+		else:
+			coordenadas_arregladas = coordenadas
+	else:#Si es impar
+		if coordenadas == Vector2(1,0):
+			coordenadas_arregladas = Vector2(1,-1)
+		elif coordenadas == Vector2(-1,0):
+			coordenadas_arregladas = Vector2(-1,-1)
+		else:
+			coordenadas_arregladas = coordenadas
+#endregion
+	var coordenadas_globales = Vector2(cantidad_pixeles * coordenadas_arregladas.x, cantidad_pixeles * coordenadas_arregladas.y)
 	#Convierte las coordenadas del tilemap a coordenadas en pixeles
 	#Contiene la cantidad de pixeles a moverse, no las coordenadas objetivo
 	posicion_objetivo = posicion_original + coordenadas_globales 
