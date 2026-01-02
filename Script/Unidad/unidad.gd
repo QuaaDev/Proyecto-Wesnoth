@@ -1,16 +1,15 @@
 extends Node2D
-
 class_name unidad_base
-
+signal animacion_terminada
 #region parametros esenciales
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
 @onready var sprite: Sprite2D = $sprite
 var ejecutar_animacion_muerte = false
-#endregion
-
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
+#endregion
+
 @export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno
 var puntos_movimiento : int #Cantidad de movimientos en ejecucion
 @export var equipo : int
@@ -75,6 +74,21 @@ func recibir_daño(cantidad : int) -> void:
 	vida_actual -= cantidad
 	if vida_actual <= 0:
 		morir()
+
+func aplicar_animacion_combate(coordenadas : Vector2):
+	var cantidad_pixeles = 36
+	var posicion_original = self.position
+	var posicion_objetivo : Vector2
+	var coordenadas_globales = Vector2(cantidad_pixeles * coordenadas.x, cantidad_pixeles * coordenadas.y)
+	print(coordenadas_globales)
+	posicion_objetivo = posicion_original + coordenadas_globales
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self,"position",posicion_objetivo, .3)
+	tween.tween_property(self,"position",posicion_original, .3)
+	await tween.finished
+	animacion_terminada.emit()
 
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap
 	coordenada_local_tilemap = tile_map.local_to_map(position)#Posicion local del tilemap

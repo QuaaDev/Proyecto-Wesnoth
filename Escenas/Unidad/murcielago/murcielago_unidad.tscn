@@ -15,7 +15,6 @@ script = ExtResource("1_m7mam")
 puntos_movimiento_maximo = 8
 turnos_de_ataque_maximo = 3
 vida_maxima = 5
-"daño" = 2
 sprite_unidad_UID = "uid://dk1ou87ug2tcj"
 area2d = NodePath("Area2D")
 metadata/_custom_type_script = "uid://dvc4cvxoyf372"
