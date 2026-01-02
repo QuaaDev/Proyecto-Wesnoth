@@ -111,9 +111,9 @@ func aplicar_animacion_combate(coordenadas : Vector2):
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self,"position",posicion_objetivo, .3)
+	tween.tween_property(self,"position",posicion_objetivo, .4)
 	#Primero va a la posicion del enemigo
-	tween.tween_property(self,"position",posicion_original, .3)
+	tween.tween_property(self,"position",posicion_original, .4)
 	#Al terminar, vuelve a su posicion original
 	await tween.finished
 	animacion_terminada.emit()
