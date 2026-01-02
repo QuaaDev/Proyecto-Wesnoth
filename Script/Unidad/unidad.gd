@@ -58,6 +58,7 @@ func morir():
 	
 func animacion_morir():
 	self.modulate += Color(0, 0, 0, -0.008)
+	#Va restando opacidad a la unidad en cada FPS
 	pass
 func activar_animacion_morir():
 	ejecutar_animacion_muerte = true
