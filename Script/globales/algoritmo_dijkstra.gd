@@ -53,22 +53,22 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 		#-------------------
 		#[[+1,  0], [+1, -1], [ 0, -1], 
 		# [-1, -1], [-1,  0], [ 0, +1]],
-		vecinos.append(Vector2(origen.x + 1 , origen.y))
-		vecinos.append(Vector2(origen.x + 1 , origen.y - 1))
-		vecinos.append(Vector2(origen.x , origen.y - 1))
-		vecinos.append(Vector2(origen.x - 1, origen.y - 1))
-		vecinos.append(Vector2(origen.x - 1, origen.y))
-		vecinos.append(Vector2(origen.x , origen.y + 1))
+		vecinos.append(Vector2(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2(origen.x + 1 , origen.y - 1))#NE
+		vecinos.append(Vector2(origen.x + 1 , origen.y)) #SE
+		vecinos.append(Vector2(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2(origen.x - 1, origen.y))#SO
+		vecinos.append(Vector2(origen.x - 1, origen.y - 1))#NO
 	else:
 		#print("columna impar")
 		#[[+1, +1], [+1,  0], [ 0, -1], 
 	 	#[-1,  0], [-1, +1], [ 0, +1]]
-		vecinos.append(Vector2(origen.x + 1 , origen.y + 1))
-		vecinos.append(Vector2(origen.x + 1, origen.y))
-		vecinos.append(Vector2(origen.x , origen.y - 1))
-		vecinos.append(Vector2(origen.x- 1 , origen.y))
-		vecinos.append(Vector2(origen.x - 1, origen.y + 1))
-		vecinos.append(Vector2(origen.x , origen.y + 1))
+		vecinos.append(Vector2(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2(origen.x + 1, origen.y)) #NE
+		vecinos.append(Vector2(origen.x + 1 , origen.y + 1)) #SE
+		vecinos.append(Vector2(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2(origen.x - 1, origen.y + 1))#SO
+		vecinos.append(Vector2(origen.x- 1 , origen.y))#NO
 	#print(vecinos)
 	return vecinos
 
