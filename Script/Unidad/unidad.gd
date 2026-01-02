@@ -2,9 +2,12 @@ extends Node2D
 
 class_name unidad_base
 
+#region parametros esenciales
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
 @onready var sprite: Sprite2D = $sprite
+var ejecutar_animacion_muerte = false
+#endregion
 
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
@@ -30,7 +33,11 @@ var opciones_de_combate = {}
 func instanciar_cosas_esenciales():
 	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
-
+	
+func _process(_delta: float) -> void:
+	if ejecutar_animacion_muerte:
+		animacion_morir()
+		
 func _ready() -> void:
 	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))
@@ -45,8 +52,20 @@ func _ready() -> void:
 
 func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
+	activar_animacion_morir()
+	await get_tree().create_timer(2.0).timeout
 	self.queue_free()
-
+	
+func animacion_morir():
+	self.modulate += Color(0, 0, 0, -0.008)
+	pass
+func activar_animacion_morir():
+	ejecutar_animacion_muerte = true
+func consulta_si_estoy_muerto() -> bool: #Recurso para algoritmo combate
+	if ejecutar_animacion_muerte == true:
+		return true
+	else: 
+		return false
 func infligir_daño():
 	puntos_movimiento = 0 #Evita que la unidad se mueva luego de atacar
 	turnos_de_ataque_actual -= 1#Gasta un turno de ataque
