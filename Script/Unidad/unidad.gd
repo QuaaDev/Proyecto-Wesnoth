@@ -40,6 +40,8 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))
+	nodo_mundo.verificar_cantidad_grupos(equipo) 
+	#Le envia su grupo a mundo para verificar si su grupo esta registrado en mundo
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()
 	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)

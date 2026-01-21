@@ -23,7 +23,7 @@ var mouse_sobre_hud : bool = false
 
 var grupos_bajo_ia = []
 @export var empieza_x_equipo : int = 1
-@export var cantidad_total_equipos : int = 0
+var cantidad_total_equipos = []
 var equipo_actual : int
 var turno_actual : int = 0
 var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas junto a sus unidades
@@ -44,7 +44,7 @@ func _ready() -> void:
 	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
 	equipo_actual = empieza_x_equipo
 	turno_actual_y_equipo.text = "turno actual 0, equipo actual: " + str(equipo_actual)
-	
+	comprobar_errores_ready() #Siempre al final 
 func _input(event):
 	if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT: #Si se apreta el mouse izq
@@ -240,6 +240,9 @@ func limpiar_unidad_seleccionada() -> void:
 	tile_map.limpiar_tiles_movimiento(AlgoritmoDijkstra.movimientos_disponibles)#<-- limpia los tilemaps de movimiento
 	unidad_a_mover = null#<---actualiza el estado del script
 
+func verificar_cantidad_grupos(grupo : int):
+	if !grupo in cantidad_total_equipos:
+		cantidad_total_equipos.append(grupo)
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
@@ -254,7 +257,8 @@ func boton_pasar_turno() -> void:
 		limpiar_unidad_seleccionada()
 	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
 	equipo_actual += 1 #Avanza al siguiente equipo
-	if equipo_actual > cantidad_total_equipos:#Si es mayor significa que ya jugaron todos los equipos
+	if !equipo_actual in cantidad_total_equipos:
+		#Si equipo actual no forma parte de la lista, significa que ya se exploraron todos los turnos
 		print("terminando turno")
 		turno_actual += 1
 		equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
@@ -264,9 +268,38 @@ func boton_pasar_turno() -> void:
 	#------IA---------------
 	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
 	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
-	#for i in range(1,cantidad_total_equipos+1):
-	#	print("------------")
-	#	for node in get_tree().get_nodes_in_group(str(i)):
-	#		print(node.name, node.equipo, node.es_mi_turno)
-	#	get_tree().call_group(str(i), "termino_mi_turno")
+	for i in cantidad_total_equipos:
+		print("------------")
+		for node in get_tree().get_nodes_in_group(str(i)):
+			print(node.name, " ", node.equipo, " ", node.es_mi_turno)
+		#get_tree().call_group(str(i), "termino_mi_turno")
+	print("--------final turnos------------")
 #------------------señañes-----------------------
+#------------------Errores-----------------------
+func comprobar_errores_ready():
+	error_1()
+	error_0()
+func error_0():
+	#Este error verifica si la lista de cantidad_total_equipo son todos numeros seguidos
+	#Si un numero no es seguido, ese equipo nunca recibira un turno por como funciona el pasar turno
+	var resultado_esperado = 0
+	var resultado_obtenido = 0
+	for i in range(1,cantidad_total_equipos.size() + 1):
+		resultado_esperado += i
+	for i in cantidad_total_equipos:
+		resultado_obtenido += i
+	if !resultado_esperado == resultado_obtenido:
+		print("--------Error 0----------")
+		print("Resultado esperado: ", resultado_esperado)
+		print("Resultado obtenido: ", resultado_obtenido)
+		push_error("Error 0")
+		print("--------------------------")
+
+func error_1():
+	#Si hay un equipo numero 0, creara falsos positivos en error_0 ya que el grupo 0
+	#no esta contemplado en el codigo
+	if 0 in cantidad_total_equipos:
+		print("-------------Error 1---------------")
+		print("Equipo 0 detectado")
+		print("------------------------------------")
+		push_error("Error 1")

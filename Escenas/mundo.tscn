@@ -9,7 +9,6 @@
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_bqhdr")
-cantidad_total_equipos = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -136,4 +135,4 @@ equipo = 2
 
 [node name="unidad_dragon5" parent="." instance=ExtResource("6_gv8d2")]
 position = Vector2(845, 289)
-equipo = 2
+equipo = 1
