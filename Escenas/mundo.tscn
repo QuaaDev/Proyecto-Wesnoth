@@ -116,11 +116,11 @@ equipo = 1
 
 [node name="murcielago_unidad5" parent="." instance=ExtResource("6_f4s1m")]
 position = Vector2(739, 576)
-equipo = 1
+equipo = 3
 
 [node name="murcielago_unidad6" parent="." instance=ExtResource("6_f4s1m")]
 position = Vector2(845, 500)
-equipo = 1
+equipo = 3
 
 [node name="murcielago_unidad2" parent="." instance=ExtResource("6_f4s1m")]
 position = Vector2(415, 431)

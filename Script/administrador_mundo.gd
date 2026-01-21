@@ -258,6 +258,10 @@ func boton_pasar_turno() -> void:
 		print("terminando turno")
 		turno_actual += 1
 		equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
+	#------IA----------------
+	if equipo_actual in grupos_bajo_ia:
+		print("Este grupo esta bajo IA")
+	#------IA---------------
 	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
 	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
 	#for i in range(1,cantidad_total_equipos+1):
