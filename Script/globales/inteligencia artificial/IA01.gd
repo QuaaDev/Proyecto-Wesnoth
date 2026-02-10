@@ -7,13 +7,17 @@ func cargar_unidades(equipo:int) -> Array:#Devuelve las unidades dentro del grup
 	
 func ejecutar_ia(equipo : int):
 	var unidades = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
+	obtener_datos(unidades)
+
+func obtener_datos(unidades : Array):
+	#print(unidad.name)
+	#AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false) 
+	#Carga los movimientos legales en el algoritmo dirksdad, se accede con AlgoritmoDijkstra.movimientos_disponibles
+	var ubicaciones_ocupadas = nodo_mundo.ubicaciones_ocupadas.duplicate()
 	for i in unidades:
-		obtener_datos(i)
-
-func obtener_datos(unidad : Node2D):
-	print(unidad.name)
-	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false)
-	print(AlgoritmoDijkstra.movimientos_disponibles)
-
+		if i.coordenada_local_tilemap in ubicaciones_ocupadas:
+			pass
+		print(i.name)
+		print(i.coordenada_local_tilemap)
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
