@@ -1,4 +1,5 @@
 extends Node
+signal combate_finalizado #Cuando finaliza el combate activo se lanza la señal
 var mostrar_resultados : bool = false
 
 func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objetivo : estadisticas_defensa) -> int:
@@ -80,6 +81,7 @@ func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
 	else:
 		print("Unidad ya muerta, no puede atacar")
 	limpiar_unidades_en_combate()
+	combate_finalizado.emit() #Emite la señal de que termino el combate
 
 func aplicar_animacion_combate(unidad_objetivo : Node2D):
 	#Le aplica la animacion de combate a las unidades segun las coordenadas del enemigo

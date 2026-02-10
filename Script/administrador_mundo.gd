@@ -267,6 +267,7 @@ func boton_pasar_turno() -> void:
 	#------IA----------------
 	if equipo_actual in grupos_bajo_ia:
 		print("Este grupo esta bajo IA")
+		IA01.ejecutar_ia(equipo_actual)
 	#------IA---------------
 	#for i in cantidad_total_equipos:
 	#	print("------------")

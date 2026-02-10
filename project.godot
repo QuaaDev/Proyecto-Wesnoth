@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 AlgoritmoDijkstra="*res://Script/globales/algoritmo_dijkstra.gd"
 AlgoritmoCombate="*res://Script/globales/algoritmo_combate.gd"
+IA01="*uid://d0ophyhag3qoa"
 
 [display]
 
