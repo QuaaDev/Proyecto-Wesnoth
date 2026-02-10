@@ -21,7 +21,7 @@ var unidad_a_mover : Node2D
 
 var mouse_sobre_hud : bool = false
 
-@export var grupos_bajo_ia = []
+@export var grupos_bajo_ia : Array[int]
 @export var empieza_x_equipo : int = 1
 var cantidad_total_equipos = []
 var equipo_actual : int
