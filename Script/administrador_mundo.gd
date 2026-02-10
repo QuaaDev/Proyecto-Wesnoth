@@ -21,7 +21,7 @@ var unidad_a_mover : Node2D
 
 var mouse_sobre_hud : bool = false
 
-var grupos_bajo_ia = []
+@export var grupos_bajo_ia = []
 @export var empieza_x_equipo : int = 1
 var cantidad_total_equipos = []
 var equipo_actual : int
@@ -262,18 +262,18 @@ func boton_pasar_turno() -> void:
 		print("terminando turno")
 		turno_actual += 1
 		equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
+	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
+	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
 	#------IA----------------
 	if equipo_actual in grupos_bajo_ia:
 		print("Este grupo esta bajo IA")
 	#------IA---------------
-	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
-	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
-	for i in cantidad_total_equipos:
-		print("------------")
-		for node in get_tree().get_nodes_in_group(str(i)):
-			print(node.name, " ", node.equipo, " ", node.es_mi_turno)
-		#get_tree().call_group(str(i), "termino_mi_turno")
-	print("--------final turnos------------")
+	#for i in cantidad_total_equipos:
+	#	print("------------")
+	#	for node in get_tree().get_nodes_in_group(str(i)):
+	#		print(node.name, " ", node.equipo, " ", node.es_mi_turno)
+	#	#get_tree().call_group(str(i), "termino_mi_turno")
+	#print("--------final turnos------------")
 #------------------señañes-----------------------
 #------------------Errores-----------------------
 func comprobar_errores_ready():
