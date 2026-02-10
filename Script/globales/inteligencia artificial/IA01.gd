@@ -12,7 +12,7 @@ func ejecutar_ia(equipo : int):
 
 func obtener_datos(unidad : Node2D):
 	print(unidad.name)
-	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas)
+	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false)
 	print(AlgoritmoDijkstra.movimientos_disponibles)
 
 func obtener_nodo_mundo (nodo : Node):
