@@ -23,7 +23,7 @@ func obtener_datos(unidades : Array):
 			ubicaciones_ocupadas_enemigos.erase(i.coordenada_local_tilemap)
 		print(i.name)
 		#-----debug---------
-		AlgoritmoDijkstra.moviendo_unidad(i, nodo_mundo.ubicaciones_ocupadas,false)
+		AlgoritmoDijkstra.moviendo_unidad(i, nodo_mundo.ubicaciones_ocupadas,false,true)
 		if AlgoritmoDijkstra.movimientos_disponibles in ubicaciones_ocupadas_enemigos:
 			print("Detecto la ubicacion de los enemigos")
 		else:

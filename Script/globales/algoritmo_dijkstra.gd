@@ -19,7 +19,8 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		#print("Error data no encontrada obtener_coste_movimiento_tile")
 		return 1
 
-func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary, dibujar_movimientos : bool) -> void:
+func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary, 
+dibujar_movimientos : bool, almacenar_ubicaciones_ocupadas : bool) -> void:
 	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
