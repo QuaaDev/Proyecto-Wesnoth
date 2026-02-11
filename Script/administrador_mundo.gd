@@ -213,7 +213,7 @@ func almacenar_unidad() -> void:
 	unidad_a_mover = mouse_sobre_unidad #Almacena la unidad que se va a mover
 	unidad_a_mover.siendo_movido() #Efecto de color nomas
 	rellenar_labels(unidad_a_mover)#Actualiza los labels
-	AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas,true,false)
+	AlgoritmoDijkstra.moviendo_unidad(unidad_a_mover,ubicaciones_ocupadas,true)
 	
 	
 func limpiar_unidad_bajo_mouse() -> void:

@@ -3,6 +3,7 @@ var tile_map : Node2D
 var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
 var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Dijkstra para su posterior uso
+var movimientos_disponibles_incluyendo_ocupados : Dictionary#Almacena las posiciones descartadas por tener una unidad sobre ellas.
 #patata 11/02/2026 no se prq escribi eso pero me dio risa lul
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
@@ -20,7 +21,7 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		return 1
 
 func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary, 
-dibujar_movimientos : bool, almacenar_ubicaciones_ocupadas : bool) -> void:
+dibujar_movimientos : bool) -> void:
 	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
@@ -42,6 +43,9 @@ dibujar_movimientos : bool, almacenar_ubicaciones_ocupadas : bool) -> void:
 				#(Si el nodo ya fue explorado, lo omite) AND (Si la ubicacion ya fue ocupada, la omite)
 				reached[next] = nuevo_costo
 				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
+			elif (not reached.has(next) or nuevo_costo < reached[next]) and(not movimientos_disponibles_incluyendo_ocupados.has(next)): #Excepcion para la IA, almacenara las posiciones ocupadas por unidades
+				#(Si el nodo ya fue explorado, lo omite) AND (si ese nodo ya fue almacenado como ocupado, lo omite)
+				movimientos_disponibles_incluyendo_ocupados[next] = nuevo_costo
 	if dibujar_movimientos:
 		dibujando_tile_map(reached)
 	movimientos_disponibles = reached.duplicate() #Almacena los movimientos disponibles
@@ -76,3 +80,4 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 
 func limpiar_movimientos() -> void:
 	movimientos_disponibles.clear()
+	movimientos_disponibles_incluyendo_ocupados.clear()
