@@ -9,7 +9,7 @@
 
 [node name="Mundo" type="Node" unique_id=768157870]
 script = ExtResource("1_bqhdr")
-grupos_bajo_ia = Array[int]([1])
+grupos_bajo_ia = Array[int]([2])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=238290189]
 
