@@ -12,28 +12,33 @@ func cargar_unidades(equipo:int) -> Array:#Devuelve las unidades dentro del grup
 	return get_tree().get_nodes_in_group(str(equipo))
 	
 func obtener_datos(unidades : Array):
-	#print(unidad.name)
-	#AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false) 
-	#Carga los movimientos legales en el algoritmo dirksdad, se accede con AlgoritmoDijkstra.movimientos_disponibles
 	ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate()
 	#Almacena las ubicaciones enemigas 
+	descartar_unidades_aliadas(unidades)
+	obtener_posibles_objetivos(unidades)
+#---------------Recursos Obtener Datos---------------
+func descartar_unidades_aliadas(unidades : Array):
+	#Quita de la lista a las unidades aliadas para facilitar el encontrar enemigos
 	for i in unidades:
 		if i.coordenada_local_tilemap in ubicaciones_ocupadas_enemigos:
-		#Quita de la lista a las unidades aliadas para facilitar el encontrar enemigos
 			ubicaciones_ocupadas_enemigos.erase(i.coordenada_local_tilemap)
-		print(i.name)
-		#-----debug---------
-		print("Ubicaciones Ocupadas Por Enemigos")
-		print(ubicaciones_ocupadas_enemigos)
-		AlgoritmoDijkstra.moviendo_unidad(i, nodo_mundo.ubicaciones_ocupadas,false)
+			
+func obtener_posibles_objetivos(unidades : Array):
+	for i in unidades:#explora todas las unidades
+		print("Ubicaciones Ocupadas Por Enemigos ", i.name)
+		AlgoritmoDijkstra.moviendo_unidad(i, nodo_mundo.ubicaciones_ocupadas,false)#Carga la lista de movimientos para esta unidad
 		movimientos_disponibles_incluyendo_ocupados = AlgoritmoDijkstra.movimientos_disponibles_incluyendo_ocupados.duplicate()
+		#Duplica la lista de movimientos disponibles blabla
 		if movimientos_disponibles_incluyendo_ocupados.is_empty():
+			#Si la lista esta vacia, se ahorra el procesar las cosas
 			print("No se detecto ubicaciones de enemigos")
 		else:
-			for x in movimientos_disponibles_incluyendo_ocupados:
-				if x in ubicaciones_ocupadas_enemigos:
+			for x in movimientos_disponibles_incluyendo_ocupados: #Por cada posible ataque
+				if x in ubicaciones_ocupadas_enemigos:#Verifica que no sean aliados prq obviamente no atacas aliados
 					print("La unidad ",x," esta a rango de ataque")
-		print(movimientos_disponibles_incluyendo_ocupados)
+		#print(movimientos_disponibles_incluyendo_ocupados)
 		print(i.coordenada_local_tilemap)
+		print("-------------------------")
+
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
