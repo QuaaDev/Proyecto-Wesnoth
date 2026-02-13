@@ -55,7 +55,8 @@ func analizar_ataque(unidad : unidad_base):
 	var clave_random = unidad.objetivos_a_atacar.keys().pick_random()
 	var objetivo : Dictionary
 	objetivo[clave_random] = unidad.objetivos_a_atacar[clave_random]
+	unidad.objetivo_final = objetivo.duplicate()
 	#Elige un objetivo aleatorio de entre los que tiene
-	print("Ataco a: " + str(objetivo))
+	print("Ataco a: " , unidad.objetivo_final)
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
