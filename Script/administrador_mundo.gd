@@ -94,7 +94,7 @@ func _input(event):
 							if  AlgoritmoDijkstra.movimientos_disponibles.has(tile_map.coordenada_global_del_mouse_a_tilemap()):
 								#If el tile al que intento mover ESTA DENTRO del diccionario de movimientos:
 								print("muevo unidad a espacio vacio")
-								mover_unidad(unidad_a_mover)
+								mover_unidad(unidad_a_mover,tile_map.coordenada_global_del_mouse_a_tilemap())
 							else:
 								print("Cancelo movimiento por intentar moverme fuera del rango")
 							limpiar_unidad_seleccionada()
@@ -108,7 +108,7 @@ func _input(event):
 									print("Te ataco!")
 									ubicaciones_ocupadas[mouse_sobre_unidad.get_coordenada_local_tilemap()].morir()
 									ubicaciones_ocupadas.erase(mouse_sobre_unidad) #Elimina la unidad que esta sobre el mouse
-									mover_unidad(unidad_a_mover)
+									mover_unidad(unidad_a_mover,tile_map.coordenada_global_del_mouse_a_tilemap())
 								else:
 									print("Cancelo movimiento por intentar moverme fuera del rango(version ataque)")
 								limpiar_unidad_seleccionada()
@@ -120,21 +120,21 @@ func _input(event):
 							#Error
 							print("Click Izquierdo condicion no reconocida, valores: ")
 							
-func mover_unidad(unidad : Node2D):
+func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
 	#AlgoritmoDijkstra.movimientos_disponibles
-	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
+	#var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
 	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
-	unidad.coordenada_local_tilemap = coordenadas_mouse #Actualiza la informacion q tiene la unidad
+	unidad.coordenada_local_tilemap = coordenada_objetivo #Actualiza la informacion q tiene la unidad
 	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
 	#-----coste de movimiento a la unidad------
 	#obtiene el coste de movimiento de la ubicacion objetivo y luego resta los movimientos a unidad
-	unidad.restar_puntos_movimiento(AlgoritmoDijkstra.movimientos_disponibles[coordenadas_mouse])#Resta los puntos de movimiento
+	unidad.restar_puntos_movimiento(AlgoritmoDijkstra.movimientos_disponibles[coordenada_objetivo])#Resta los puntos de movimiento
 	#--------------obtener las coordenadas para el camino--------
 	var coordenada_mas_barata_actual : Vector2
 	var opcion_mas_barata := 100 
 	var camino_a_seguir = [] #Almacena las coordenadas en orden del camino de destino -> origen
 	var interruptor_while := true
-	var coordenada_origen = coordenadas_mouse #El origen es desde la posicion que se calcula los tiles vecinos
+	var coordenada_origen = coordenada_objetivo #El origen es desde la posicion que se calcula los tiles vecinos
 	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
 	while interruptor_while: #Mientras el interruptor sea verdadero
 		var contador_seguridad := 0
