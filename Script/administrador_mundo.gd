@@ -137,9 +137,9 @@ func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
 	var opcion_mas_barata := 100
 	while interruptor_while: #Mientras el interruptor sea verdadero
 		var resultado_vecino_mas_barato = AlgoritmoDijkstra.obtener_vecino_mas_barato(coordenada_origen, opcion_mas_barata)
-		var coordenada_mas_barata = resultado_vecino_mas_barato[0]
-		opcion_mas_barata = resultado_vecino_mas_barato[1]
-		print(opcion_mas_barata)
+		#Obtiene las coordenadas y coste de movimiento del vecino mas barato
+		var coordenada_mas_barata = resultado_vecino_mas_barato[0]#Separa el return en valores independientes, ya que envia dos return juntos
+		opcion_mas_barata = resultado_vecino_mas_barato[1]#Separa el return en valores independientes, ya que envia dos return juntos
 		camino_a_seguir.append(coordenada_mas_barata)#Luego de explorar todas las opciones, almacena la que fue mas barato
 		coordenada_origen = coordenada_mas_barata#Actualiza la coordenada origen para la siguiente ejecucion
 		if opcion_mas_barata <= 0:#Si el valor es 0 o menos, significa que se llego al final del recorrido
