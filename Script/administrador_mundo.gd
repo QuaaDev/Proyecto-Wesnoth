@@ -130,31 +130,18 @@ func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
 	#obtiene el coste de movimiento de la ubicacion objetivo y luego resta los movimientos a unidad
 	unidad.restar_puntos_movimiento(AlgoritmoDijkstra.movimientos_disponibles[coordenada_objetivo])#Resta los puntos de movimiento
 	#--------------obtener las coordenadas para el camino--------
-	var coordenada_mas_barata_actual : Vector2
-	var opcion_mas_barata := 100 
 	var camino_a_seguir = [] #Almacena las coordenadas en orden del camino de destino -> origen
 	var interruptor_while := true
 	var coordenada_origen = coordenada_objetivo #El origen es desde la posicion que se calcula los tiles vecinos
 	camino_a_seguir.append(coordenada_origen)#Agrega el destino final al array
+	var opcion_mas_barata := 100
 	while interruptor_while: #Mientras el interruptor sea verdadero
-		var contador_seguridad := 0
-		var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
-		for i in opciones:#Explora todos los posibles vecinos
-			if AlgoritmoDijkstra.movimientos_disponibles.has(i):#Verifica si el vecino esta dentro de los movimientos validos
-				if AlgoritmoDijkstra.movimientos_disponibles[i] < opcion_mas_barata:
-					#Si la opcion actual consume menos movimientos que la anterior significa que es mas optima
-					opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i] #Almacena el nuevo valor mas barato 
-					coordenada_mas_barata_actual = i #Almacena temporalmente la coordenada mas barata actual
-			else:
-				contador_seguridad += 1
-				#print(i , "Opcion no esta dentro de movimientos validos")
-				pass
-		#print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
-		if contador_seguridad >= 6:#Si el contador de seguridad llega a 6 significa que ningun vecino del origen es valido, por lo tanto el bucle es infinito.
-			push_error("Error Rojo, Bucle infinito detectado funcion administrador_mundo.mover_unidad(), deteniendo loop")
-			break
-		camino_a_seguir.append(coordenada_mas_barata_actual)#Luego de explorar todas las opciones, almacena la que fue mas barato
-		coordenada_origen = coordenada_mas_barata_actual#Actualiza la coordenada origen para la siguiente ejecucion
+		var resultado_vecino_mas_barato = AlgoritmoDijkstra.obtener_vecino_mas_barato(coordenada_origen, opcion_mas_barata)
+		var coordenada_mas_barata = resultado_vecino_mas_barato[0]
+		opcion_mas_barata = resultado_vecino_mas_barato[1]
+		print(opcion_mas_barata)
+		camino_a_seguir.append(coordenada_mas_barata)#Luego de explorar todas las opciones, almacena la que fue mas barato
+		coordenada_origen = coordenada_mas_barata#Actualiza la coordenada origen para la siguiente ejecucion
 		if opcion_mas_barata <= 0:#Si el valor es 0 o menos, significa que se llego al final del recorrido
 			interruptor_while = false#Apaga el while
 	#--------actualiza la posicion de la unidad----------

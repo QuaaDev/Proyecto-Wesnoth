@@ -78,6 +78,30 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 	#print(vecinos)
 	return vecinos
 
+func obtener_vecino_mas_barato(coordenada_origen : Vector2, opcion_mas_barata_arg : int) -> Array:
+	#La variable opcion_mas_barata se llama desde el exterior para mantenerla independiente y evitar bucles infinitos
+	var opcion_mas_barata = opcion_mas_barata_arg
+	var coordenada_mas_barata_actual : Vector2
+	var contador_seguridad := 0
+	var opciones = AlgoritmoDijkstra.get_neighbors(coordenada_origen)#Consulta los vecinos del tile origen
+	for i in opciones:#Explora todos los posibles vecinos
+		if AlgoritmoDijkstra.movimientos_disponibles.has(i):#Verifica si el vecino esta dentro de los movimientos validos
+			if AlgoritmoDijkstra.movimientos_disponibles[i] < opcion_mas_barata:
+				#Si la opcion actual consume menos movimientos que la anterior significa que es mas optima
+				opcion_mas_barata = AlgoritmoDijkstra.movimientos_disponibles[i] #Almacena el nuevo valor mas barato 
+				coordenada_mas_barata_actual = i #Almacena temporalmente la coordenada mas barata actual
+		else:
+			contador_seguridad += 1
+			#print(i , "Opcion no esta dentro de movimientos validos")
+			pass
+		#print(AlgoritmoDijkstra.movimientos_disponibles[coordenada_mas_barata_actual], coordenada_mas_barata_actual)
+		if contador_seguridad >= 6:#Si el contador de seguridad llega a 6 significa que ningun vecino del origen es valido, por lo tanto el bucle es infinito.
+			push_error("Error Rojo, Bucle infinito detectado funcion administrador_mundo.mover_unidad(), deteniendo loop")
+			break
+	var retorno = [coordenada_mas_barata_actual,opcion_mas_barata]
+	#Envia dos return en uno
+	return retorno
+
 func limpiar_movimientos() -> void:
 	movimientos_disponibles.clear()
 	movimientos_disponibles_incluyendo_ocupados.clear()
