@@ -8,6 +8,7 @@ signal animacion_terminada #Conectada a algoritmo_combate
 var ejecutar_animacion_muerte = false
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
+var objetivos_a_atacar : Dictionary #Almacena los posibles objetivos que puede atacar
 #endregion
 
 @export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno

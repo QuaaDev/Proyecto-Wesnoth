@@ -16,6 +16,7 @@ func obtener_datos(unidades : Array):
 	#Almacena las ubicaciones enemigas 
 	descartar_unidades_aliadas(unidades)
 	obtener_posibles_objetivos(unidades)
+	ejecutar_ataque(unidades)
 #---------------Recursos Obtener Datos---------------
 func descartar_unidades_aliadas(unidades : Array):
 	#Quita de la lista a las unidades aliadas para facilitar el encontrar enemigos
@@ -36,9 +37,25 @@ func obtener_posibles_objetivos(unidades : Array):
 			for x in movimientos_disponibles_incluyendo_ocupados: #Por cada posible ataque
 				if x in ubicaciones_ocupadas_enemigos:#Verifica que no sean aliados prq obviamente no atacas aliados
 					print("La unidad ",x," esta a rango de ataque")
+					i.objetivos_a_atacar[x] = movimientos_disponibles_incluyendo_ocupados[x] #Guarda la informacion en la unidad
 		#print(movimientos_disponibles_incluyendo_ocupados)
+		print("objetivos a atacar",i.objetivos_a_atacar)
 		print(i.coordenada_local_tilemap)
 		print("-------------------------")
 
+func ejecutar_ataque(unidades:Array):
+	for i in unidades:
+		if !i.objetivos_a_atacar.is_empty():
+			analizar_ataque(i)
+		else:
+			print("No hay posibles ataques :c")
+
+func analizar_ataque(unidad : unidad_base):
+	print(unidad.name)
+	var clave_random = unidad.objetivos_a_atacar.keys().pick_random()
+	var objetivo : Dictionary
+	objetivo[clave_random] = unidad.objetivos_a_atacar[clave_random]
+	#Elige un objetivo aleatorio de entre los que tiene
+	print("Ataco a: " + str(objetivo))
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
