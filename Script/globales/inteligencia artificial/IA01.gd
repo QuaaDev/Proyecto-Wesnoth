@@ -7,6 +7,7 @@ var unidades_almacenadas
 func ejecutar_ia(equipo : int):
 	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
 	obtener_datos(unidades_almacenadas)
+	ejecutar_ataque(unidades_almacenadas)
 
 #Obtener las unidades a las que hay que aplicarle la IA
 func cargar_unidades(equipo:int) -> Array:#Devuelve las unidades dentro del grupo especificado
@@ -17,7 +18,6 @@ func obtener_datos(unidades : Array):
 	#Almacena las ubicaciones enemigas 
 	descartar_unidades_aliadas(unidades)
 	obtener_posibles_objetivos(unidades)
-	ejecutar_ataque(unidades)
 #---------------Recursos Obtener Datos---------------
 func descartar_unidades_aliadas(unidades : Array):
 	#Quita de la lista a las unidades aliadas para facilitar el encontrar enemigos
@@ -48,6 +48,7 @@ func ejecutar_ataque(unidades:Array):
 	for i in unidades:
 		if !i.objetivos_a_atacar.is_empty():
 			analizar_ataque(i)
+			#realizar_movimiento_adyacente(i)
 		else:
 			print("No hay posibles ataques :c")
 
@@ -56,8 +57,14 @@ func analizar_ataque(unidad : unidad_base):
 	var clave_random = unidad.objetivos_a_atacar.keys().pick_random()
 	var objetivo : Dictionary
 	objetivo[clave_random] = unidad.objetivos_a_atacar[clave_random]
-	unidad.objetivo_final = objetivo.duplicate()
+	unidad.objetivo_final.append(clave_random)
+	unidad.objetivo_final.append(objetivo[clave_random])
 	#Elige un objetivo aleatorio de entre los que tiene
 	print("Ataco a: " , unidad.objetivo_final)
+
+func realizar_movimiento_adyacente(unidad : unidad_base):
+	var resultado = AlgoritmoDijkstra.obtener_vecino_mas_barato(unidad.objetivo_final[0], unidad.objetivo_final[1])
+	print(resultado)
+
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo

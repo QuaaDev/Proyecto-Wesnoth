@@ -9,7 +9,7 @@ var ejecutar_animacion_muerte = false
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
 var objetivos_a_atacar : Dictionary #Almacena los posibles objetivos que puede atacar
-var objetivo_final : Dictionary#Almacena el objetivo al que le ejecutara el ataque >:D
+var objetivo_final : Array#Almacena el objetivo al que le ejecutara el ataque >:D
 #endregion
 
 @export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno
