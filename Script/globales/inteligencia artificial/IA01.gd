@@ -3,9 +3,10 @@ signal todas_las_unidades_procesadas #Cuando se agota la lista de unidades a apl
 var nodo_mundo
 var ubicaciones_ocupadas_enemigos
 var movimientos_disponibles_incluyendo_ocupados
+var unidades_almacenadas
 func ejecutar_ia(equipo : int):
-	var unidades = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
-	obtener_datos(unidades)
+	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
+	obtener_datos(unidades_almacenadas)
 
 #Obtener las unidades a las que hay que aplicarle la IA
 func cargar_unidades(equipo:int) -> Array:#Devuelve las unidades dentro del grupo especificado
