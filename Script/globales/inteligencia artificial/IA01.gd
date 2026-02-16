@@ -8,11 +8,12 @@ func ejecutar_ia(equipo : int):
 	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
 	ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate() #Actualiza la informacion
 	descartar_unidades_aliadas(unidades_almacenadas)
-	for i in unidades_almacenadas:
+	for unidad in unidades_almacenadas: #Se ejecuta cada unidad de forma independiente.
 		print("-------------------")
-		print(i.name)
-		obtener_datos(i)
-		ejecutar_ataque(i)
+		print(unidad.name)
+		unidad.limpiar_objetivos_ataque() #Limpia la lista de objetivos
+		obtener_datos(unidad)#Obtiene informacion del entorno
+		ejecutar_ataque(unidad)#Ejecuta el ataque
 		print("-------------------")
 
 #Obtener las unidades a las que hay que aplicarle la IA

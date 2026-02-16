@@ -144,6 +144,11 @@ func empezo_mi_turno() -> void:
 func restar_puntos_movimiento(cantidad : int) -> void: #Resta la cantidad de movimientos dispomible
 	puntos_movimiento -= cantidad
 	
+func limpiar_objetivos_ataque() -> void:
+	objetivos_a_atacar.clear()
+	objetivo_final.clear()
+	
+	
 func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administrador mundo para informarle de que esta unidad esta bajo el mouse
 	nodo_mundo.obtener_unidad_bajo_mouse(self)
 
