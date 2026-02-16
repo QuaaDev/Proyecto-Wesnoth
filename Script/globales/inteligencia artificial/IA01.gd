@@ -31,7 +31,7 @@ func descartar_unidades_aliadas(unidades : Array):
 			ubicaciones_ocupadas_enemigos.erase(i.coordenada_local_tilemap)
 			
 func obtener_posibles_objetivos(unidad : unidad_base):
-	print("Ubicaciones Ocupadas Por Enemigos ")
+	#print("Ubicaciones Ocupadas Por Enemigos ")
 	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false)#Carga la lista de movimientos para esta unidad
 	movimientos_disponibles_incluyendo_ocupados = AlgoritmoDijkstra.movimientos_disponibles_incluyendo_ocupados.duplicate()
 	#Duplica la lista de movimientos disponibles blabla
@@ -41,16 +41,16 @@ func obtener_posibles_objetivos(unidad : unidad_base):
 	else:
 		for x in movimientos_disponibles_incluyendo_ocupados: #Por cada posible ataque
 			if x in ubicaciones_ocupadas_enemigos:#Verifica que no sean aliados prq obviamente no atacas aliados
-				print("La unidad ",x," esta a rango de ataque")
+				#print("La unidad ",x," esta a rango de ataque")
 				unidad.objetivos_a_atacar[x] = movimientos_disponibles_incluyendo_ocupados[x] #Guarda la informacion en la unidad
 	#print(movimientos_disponibles_incluyendo_ocupados)
 	print("objetivos a atacar",unidad.objetivos_a_atacar)
-	print(unidad.coordenada_local_tilemap)
+	#print(unidad.coordenada_local_tilemap)
 
 func ejecutar_ataque(unidad: unidad_base):
-	if !unidad.objetivos_a_atacar.is_empty():
-		analizar_ataque(unidad)
-		realizar_movimiento_adyacente(unidad)
+	if !unidad.objetivos_a_atacar.is_empty(): #Si la unidad tiene objetivos para atacar
+		analizar_ataque(unidad) #Decide a cual atacar
+		realizar_movimiento_adyacente(unidad)#Luego realiza el movimiento
 	else:
 		print("No hay posibles ataques :c")
 
@@ -65,7 +65,9 @@ func analizar_ataque(unidad : unidad_base):
 
 func realizar_movimiento_adyacente(unidad : unidad_base):
 	var resultado = AlgoritmoDijkstra.obtener_vecino_mas_barato(unidad.objetivo_final[0], unidad.objetivo_final[1])
-	print(resultado)
+	#Convierte el diccionario en un array, se accede a sus valores con [0] y [1]
+	#print("me muevo a",resultado)
+	nodo_mundo.mover_unidad(unidad,resultado[0])
 
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
