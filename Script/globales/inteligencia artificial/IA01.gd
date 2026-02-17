@@ -74,7 +74,9 @@ func realizar_ataque(unidad : unidad_base):
 	var unidad_atacante = unidad
 	var unidad_defensora = nodo_mundo.ubicaciones_ocupadas[unidad.objetivo_final[0]] #Referencia a la unidad que se defendera
 	AlgoritmoCombate.obtener_unidades_en_combate(unidad_atacante, unidad_defensora) #Actualiza la informacion de las unidades en combate
-	
-	#AlgoritmoCombate.obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D)
+	var daño_unidad_atacante = AlgoritmoCombate.obtener_mejor_ataque(unidad_atacante, unidad_defensora, false)
+	var daño_unidad_defensora = AlgoritmoCombate.obtener_mejor_ataque(unidad_defensora, unidad_atacante, false)
+	print("daño unidad atacante: ", str(daño_unidad_atacante))
+	print("daño unidad defensora: ", str(daño_unidad_defensora))
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
