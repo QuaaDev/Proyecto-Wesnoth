@@ -9,14 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="4_wj0xx"]
 [ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="5_e0lx4"]
 [ext_resource type="Resource" uid="uid://dufolgde5qn6v" path="res://Escenas/Unidad/murcielago/mirada_del_abismo.tres" id="5_nkd6b"]
+[ext_resource type="PackedScene" uid="uid://vquoauhoi83j" path="res://Escenas/Unidad/constructor/barra_de_vida.tscn" id="10_0h8lc"]
 
-[node name="murcielago_unidad" type="Node2D" unique_id=1030529905 node_paths=PackedStringArray("area2d")]
+[node name="murcielago_unidad" type="Node2D" unique_id=1030529905 node_paths=PackedStringArray("area2d", "barra_de_vida")]
 script = ExtResource("1_m7mam")
 puntos_movimiento_maximo = 8
 turnos_de_ataque_maximo = 3
 vida_maxima = 5
 sprite_unidad_UID = "uid://dk1ou87ug2tcj"
 area2d = NodePath("Area2D")
+barra_de_vida = NodePath("Barra_De_Vida")
 metadata/_custom_type_script = "uid://dvc4cvxoyf372"
 
 [node name="EstadisticasAtaque" parent="." unique_id=28290817 instance=ExtResource("2_ji2ur")]
@@ -37,3 +39,5 @@ informacion_defensa = ExtResource("4_t1uk2")
 [node name="sprite" parent="." unique_id=634874978 instance=ExtResource("4_wj0xx")]
 
 [node name="Area2D" parent="." unique_id=1962834764 instance=ExtResource("5_e0lx4")]
+
+[node name="Barra_De_Vida" parent="." unique_id=792611011 instance=ExtResource("10_0h8lc")]
