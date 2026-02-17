@@ -29,8 +29,8 @@ var vida_actual : int
 @export var area2d : Area2D
 #------Barra de vida--------
 @export var barra_de_vida : ProgressBar
-var cambio_a_barra_de_vida : float
-var vida_perdida_por_frame : float = 0.05
+var cambio_a_barra_de_vida : float #Almacena la cantidad de valor a restarle a la barra
+var vida_perdida_por_frame : float = 0.05 #Velocidad a la que la barra de vida baja su valor
 #------Barra de vida--------
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
