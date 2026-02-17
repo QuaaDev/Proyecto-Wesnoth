@@ -11,6 +11,7 @@ var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
 var es_mi_turno : bool = false
 var objetivos_a_atacar : Dictionary #Almacena los posibles objetivos que puede atacar
 var objetivo_final : Array#Almacena el objetivo al que le ejecutara el ataque >:D
+var tween : Tween
 #endregion
 
 @export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno
@@ -81,7 +82,9 @@ func recibir_daño(cantidad : int) -> void:
 		morir()
 
 func aplicando_animacion_movimiento(camino_a_seguir : Array) -> void:
-	var tween = create_tween()
+	if tween and tween.is_running():#Si ya hay una animacion corriendo, espera a que termine
+		await tween.finished
+	tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
 	for i in camino_a_seguir:
@@ -89,6 +92,9 @@ func aplicando_animacion_movimiento(camino_a_seguir : Array) -> void:
 		tween.tween_property(self,"position",new_position, .5)
 
 func aplicar_animacion_combate(coordenadas : Vector2) -> void:
+	if tween and tween.is_running(): #Si ya hay una animacion corriendo, espera a que termine
+		await tween.finished
+	tween = create_tween() #Crea un nuevo tween desde cero
 	var cantidad_pixeles = 36 #Cantidad de pixeles a moverse
 	var posicion_original = self.position #Posicion para volver al terminar la animacion
 	var posicion_objetivo : Vector2 #Posicion a la que ira
@@ -120,8 +126,6 @@ func aplicar_animacion_combate(coordenadas : Vector2) -> void:
 	#Contiene la cantidad de pixeles a moverse, no las coordenadas objetivo
 	posicion_objetivo = posicion_original + coordenadas_globales 
 	#Suma la posicion actual con la cantidad de pixeles que necesita para moverse
-	#Aplica Tween
-	var tween = create_tween()
 	tween.tween_property(self,"position",posicion_objetivo, .4)
 	#Primero va a la posicion del enemigo
 	tween.tween_property(self,"position",posicion_original, .4)
