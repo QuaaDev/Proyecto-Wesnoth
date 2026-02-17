@@ -31,6 +31,10 @@ var vida_actual : int
 @export var barra_de_vida : ProgressBar
 var cambio_a_barra_de_vida : float #Almacena la cantidad de valor a restarle a la barra
 var vida_perdida_por_frame : float = 0.05 #Velocidad a la que la barra de vida baja su valor
+var vida_alta : Color = Color(0.0, 0.714, 0.0, 1.0)
+var vida_media : Color = Color(0.616, 0.569, 0.0, 1.0)
+var vida_baja : Color = Color(0.774, 0.0, 0.0, 1.0)
+var franjas_de_vida : Array #Almacena los limites de franjas para cambiar los colores| 50% media 25% baja
 #------Barra de vida--------
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
@@ -46,7 +50,7 @@ func instanciar_cosas_esenciales():
 	else:
 		barra_de_vida.max_value = vida_maxima
 		barra_de_vida.value = vida_actual
-	
+		barra_de_vida.get("theme_override_styles/fill").bg_color = vida_alta
 func _process(_delta: float) -> void:
 	if ejecutar_animacion_muerte:
 		animacion_morir()
