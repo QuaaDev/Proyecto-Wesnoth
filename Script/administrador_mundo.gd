@@ -171,10 +171,6 @@ func iniciar_interfaz_combate() ->void:
 	interfaz_combate.visible = true
 	limpiar_unidad_seleccionada()
 
-func ejecutando_ataque() -> void: #<----------- Version antigua, es descartable
-	print("Le rompo la cabeza a este triplehijueremil buta")
-	mouse_sobre_unidad.recibir_daño(unidad_a_mover.infligir_daño())#La unidad seleccionada le inflige daño a la que esta bajo el mouse
-	limpiar_unidad_seleccionada()
 #-------Seccion Combate-----------
 func verificar_si_coordenadas_estan_libres() -> bool:
 	var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap() #Coordenada del tilemap
