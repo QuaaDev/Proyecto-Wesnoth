@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmebkus7j77fl"]
+[gd_scene format=3 uid="uid://dmebkus7j77fl"]
 
 [ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_w64r7"]
 [ext_resource type="PackedScene" uid="uid://bha06lvm3so0o" path="res://Escenas/Unidad/constructor/estadisticas_ataque.tscn" id="2_huqs5"]
@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="4_p7tnc"]
 [ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="5_033al"]
 
-[node name="Unidad" type="Node2D"]
+[node name="Unidad" type="Node2D" unique_id=1613757178]
 script = ExtResource("1_w64r7")
 
-[node name="EstadisticasAtaque" parent="." instance=ExtResource("2_huqs5")]
+[node name="EstadisticasAtaque" parent="." unique_id=168919224 instance=ExtResource("2_huqs5")]
 
-[node name="estadisticas_defensa" parent="." instance=ExtResource("3_jbfm1")]
+[node name="estadisticas_defensa" parent="." unique_id=850571638 instance=ExtResource("3_jbfm1")]
 
-[node name="sprite" parent="." instance=ExtResource("4_p7tnc")]
+[node name="sprite" parent="." unique_id=22200037 instance=ExtResource("4_p7tnc")]
 
-[node name="Area2D" parent="." instance=ExtResource("5_033al")]
+[node name="Area2D" parent="." unique_id=561028619 instance=ExtResource("5_033al")]

@@ -1,8 +1,9 @@
 Primero crear un nuevo nodo de la clase unidad_base
 Luego hay que colocarle las escenas esenciales que estan en la carpeta Unidad/Constructor
-Esas escenas son area2d, estadisticas ataque, estadisticas defensa y sprite.
+Esas escenas son area2d, barra de vida, estadisticas ataque, estadisticas defensa y sprite.
 
 el area2d hay que adjuntarlo en la variable export de la unidad
+la barra de vida hay que adjuntarla a la variable export de la unidad
 a estadisticas_defensa hay que adjuntarle el recurso que disponga de la informacion de defensa.
 
 a estadisticasataque hay que ponerle nodos OpcionAtaque como hijos. Cada opcionataque 

@@ -27,6 +27,7 @@ var vida_actual : int
 @export var sprite_unidad_UID : String
 
 @export var area2d : Area2D
+@export var barra_de_vida : ProgressBar
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
 #	(png_path : String, nombre_ataque : String, tipo_daño : String,
@@ -36,6 +37,8 @@ var opciones_de_combate = {}
 func instanciar_cosas_esenciales():
 	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
+	if barra_de_vida == null:
+		print("Error unidad no tiene barra de vida " + self.name)
 	
 func _process(_delta: float) -> void:
 	if ejecutar_animacion_muerte:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btdj0ckytx6lu"]
+[gd_scene format=3 uid="uid://btdj0ckytx6lu"]
 
 [ext_resource type="Script" uid="uid://dvc4cvxoyf372" path="res://Script/Unidad/unidad.gd" id="1_yf6mb"]
 [ext_resource type="PackedScene" uid="uid://bha06lvm3so0o" path="res://Escenas/Unidad/constructor/estadisticas_ataque.tscn" id="2_ivm0q"]
@@ -10,29 +10,33 @@
 [ext_resource type="PackedScene" uid="uid://dgi0x5d4nwbis" path="res://Escenas/Unidad/constructor/sprite.tscn" id="5_iwe68"]
 [ext_resource type="PackedScene" uid="uid://bvan7vndkivek" path="res://Escenas/Unidad/constructor/area_2d.tscn" id="6_ehdkd"]
 [ext_resource type="Resource" uid="uid://bbq2assr0bj12" path="res://Escenas/Unidad/dragon/ataque_dragon_2.tres" id="6_nh52g"]
+[ext_resource type="PackedScene" uid="uid://vquoauhoi83j" path="res://Escenas/Unidad/constructor/barra_de_vida.tscn" id="11_nh52g"]
 
-[node name="unidad_dragon" type="Node2D" node_paths=PackedStringArray("area2d")]
+[node name="unidad_dragon" type="Node2D" unique_id=844868248 node_paths=PackedStringArray("area2d", "barra_de_vida")]
 script = ExtResource("1_yf6mb")
 puntos_movimiento_maximo = 4
 turnos_de_ataque_maximo = 1
 vida_maxima = 20
 sprite_unidad_UID = "uid://bksfnvk2kclfb"
 area2d = NodePath("Area2D")
+barra_de_vida = NodePath("Barra_De_Vida")
 metadata/_custom_type_script = "uid://dvc4cvxoyf372"
 
-[node name="EstadisticasAtaque" parent="." instance=ExtResource("2_ivm0q")]
+[node name="EstadisticasAtaque" parent="." unique_id=825122742 instance=ExtResource("2_ivm0q")]
 
-[node name="OpcionAtaque" parent="EstadisticasAtaque" instance=ExtResource("3_ri1iw")]
+[node name="OpcionAtaque" parent="EstadisticasAtaque" unique_id=1982678800 instance=ExtResource("3_ri1iw")]
 opcion_ataque_res = ExtResource("4_iwe68")
 
-[node name="OpcionAtaque2" type="Node" parent="EstadisticasAtaque"]
+[node name="OpcionAtaque2" type="Node" parent="EstadisticasAtaque" unique_id=883132332]
 script = ExtResource("5_ehdkd")
 opcion_ataque_res = ExtResource("6_nh52g")
 metadata/_custom_type_script = "uid://c5g8o7um40762"
 
-[node name="estadisticas_defensa" parent="." instance=ExtResource("3_yu82b")]
+[node name="estadisticas_defensa" parent="." unique_id=1389162916 instance=ExtResource("3_yu82b")]
 informacion_defensa = ExtResource("4_ri1iw")
 
-[node name="sprite" parent="." instance=ExtResource("5_iwe68")]
+[node name="sprite" parent="." unique_id=384819853 instance=ExtResource("5_iwe68")]
 
-[node name="Area2D" parent="." instance=ExtResource("6_ehdkd")]
+[node name="Area2D" parent="." unique_id=503581512 instance=ExtResource("6_ehdkd")]
+
+[node name="Barra_De_Vida" parent="." unique_id=792611011 instance=ExtResource("11_nh52g")]

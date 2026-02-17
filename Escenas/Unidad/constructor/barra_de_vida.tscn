@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://vquoauhoi83j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehdkd"]
+bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nh52g"]
+bg_color = Color(0, 0.70980394, 0.25490198, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 4
+
+[node name="Barra_De_Vida" type="ProgressBar" unique_id=792611011]
+offset_left = -27.0
+offset_top = -29.0
+offset_right = -18.0
+offset_bottom = 30.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ehdkd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nh52g")
+step = 0.5
+value = 80.0
+fill_mode = 3
+show_percentage = false
