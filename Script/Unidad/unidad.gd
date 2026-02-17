@@ -27,7 +27,11 @@ var vida_actual : int
 @export var sprite_unidad_UID : String
 
 @export var area2d : Area2D
+#------Barra de vida--------
 @export var barra_de_vida : ProgressBar
+var cambio_a_barra_de_vida : float
+var vida_perdida_por_frame : float = 0.05
+#------Barra de vida--------
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
 #	(png_path : String, nombre_ataque : String, tipo_daño : String,
@@ -39,12 +43,20 @@ func instanciar_cosas_esenciales():
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
 	if barra_de_vida == null:
 		push_error("Error unidad no tiene barra de vida " + self.name)
+	else:
+		barra_de_vida.max_value = vida_maxima
+		barra_de_vida.value = vida_actual
 	
 func _process(_delta: float) -> void:
 	if ejecutar_animacion_muerte:
 		animacion_morir()
+	if cambio_a_barra_de_vida > 0:
+		barra_de_vida.value -= vida_perdida_por_frame
+		cambio_a_barra_de_vida -= vida_perdida_por_frame
+	
 		
 func _ready() -> void:
+	vida_actual = vida_maxima
 	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))
 	nodo_mundo.verificar_cantidad_grupos(equipo) 
@@ -53,7 +65,6 @@ func _ready() -> void:
 	actualizar_coordenada_local_tilemap()
 	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)
 	self.position = coordenada_global #Centra a la unidad en la celda
-	vida_actual = vida_maxima
 	sprite.texture = load(sprite_unidad_UID)
 	sprite.cambiar_color(equipo) #recolorización por máscara de color
 	#print(opciones_de_combate)
@@ -81,6 +92,7 @@ func infligir_daño():
 	
 func recibir_daño(cantidad : int) -> void:
 	vida_actual -= cantidad
+	cambio_a_barra_de_vida = float(cantidad)
 	if vida_actual <= 0:
 		morir()
 
