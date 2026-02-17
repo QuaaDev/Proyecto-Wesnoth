@@ -85,7 +85,7 @@ func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
 	unidad_atacante.infligir_daño() #Activa el evento de infligir daño de la unidad
 	unidad_defensor.recibir_daño(daño_atacante)#Aplica el daño sobre el enemigo
 	aplicar_animacion_combate(unidad_atacante)
-	await unidad_atacante.animacion_terminada #Espera a que la animacion termine para seguir ejecutando el combate
+	await unidad_atacante.animacion_terminada_combate #Espera a que la animacion termine para seguir ejecutando el combate
 	print("Unidad atacante inflige: " + str(daño_atacante))
 	if !unidad_defensor.consulta_si_estoy_muerto():#Si esta muerto no inflige daño
 		unidad_defensor.infligir_daño()

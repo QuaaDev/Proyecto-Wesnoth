@@ -147,12 +147,7 @@ func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
 	#--------actualiza la posicion de la unidad----------
 	#unidad.position = nueva_posicion_unidad #Mueve a la unidad
 	camino_a_seguir.reverse() #Invierte el orden del array
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
-	for i in camino_a_seguir:
-		var new_position = tile_map.map_to_local(i)
-		tween.tween_property(unidad,"position",new_position, .5)
+	unidad.aplicando_animacion_movimiento(camino_a_seguir)
 	#Objeto a aplicar / propiedad a editar / ubicacion objetivo / velocidad de la animacion
 	#print(camino_a_seguir)
 	#print(ubicaciones_ocupadas)

@@ -13,7 +13,7 @@ func ejecutar_ia(equipo : int):
 		print(unidad.name)
 		unidad.limpiar_objetivos_ataque() #Limpia la lista de objetivos
 		obtener_datos(unidad)#Obtiene informacion del entorno
-		ejecutar_ataque(unidad)#Ejecuta el ataque
+		await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
 		print("-------------------")
 
 #Obtener las unidades a las que hay que aplicarle la IA
@@ -52,6 +52,7 @@ func ejecutar_ataque(unidad: unidad_base):
 		analizar_ataque(unidad) #Decide a cual atacar
 		realizar_movimiento_adyacente(unidad)#Luego realiza el movimiento
 		realizar_ataque(unidad)#Luego ejecuta el ataque
+		await AlgoritmoCombate.combate_finalizado #Espera a que finalice el combate
 	else:
 		print("No hay posibles ataques :c")
 
@@ -78,5 +79,6 @@ func realizar_ataque(unidad : unidad_base):
 	var daño_unidad_defensora = AlgoritmoCombate.obtener_mejor_ataque(unidad_defensora, unidad_atacante, false)
 	print("daño unidad atacante: ", str(daño_unidad_atacante))
 	print("daño unidad defensora: ", str(daño_unidad_defensora))
+	AlgoritmoCombate.ejecutar_ataque(daño_unidad_atacante, daño_unidad_defensora)
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
