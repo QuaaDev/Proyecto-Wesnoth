@@ -51,6 +51,7 @@ func ejecutar_ataque(unidad: unidad_base):
 	if !unidad.objetivos_a_atacar.is_empty(): #Si la unidad tiene objetivos para atacar
 		analizar_ataque(unidad) #Decide a cual atacar
 		realizar_movimiento_adyacente(unidad)#Luego realiza el movimiento
+		realizar_ataque(unidad)#Luego ejecuta el ataque
 	else:
 		print("No hay posibles ataques :c")
 
@@ -68,6 +69,9 @@ func realizar_movimiento_adyacente(unidad : unidad_base):
 	#Convierte el diccionario en un array, se accede a sus valores con [0] y [1]
 	#print("me muevo a",resultado)
 	nodo_mundo.mover_unidad(unidad,resultado[0])
+
+func realizar_ataque(unidad : unidad_base):
+	pass
 
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
