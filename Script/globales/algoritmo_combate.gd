@@ -21,7 +21,8 @@ func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objet
 		print("Daño total es: " + str(daño_total))
 	return daño_total
 
-func obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D) -> int:
+func obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D, daño_o_indice : bool) -> int:
+	#daño o indice = true es devolver indice, false devolver valor del daño
 	var opcion_y_resultado : Dictionary #Key almacena Indice de ataque y contenido el resultado del ataque
 	var defensa_objetivo = unidad_objetivo.get_node("estadisticas_defensa") #Obtiene el recurso de defensa
 	var contador : int = 0 #Inicia contador
@@ -30,10 +31,12 @@ func obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D) -
 		opcion_y_resultado[contador] = calcular_daño_total(opcion_ataque_recurso.cantidad_daño, opcion_ataque_recurso.tipo_daño, defensa_objetivo)
 		#Agrega el daño total de este ataque
 		contador += 1
-	
-	return obtener_valor_mayor(opcion_y_resultado)
-	
-func obtener_valor_mayor(Diccionario : Dictionary) -> int:
+	if daño_o_indice:
+		return obtener_valor_mayor_indice(opcion_y_resultado) 
+	else:
+		return obtener_valor_mayor_valor(opcion_y_resultado)
+func obtener_valor_mayor_indice(Diccionario : Dictionary) -> int:
+	#Retorna el indice con mas daño
 	if Diccionario.is_empty():
 		push_error("❌Error obtener_valor_mayor el diccionario esta vacio, devolviendo error")
 		return -1
@@ -45,6 +48,17 @@ func obtener_valor_mayor(Diccionario : Dictionary) -> int:
 			valor_actual = Diccionario[i]#Actualiza el nuevo valor mayor
 			index_con_mas_valor = i#Actualiza a que indice pertenece el valor mayor
 	return index_con_mas_valor#Devuelve el indice del valor mayor
+
+func obtener_valor_mayor_valor(Diccionario : Dictionary) -> int:
+	#Retorna el valor con mas daño
+	if Diccionario.is_empty():
+		push_error("❌Error obtener_valor_mayor el diccionario esta vacio, devolviendo error")
+		return -1
+	var valor_actual = -INF #Infinito negativo
+	for i in Diccionario:#Explora las opciones del diccionario
+		if Diccionario[i] > valor_actual: #Si la opcion actual tiene un valor mayor al almacenado
+			valor_actual = Diccionario[i]#Actualiza el nuevo valor mayor
+	return valor_actual#Devuelve mayor valor de daño
 
 func _ready() -> void:
 	pass

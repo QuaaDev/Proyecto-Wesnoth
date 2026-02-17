@@ -71,7 +71,10 @@ func realizar_movimiento_adyacente(unidad : unidad_base):
 	nodo_mundo.mover_unidad(unidad,resultado[0])
 
 func realizar_ataque(unidad : unidad_base):
-	pass
-
+	var unidad_atacante = unidad
+	var unidad_defensora = nodo_mundo.ubicaciones_ocupadas[unidad.objetivo_final[0]] #Referencia a la unidad que se defendera
+	AlgoritmoCombate.obtener_unidades_en_combate(unidad_atacante, unidad_defensora) #Actualiza la informacion de las unidades en combate
+	
+	#AlgoritmoCombate.obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D)
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo

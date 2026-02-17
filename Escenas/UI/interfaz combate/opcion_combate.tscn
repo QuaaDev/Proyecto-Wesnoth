@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv866k7yhc510"]
+[gd_scene format=3 uid="uid://dv866k7yhc510"]
 
 [ext_resource type="Script" uid="uid://dny4jsxxywr3j" path="res://Script/HUD/opcion_combate.gd" id="1_l0vp7"]
 [ext_resource type="Texture2D" uid="uid://cliquijfulqcx" path="res://Escenas/Unidad/dragon/axe.png" id="1_mdl8y"]
@@ -6,7 +6,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_gpdml"]
 font_size = 12
 
-[node name="OpcionCombate" type="Button"]
+[node name="OpcionCombate" type="Button" unique_id=84853797]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,7 +25,7 @@ text = "
 "
 script = ExtResource("1_l0vp7")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=556416187]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,96 +34,96 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=533508619]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PanelAliado" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+[node name="PanelAliado" type="PanelContainer" parent="PanelContainer/HBoxContainer" unique_id=922267342]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado" unique_id=817809014]
 layout_mode = 2
 
-[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer"]
+[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer" unique_id=144332230]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 texture = ExtResource("1_mdl8y")
 
-[node name="Stats" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer"]
+[node name="Stats" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer" unique_id=1107230425]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
 
-[node name="NombreAtaque" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats"]
+[node name="NombreAtaque" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats" unique_id=1826466090]
 layout_mode = 2
 text = "Espada de dios"
 
-[node name="TipoDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats"]
+[node name="TipoDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats" unique_id=2007029822]
 layout_mode = 2
 text = "Corte"
 
-[node name="CantidadDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats"]
+[node name="CantidadDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats" unique_id=650887748]
 layout_mode = 2
 text = "5"
 
-[node name="CantidadAtaques" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats"]
+[node name="CantidadAtaques" type="Label" parent="PanelContainer/HBoxContainer/PanelAliado/HBoxContainer/Stats" unique_id=956180796]
 layout_mode = 2
 text = "2"
 
-[node name="PanelMitad" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+[node name="PanelMitad" type="PanelContainer" parent="PanelContainer/HBoxContainer" unique_id=1848647172]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 mouse_filter = 1
 
-[node name="modo_combate" type="Label" parent="PanelContainer/HBoxContainer/PanelMitad"]
+[node name="modo_combate" type="Label" parent="PanelContainer/HBoxContainer/PanelMitad" unique_id=706872699]
 layout_mode = 2
 text = "Mele"
 label_settings = SubResource("LabelSettings_gpdml")
 horizontal_alignment = 1
 
-[node name="PanelEnemigo" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+[node name="PanelEnemigo" type="PanelContainer" parent="PanelContainer/HBoxContainer" unique_id=1663629823]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelEnemigo"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelEnemigo" unique_id=1428498930]
 layout_mode = 2
 
-[node name="Stats" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer"]
+[node name="Stats" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer" unique_id=210990139]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="NombreAtaque" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats"]
+[node name="NombreAtaque" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats" unique_id=785360715]
 layout_mode = 2
 text = "Espada de dios"
 horizontal_alignment = 2
 
-[node name="TipoDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats"]
+[node name="TipoDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats" unique_id=630257847]
 layout_mode = 2
 text = "Corte"
 horizontal_alignment = 2
 
-[node name="CantidadDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats"]
+[node name="CantidadDaño" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats" unique_id=1732412709]
 layout_mode = 2
 text = "5"
 horizontal_alignment = 2
 
-[node name="CantidadAtaques" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats"]
+[node name="CantidadAtaques" type="Label" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer/Stats" unique_id=305773143]
 layout_mode = 2
 text = "3"
 horizontal_alignment = 2
 
-[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer"]
+[node name="PNG" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelEnemigo/HBoxContainer" unique_id=1875708859]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 8

@@ -11,7 +11,7 @@ const OPCION_COMBATE = preload("uid://dv866k7yhc510")
 @onready var png_aliado: TextureRect = $FondoUiCombate/PanelPerfil/HBoxContainer2/PNGAliado
 @onready var png_enemigo: TextureRect = $FondoUiCombate/PanelPerfil/HBoxContainer2/PNGEnemigo
 
-var opcion_elegida #Almacena la opcion elegida para ejecutar el combate
+var opcion_elegida : opcion_combate#Almacena la opcion elegida para ejecutar el combate
 
 func _ready() -> void:
 	pass
@@ -31,7 +31,7 @@ func iniciar_combate(unidad_aliada : Node2D, unidad_enemiga : Node2D):
 	png_enemigo.texture = load(unidad_enemiga.sprite_unidad_UID)
 	#Carga el png de las unidades en combate
 	#var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(0)
-	var indice_mejor_ataque_enemigo = AlgoritmoCombate.obtener_mejor_ataque(unidad_enemiga, unidad_aliada)
+	var indice_mejor_ataque_enemigo = AlgoritmoCombate.obtener_mejor_ataque(unidad_enemiga, unidad_aliada, true)
 	var ejemplo_ataque_enemigo = unidad_enemiga.get_node("EstadisticasAtaque").get_child(indice_mejor_ataque_enemigo)
 	var defensa_aliada = unidad_aliada.get_node("estadisticas_defensa")
 	var defensa_enemiga = unidad_enemiga.get_node("estadisticas_defensa")

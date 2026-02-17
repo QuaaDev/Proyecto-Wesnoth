@@ -1,5 +1,5 @@
 extends Button
-
+class_name opcion_combate
 signal presionado_con_origen(origen : Button) 
 #Envia una señal cuando se presiona el boton incluyendo el origen de la señal como argumento
 #---------Seccion Aliado---------------
