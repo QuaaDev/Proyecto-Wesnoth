@@ -31,10 +31,12 @@ var vida_actual : int
 @export var barra_de_vida : ProgressBar
 var cambio_a_barra_de_vida : float #Almacena la cantidad de valor a restarle a la barra
 var vida_perdida_por_frame : float = 0.05 #Velocidad a la que la barra de vida baja su valor
+var vida_perdida_por_frame_muerte : float#Lo mismo que la anterior variable pero en casos de muerte
 var vida_alta : Color = Color(0.0, 0.714, 0.0, 1.0)
 var vida_media : Color = Color(0.616, 0.569, 0.0, 1.0)
 var vida_baja : Color = Color(0.774, 0.0, 0.0, 1.0)
 var franjas_de_vida : Array #Almacena los limites de franjas para cambiar los colores| 50% media 25% baja
+var actual_franja_de_vida : int = 3#Cada vez que se baja una franja, cambia el color
 #------Barra de vida--------
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
@@ -45,18 +47,39 @@ var opciones_de_combate = {}
 func instanciar_cosas_esenciales():
 	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
-	if barra_de_vida == null:
+	if barra_de_vida == null: #Verifica si hay una barra de vida asignada
 		push_error("Error unidad no tiene barra de vida " + self.name)
 	else:
 		barra_de_vida.max_value = vida_maxima
 		barra_de_vida.value = vida_actual
-		barra_de_vida.get("theme_override_styles/fill").bg_color = vida_alta
+		vida_perdida_por_frame_muerte = vida_maxima*0.02 #Pierde el 2% de la vida por frame
+		barra_de_vida.get("theme_override_styles/fill").bg_color = vida_alta 
+		franjas_de_vida.append(barra_de_vida.max_value * 0.5)
+		franjas_de_vida.append(barra_de_vida.max_value * 0.25)
 func _process(_delta: float) -> void:
 	if ejecutar_animacion_muerte:
 		animacion_morir()
-	if cambio_a_barra_de_vida > 0:
-		barra_de_vida.value -= vida_perdida_por_frame
-		cambio_a_barra_de_vida -= vida_perdida_por_frame
+	if cambio_a_barra_de_vida > 0: #Si hay que actualizar la barra de vida
+		if !ejecutar_animacion_muerte:#Verifica si la unidad va a morir para cambiar la velocidad de la animacion
+			barra_de_vida.value -= vida_perdida_por_frame #Actualiza con el valor por frame
+			cambio_a_barra_de_vida -= vida_perdida_por_frame#Actualiza el valor de daño que falta aplicar
+		else:
+			barra_de_vida.value -= vida_perdida_por_frame_muerte
+			cambio_a_barra_de_vida -= vida_perdida_por_frame_muerte
+		if !franjas_de_vida.is_empty():#Si no existe mas franjas evita entrar por errores
+			if barra_de_vida.value < franjas_de_vida[0]:#Si se puede cambiar la franja de vida
+				actual_franja_de_vida -= 1#Cambia la franja de vida
+				franjas_de_vida.remove_at(0)#Borra la franja obsoleta
+				match  actual_franja_de_vida:#Y cambia el color segun el caso correspondiente
+					3:
+						barra_de_vida.get("theme_override_styles/fill").bg_color = vida_alta 
+					2:
+						barra_de_vida.get("theme_override_styles/fill").bg_color = vida_media
+					1:
+						barra_de_vida.get("theme_override_styles/fill").bg_color = vida_baja
+					_:
+						push_error("Ninguna franja de linea coincide con el valor actual")
+				
 	
 		
 func _ready() -> void:
