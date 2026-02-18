@@ -11,6 +11,17 @@
 [ext_resource type="Resource" uid="uid://dufolgde5qn6v" path="res://Escenas/Unidad/murcielago/mirada_del_abismo.tres" id="5_nkd6b"]
 [ext_resource type="PackedScene" uid="uid://vquoauhoi83j" path="res://Escenas/Unidad/constructor/barra_de_vida.tscn" id="10_0h8lc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h8lc"]
+resource_local_to_scene = true
+bg_color = Color(0, 0.70980394, 0.25490198, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 4
+
 [node name="murcielago_unidad" type="Node2D" unique_id=1030529905 node_paths=PackedStringArray("area2d", "barra_de_vida")]
 script = ExtResource("1_m7mam")
 puntos_movimiento_maximo = 8
@@ -41,3 +52,4 @@ informacion_defensa = ExtResource("4_t1uk2")
 [node name="Area2D" parent="." unique_id=1962834764 instance=ExtResource("5_e0lx4")]
 
 [node name="Barra_De_Vida" parent="." unique_id=792611011 instance=ExtResource("10_0h8lc")]
+theme_override_styles/fill = SubResource("StyleBoxFlat_0h8lc")
