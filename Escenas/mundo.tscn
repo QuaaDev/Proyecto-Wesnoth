@@ -106,6 +106,14 @@ equipo = 3
 position = Vector2(469, 325)
 equipo = 2
 
+[node name="unidad_dragon8" parent="." unique_id=844868248 instance=ExtResource("6_gv8d2")]
+position = Vector2(303, 283)
+equipo = 2
+
+[node name="unidad_dragon9" parent="." unique_id=230457773 instance=ExtResource("6_gv8d2")]
+position = Vector2(192, 286)
+equipo = 2
+
 [node name="unidad_dragon6" parent="." unique_id=2009352179 instance=ExtResource("6_gv8d2")]
 position = Vector2(578, 324)
 equipo = 2
@@ -116,4 +124,12 @@ equipo = 2
 
 [node name="unidad_dragon5" parent="." unique_id=496260312 instance=ExtResource("6_gv8d2")]
 position = Vector2(302, 427)
+equipo = 1
+
+[node name="unidad_dragon10" parent="." unique_id=1800074961 instance=ExtResource("6_gv8d2")]
+position = Vector2(196, 496)
+equipo = 1
+
+[node name="unidad_dragon11" parent="." unique_id=784542001 instance=ExtResource("6_gv8d2")]
+position = Vector2(90, 428)
 equipo = 1
