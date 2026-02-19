@@ -258,9 +258,35 @@ func boton_pasar_turno() -> void:
 	#		print(node.name, " ", node.equipo, " ", node.es_mi_turno)
 	#	#get_tree().call_group(str(i), "termino_mi_turno")
 	#print("--------final turnos------------")
+
 func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
 	print("Calculo las cositas.", contenido)
+	convertir_texto_a_vectores(contenido)
+	
+func convertir_texto_a_vectores(texto : String) -> Array:
+	#Recibe el texto y lo separa en dos vectores independientes
+	var primer_texto : String
+	var segundo_texto : String
+	var array : Array
+	if texto.find(";") == -1: #Caso de error
+		push_error("String no valido, use el formato X,Y;X2,Y2")
+		array.append(Vector2(0,0))
+		array.append(Vector2(1,1))
+		return array
+	primer_texto = texto.left(texto.find(";"))#Divide el texto en izquierda y derecha
+	segundo_texto = texto.right(texto.find(";"))
+	print(texto_a_vector(primer_texto), " , ",texto_a_vector(segundo_texto))
+	return array
+
+func texto_a_vector(texto) -> Vector2:
+	#Convierte el texto a int, y de int a Vector2
+	if texto.find(",") == -1:
+		push_error("String no valido, use el formato X,Y;X2,Y2")
+		return Vector2(0,0)
+	var primer_numero = int(texto.left(texto.find(",")))
+	var segundo_numero = int(texto.right(texto.find(",")))
+	return Vector2(primer_numero,segundo_numero)
 #------------------señañes-----------------------
 #------------------Errores-----------------------
 func comprobar_errores_ready():
