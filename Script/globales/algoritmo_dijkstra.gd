@@ -103,3 +103,8 @@ func obtener_vecino_mas_barato(coordenada_origen : Vector2, opcion_mas_barata_ar
 func limpiar_movimientos() -> void:
 	movimientos_disponibles.clear()
 	movimientos_disponibles_incluyendo_ocupados.clear()
+#region Greedy Best First Search
+#Este algoritmo prioriza el camino mas corto entre origen y objetivo.
+
+
+#endregion
