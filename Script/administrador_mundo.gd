@@ -11,6 +11,10 @@ var unidad_a_mover : Node2D
 @onready var label_puntos_movimiento: Label = $CanvasLayer/hud_derecho/VBoxContainer/puntos_movimiento
 @onready var label_vida_unidad: Label = $CanvasLayer/hud_derecho/VBoxContainer/vida_unidad
 @onready var label_turnos_de_ataques: Label = $CanvasLayer/hud_derecho/VBoxContainer/turnos_de_ataques
+
+@onready var button_calcular_a_estrella: Button = $"CanvasLayer/hud_derecho/CalcularA*"
+@onready var contenido_calculo_a_estrella: LineEdit = $"CanvasLayer/hud_derecho/ContenidoCalculoA*"
+
 #----------Seccion hud derecho----------
 @onready var label_mouse_en_hud: Label = $CanvasLayer/VBoxContainer/mouse_en_hud
 
@@ -40,7 +44,7 @@ func _ready() -> void:
 	hud_derecho.mouse_exited.connect(mouse_sale_del_hud)
 	interfaz_combate.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
-	
+	button_calcular_a_estrella.pressed.connect(boton_calcular_a_estrella)
 	#Prepara los grupos de unidades con su respectivo turno
 	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
 	equipo_actual = empieza_x_equipo
@@ -254,6 +258,9 @@ func boton_pasar_turno() -> void:
 	#		print(node.name, " ", node.equipo, " ", node.es_mi_turno)
 	#	#get_tree().call_group(str(i), "termino_mi_turno")
 	#print("--------final turnos------------")
+func boton_calcular_a_estrella() -> void:
+	var contenido = contenido_calculo_a_estrella.text
+	print("Calculo las cositas.", contenido)
 #------------------señañes-----------------------
 #------------------Errores-----------------------
 func comprobar_errores_ready():

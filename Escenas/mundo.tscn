@@ -56,6 +56,14 @@ offset_bottom = 558.0
 mouse_filter = 1
 text = "CalcularA*"
 
+[node name="ContenidoCalculoA*" type="LineEdit" parent="CanvasLayer/hud_derecho" unique_id=1482883825]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 486.0
+offset_right = 246.0
+offset_bottom = 524.0
+mouse_filter = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/hud_derecho" unique_id=1831101649]
 layout_mode = 0
 offset_right = 40.0
@@ -84,14 +92,6 @@ text = "turno actual"
 [node name="turnos_de_ataques" type="Label" parent="CanvasLayer/hud_derecho/VBoxContainer" unique_id=492532538]
 layout_mode = 2
 text = "turnos de ataques"
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/hud_derecho" unique_id=1482883825]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 486.0
-offset_right = 246.0
-offset_bottom = 524.0
-mouse_filter = 1
 
 [node name="interfaz_combate" parent="CanvasLayer" unique_id=1670008517 instance=ExtResource("2_rxj15")]
 visible = false
