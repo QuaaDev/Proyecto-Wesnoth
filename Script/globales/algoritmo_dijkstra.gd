@@ -130,9 +130,15 @@ func oddq_to_cube(hex: Vector2i) -> Vector3i: #Convierte las coordenadas odd-q a
 	var x = hex.x
 	var z = hex.y - (hex.x - (hex.x & 1)) / 2
 	var y = -x - z
-	print(Vector3i(x, y, z),"x,y,z")
+	#print(Vector3i(x, y, z),"x,y,z")
 	return Vector3i(x, y, z)
 
-
+func heuristica(a: Vector2i, b: Vector2i) -> int: #Devuelve la cantidad de hexagonos que hay entre el origen y el objetivo
+	var ac = oddq_to_cube(a)
+	var bc = oddq_to_cube(b)
+	
+	return (abs(ac.x - bc.x) +
+			abs(ac.y - bc.y) +
+			abs(ac.z - bc.z)) / 2
 
 #endregion

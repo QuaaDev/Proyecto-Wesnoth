@@ -262,25 +262,26 @@ func boton_pasar_turno() -> void:
 func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
 	print("Calculo las cositas.", contenido)
-	AlgoritmoDijkstra.oddq_to_cube(convertir_texto_a_vectores(contenido)[0])#Envia al algoritmo el vector origen
+	var valores = convertir_texto_a_vectores(contenido)
+	print(AlgoritmoDijkstra.heuristica(valores[0], valores[1]))
 	
 func convertir_texto_a_vectores(texto: String) -> Array:
 	var partes = texto.split(";")
 	if partes.size() != 2:
 		push_error("String no valido, use el formato X,Y;X2,Y2")
-		return [Vector2.ZERO, Vector2.ONE]
+		return [Vector2i.ZERO, Vector2i.ONE]
 	var vector1 = texto_a_vector(partes[0])
 	var vector2 = texto_a_vector(partes[1])
 	print(vector1, vector2)
 	return [vector1, vector2]
-func texto_a_vector(texto: String) -> Vector2:
+func texto_a_vector(texto: String) -> Vector2i:
 	var partes = texto.split(",")
 	if partes.size() != 2:
 		push_error("String no valido, use el formato X,Y")
-		return Vector2.ZERO
+		return Vector2i.ZERO
 	var x = int(partes[0])
 	var y = int(partes[1])
-	return Vector2(x, y)
+	return Vector2i(x, y)
 #------------------señañes-----------------------
 #------------------Errores-----------------------
 func comprobar_errores_ready():
