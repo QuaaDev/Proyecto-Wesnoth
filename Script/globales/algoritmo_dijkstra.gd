@@ -120,9 +120,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		var current = frontier.pop_front()
 		# 🔹 Si llegamos al destino, reconstruimos camino
 		if current == destino:
-			print("Destino:", destino)
-			print("Padre del destino:", came_from.get(destino, "NO TIENE PADRE"))
-			return reconstruir_camino(came_from, current,10)
+			return reconstruir_camino(came_from, current,20)
 		for next in get_neighbors(current):
 			if ubicaciones_ocupadas.has(next) and next != destino:
 				continue
@@ -132,9 +130,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				g_score[next] = nuevo_costo
 				f_score[next] = nuevo_costo + heuristica(next, destino)
 				if next == destino:
-					print("Destino:", destino)
-					print("Padre del destino:", came_from.get(destino, "NO TIENE PADRE"))
-					return reconstruir_camino(came_from, destino, 10)
+					return reconstruir_camino(came_from, destino, 40)
 				if next not in frontier:
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
@@ -160,6 +156,8 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 			continue
 		var costo_tile = obtener_coste_movimiento_tile(camino[i])
 		if costo_acumulado + costo_tile > movimiento_maximo:
+			if costo_acumulado < movimiento_maximo:
+				camino_limitado.append(camino[i])
 			break
 		costo_acumulado += costo_tile
 		camino_limitado.append(camino[i])
