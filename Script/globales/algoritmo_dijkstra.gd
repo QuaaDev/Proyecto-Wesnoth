@@ -103,8 +103,36 @@ func obtener_vecino_mas_barato(coordenada_origen : Vector2, opcion_mas_barata_ar
 func limpiar_movimientos() -> void:
 	movimientos_disponibles.clear()
 	movimientos_disponibles_incluyendo_ocupados.clear()
-#region Greedy Best First Search
+#region A*
 #Este algoritmo prioriza el camino mas corto entre origen y objetivo.
+func algoritmo_a_estrella(origen : Vector2, destino : Vector2, ubicaciones_ocupadas : Dictionary, 
+dibujar_movimientos : bool) -> void:
+	limpiar_movimientos() #Limpia la anterior lista de movimientos
+	var start = origen
+	var frontier = [] #Almacena las fronteras que hay que explorar
+	frontier.append(start) #Donde empieza la ejecucion
+	var reached = {} #Almacena las casillas ya exploradas
+	reached[start] = 0#Almacena la cantidad de puntos de movimiento que consume
+	while frontier.size() > 0: #Mientras existan mas fronteras:
+		var current = frontier.pop_front() #Selecciona la primera frontera y la elimina del array
+		var distancia_actual = reached[current]#Almacena la distancia que se recorrio desde start
+		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
+			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
+			if (not reached.has(next) or nuevo_costo < reached[next]) and !(ubicaciones_ocupadas.has(next)):
+				#(Si el nodo ya fue explorado, lo omite) AND (Si la ubicacion ya fue ocupada, la omite)
+				reached[next] = nuevo_costo
+				frontier.append(next)#Agrega la ubicacion como nueva frontera, para que luego se expanda en base a este
+	if dibujar_movimientos:
+		dibujando_tile_map(reached)
+	movimientos_disponibles = reached.duplicate() #Almacena los movimientos disponibles
+
+func oddq_to_cube(hex: Vector2i) -> Vector3i: #Convierte las coordenadas odd-q a Cube
+	var x = hex.x
+	var z = hex.y - (hex.x - (hex.x & 1)) / 2
+	var y = -x - z
+	print(Vector3i(x, y, z),"x,y,z")
+	return Vector3i(x, y, z)
+
 
 
 #endregion

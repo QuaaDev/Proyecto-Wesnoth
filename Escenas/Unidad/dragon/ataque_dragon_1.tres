@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="OpcionAtaqueRes" load_steps=2 format=3 uid="uid://yom3d837haxk"]
+[gd_resource type="Resource" script_class="OpcionAtaqueRes" format=3 uid="uid://yom3d837haxk"]
 
 [ext_resource type="Script" uid="uid://cfq5cl8ihg6n8" path="res://Script/Unidad/recursos ataque/opcion_ataque_res.gd" id="1_1fbu4"]
 

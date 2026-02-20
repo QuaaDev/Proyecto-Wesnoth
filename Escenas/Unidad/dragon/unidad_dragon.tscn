@@ -12,6 +12,17 @@
 [ext_resource type="Resource" uid="uid://bbq2assr0bj12" path="res://Escenas/Unidad/dragon/ataque_dragon_2.tres" id="6_nh52g"]
 [ext_resource type="PackedScene" uid="uid://vquoauhoi83j" path="res://Escenas/Unidad/constructor/barra_de_vida.tscn" id="11_nh52g"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nh52g"]
+resource_local_to_scene = true
+bg_color = Color(0, 0.70980394, 0.25490198, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 4
+
 [node name="unidad_dragon" type="Node2D" unique_id=844868248 node_paths=PackedStringArray("area2d", "barra_de_vida")]
 script = ExtResource("1_yf6mb")
 puntos_movimiento_maximo = 4
@@ -40,3 +51,4 @@ informacion_defensa = ExtResource("4_ri1iw")
 [node name="Area2D" parent="." unique_id=503581512 instance=ExtResource("6_ehdkd")]
 
 [node name="Barra_De_Vida" parent="." unique_id=792611011 instance=ExtResource("11_nh52g")]
+theme_override_styles/fill = SubResource("StyleBoxFlat_nh52g")

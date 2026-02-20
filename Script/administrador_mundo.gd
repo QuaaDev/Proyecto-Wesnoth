@@ -262,7 +262,7 @@ func boton_pasar_turno() -> void:
 func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
 	print("Calculo las cositas.", contenido)
-	convertir_texto_a_vectores(contenido)
+	AlgoritmoDijkstra.oddq_to_cube(convertir_texto_a_vectores(contenido)[0])#Envia al algoritmo el vector origen
 	
 func convertir_texto_a_vectores(texto: String) -> Array:
 	var partes = texto.split(";")
