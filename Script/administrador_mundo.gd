@@ -264,29 +264,23 @@ func boton_calcular_a_estrella() -> void:
 	print("Calculo las cositas.", contenido)
 	convertir_texto_a_vectores(contenido)
 	
-func convertir_texto_a_vectores(texto : String) -> Array:
-	#Recibe el texto y lo separa en dos vectores independientes
-	var primer_texto : String
-	var segundo_texto : String
-	var array : Array
-	if texto.find(";") == -1: #Caso de error
+func convertir_texto_a_vectores(texto: String) -> Array:
+	var partes = texto.split(";")
+	if partes.size() != 2:
 		push_error("String no valido, use el formato X,Y;X2,Y2")
-		array.append(Vector2(0,0))
-		array.append(Vector2(1,1))
-		return array
-	primer_texto = texto.left(texto.find(";"))#Divide el texto en izquierda y derecha
-	segundo_texto = texto.right(texto.find(";"))
-	print(texto_a_vector(primer_texto), " , ",texto_a_vector(segundo_texto))
-	return array
-
-func texto_a_vector(texto) -> Vector2:
-	#Convierte el texto a int, y de int a Vector2
-	if texto.find(",") == -1:
-		push_error("String no valido, use el formato X,Y;X2,Y2")
-		return Vector2(0,0)
-	var primer_numero = int(texto.left(texto.find(",")))
-	var segundo_numero = int(texto.right(texto.find(",")))
-	return Vector2(primer_numero,segundo_numero)
+		return [Vector2.ZERO, Vector2.ONE]
+	var vector1 = texto_a_vector(partes[0])
+	var vector2 = texto_a_vector(partes[1])
+	print(vector1, vector2)
+	return [vector1, vector2]
+func texto_a_vector(texto: String) -> Vector2:
+	var partes = texto.split(",")
+	if partes.size() != 2:
+		push_error("String no valido, use el formato X,Y")
+		return Vector2.ZERO
+	var x = int(partes[0])
+	var y = int(partes[1])
+	return Vector2(x, y)
 #------------------señañes-----------------------
 #------------------Errores-----------------------
 func comprobar_errores_ready():
