@@ -120,29 +120,54 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		var current = frontier.pop_front()
 		# 🔹 Si llegamos al destino, reconstruimos camino
 		if current == destino:
-			return reconstruir_camino(came_from, current)
+			print("Destino:", destino)
+			print("Padre del destino:", came_from.get(destino, "NO TIENE PADRE"))
+			return reconstruir_camino(came_from, current,10)
 		for next in get_neighbors(current):
-			if ubicaciones_ocupadas.has(next):
+			if ubicaciones_ocupadas.has(next) and next != destino:
 				continue
 			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next)
 			if not g_score.has(next) or nuevo_costo < g_score[next]:
 				came_from[next] = current
 				g_score[next] = nuevo_costo
 				f_score[next] = nuevo_costo + heuristica(next, destino)
+				if next == destino:
+					print("Destino:", destino)
+					print("Padre del destino:", came_from.get(destino, "NO TIENE PADRE"))
+					return reconstruir_camino(came_from, destino, 10)
 				if next not in frontier:
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
 
-func reconstruir_camino(came_from: Dictionary, current: Vector2) -> Array:
-	var path: Array = [current]
-	
-	while came_from.has(current):
+func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:
+	var camino: Array = []
+	var current = destino
+	# Reconstruir desde destino hacia atrás
+	while true:
+		camino.push_front(current)
+		if not came_from.has(current):
+			break
 		current = came_from[current]
-		path.push_front(current)
-		
-	for i in path:
+	# Si solo hay un nodo, algo falló
+	if camino.size() <= 1:
+		return camino
+	# Ahora recortamos por movimiento
+	var camino_limitado: Array = []
+	var costo_acumulado := 0
+	for i in range(camino.size()):
+		if i == 0:
+			camino_limitado.append(camino[i])
+			continue
+		var costo_tile = obtener_coste_movimiento_tile(camino[i])
+		if costo_acumulado + costo_tile > movimiento_maximo:
+			break
+		costo_acumulado += costo_tile
+		camino_limitado.append(camino[i])
+	for i in camino_limitado:
 		dibujando_tile_individual(i)
-	return path
+	print(camino)
+	print(camino_limitado)
+	return camino_limitado
 
 
 func oddq_to_cube(hex: Vector2i) -> Vector3: #Convierte las coordenadas odd-q a Cube
@@ -155,7 +180,6 @@ func oddq_to_cube(hex: Vector2i) -> Vector3: #Convierte las coordenadas odd-q a 
 func heuristica(a: Vector2i, b: Vector2i) -> int: #Devuelve la cantidad de hexagonos que hay entre el origen y el objetivo
 	var ac = oddq_to_cube(a)
 	var bc = oddq_to_cube(b)
-	
 	return (abs(ac.x - bc.x) +
 			abs(ac.y - bc.y) +
 			abs(ac.z - bc.z)) / 2
