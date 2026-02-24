@@ -13,6 +13,10 @@ func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
 		tile_map_hud.set_cell(i,3,Vector2(0,0),0)
 		
+func limpiando_tiles(ubicaciones : Dictionary):
+	for i in ubicaciones:
+		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
+
 func dibujando_tile_individual(ubicacion : Vector2) -> void:
 	tile_map_hud.set_cell(ubicacion,3,Vector2(0,0),0)
 	
@@ -123,12 +127,13 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	g_score[origen] = 0
 	f_score[origen] = heuristica(origen, destino)
 	while frontier.size() > 0:
-		# 🔹 Priorizar el nodo más prometedor
+		#  Priorizar el nodo más prometedor
 		frontier.sort_custom(func(a, b): return f_score[a] < f_score[b])
 		var current = frontier.pop_front()
 		dibujando_tile_individual(current)
-		# 🔹 Si llegamos al destino, reconstruimos camino
+		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
+			limpiando_tiles(came_from)
 			return reconstruir_camino(came_from, current,1000) #<--------------
 		for next in get_neighbors(current):
 			if ubicaciones_ocupadas.has(next) and next != destino:
@@ -139,6 +144,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				g_score[next] = nuevo_costo
 				f_score[next] = nuevo_costo + heuristica(next, destino)
 				if next == destino:
+					limpiando_tiles(came_from)
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
 				if next not in frontier:
 					frontier.append(next)
