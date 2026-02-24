@@ -4,7 +4,11 @@ var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
 var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Dijkstra para su posterior uso
 var movimientos_disponibles_incluyendo_ocupados : Dictionary#Almacena las posiciones descartadas por tener una unidad sobre ellas.
+var hilo_path_finding : Thread #Variable para el multi hilo del pathfinding
 #patata 11/02/2026 no se prq escribi eso pero me dio risa lul
+func _ready() -> void:
+	hilo_path_finding = Thread.new()
+	
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
 		tile_map_hud.set_cell(i,3,Vector2(0,0),0)
@@ -105,6 +109,10 @@ func limpiar_movimientos() -> void:
 	movimientos_disponibles_incluyendo_ocupados.clear()
 #region A*
 #Este algoritmo prioriza el camino mas corto entre origen y objetivo.
+func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool):
+	if hilo_path_finding.is_started():
+		hilo_path_finding.wait_to_finish()
+	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos))
 func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool):
 	limpiar_movimientos()
 	var frontier: Array = []
@@ -118,9 +126,10 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		# 🔹 Priorizar el nodo más prometedor
 		frontier.sort_custom(func(a, b): return f_score[a] < f_score[b])
 		var current = frontier.pop_front()
+		dibujando_tile_individual(current)
 		# 🔹 Si llegamos al destino, reconstruimos camino
 		if current == destino:
-			return reconstruir_camino(came_from, current,20)
+			return reconstruir_camino(came_from, current,1000) #<--------------
 		for next in get_neighbors(current):
 			if ubicaciones_ocupadas.has(next) and next != destino:
 				continue
@@ -130,7 +139,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				g_score[next] = nuevo_costo
 				f_score[next] = nuevo_costo + heuristica(next, destino)
 				if next == destino:
-					return reconstruir_camino(came_from, destino, 40)
+					return reconstruir_camino(came_from, destino, 1000) #<-----------
 				if next not in frontier:
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino

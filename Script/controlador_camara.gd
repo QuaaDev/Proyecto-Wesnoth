@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var speed := 300.0  # velocidad en píxeles por segundo
+@export var speed := 500.0  # velocidad en píxeles por segundo
 
 func _process(delta):
 	var direction = Vector2.ZERO
@@ -16,10 +16,10 @@ func _process(delta):
 
 	if direction != Vector2.ZERO:
 		#direction = direction.normalized()
-		position += direction * speed * delta
+		position += direction * (speed/zoom.x)  * delta
 
 @export var zoom_step := 0.1
-@export var min_zoom := 0.5
+@export var min_zoom := 0.1
 @export var max_zoom := 3.0
 
 func _unhandled_input(event):
