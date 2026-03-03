@@ -150,12 +150,12 @@ func limpiar_movimientos() -> void:
 func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
-	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes)) <---- el q funciona por ahora
-	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes))
+	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,1,true)) #<---- el q funciona por ahora
+	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,false))
 	
-func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int) -> void:
+func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int, limpiar_tiles : bool) -> void:
 	contador_nodos_debug = 0
-	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes) #Ruta general optimizado
+	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,limpiar_tiles) #Ruta general optimizado
 	var camino : Array
 	var contador := 0
 	for i in ruta_general:
@@ -163,12 +163,15 @@ func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_oc
 			var origen_actual = ruta_general[contador]
 			var destino_actual = ruta_general[contador + 1]
 			contador += 1
-			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1)
+			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
 	print("Cantidad de nodos recorridos:",contador_nodos_debug)
+	print(camino)
 	for i in camino:
 		dibujando_tile_individual(i)
+	for i in ruta_general:
+		dibujando_tile_individual(i)
 var contador_nodos_debug : int #<------- puramente debug esto
-func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int) -> Array:
+func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int, limpiar_tiles : bool) -> Array:
 	limpiar_movimientos()
 	var frontier: Array = [] #Fronteras a calcular 
 	frontier.append(origen)
@@ -186,7 +189,8 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		dibujando_tile_individual(current)
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
-			limpiando_tiles(came_from)
+			if limpiar_tiles:
+				limpiando_tiles(came_from)
 			contador_nodos_debug += came_from.size()
 			return reconstruir_camino(came_from, current,1000) #<--------------
 		#Si no se llega al destino, se expande la busqueda
@@ -201,7 +205,8 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
 				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------
 					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
-					limpiando_tiles(came_from)
+					if limpiar_tiles:
+						limpiando_tiles(came_from)
 					contador_nodos_debug += came_from.size()
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
 				if next not in frontier: #Si next no es una frontera, la agrega.
@@ -210,6 +215,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	return []
 
 func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:
+	#print(contador_nodos_debug)
 	var camino: Array = []
 	var current = destino #Fija el destino como nodo actual
 	# Reconstruir desde destino hacia atrás
