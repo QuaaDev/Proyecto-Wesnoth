@@ -156,13 +156,13 @@ func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas
 func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int) -> void:
 	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes) #Ruta general optimizado
 	var camino : Array
-	print("Esto es ruta general", ruta_general)
+	var contador := 0
 	for i in ruta_general:
-		print("Recorro este nodo de la ruta general:",i)
-		var origen_actual = ruta_general[0]
-		var destino_actual = ruta_general[1]
-		ruta_general.remove_at(0) 
-		camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1)
+		if !contador >= ruta_general.size() - 1:
+			var origen_actual = ruta_general[contador]
+			var destino_actual = ruta_general[contador + 1]
+			contador += 1
+			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1)
 	for i in camino:
 		dibujando_tile_individual(i)
 	print(camino)
