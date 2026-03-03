@@ -265,7 +265,7 @@ func boton_calcular_a_estrella() -> void:
 	var valores = convertir_texto_a_vectores(contenido)
 	#print(AlgoritmoDijkstra.heuristica(valores[0], valores[1]))
 	#AlgoritmoDijkstra.algoritmo_a_estrella(valores[0],valores[1],ubicaciones_ocupadas,true)
-	AlgoritmoDijkstra.a_estrella_multi_hilo(valores[0],valores[1],ubicaciones_ocupadas,true,1)
+	AlgoritmoDijkstra.a_estrella_multi_hilo(valores[0],valores[1],ubicaciones_ocupadas,true,5)
 func convertir_texto_a_vectores(texto: String) -> Array:
 	var partes = texto.split(";")
 	if partes.size() != 2:

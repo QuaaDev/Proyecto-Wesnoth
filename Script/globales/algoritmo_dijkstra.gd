@@ -150,14 +150,24 @@ func limpiar_movimientos() -> void:
 func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
-	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes))
+	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes)) <---- el q funciona por ahora
+	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes))
 	
-func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2, dibujar_movimientos : bool, tamaño_red_general : int, vecinos_distantes : int) -> void:
+func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int) -> void:
+	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes) #Ruta general optimizado
+	var camino : Array
+	print("Esto es ruta general", ruta_general)
+	for i in ruta_general:
+		print("Recorro este nodo de la ruta general:",i)
+		var origen_actual = ruta_general[0]
+		var destino_actual = ruta_general[1]
+		ruta_general.remove_at(0) 
+		camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1)
+	for i in camino:
+		dibujando_tile_individual(i)
+	print(camino)
 	
-	pass
-	
-	
-func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int):
+func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int) -> Array:
 	limpiar_movimientos()
 	var frontier: Array = [] #Fronteras a calcular 
 	frontier.append(origen)
@@ -196,6 +206,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				if next not in frontier: #Si next no es una frontera, la agrega.
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
+	return []
 
 func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:
 	var camino: Array = []
