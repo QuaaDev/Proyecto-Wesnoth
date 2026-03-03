@@ -154,6 +154,7 @@ func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas
 	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes))
 	
 func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int) -> void:
+	contador_nodos_debug = 0
 	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes) #Ruta general optimizado
 	var camino : Array
 	var contador := 0
@@ -163,10 +164,10 @@ func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_oc
 			var destino_actual = ruta_general[contador + 1]
 			contador += 1
 			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1)
+	print("Cantidad de nodos recorridos:",contador_nodos_debug)
 	for i in camino:
 		dibujando_tile_individual(i)
-	print(camino)
-	
+var contador_nodos_debug : int #<------- puramente debug esto
 func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int) -> Array:
 	limpiar_movimientos()
 	var frontier: Array = [] #Fronteras a calcular 
@@ -186,7 +187,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			limpiando_tiles(came_from)
-			print(came_from.size(), "brbrr")
+			contador_nodos_debug += came_from.size()
 			return reconstruir_camino(came_from, current,1000) #<--------------
 		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors_distantes(current,vecinos_distantes):
@@ -201,7 +202,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------
 					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
 					limpiando_tiles(came_from)
-					print(came_from.size(), "brbrr")
+					contador_nodos_debug += came_from.size()
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
 				if next not in frontier: #Si next no es una frontera, la agrega.
 					frontier.append(next)
