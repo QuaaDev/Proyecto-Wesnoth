@@ -8,6 +8,10 @@ var hilo_path_finding : Thread #Variable para el multi hilo del pathfinding
 #patata 11/02/2026 no se prq escribi eso pero me dio risa lul
 func _ready() -> void:
 	hilo_path_finding = Thread.new()
+	var probando = get_neighbors_distantes(Vector2(0,0), 10)
+	await get_tree().create_timer(0,5).timeout
+	for i in probando:
+		dibujando_tile_individual(i)
 	
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
@@ -85,6 +89,38 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 		vecinos.append(Vector2(origen.x- 1 , origen.y))#NO
 	#print(vecinos)
 	return vecinos
+
+func get_neighbors_distantes(origen : Vector2, distancia : int) -> Array:
+	#Modelo odd-q
+	var vecinos = []
+	if distancia <= 0:
+		push_error("Argumento recibio distancia menor a 0, valor erroneo")
+	#even = par , odd = impar
+	if int(origen.x) % 2 == 0: #Si la columna es par
+		#print("Columna par")
+		#-------------------
+		#[[+1,  0], [+1, -1], [ 0, -1], 
+		# [-1, -1], [-1,  0], [ 0, +1]],
+		vecinos.append(Vector2(origen.x , origen.y - (1 * distancia)))#N
+		vecinos.append(Vector2(origen.x + (1 * distancia) , origen.y - (1 * distancia)))#NE
+		vecinos.append(Vector2(origen.x + (1 * distancia) , origen.y)) #SE
+		vecinos.append(Vector2(origen.x , origen.y + (1 * distancia)))#S
+		vecinos.append(Vector2(origen.x - (1 * distancia), origen.y))#SO
+		vecinos.append(Vector2(origen.x - (1 * distancia), origen.y - (1 * distancia)))#NO
+	else:
+		#print("columna impar")
+		#[[+1, +1], [+1,  0], [ 0, -1], 
+	 	#[-1,  0], [-1, +1], [ 0, +1]]
+		vecinos.append(Vector2(origen.x , origen.y - (1 * distancia)))#N
+		vecinos.append(Vector2(origen.x + (1 * distancia), origen.y)) #NE
+		vecinos.append(Vector2(origen.x + (1 * distancia) , origen.y + (1 * distancia))) #SE
+		vecinos.append(Vector2(origen.x , origen.y + (1 * distancia)))#S
+		vecinos.append(Vector2(origen.x - (1 * distancia), origen.y + (1 * distancia)))#SO
+		vecinos.append(Vector2(origen.x- (1 * distancia) , origen.y))#NO
+	#print(vecinos)
+	return vecinos
+
+
 
 func obtener_vecino_mas_barato(coordenada_origen : Vector2, opcion_mas_barata_arg : int) -> Array:
 	#La variable opcion_mas_barata se llama desde el exterior para mantenerla independiente y evitar bucles infinitos
