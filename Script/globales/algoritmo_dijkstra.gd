@@ -8,10 +8,8 @@ var hilo_path_finding : Thread #Variable para el multi hilo del pathfinding
 #patata 11/02/2026 no se prq escribi eso pero me dio risa lul
 func _ready() -> void:
 	hilo_path_finding = Thread.new()
+	#---------Prueba---------------
 	var probando = get_neighbors_distantes(Vector2(0,0), 10)
-	await get_tree().create_timer(0,5).timeout
-	for i in probando:
-		dibujando_tile_individual(i)
 	
 func dibujando_tile_map(ubicaciones : Dictionary) -> void:
 	for i in ubicaciones:
@@ -90,7 +88,7 @@ func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de 
 	#print(vecinos)
 	return vecinos
 
-func get_neighbors_distantes(origen : Vector2, distancia : int) -> Array:
+func get_neighbors_distantes(origen : Vector2, distancia : int) -> Array: #Devuelve los vecinos segun X distancia del origen
 	#Modelo odd-q
 	var vecinos = []
 	if distancia <= 0:
@@ -149,11 +147,17 @@ func limpiar_movimientos() -> void:
 	movimientos_disponibles_incluyendo_ocupados.clear()
 #region A*
 #Este algoritmo prioriza el camino mas corto entre origen y objetivo.
-func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool):
+func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
-	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos))
-func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool):
+	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes))
+	
+func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2, dibujar_movimientos : bool, tamaño_red_general : int, vecinos_distantes : int) -> void:
+	
+	pass
+	
+	
+func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int):
 	limpiar_movimientos()
 	var frontier: Array = []
 	frontier.append(origen)
@@ -170,8 +174,9 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			limpiando_tiles(came_from)
+			print(came_from.size(), "brbrr")
 			return reconstruir_camino(came_from, current,1000) #<--------------
-		for next in get_neighbors(current):
+		for next in get_neighbors_distantes(current,vecinos_distantes):
 			if ubicaciones_ocupadas.has(next) and next != destino:
 				continue
 			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next)
@@ -181,6 +186,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				f_score[next] = nuevo_costo + heuristica(next, destino)
 				if next == destino:
 					limpiando_tiles(came_from)
+					print(came_from.size(), "brbrr")
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
 				if next not in frontier:
 					frontier.append(next)
@@ -214,8 +220,6 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 		camino_limitado.append(camino[i])
 	for i in camino_limitado:
 		dibujando_tile_individual(i)
-	print(camino)
-	print(camino_limitado)
 	return camino_limitado
 
 
