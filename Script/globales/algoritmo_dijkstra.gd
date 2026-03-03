@@ -159,10 +159,14 @@ func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_oc
 	var camino : Array
 	var contador := 0
 	for i in ruta_general:
-		if !contador >= ruta_general.size() - 1:
+		if !(contador >= ruta_general.size() - 1):
 			var origen_actual = ruta_general[contador]
 			var destino_actual = ruta_general[contador + 1]
 			contador += 1
+			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
+		else:
+			var origen_actual = ruta_general[contador]
+			var destino_actual = destino
 			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
 	print("Cantidad de nodos recorridos:",contador_nodos_debug)
 	print(camino)
@@ -208,7 +212,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 					if limpiar_tiles:
 						limpiando_tiles(came_from)
 					contador_nodos_debug += came_from.size()
-					return reconstruir_camino(came_from, destino, 1000) #<-----------
+					return reconstruir_camino(came_from, next, 1000) #<-----------
 				if next not in frontier: #Si next no es una frontera, la agrega.
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
