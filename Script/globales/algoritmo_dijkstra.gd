@@ -150,8 +150,8 @@ func limpiar_movimientos() -> void:
 func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
-	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,1,true)) #<---- el q funciona por ahora
-	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,false))
+	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,1,true)) #Sin division por regiones
+	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,false)) #Dividido por regiones
 	
 func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int, limpiar_tiles : bool) -> void:
 	contador_nodos_debug = 0
@@ -169,7 +169,6 @@ func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_oc
 			var destino_actual = destino
 			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
 	print("Cantidad de nodos recorridos:",contador_nodos_debug)
-	print(camino)
 	for i in camino:
 		dibujando_tile_individual(i)
 	for i in ruta_general:
@@ -196,18 +195,19 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 			if limpiar_tiles:
 				limpiando_tiles(came_from)
 			contador_nodos_debug += came_from.size()
-			return reconstruir_camino(came_from, current,1000) #<--------------
+			return reconstruir_camino(came_from, current,1000) #<---------ERROR CASO NO PRESENCIADO
 		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors_distantes(current,vecinos_distantes):
 			#Next es un Vector2
 			if ubicaciones_ocupadas.has(next) and next != destino:#Ignora los nodos ocupados por unidades, almenos que ese sea el objetivo. Posible bug aqui si esta ocupado? 
 				continue
-			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento, suma desde donde viene + a donde va
+			var coste_salto = calcular_coste_salto(current, next)
+			var nuevo_costo = g_score[current] + coste_salto
 			if not g_score.has(next) or nuevo_costo < g_score[next]: #Si nunca fue explorado O esta ruta es mas barata:
 				came_from[next] = current #Registra desde donde viene
 				g_score[next] = nuevo_costo #Registra el coste de movimiento
 				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
-				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------
+				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------RROR CASO NO PRESENCIADO
 					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
 					if limpiar_tiles:
 						limpiando_tiles(came_from)
@@ -250,6 +250,14 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 		dibujando_tile_individual(i)
 	return camino_limitado
 
+func calcular_coste_salto(origen: Vector2, destino: Vector2) -> float:
+	var direccion = (destino - origen).sign()
+	var actual = origen
+	var coste_total = 0.0
+	while actual != destino:
+		actual += direccion
+		coste_total += obtener_coste_movimiento_tile(actual)
+	return coste_total
 
 func oddq_to_cube(hex: Vector2i) -> Vector3: #Convierte las coordenadas odd-q a Cube
 	var x = hex.x

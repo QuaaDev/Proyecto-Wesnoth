@@ -6,3 +6,5 @@ Coordenadas de desplazamiento
 
 guia de pathfinding:
 https://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+Se podria poner una opcion para elegir la exactitud del pathfinding para mejorar o empeorar el rendimiento. Por ahora las opciones son salto de 1,3,5
