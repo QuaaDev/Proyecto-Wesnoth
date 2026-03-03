@@ -159,65 +159,69 @@ func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2, dibujar_movim
 	
 func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int):
 	limpiar_movimientos()
-	var frontier: Array = []
+	var frontier: Array = [] #Fronteras a calcular 
 	frontier.append(origen)
-	var came_from := {}
-	var g_score := {}
-	var f_score := {}
+	var came_from := {} #Almacena desde que nodo viene el nodo actual. Por ejemplo Para llegar al nodo C, el nodo C almacena B y el B almacena A. El camino es A->B->C
+	#Representa la mejor ruta conocida segun como se conectan los nodos
+	var g_score := {} #Almacena el coste de movimiento actual del nodo.
+	var f_score := {} #Es la prioridad a la hora de analizar los nodos. Almacena el coste de movimiento y la distancia entre ubicacion actual y destino. El nodo que tenga la menor distancia
+	#al destino se analiza antes.
 	g_score[origen] = 0
 	f_score[origen] = heuristica(origen, destino)
-	while frontier.size() > 0:
+	while frontier.size() > 0: #Mientras hay fronteras para explorar
 		#  Priorizar el nodo más prometedor
-		frontier.sort_custom(func(a, b): return f_score[a] < f_score[b])
-		var current = frontier.pop_front()
+		frontier.sort_custom(func(a, b): return f_score[a] < f_score[b]) #Ordena por f_score ascendente y toma el mejor candidato.
+		var current = frontier.pop_front() #Toma la frontera con mayor prioridad
 		dibujando_tile_individual(current)
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			limpiando_tiles(came_from)
 			print(came_from.size(), "brbrr")
 			return reconstruir_camino(came_from, current,1000) #<--------------
+		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors_distantes(current,vecinos_distantes):
-			if ubicaciones_ocupadas.has(next) and next != destino:
+			if ubicaciones_ocupadas.has(next) and next != destino:#Ignora los nodos ocupados por unidades, almenos que ese sea el objetivo. Posible bug aqui si esta ocupado? 
 				continue
-			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next)
-			if not g_score.has(next) or nuevo_costo < g_score[next]:
-				came_from[next] = current
-				g_score[next] = nuevo_costo
-				f_score[next] = nuevo_costo + heuristica(next, destino)
-				if next == destino:
+			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento, suma desde donde viene + a donde va
+			if not g_score.has(next) or nuevo_costo < g_score[next]: #Si nunca fue explorado O esta ruta es mas barata:
+				came_from[next] = current #Registra desde donde viene
+				g_score[next] = nuevo_costo #Registra el coste de movimiento
+				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
+				if next == destino: #Si el destino es un vecino, termina el bucle y reconstruye el camino
 					limpiando_tiles(came_from)
 					print(came_from.size(), "brbrr")
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
-				if next not in frontier:
+				if next not in frontier: #Si next no es una frontera, la agrega.
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
 
 func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:
 	var camino: Array = []
-	var current = destino
+	var current = destino #Fija el destino como nodo actual
 	# Reconstruir desde destino hacia atrás
 	while true:
-		camino.push_front(current)
-		if not came_from.has(current):
+		camino.push_front(current) #Agrega al inicio del Array el nodo actual
+		if not came_from.has(current):#Si el nodo actual no tiene un padre, corta el bucle. 
 			break
-		current = came_from[current]
+		current = came_from[current]#Obtiene el padre del nodo actual para seguir acercandose al origen.
 	# Si solo hay un nodo, algo falló
 	if camino.size() <= 1:
 		return camino
 	# Ahora recortamos por movimiento
 	var camino_limitado: Array = []
 	var costo_acumulado := 0
-	for i in range(camino.size()):
-		if i == 0:
+	for i in range(camino.size()): #Para cada movimiento
+		if i == 0: #El origen siempre se incluye
 			camino_limitado.append(camino[i])
 			continue
-		var costo_tile = obtener_coste_movimiento_tile(camino[i])
-		if costo_acumulado + costo_tile > movimiento_maximo:
-			if costo_acumulado < movimiento_maximo:
+		var costo_tile = obtener_coste_movimiento_tile(camino[i]) #Obtiene el costo de movimiento del siguiente tile
+		if costo_acumulado + costo_tile > movimiento_maximo: #Si el coste de movimiento es mayor a la capacidad de movimiento
+			#Si el anterior coste de movimiento fue mayor a la cantidad de movimiento actual, evita volver a agregar el movimiento (Por ejemplo para el caso de un 0 exacto)
+			if costo_acumulado < movimiento_maximo:#Si el anterior coste de movimiento es menor a la actual capacidad de movimiento, lo agrega igualmente
 				camino_limitado.append(camino[i])
-			break
-		costo_acumulado += costo_tile
-		camino_limitado.append(camino[i])
+			break #Corta el for para no ejecutar el resto
+		costo_acumulado += costo_tile#Aumenta el costo acumulado actual
+		camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
 	for i in camino_limitado:
 		dibujando_tile_individual(i)
 	return camino_limitado
