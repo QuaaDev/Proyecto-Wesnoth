@@ -180,6 +180,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 			return reconstruir_camino(came_from, current,1000) #<--------------
 		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors_distantes(current,vecinos_distantes):
+			#Next es un Vector2
 			if ubicaciones_ocupadas.has(next) and next != destino:#Ignora los nodos ocupados por unidades, almenos que ese sea el objetivo. Posible bug aqui si esta ocupado? 
 				continue
 			var nuevo_costo = g_score[current] + obtener_coste_movimiento_tile(next) #Obtiene el coste de movimiento, suma desde donde viene + a donde va
@@ -187,7 +188,8 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				came_from[next] = current #Registra desde donde viene
 				g_score[next] = nuevo_costo #Registra el coste de movimiento
 				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
-				if next == destino: #Si el destino es un vecino, termina el bucle y reconstruye el camino
+				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------
+					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
 					limpiando_tiles(came_from)
 					print(came_from.size(), "brbrr")
 					return reconstruir_camino(came_from, destino, 1000) #<-----------
@@ -234,7 +236,7 @@ func oddq_to_cube(hex: Vector2i) -> Vector3: #Convierte las coordenadas odd-q a 
 	#print(Vector3i(x, y, z),"x,y,z")
 	return Vector3(x, y, z)
 
-func heuristica(a: Vector2i, b: Vector2i) -> int: #Devuelve la cantidad de hexagonos que hay entre el origen y el objetivo
+func heuristica(a: Vector2, b: Vector2) -> int: #Devuelve la cantidad de hexagonos que hay entre el origen y el objetivo
 	var ac = oddq_to_cube(a)
 	var bc = oddq_to_cube(b)
 	return (abs(ac.x - bc.x) +
