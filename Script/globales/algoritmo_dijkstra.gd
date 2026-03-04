@@ -147,34 +147,43 @@ func limpiar_movimientos() -> void:
 	movimientos_disponibles_incluyendo_ocupados.clear()
 #region A*
 #Este algoritmo prioriza el camino mas corto entre origen y objetivo.
-func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int):
+func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool,vecinos_distantes : int,
+movimiento_maximo : int,aplicar_movimiento_maximo : bool):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
 	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,1,true)) #Sin division por regiones
-	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,false)) #Dividido por regiones
+	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,true,movimiento_maximo,aplicar_movimiento_maximo)) #Dividido por regiones
 	
-func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, vecinos_distantes : int, limpiar_tiles : bool) -> void:
+func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, 
+vecinos_distantes : int, limpiar_tiles : bool,movimiento_maximo : int,aplicar_movimiento_maximo : bool) -> void:
 	contador_nodos_debug = 0
-	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,limpiar_tiles) #Ruta general optimizado
+	var ruta_general = algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,limpiar_tiles,movimiento_maximo,false) #Ruta general optimizado
 	var camino : Array
 	var contador := 0
+	camino.append(origen)
 	for i in ruta_general:
 		if !(contador >= ruta_general.size() - 1):
 			var origen_actual = ruta_general[contador]
 			var destino_actual = ruta_general[contador + 1]
 			contador += 1
-			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
+			var sub_camino = algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles,movimiento_maximo,false)
+			sub_camino.remove_at(0)
+			camino = camino + sub_camino
 		else:
 			var origen_actual = ruta_general[contador]
 			var destino_actual = destino
-			camino = camino + algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles)
+			var sub_camino = algoritmo_a_estrella(origen_actual,destino_actual,ubicaciones_ocupadas,dibujar_movimientos,1,limpiar_tiles,movimiento_maximo,false)
+			sub_camino.remove_at(0)
+			camino = camino + sub_camino
 	print("Cantidad de nodos recorridos:",contador_nodos_debug)
 	for i in camino:
 		dibujando_tile_individual(i)
+	print(camino)
 	for i in ruta_general:
 		dibujando_tile_individual(i)
 var contador_nodos_debug : int #<------- puramente debug esto
-func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, vecinos_distantes : int, limpiar_tiles : bool) -> Array:
+func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,dibujar_movimientos: bool, 
+vecinos_distantes : int, limpiar_tiles : bool, movimiento_maximo : int,aplicar_movimiento_maximo : bool) -> Array:
 	limpiar_movimientos()
 	var frontier: Array = [] #Fronteras a calcular 
 	frontier.append(origen)
@@ -195,7 +204,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 			if limpiar_tiles:
 				limpiando_tiles(came_from)
 			contador_nodos_debug += came_from.size()
-			return reconstruir_camino(came_from, current,1000) #<---------ERROR CASO NO PRESENCIADO
+			return reconstruir_camino(came_from, current,movimiento_maximo,aplicar_movimiento_maximo) #<---------ERROR CASO NO PRESENCIADO
 		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors_distantes(current,vecinos_distantes):
 			#Next es un Vector2
@@ -212,13 +221,13 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 					if limpiar_tiles:
 						limpiando_tiles(came_from)
 					contador_nodos_debug += came_from.size()
-					return reconstruir_camino(came_from, next, 1000) #<-----------
+					return reconstruir_camino(came_from, next, movimiento_maximo,aplicar_movimiento_maximo) #<-----------
 				if next not in frontier: #Si next no es una frontera, la agrega.
 					frontier.append(next)
 	print("Camino no encontrado") # No encontró camino
 	return []
 
-func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:
+func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int, aplicar_movimiento_maximo : bool) -> Array:
 	#print(contador_nodos_debug)
 	var camino: Array = []
 	var current = destino #Fija el destino como nodo actual
@@ -234,18 +243,22 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 	# Ahora recortamos por movimiento
 	var camino_limitado: Array = []
 	var costo_acumulado := 0
-	for i in range(camino.size()): #Para cada movimiento
-		if i == 0: #El origen siempre se incluye
-			camino_limitado.append(camino[i])
-			continue
-		var costo_tile = obtener_coste_movimiento_tile(camino[i]) #Obtiene el costo de movimiento del siguiente tile
-		if costo_acumulado + costo_tile > movimiento_maximo: #Si el coste de movimiento es mayor a la capacidad de movimiento
-			#Si el anterior coste de movimiento fue mayor a la cantidad de movimiento actual, evita volver a agregar el movimiento (Por ejemplo para el caso de un 0 exacto)
-			if costo_acumulado < movimiento_maximo:#Si el anterior coste de movimiento es menor a la actual capacidad de movimiento, lo agrega igualmente
+	if aplicar_movimiento_maximo: #Si hay que aplicar camino maximo
+		for i in range(camino.size()): #Para cada movimiento
+			if i == 0: #El origen siempre se incluye
 				camino_limitado.append(camino[i])
-			break #Corta el for para no ejecutar el resto
-		costo_acumulado += costo_tile#Aumenta el costo acumulado actual
-		camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
+				continue
+			var costo_tile = obtener_coste_movimiento_tile(camino[i]) #Obtiene el costo de movimiento del siguiente tile
+			if costo_acumulado + costo_tile > movimiento_maximo: #Si el coste de movimiento es mayor a la capacidad de movimiento
+				#Si el anterior coste de movimiento fue mayor a la cantidad de movimiento actual, evita volver a agregar el movimiento (Por ejemplo para el caso de un 0 exacto)
+				if costo_acumulado < movimiento_maximo:#Si el anterior coste de movimiento es menor a la actual capacidad de movimiento, lo agrega igualmente
+					camino_limitado.append(camino[i])
+				break #Corta el for para no ejecutar el resto
+			costo_acumulado += costo_tile#Aumenta el costo acumulado actual
+			camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
+	else:
+		#Si no hay que aplicar camino maximo
+		camino_limitado = camino
 	for i in camino_limitado:
 		dibujando_tile_individual(i)
 	return camino_limitado
