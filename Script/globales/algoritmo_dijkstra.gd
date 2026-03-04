@@ -153,7 +153,9 @@ movimiento_maximo : int,aplicar_movimiento_maximo : bool):
 		hilo_path_finding.wait_to_finish()
 	#hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,1,true)) #Sin division por regiones
 	hilo_path_finding.start(a_estrella_optimizado_v1.bind(origen,destino,ubicaciones_ocupadas,dibujar_movimientos,vecinos_distantes,true,movimiento_maximo,aplicar_movimiento_maximo)) #Dividido por regiones
-	
+
+#Primer intento fallido. El V1 es un desastre que no vale la pena continuar. Dos semanas de desarrollo a la basura 04/03/2026
+#Almenos aprendi el metodo HPA* (?
 func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, 
 vecinos_distantes : int, limpiar_tiles : bool,movimiento_maximo : int,aplicar_movimiento_maximo : bool) -> void:
 	contador_nodos_debug = 0
@@ -216,7 +218,7 @@ vecinos_distantes : int, limpiar_tiles : bool, movimiento_maximo : int,aplicar_m
 				came_from[next] = current #Registra desde donde viene
 				g_score[next] = nuevo_costo #Registra el coste de movimiento
 				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
-				if next == destino or heuristica(next,destino) < vecinos_distantes: #<-----------RROR CASO NO PRESENCIADO
+				if next == destino: #<-----------RROR CASO NO PRESENCIADO
 					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
 					if limpiar_tiles:
 						limpiando_tiles(came_from)
