@@ -156,6 +156,7 @@ movimiento_maximo : int,aplicar_movimiento_maximo : bool):
 
 #Primer intento fallido. El V1 es un desastre que no vale la pena continuar. Dos semanas de desarrollo a la basura 04/03/2026
 #Almenos aprendi el metodo HPA* (?
+#https://web.archive.org/web/20190411040123/http://aigamedev.com/open/article/clearance-based-pathfinding/
 func a_estrella_optimizado_v1(origen : Vector2, destino : Vector2,ubicaciones_ocupadas:Dictionary, dibujar_movimientos : bool, 
 vecinos_distantes : int, limpiar_tiles : bool,movimiento_maximo : int,aplicar_movimiento_maximo : bool) -> void:
 	contador_nodos_debug = 0
