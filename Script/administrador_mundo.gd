@@ -263,10 +263,7 @@ func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
 	print("Calculo las cositas.", contenido)
 	var valores = convertir_texto_a_vectores(contenido)
-	#print(AlgoritmoDijkstra.heuristica(valores[0], valores[1]))
-	#AlgoritmoDijkstra.algoritmo_a_estrella(valores[0],valores[1],ubicaciones_ocupadas,true)
 	AlgoritmoDijkstra.a_estrella_multi_hilo(valores[0],valores[1],ubicaciones_ocupadas,10000)
-	#(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,movimiento_maximo : int)
 func convertir_texto_a_vectores(texto: String) -> Array:
 	var partes = texto.split(";")
 	if partes.size() != 2:

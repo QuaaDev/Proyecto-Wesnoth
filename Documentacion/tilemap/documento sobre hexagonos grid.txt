@@ -9,3 +9,6 @@ https://www.redblobgames.com/pathfinding/a-star/introduction.html
 
 Se podria poner una opcion para elegir la exactitud del pathfinding para mejorar o empeorar el rendimiento. Por ahora las opciones son salto de 1,3,5
 https://www.reddit.com/r/godot/comments/100vnjv/i_wrote_astar_from_scratch_in_gdscript/
+0,0;100,0 Tiempo:686.111ms
+0,0;200,0 Tiempo:7242.222ms
+(0, 0)(300, 0) : Tiempo:25640.671ms
