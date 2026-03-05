@@ -17,11 +17,11 @@ func insert(element: Vector2, cost: float) -> void:
 func extract():
 	if self.empty():
 		return null
-	var result: Vector3 = self._data.pop_front()
-	# If the tree is not empty, replace the root of the heap with the last
-	# element on the last level.
-	if not self.empty():
-		self._data.push_front(self._data.pop_back())
+	var result: Vector3 = self._data[0]
+	if self._data.size() == 1:
+		self._data.pop_back()
+	else:
+		self._data[0] = self._data.pop_back()
 		self._down_heap(0)
 	return Vector2(result.x, result.y)
 
