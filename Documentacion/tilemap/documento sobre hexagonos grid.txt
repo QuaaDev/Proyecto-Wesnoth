@@ -12,8 +12,12 @@ https://www.reddit.com/r/godot/comments/100vnjv/i_wrote_astar_from_scratch_in_gd
 ------Version sin prioridad binaria------------
 0,0;100,0 Tiempo:686.111ms
 0,0;200,0 Tiempo:7242.222ms
-(0, 0)(300, 0) : Tiempo:25640.671ms
+0,0;300,0 : Tiempo:25640.671ms
 ----Version con prioridad binaria-------------
 0,0;100,0 Tiempo:21.7ms
 0,0;200,0 Tiempo:47.322ms
 0,0;300,0 Tiempo:111.762ms
+----Version optimizada por chatGPT-----------
+0,0;100,0 Tiempo:22.189ms
+0,0;200,0 Tiempo:45.941ms
+0,0;300,0 Tiempo:98.635ms
