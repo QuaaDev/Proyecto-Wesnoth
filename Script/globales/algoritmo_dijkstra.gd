@@ -158,8 +158,8 @@ var contador_nodos_debug : int #<------- puramente debug esto
 func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary, limpiar_tiles : bool, movimiento_maximo : int) -> Array:
 	var inicio := Time.get_ticks_usec() #<---- debug
 	limpiar_movimientos()
-	var frontier: Array = [] #Fronteras a calcular 
-	frontier.append(origen)
+	var frontier := PriorityQueue.new() #Fronteras a calcular, utilizando la libreria PriorityQueue
+	frontier.insert(origen, 0)
 	var came_from := {} #Almacena desde que nodo viene el nodo actual. Por ejemplo Para llegar al nodo C, el nodo C almacena B y el B almacena A. El camino es A->B->C
 	#Representa la mejor ruta conocida segun como se conectan los nodos
 	var g_score := {} #Almacena el coste de movimiento actual del nodo.
@@ -167,10 +167,9 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	#al destino se analiza antes.
 	g_score[origen] = 0
 	f_score[origen] = heuristica(origen, destino)
-	while frontier.size() > 0: #Mientras hay fronteras para explorar
+	while not frontier.empty(): #Mientras hay fronteras para explorar
 		#  Priorizar el nodo más prometedor
-		frontier.sort_custom(func(a, b): return f_score[a] < f_score[b]) #Ordena por f_score ascendente y toma el mejor candidato.
-		var current = frontier.pop_front() #Toma la frontera con mayor prioridad
+		var current: Vector2 = frontier.extract()#Toma la frontera con mayor prioridad
 		dibujando_tile_individual(current)
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
@@ -191,7 +190,8 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 			if not g_score.has(next) or nuevo_costo < g_score[next]: #Si nunca fue explorado O esta ruta es mas barata:
 				came_from[next] = current #Registra desde donde viene
 				g_score[next] = nuevo_costo #Registra el coste de movimiento
-				f_score[next] = nuevo_costo + heuristica(next, destino) #Aplica heuristica
+				var prioridad = nuevo_costo + heuristica(next, destino)
+				f_score[next] = prioridad
 				if next == destino:
 					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
 					if limpiar_tiles:
@@ -201,8 +201,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 					var tiempo_ms := (fin - inicio) / 1000.0 #<--- debug
 					print("Tiempo:", tiempo_ms, "ms") #<--- debug
 					return reconstruir_camino(came_from, next, movimiento_maximo) #<-----------
-				if next not in frontier: #Si next no es una frontera, la agrega.
-					frontier.append(next)
+				frontier.insert(next, prioridad)
 	print("Camino no encontrado") # No encontró camino
 	return []
 
