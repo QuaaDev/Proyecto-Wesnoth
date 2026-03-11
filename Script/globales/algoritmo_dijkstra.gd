@@ -1,4 +1,5 @@
 extends Node
+signal resultado_estrella_obtenido
 var tile_map : Node2D
 var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
@@ -6,6 +7,7 @@ var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Di
 var movimientos_disponibles_incluyendo_ocupados : Dictionary#Almacena las posiciones descartadas por tener una unidad sobre ellas.
 var hilo_path_finding : Thread #Variable para el multi hilo del pathfinding
 #patata 11/02/2026 no se prq escribi eso pero me dio risa lul
+var resultado_a_estrella : Array#Almacena el resultado del A* 
 func _ready() -> void:
 	hilo_path_finding = Thread.new()
 	#---------Prueba---------------
@@ -234,6 +236,10 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 		camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
 	for i in camino_limitado:
 		dibujando_tile_individual(i)
+	for i in resultado_a_estrella: #Limpia el anterior camino
+		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
+	resultado_a_estrella = camino_limitado.duplicate()
+	call_deferred_thread_group("emit_signal","resultado_estrella_obtenido")#Emite una señal para que los scripts sepan que ya termino de calcular cosas
 	return camino_limitado
 
 func calcular_coste_salto(origen: Vector2, destino: Vector2) -> float:

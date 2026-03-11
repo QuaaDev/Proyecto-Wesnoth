@@ -2,21 +2,29 @@ extends Node
 signal todas_las_unidades_procesadas #Cuando se agota la lista de unidades a aplicarle IA, activa esta señal
 #Primera version de la IA :D. 2 semanas de trabajo dieron sus frutos.
 var nodo_mundo
-var ubicaciones_ocupadas_enemigos
+var ubicaciones_ocupadas_enemigos : Dictionary#Almacena las ubicaciones de los enemigos
 var movimientos_disponibles_incluyendo_ocupados
 var unidades_almacenadas
-
+enum decision_IA {no_definido = 0,atacando = 1, moviendose = 2}
+var decision_final : decision_IA
 func ejecutar_ia(equipo : int):
 	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
-	ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate() #Actualiza la informacion
-	descartar_unidades_aliadas(unidades_almacenadas)
 	for unidad in unidades_almacenadas: #Se ejecuta cada unidad de forma independiente.
+		ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate() #Actualiza la informacion
+		descartar_unidades_aliadas(unidades_almacenadas)
+		decision_final= decision_IA.no_definido#Resetea el valor del estado
 		print("-------------------")
 		print(unidad.name)
 		unidad.limpiar_objetivos_ataque() #Limpia la lista de objetivos
 		unidad.puntos_movimiento += 1 #Para poder detectar a las unidades al limite del rango le suma +1 al movimiento
 		obtener_datos(unidad)#Obtiene informacion del entorno
 		await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
+		if decision_final == decision_IA.no_definido and !ubicaciones_ocupadas_enemigos.is_empty(): 
+			#Si no esta definido su estado, significa que no pudo atacar AND si hay enemigos aun vivos
+			avanzar_hacia_un_enemigo(unidad)#Avanza hacia algun enemigo
+			await unidad.animacion_movimiento_terminada
+			decision_final = decision_IA.moviendose
+		print("Decision final de la IA: ",decision_final)
 		print("-------------------")
 
 #Obtener las unidades a las que hay que aplicarle la IA
@@ -55,6 +63,7 @@ func ejecutar_ataque(unidad: unidad_base):
 		analizar_ataque(unidad) #Decide a cual atacar
 		realizar_movimiento_adyacente(unidad)#Luego realiza el movimiento
 		realizar_ataque(unidad)#Luego ejecuta el ataque
+		decision_final = decision_IA.atacando#Actualiza la decision de la IA
 		await AlgoritmoCombate.combate_finalizado #Espera a que finalice el combate
 	else:
 		print("No hay posibles ataques :c")
@@ -87,3 +96,16 @@ func realizar_ataque(unidad : unidad_base):
 	AlgoritmoCombate.ejecutar_ataque(daño_unidad_atacante, daño_unidad_defensora)#Envia la informacion a algoritmo combate para que vuelva real el combate
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
+func avanzar_hacia_un_enemigo(unidad : unidad_base):
+	var origen = unidad.coordenada_local_tilemap#Ubicacion de la unidad
+	var heuristica_distancia_enemiga : Array
+	for i in ubicaciones_ocupadas_enemigos:
+		heuristica_distancia_enemiga.append(AlgoritmoDijkstra.heuristica(origen, i))#Mide la distancia entre dos puntos y almacena el resultado
+	var ubicaciones_ocupadas_enemigos_keys = ubicaciones_ocupadas_enemigos.keys()#Lo transforma de dictionary a un array
+	var destino = ubicaciones_ocupadas_enemigos_keys[heuristica_distancia_enemiga.find(heuristica_distancia_enemiga.min())]
+	#Obtiene el destino segun la heuristica con mejor valor y luego buscando el indice segun ese valor
+	AlgoritmoDijkstra.a_estrella_multi_hilo(origen,destino,nodo_mundo.ubicaciones_ocupadas.duplicate(),unidad.puntos_movimiento_maximo)#Envia la informacion al algoritmo
+	await AlgoritmoDijkstra.resultado_estrella_obtenido#Espera a que el multihilo termine
+	var resultado = AlgoritmoDijkstra.resultado_a_estrella#Almacena el resultado
+	print("Seguire el siguiente camino:",resultado)
+	nodo_mundo.mover_unidad_con_a_estrella(unidad,resultado) #mueve la unidad con la funcion de A*

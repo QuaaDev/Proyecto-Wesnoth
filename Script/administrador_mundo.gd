@@ -155,6 +155,16 @@ func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
 	#Objeto a aplicar / propiedad a editar / ubicacion objetivo / velocidad de la animacion
 	#print(camino_a_seguir)
 	#print(ubicaciones_ocupadas)
+func mover_unidad_con_a_estrella(unidad : unidad_base,camino:Array):
+	var coordenada_objetivo = camino.back()#Almacena el final del camino
+	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
+	unidad.coordenada_local_tilemap = coordenada_objetivo #Actualiza la informacion q tiene la unidad
+	ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad #Actualiza la informacion del diccionario
+	#----------
+	unidad.restar_puntos_movimiento(unidad.puntos_movimiento)#Le resta todos los puntos de movimiento, ya que al usar A estrella siempre se hara un solo movimiento
+	#-----------
+	unidad.aplicando_animacion_movimiento(camino)
+	
 func verificar_si_son_aliados() -> bool:
 	#Si son aliados devuelve true
 	if mouse_sobre_unidad == null:
@@ -263,7 +273,7 @@ func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
 	print("Calculo las cositas.", contenido)
 	var valores = convertir_texto_a_vectores(contenido)
-	AlgoritmoDijkstra.a_estrella_multi_hilo(valores[0],valores[1],ubicaciones_ocupadas,10000)
+	AlgoritmoDijkstra.a_estrella_multi_hilo(valores[0],valores[1],ubicaciones_ocupadas,5)
 func convertir_texto_a_vectores(texto: String) -> Array:
 	var partes = texto.split(";")
 	if partes.size() != 2:

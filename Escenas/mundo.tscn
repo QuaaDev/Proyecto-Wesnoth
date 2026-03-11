@@ -108,19 +108,15 @@ position = Vector2(576, 323)
 script = ExtResource("4_ly0wt")
 
 [node name="murcielago_unidad8" parent="." unique_id=840916615 instance=ExtResource("6_f4s1m")]
-position = Vector2(793, 541)
+position = Vector2(479, 609)
 equipo = 1
 
 [node name="unidad_dragon4" parent="." unique_id=240753784 instance=ExtResource("6_gv8d2")]
-position = Vector2(523, 573)
+position = Vector2(363, 33)
 equipo = 2
 
 [node name="unidad_dragon6" parent="." unique_id=2009352179 instance=ExtResource("6_gv8d2")]
-position = Vector2(578, 324)
-equipo = 2
-
-[node name="unidad_dragon8" parent="." unique_id=844868248 instance=ExtResource("6_gv8d2")]
-position = Vector2(193, 214)
+position = Vector2(796, 110)
 equipo = 2
 
 [node name="unidad_dragon9" parent="." unique_id=1330619164 instance=ExtResource("6_gv8d2")]
@@ -128,19 +124,15 @@ position = Vector2(245, 250)
 equipo = 2
 
 [node name="unidad_dragon10" parent="." unique_id=1363739100 instance=ExtResource("6_gv8d2")]
-position = Vector2(249, 315)
+position = Vector2(572, 105)
 equipo = 2
 
 [node name="unidad_dragon11" parent="." unique_id=641515950 instance=ExtResource("6_gv8d2")]
-position = Vector2(252, 392)
+position = Vector2(90, 581)
 equipo = 2
 
 [node name="unidad_dragon12" parent="." unique_id=2079913597 instance=ExtResource("6_gv8d2")]
-position = Vector2(255, 465)
-equipo = 2
-
-[node name="unidad_dragon13" parent="." unique_id=553671985 instance=ExtResource("6_gv8d2")]
-position = Vector2(202, 505)
+position = Vector2(955, 212)
 equipo = 2
 
 [node name="unidad_dragon7" parent="." unique_id=1322307210 instance=ExtResource("6_gv8d2")]

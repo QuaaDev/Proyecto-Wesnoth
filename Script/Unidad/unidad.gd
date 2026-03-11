@@ -1,7 +1,7 @@
 extends Node2D
 class_name unidad_base
 signal animacion_terminada_combate #Conectada a algoritmo_combate
-
+signal animacion_movimiento_terminada #Conectada a IA
 #region parametros esenciales
 @onready var nodo_mundo = self.get_parent()
 @onready var tile_map: Node2D = $"../TileMap"
@@ -132,6 +132,8 @@ func aplicando_animacion_movimiento(camino_a_seguir : Array) -> void:
 	for i in camino_a_seguir:
 		var new_position = tile_map.map_to_local(i)
 		tween.tween_property(self,"position",new_position, .5)
+	await tween.finished
+	animacion_movimiento_terminada.emit()
 
 func aplicar_animacion_combate(coordenadas : Vector2) -> void:
 	if tween and tween.is_running(): #Si ya hay una animacion corriendo, espera a que termine
