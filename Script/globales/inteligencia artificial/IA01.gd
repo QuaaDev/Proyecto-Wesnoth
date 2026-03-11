@@ -26,6 +26,7 @@ func ejecutar_ia(equipo : int):
 			decision_final = decision_IA.moviendose
 		print("Decision final de la IA: ",decision_final)
 		print("-------------------")
+	todas_las_unidades_procesadas.emit()
 
 #Obtener las unidades a las que hay que aplicarle la IA
 func cargar_unidades(equipo:int) -> Array:#Devuelve las unidades dentro del grupo especificado

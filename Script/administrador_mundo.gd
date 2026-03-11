@@ -45,6 +45,7 @@ func _ready() -> void:
 	interfaz_combate.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
 	button_calcular_a_estrella.pressed.connect(boton_calcular_a_estrella)
+	IA01.todas_las_unidades_procesadas.connect(boton_pasar_turno)#Para que la IA pueda pasar turno por si sola
 	#Prepara los grupos de unidades con su respectivo turno
 	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
 	equipo_actual = empieza_x_equipo
