@@ -55,6 +55,15 @@ dibujar_movimientos : bool, una_celda_mas : bool) -> void:
 			elif (not reached.has(next) or nuevo_costo < reached[next]) and(not movimientos_disponibles_incluyendo_ocupados.has(next)): #Excepcion para la IA, almacenara las posiciones ocupadas por unidades
 				#(Si el nodo ya fue explorado, lo omite) AND (si ese nodo ya fue almacenado como ocupado, lo omite)
 				movimientos_disponibles_incluyendo_ocupados[next] = nuevo_costo
+	if una_celda_mas: #Si se acepta una celda mas, expandiendo el rango en +1 celda
+		for tile in reached.keys():#Por cada tile registrado
+			for vecino in get_neighbors(tile):#Obtiene todos sus vecinos
+				if reached.has(vecino):#Si el vecino ya esta registrado, lo omite
+					continue
+				#Si no esta registrado lo almacena
+				var nuevo_costo = reached[tile] + obtener_coste_movimiento_tile(vecino)
+				if not movimientos_disponibles_incluyendo_ocupados.has(vecino):
+					movimientos_disponibles_incluyendo_ocupados[vecino] = nuevo_costo
 	if dibujar_movimientos:
 		dibujando_tile_map(reached)
 	movimientos_disponibles = reached.duplicate() #Almacena los movimientos disponibles

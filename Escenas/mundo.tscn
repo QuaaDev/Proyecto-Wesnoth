@@ -140,5 +140,5 @@ position = Vector2(191, 145)
 equipo = 2
 
 [node name="unidad_dragon5" parent="." unique_id=496260312 instance=ExtResource("6_gv8d2")]
-position = Vector2(901, 542)
+position = Vector2(-19, 643)
 equipo = 1
