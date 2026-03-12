@@ -16,7 +16,6 @@ func ejecutar_ia(equipo : int):
 		print("-------------------")
 		print(unidad.name)
 		unidad.limpiar_objetivos_ataque() #Limpia la lista de objetivos
-		unidad.puntos_movimiento += 1 #Para poder detectar a las unidades al limite del rango le suma +1 al movimiento
 		obtener_datos(unidad)#Obtiene informacion del entorno
 		await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
 		if decision_final == decision_IA.no_definido and !ubicaciones_ocupadas_enemigos.is_empty(): 
