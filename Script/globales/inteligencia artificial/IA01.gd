@@ -44,7 +44,7 @@ func descartar_unidades_aliadas(unidades : Array):
 			
 func obtener_posibles_objetivos(unidad : unidad_base):
 	#print("Ubicaciones Ocupadas Por Enemigos ")
-	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false)#Carga la lista de movimientos para esta unidad
+	AlgoritmoDijkstra.moviendo_unidad(unidad, nodo_mundo.ubicaciones_ocupadas,false,true)#Carga la lista de movimientos para esta unidad
 	movimientos_disponibles_incluyendo_ocupados = AlgoritmoDijkstra.movimientos_disponibles_incluyendo_ocupados.duplicate()
 	#Duplica la lista de movimientos disponibles blabla
 	if movimientos_disponibles_incluyendo_ocupados.is_empty():

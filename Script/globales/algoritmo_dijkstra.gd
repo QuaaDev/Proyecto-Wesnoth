@@ -32,7 +32,8 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		return 1
 
 func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary, 
-dibujar_movimientos : bool) -> void:
+dibujar_movimientos : bool, una_celda_mas : bool) -> void:
+	#Una celda mas aumenta la busqueda en 1 celda para la IA
 	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
@@ -42,12 +43,9 @@ dibujar_movimientos : bool) -> void:
 	reached[start] = 0#Almacena la cantidad de puntos de movimiento que consume
 	while frontier.size() > 0: #Mientras existan mas fronteras:
 		var current = frontier.pop_front() #Selecciona la primera frontera y la elimina del array
-		
 		var distancia_actual = reached[current]#Almacena la distancia que se recorrio desde start
-		
 		if distancia_actual >= cantidad_de_movimiento_maximo: #Si alcanza el limite de movimiento
 			continue#Omite esta ejecucion del while
-		
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
 			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
 			if (not reached.has(next) or nuevo_costo < reached[next]) and !(ubicaciones_ocupadas.has(next)):
@@ -118,9 +116,6 @@ func get_neighbors_distantes(origen : Vector2, distancia : int) -> Array: #Devue
 		vecinos.append(Vector2(origen.x- (1 * distancia) , origen.y))#NO
 	#print(vecinos)
 	return vecinos
-
-
-
 func obtener_vecino_mas_barato(coordenada_origen : Vector2, opcion_mas_barata_arg : int) -> Array:
 	#La variable opcion_mas_barata se llama desde el exterior para mantenerla independiente y evitar bucles infinitos
 	#Busca el vecino mas barato segun el coste de movimiento. Devuelve un array con coordenada mas barata y el coste de ese movimiento.
@@ -195,7 +190,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 				var prioridad = nuevo_costo + heuristica(next, destino)
 				f_score[next] = prioridad
 				if next == destino:
-					#Si el destino es un vecino, termina el bucle y reconstruye el camino O si hay menor distancia entre next y destino segun vecinos_distantes
+					#Si el destino es un vecino, termina el bucle y reconstruye el camino
 					if limpiar_tiles:
 						limpiando_tiles(came_from)
 					contador_nodos_debug += came_from.size()
