@@ -155,7 +155,8 @@ func limpiar_movimientos() -> void:
 func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary,movimiento_maximo : int):
 	if hilo_path_finding.is_started():
 		hilo_path_finding.wait_to_finish()
-	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,true,movimiento_maximo)) #Sin division por regiones
+	hilo_path_finding.start(algoritmo_a_estrella.bind(origen,destino,ubicaciones_ocupadas,false,movimiento_maximo)) #Sin division por regiones
+	#algoritmo_a_estrella(origen,destino,ubicaciones_ocupadas,true,movimiento_maximo)
 
 #Primer intento fallido. El V1 es un desastre que no vale la pena continuar. Dos semanas de desarrollo a la basura 04/03/2026
 #Almenos aprendi el metodo HPA* (?
@@ -176,7 +177,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	while not frontier.empty(): #Mientras hay fronteras para explorar
 		#  Priorizar el nodo más prometedor
 		var current: Vector2 = frontier.extract()#Toma la frontera con mayor prioridad
-		dibujando_tile_individual(current)
+		#dibujando_tile_individual(current)
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			if limpiar_tiles:
@@ -238,10 +239,10 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 			break #Corta el for para no ejecutar el resto
 		costo_acumulado += costo_tile#Aumenta el costo acumulado actual
 		camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
-	for i in camino_limitado:
-		dibujando_tile_individual(i)
-	for i in resultado_a_estrella: #Limpia el anterior camino
-		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
+	#for i in camino_limitado:
+	#	dibujando_tile_individual(i)
+	#for i in resultado_a_estrella: #Limpia el anterior camino
+	#	tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
 	resultado_a_estrella = camino_limitado.duplicate()
 	call_deferred_thread_group("emit_signal","resultado_estrella_obtenido")#Emite una señal para que los scripts sepan que ya termino de calcular cosas
 	return camino_limitado
