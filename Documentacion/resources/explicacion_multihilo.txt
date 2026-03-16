@@ -1,0 +1,13 @@
+p_elem->_root != this error
+
+Este error es causado cuando un hilo diferente al main intenta cambiar nodos de main.
+Por ejemplo set_cell blablabla de un tilemap, puede causar ese error eventualmente.
+Este mismo error tambien puede verse como: 
+	ERROR: [1] error(-1): no debug info in PE/COFF executable 
+	ERROR: [2] error(-1): no debug info in PE/COFF executable
+	etc etc
+ambos errores apuntan al mismo problema: Un hilo intenta cambiar a Main generando incosistencias en la memoria.
+Hay que mantener la influencia de los hilos en intercambio de variables simples, cosas como arrays, int etc que
+solo este usando ese hilo. EVITAR a toda costa influir directamente en datos de Main. 
+Hay que tratarlos como si fuesen trenes de Factorio.
+16/03/2026

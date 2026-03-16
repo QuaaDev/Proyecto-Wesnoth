@@ -177,7 +177,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	while not frontier.empty(): #Mientras hay fronteras para explorar
 		#  Priorizar el nodo más prometedor
 		var current: Vector2 = frontier.extract()#Toma la frontera con mayor prioridad
-		#dibujando_tile_individual(current)
+		#dibujando_tile_individual(current)<---- Ocasiona error remove: Condition "p_elem->_root != this" is true
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			if limpiar_tiles:
@@ -240,9 +240,9 @@ func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maxi
 		costo_acumulado += costo_tile#Aumenta el costo acumulado actual
 		camino_limitado.append(camino[i])#Agrega el nuevo nodo al camino limitado
 	#for i in camino_limitado:
-	#	dibujando_tile_individual(i)
+	#	dibujando_tile_individual(i)<---- Ocasiona error remove: Condition "p_elem->_root != this" is true
 	#for i in resultado_a_estrella: #Limpia el anterior camino
-	#	tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
+	#	tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)<---- Ocasiona error remove: Condition "p_elem->_root != this" is true
 	resultado_a_estrella = camino_limitado.duplicate()
 	call_deferred_thread_group("emit_signal","resultado_estrella_obtenido")#Emite una señal para que los scripts sepan que ya termino de calcular cosas
 	return camino_limitado
