@@ -53,6 +53,13 @@ func _ready() -> void:
 	equipo_actual = empieza_x_equipo
 	turno_actual_y_equipo.text = "turno actual 0, equipo actual: " + str(equipo_actual)
 	comprobar_errores_ready() #Siempre al final 
+	#Si la IA tiene el primer turno, lo ejecuta
+	if equipo_actual in grupos_bajo_ia:
+		print("Este grupo esta bajo IA")
+		ia_empieza_a_jugar()
+		IA01.ejecutar_ia(equipo_actual)
+	else:
+		ia_deja_de_jugar()
 func _input(event):
 	if event is InputEventMouseButton:
 			if (event.button_index == MOUSE_BUTTON_LEFT and event.pressed) and (!mouse_sobre_hud and !ia_jugando): 
