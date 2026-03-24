@@ -1,6 +1,7 @@
 extends Node
 var mouse_sobre_unidad : Node2D
 var unidad_a_mover : Node2D
+var ia_jugando : bool = false#Interruptor para cuando la IA este jugando
 @onready var tile_map: Node2D = $TileMap
 
 #----------Seccion hud derecho----------
@@ -17,6 +18,7 @@ var unidad_a_mover : Node2D
 
 #----------Seccion hud derecho----------
 @onready var label_mouse_en_hud: Label = $CanvasLayer/VBoxContainer/mouse_en_hud
+@onready var label_ia_jugando: Label = $CanvasLayer/VBoxContainer/ia_jugando
 
 #---------Seccion Interfaz combate----------
 @onready var interfaz_combate: Control = $CanvasLayer/interfaz_combate
@@ -246,6 +248,12 @@ func mouse_sale_del_hud() -> void:
 	mouse_sobre_hud = false
 	label_mouse_en_hud.modulate = Color(0.671, 0.0, 0.0, 1.0)
 	#print("El mouse sale del hud")
+func ia_empieza_a_jugar() -> void:
+	ia_jugando = true
+	label_ia_jugando.modulate = Color(0.0, 0.725, 0.0, 1.0)
+func ia_deja_de_jugar() -> void:
+	ia_jugando = false
+	label_ia_jugando.modulate = Color(0.671, 0.0, 0.0, 1.0)
 func boton_pasar_turno() -> void:
 	if unidad_a_mover != null: #Solucion al bug de mover una unidad fuera de su turno
 		limpiar_unidad_seleccionada()
@@ -261,7 +269,10 @@ func boton_pasar_turno() -> void:
 	#------IA----------------
 	if equipo_actual in grupos_bajo_ia:
 		print("Este grupo esta bajo IA")
+		ia_empieza_a_jugar()
 		IA01.ejecutar_ia(equipo_actual)
+	else:
+		ia_deja_de_jugar()
 	#------IA---------------
 	#for i in cantidad_total_equipos:
 	#	print("------------")

@@ -25,6 +25,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Mouse En HUD"
 
+[node name="ia_jugando" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1874407146]
+layout_mode = 2
+text = "IA JUGANDO?"
+
 [node name="hud_derecho" type="ColorRect" parent="CanvasLayer" unique_id=1572635695]
 anchors_preset = 6
 anchor_left = 1.0
