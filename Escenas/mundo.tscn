@@ -108,7 +108,7 @@ position = Vector2(576, 323)
 script = ExtResource("4_ly0wt")
 
 [node name="murcielago_unidad8" parent="." unique_id=840916615 instance=ExtResource("6_f4s1m")]
-position = Vector2(36, 608)
+position = Vector2(253, 539)
 equipo = 1
 
 [node name="unidad_dragon4" parent="." unique_id=240753784 instance=ExtResource("6_gv8d2")]
@@ -140,5 +140,5 @@ position = Vector2(191, 145)
 equipo = 2
 
 [node name="unidad_dragon5" parent="." unique_id=496260312 instance=ExtResource("6_gv8d2")]
-position = Vector2(-19, 643)
+position = Vector2(197, 217)
 equipo = 1

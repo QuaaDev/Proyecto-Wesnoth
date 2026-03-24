@@ -78,10 +78,14 @@ func analizar_ataque(unidad : unidad_base):
 	print("Ataco a: " , unidad.objetivo_final)
 
 func realizar_movimiento_adyacente(unidad : unidad_base):
-	var resultado = AlgoritmoDijkstra.obtener_vecino_mas_barato(unidad.objetivo_final[0], unidad.objetivo_final[1])
+	var resultado = AlgoritmoDijkstra.obtener_vecino_mas_barato(unidad.objetivo_final[0], unidad.objetivo_final[1])#Obtiene una celda adyacente al objetivo
 	#Convierte el diccionario en un array, se accede a sus valores con [0] y [1]
-	#print("me muevo a",resultado)
-	nodo_mundo.mover_unidad(unidad,resultado[0])
+	#Valor 0 la coordenada valor 1 el coste de movimiento
+	if !(resultado[0] == unidad.coordenada_local_tilemap): #Si unidad no esta en la ubicacion objetivo, aplica movimiento
+		print("Resultado: ",resultado," y la coordenada", unidad.objetivo_final[0])
+		nodo_mundo.mover_unidad(unidad,resultado[0])#Luego aplica movimiento desde origen -> resultado
+	else:#Si ya esta en la ubicacion objetivo, pos no hace nada(?
+		pass
 
 func realizar_ataque(unidad : unidad_base):
 	var unidad_atacante = unidad
