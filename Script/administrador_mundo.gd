@@ -57,7 +57,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT: #Si se apreta el mouse izq
 				if event.pressed:
-					if !mouse_sobre_hud: #Si el mouse esta sobre el hud evita interactuar con unidades y grid
+					if !mouse_sobre_hud and !ia_jugando: #Si el mouse esta sobre el hud AND si la ia no esta jugando evita interactuar con unidades y grid
 						if mouse_sobre_unidad != null and unidad_a_mover == null:
 							#print("Patata two")
 							#If el mouse esta sobre una unidad AND no hay unidad para mover:
