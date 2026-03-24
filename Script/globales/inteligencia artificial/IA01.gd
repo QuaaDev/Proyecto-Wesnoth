@@ -82,7 +82,7 @@ func realizar_movimiento_adyacente(unidad : unidad_base):
 	#Convierte el diccionario en un array, se accede a sus valores con [0] y [1]
 	#Valor 0 la coordenada valor 1 el coste de movimiento
 	if !(resultado[0] == unidad.coordenada_local_tilemap): #Si unidad no esta en la ubicacion objetivo, aplica movimiento
-		print("Resultado: ",resultado," y la coordenada", unidad.objetivo_final[0])
+		#print("Resultado: ",resultado," y la coordenada", unidad.objetivo_final[0])
 		nodo_mundo.mover_unidad(unidad,resultado[0])#Luego aplica movimiento desde origen -> resultado
 	else:#Si ya esta en la ubicacion objetivo, pos no hace nada(?
 		pass
