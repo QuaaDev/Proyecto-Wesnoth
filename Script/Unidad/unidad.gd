@@ -205,15 +205,16 @@ func limpiar_objetivos_ataque() -> void:
 	
 	
 func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administrador mundo para informarle de que esta unidad esta bajo el mouse
-	nodo_mundo.obtener_unidad_bajo_mouse(self)
+	nodo_mundo.obtener_unidad_bajo_mouse(self)#Envia la informacion de la unidad
 
 
 func _on_area_2d_mouse_exited() -> void:
 	#Actualiza la informacion de administrador mundo para informarle de que esta unidad ya no esta bajo el mouse
 	if nodo_mundo.mouse_sobre_unidad == self:
-		#Si el actual foco lo tiene otra unidad, no aplica el exited
+		#IF el actual foco lo tiene la unidad a pesar de haber salido el mouse
 		nodo_mundo.limpiar_unidad_bajo_mouse()
 	else:
+		#ELSE el foco lo tiene una unidad diferente luego de haber salido, no ejecuta nada
 		#print("Que atrevimiento aplicar exited cuando no soy yo el foco che")
 		pass
 

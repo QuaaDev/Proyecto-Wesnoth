@@ -207,7 +207,8 @@ func verificar_si_coordenadas_estan_libres() -> bool:
 		return true
 	
 func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a la unidad bajo el mouse
-	mouse_sobre_unidad = unidad
+	mouse_sobre_unidad = unidad#Actualiza la variable
+	rellenar_labels(unidad)#Rellena los labels de la derecha con la informacion
 	#print("entro")
 	
 func almacenar_unidad() -> void:
@@ -219,11 +220,12 @@ func almacenar_unidad() -> void:
 	
 	
 func limpiar_unidad_bajo_mouse() -> void:
-	mouse_sobre_unidad = null
+	mouse_sobre_unidad = null#Actualiza la variable
+	limpiar_labels()#Limpia los labels de la derecha
 	#print("salgo")
 func rellenar_labels(unidad : Node2D) ->void:
 	label_puntos_movimiento.text = "Puntos movimiento: "+str(unidad.puntos_movimiento) + " / "+str(unidad.puntos_movimiento_maximo)
-	label_unidad_moviendose.text = "nombre: " + unidad_a_mover.name
+	label_unidad_moviendose.text = "nombre: " + unidad.name
 	label_equipo_unidad.text = "equipo: " + str(unidad.equipo)
 	label_vida_unidad.text = "Vida: "+str(unidad.vida_actual)+" / "+str(unidad.vida_maxima)
 	label_turnos_de_ataques.text = "Turnos de ataque: " + str(unidad.turnos_de_ataque_actual) + " / " + str(unidad.turnos_de_ataque_maximo)
