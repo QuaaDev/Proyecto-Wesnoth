@@ -31,7 +31,7 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 		#print("Error data no encontrada obtener_coste_movimiento_tile")
 		return 1
 
-func moviendo_unidad(unidad : Node2D, ubicaciones_ocupadas : Dictionary, 
+func moviendo_unidad(unidad : unidad_base, ubicaciones_ocupadas : Dictionary, 
 dibujar_movimientos : bool, una_celda_mas : bool) -> void:
 	#Una celda mas aumenta la busqueda en 1 celda para la IA
 	limpiar_movimientos() #Limpia la anterior lista de movimientos

@@ -1,6 +1,6 @@
 extends Node
-var mouse_sobre_unidad : Node2D
-var unidad_a_mover : Node2D
+var mouse_sobre_unidad : unidad_base
+var unidad_a_mover : unidad_base
 var ia_jugando : bool = false#Interruptor para cuando la IA este jugando
 @onready var tile_map: Node2D = $TileMap
 
@@ -134,7 +134,7 @@ func _input(event):
 					#Error
 					print("Click Izquierdo condicion no reconocida, valores: ")
 					
-func mover_unidad(unidad : Node2D, coordenada_objetivo : Vector2):
+func mover_unidad(unidad : unidad_base, coordenada_objetivo : Vector2):
 	#AlgoritmoDijkstra.movimientos_disponibles
 	#var coordenadas_mouse = tile_map.coordenada_global_del_mouse_a_tilemap()
 	ubicaciones_ocupadas.erase(unidad.get_coordenada_local_tilemap()) #Borra su anterior posicion ocupada del diccionario
@@ -206,7 +206,7 @@ func verificar_si_coordenadas_estan_libres() -> bool:
 		#print("Devuelvo true")
 		return true
 	
-func obtener_unidad_bajo_mouse(unidad : Node2D) -> void: #Almacena referencia a la unidad bajo el mouse
+func obtener_unidad_bajo_mouse(unidad : unidad_base) -> void: #Almacena referencia a la unidad bajo el mouse
 	mouse_sobre_unidad = unidad#Actualiza la variable
 	rellenar_labels(unidad)#Rellena los labels de la derecha con la informacion
 	#print("entro")
@@ -223,7 +223,7 @@ func limpiar_unidad_bajo_mouse() -> void:
 	mouse_sobre_unidad = null#Actualiza la variable
 	limpiar_labels()#Limpia los labels de la derecha
 	#print("salgo")
-func rellenar_labels(unidad : Node2D) ->void:
+func rellenar_labels(unidad : unidad_base) ->void:
 	label_puntos_movimiento.text = "Puntos movimiento: "+str(unidad.puntos_movimiento) + " / "+str(unidad.puntos_movimiento_maximo)
 	label_unidad_moviendose.text = "nombre: " + unidad.name
 	label_equipo_unidad.text = "equipo: " + str(unidad.equipo)

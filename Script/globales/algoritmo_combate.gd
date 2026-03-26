@@ -21,7 +21,7 @@ func calcular_daño_total(cantidad_daño : int, tipo_daño : int, armadura_objet
 		print("Daño total es: " + str(daño_total))
 	return daño_total
 
-func obtener_mejor_ataque(unidad_atacanteX : Node2D, unidad_objetivo : Node2D, daño_o_indice : bool) -> int:
+func obtener_mejor_ataque(unidad_atacanteX : unidad_base, unidad_objetivo : unidad_base, daño_o_indice : bool) -> int:
 	#daño o indice = true es devolver indice, false devolver valor del daño
 	var opcion_y_resultado : Dictionary #Key almacena Indice de ataque y contenido el resultado del ataque
 	var defensa_objetivo = unidad_objetivo.get_node("estadisticas_defensa") #Obtiene el recurso de defensa
@@ -70,9 +70,9 @@ func _ready() -> void:
 	#print(obtener_valor_mayor(ejemplo3))
 #---------Seccion combate activo-----------------
 #Infligir daños, animaciones, en general ejecutar el combate en si.
-var unidad_atacante : Node2D
-var unidad_defensor : Node2D
-func obtener_unidades_en_combate(atacante : Node2D, defensor : Node2D):
+var unidad_atacante : unidad_base
+var unidad_defensor : unidad_base
+func obtener_unidades_en_combate(atacante : unidad_base, defensor : unidad_base):
 	#Almacena las unidades que entran en combate
 	unidad_atacante = atacante
 	unidad_defensor = defensor
@@ -97,7 +97,7 @@ func ejecutar_ataque(daño_atacante : int, daño_defensor : int):
 	limpiar_unidades_en_combate()
 	combate_finalizado.emit() #Emite la señal de que termino el combate
 
-func aplicar_animacion_combate(unidad_objetivo : Node2D):
+func aplicar_animacion_combate(unidad_objetivo : unidad_base):
 	#Le aplica la animacion de combate a las unidades segun las coordenadas del enemigo
 	var resultado_posicion_local : Vector2
 	#Segun si es atacante o defensor, calcula la posicion de uno o otro
