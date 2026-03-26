@@ -47,7 +47,7 @@ func _ready() -> void:
 	interfaz_combate.mouse_exited.connect(mouse_sale_del_hud)
 	hud_derecho.get_node("proximo_turno").pressed.connect(boton_pasar_turno)
 	button_calcular_a_estrella.pressed.connect(boton_calcular_a_estrella)
-	IA01.todas_las_unidades_procesadas.connect(boton_pasar_turno)#Para que la IA pueda pasar turno por si sola
+	#IA01.todas_las_unidades_procesadas.connect(boton_pasar_turno)#Para que la IA pueda pasar turno por si sola
 	#Prepara los grupos de unidades con su respectivo turno
 	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
 	equipo_actual = empieza_x_equipo
@@ -262,31 +262,35 @@ func ia_deja_de_jugar() -> void:
 	ia_jugando = false
 	label_ia_jugando.modulate = Color(0.671, 0.0, 0.0, 1.0)
 func boton_pasar_turno() -> void:
-	if unidad_a_mover != null: #Solucion al bug de mover una unidad fuera de su turno
-		limpiar_unidad_seleccionada()
-	get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
-	equipo_actual += 1 #Avanza al siguiente equipo
-	if !equipo_actual in cantidad_total_equipos:
-		#Si equipo actual no forma parte de la lista, significa que ya se exploraron todos los turnos
-		print("terminando turno")
-		turno_actual += 1
-		equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
-	get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
-	turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
-	#------IA----------------
-	if equipo_actual in grupos_bajo_ia:
-		print("Este grupo esta bajo IA")
-		ia_empieza_a_jugar()
-		IA01.ejecutar_ia(equipo_actual)
+	pasar_turno(true) #Llama la funcion con llamado desde jugador true
+	
+func pasar_turno (llamado_desde_jugador : bool) -> void:
+	#Si es llamado por el jugador o la IA, actua de forma diferente
+	if not(llamado_desde_jugador and ia_jugando):
+		#Si la llamada la hace el jugador y la IA esta jugando, false
+		#Si la llamada la hace el jugador y la IA no esta jugando, true
+		#Si la llamada la hace la IA y la IA esta jugando, true
+		#Si la llamada la hace la IA y el jugador esta jugando, true
+		if unidad_a_mover != null: #Solucion al bug de mover una unidad fuera de su turno
+			limpiar_unidad_seleccionada()
+		get_tree().call_group(str(equipo_actual), "termino_mi_turno") #Termina el turno del equipo anterior
+		equipo_actual += 1 #Avanza al siguiente equipo
+		if !equipo_actual in cantidad_total_equipos:
+			#Si equipo actual no forma parte de la lista, significa que ya se exploraron todos los turnos
+			print("terminando turno")
+			turno_actual += 1
+			equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
+		get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
+		turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
+		#------IA----------------
+		if equipo_actual in grupos_bajo_ia:
+			print("Este grupo esta bajo IA")
+			ia_empieza_a_jugar()
+			IA01.ejecutar_ia(equipo_actual)
+		else:
+			ia_deja_de_jugar()
 	else:
-		ia_deja_de_jugar()
-	#------IA---------------
-	#for i in cantidad_total_equipos:
-	#	print("------------")
-	#	for node in get_tree().get_nodes_in_group(str(i)):
-	#		print(node.name, " ", node.equipo, " ", node.es_mi_turno)
-	#	#get_tree().call_group(str(i), "termino_mi_turno")
-	#print("--------final turnos------------")
+		print("No es posible pasar turno mientras juega la IA")
 
 func boton_calcular_a_estrella() -> void:
 	var contenido = contenido_calculo_a_estrella.text
