@@ -51,7 +51,7 @@ func instanciar_cosas_esenciales():
 	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
 	self.add_child(label_daño_recibido)#Agrega el label como hijo
-	label_daño_recibido.text = "Hola"
+	label_daño_recibido.text = "Hola"#Debug, se puede borrar luego :c
 	label_daño_recibido.visible = false#Esconde el label hasta que sea necesario
 	label_daño_recibido.z_index = 1#Hace que se dibuje por arriba del resto de cosas
 	label_daño_recibido.label_settings = preload("uid://dx2ew6ngt21k8")#Recurso con informacion de la fuente
@@ -90,12 +90,12 @@ func _process(delta: float) -> void:
 						push_error("Ninguna franja de linea coincide con el valor actual")
 	if animar_label_daño_recibido: #Si hay que aplicar animacion al label
 		if label_daño_recibido.position.y > altura_maxima_animacion:#Si aun tiene que seguir subiendo, sube.
-			label_daño_recibido.position -= Vector2(0,100*delta)#Le da altura
-		elif label_daño_recibido.modulate.a > 0 :
-			label_daño_recibido.modulate += Color(0, 0, 0, -.5 * delta)
+			@warning_ignore("integer_division")
+			label_daño_recibido.position -= Vector2(0,-(altura_maxima_animacion/2)*delta)#Le da altura
+			label_daño_recibido.modulate -= Color(0, 0, 0, ((1.0/2.0) * delta))#Disminuye el valor de alfa
 		else:
-			animar_label_daño_recibido = false
-			label_daño_recibido.visible = false
+			animar_label_daño_recibido = false#Termina de animar
+			label_daño_recibido.visible = false#Vuelve invisible al label
 			
 
 	
@@ -140,7 +140,7 @@ func recibir_daño(cantidad : int) -> void:
 	cambio_a_barra_de_vida = float(cantidad)
 	#-------------Label de daño recibido---------
 	label_daño_recibido.text = str(cantidad)#Numerito a mostrar
-	label_daño_recibido.modulate =Color(1.0, 1.0, 1.0, 1.0)#Le pone el color
+	label_daño_recibido.modulate =Color(1.0, 0.112, 0.169, 1.0)#Le pone el color
 	label_daño_recibido.set_position(Vector2(0,0))#Resetea la posicion del label
 	animar_label_daño_recibido = true#Activa la animacion de process
 	label_daño_recibido.visible = true#Lo hace visible
