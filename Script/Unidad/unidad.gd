@@ -38,6 +38,9 @@ var vida_baja : Color = Color(0.774, 0.0, 0.0, 1.0)
 var franjas_de_vida : Array #Almacena los limites de franjas para cambiar los colores| 50% media 25% baja
 var actual_franja_de_vida : int = 3#Cada vez que se baja una franja, cambia el color
 #------Barra de vida--------
+@onready var label_daño_recibido : Label = Label.new()
+var animar_label_daño_recibido : bool = false
+var altura_maxima_animacion : int = -100
 #-----------Informacion combate---------------------
 var opciones_de_combate = {}
 #	(png_path : String, nombre_ataque : String, tipo_daño : String,
@@ -47,6 +50,12 @@ var opciones_de_combate = {}
 func instanciar_cosas_esenciales():
 	area2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area2d.mouse_exited.connect(_on_area_2d_mouse_exited)
+	self.add_child(label_daño_recibido)#Agrega el label como hijo
+	label_daño_recibido.text = "Hola"
+	label_daño_recibido.visible = false#Esconde el label hasta que sea necesario
+	label_daño_recibido.z_index = 1#Hace que se dibuje por arriba del resto de cosas
+	label_daño_recibido.label_settings = preload("uid://dx2ew6ngt21k8")#Recurso con informacion de la fuente
+	#res://Escenas/Unidad/constructor/label_daño_flotante.tres
 	if barra_de_vida == null: #Verifica si hay una barra de vida asignada
 		push_error("Error unidad no tiene barra de vida " + self.name)
 	else:
@@ -56,7 +65,7 @@ func instanciar_cosas_esenciales():
 		barra_de_vida.get("theme_override_styles/fill").bg_color = vida_alta 
 		franjas_de_vida.append(barra_de_vida.max_value * 0.5)
 		franjas_de_vida.append(barra_de_vida.max_value * 0.25)
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if ejecutar_animacion_muerte:
 		animacion_morir()
 	if cambio_a_barra_de_vida > 0: #Si hay que actualizar la barra de vida
@@ -79,7 +88,16 @@ func _process(_delta: float) -> void:
 						barra_de_vida.get("theme_override_styles/fill").bg_color = vida_baja
 					_:
 						push_error("Ninguna franja de linea coincide con el valor actual")
-				
+	if animar_label_daño_recibido: #Si hay que aplicar animacion al label
+		if label_daño_recibido.position.y > altura_maxima_animacion:#Si aun tiene que seguir subiendo, sube.
+			label_daño_recibido.position -= Vector2(0,100*delta)#Le da altura
+		elif label_daño_recibido.modulate.a > 0 :
+			label_daño_recibido.modulate += Color(0, 0, 0, -.5 * delta)
+		else:
+			animar_label_daño_recibido = false
+			label_daño_recibido.visible = false
+			
+
 	
 		
 func _ready() -> void:
@@ -120,6 +138,13 @@ func infligir_daño():
 func recibir_daño(cantidad : int) -> void:
 	vida_actual -= cantidad
 	cambio_a_barra_de_vida = float(cantidad)
+	#-------------Label de daño recibido---------
+	label_daño_recibido.text = str(cantidad)#Numerito a mostrar
+	label_daño_recibido.modulate =Color(1.0, 1.0, 1.0, 1.0)#Le pone el color
+	label_daño_recibido.set_position(Vector2(0,0))#Resetea la posicion del label
+	animar_label_daño_recibido = true#Activa la animacion de process
+	label_daño_recibido.visible = true#Lo hace visible
+	#-------------Label de daño recibido---------
 	if vida_actual <= 0:
 		morir()
 
