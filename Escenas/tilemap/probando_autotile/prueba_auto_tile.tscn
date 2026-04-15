@@ -65,7 +65,7 @@ terrain_set_0/terrain_0/color = Color(0.7137255, 0, 0, 1)
 sources/2 = SubResource("TileSetAtlasSource_uvo03")
 
 [node name="PruebaAutoTile" type="TileMapLayer" unique_id=169452657]
-tile_map_data = PackedByteArray("AAAAAAAAAgABAAEAAAD5////AgABAAAAAAD4/wAAAgAAAAAAAAD4/wEAAgAAAAEAAAD5/wEAAgABAAIAAAD6/wEAAgACAAEAAAD6/wAAAgACAAAAAAD5/wAAAgABAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAD5////AgABAAAAAAD4/wAAAgAAAAAAAAD4/wEAAgAAAAEAAAD5/wEAAgABAAIAAAD6/wEAAgACAAEAAAD6/wAAAgACAAAAAAD5/wAAAgABAAEAAAA=")
 tile_set = SubResource("TileSet_fbdi5")
 script = ExtResource("2_uvo03")
 
