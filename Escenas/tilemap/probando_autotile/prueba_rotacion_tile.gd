@@ -22,5 +22,6 @@ func rotar():
 	elif contador == 3:
 		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | TileTransform.ROTATE_270)
 		contador = -1
+#https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
 #Con esto haciendo la mitad de assets puedo cubrir todas las posibilidades, y luego rotar los existentes segun la necesidad 
