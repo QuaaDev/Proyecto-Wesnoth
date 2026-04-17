@@ -1,8 +1,10 @@
 extends TileMapLayer
 @onready var button: Button = $Button
+@onready var label: Label = $Label
+
 var coordenadas = Vector2i(0, 0)
 var source_id = 2
-var atlas_coordenadas = Vector2i(1,0)
+var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0)]
 var alternative_id = 0
 var contador = -1
 enum TileTransform {
@@ -19,23 +21,27 @@ enum FlipEnum{
 func rotar():
 	contador += 1
 	if contador == 0:
-		print("horizontal flip")
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | 0) #Devuelve la orientacion original
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | FlipEnum.fliph)#aplica fliph
+		label.text = "horizontal flip"
+		for i in atlas_coordenadas:
+			set_cell(i, source_id, i, alternative_id | 0) #Devuelve la orientacion original
+			set_cell(i, source_id, i, alternative_id | FlipEnum.fliph)#aplica fliph
 		#0,0,1,1,1,0 -> 1,1,0,0,0,1 horizontal flip 
 	elif contador == 1:
-		print("vertical flip")
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | 0)#Devuelve la orientacion original
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | FlipEnum.flipv)#aplica flipv
-		#,1,1,1,0,0,0 -> 0,0,0,1,1,1 vertical flip
+		label.text = "vertical flip"
+		for i in atlas_coordenadas:
+			set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
+			set_cell(i, source_id, i, alternative_id | FlipEnum.flipv)#aplica flipv
+			#,1,1,1,0,0,0 -> 0,0,0,1,1,1 vertical flip
 	elif contador == 2:
-		print("diagonal flip")
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | 0)#Devuelve la orientacion original
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | FlipEnum.flipv_and_h)#aplica flipv
+		label.text = "diagonal flip"
+		for i in atlas_coordenadas:
+			set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
+			set_cell(i, source_id, i, alternative_id | FlipEnum.flipv_and_h)#aplica flipv
 		#0,1,1,1,0,0 -> 1,0,0,0,1,1 diagonal flip
 	elif contador == 3:
-		print("Original position")
-		set_cell(coordenadas, source_id, atlas_coordenadas, alternative_id | 0)
+		label.text = "Original position"
+		for i in atlas_coordenadas:
+			set_cell(i, source_id, i, alternative_id | 0)
 		contador = -1
 #https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
