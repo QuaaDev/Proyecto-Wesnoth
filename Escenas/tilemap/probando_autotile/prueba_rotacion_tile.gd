@@ -5,7 +5,7 @@ extends TileMapLayer
 var coordenadas = Vector2i(0, 0)
 var source_id = 2
 var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
-Vector2i(6,0),Vector2i(7,0)]
+Vector2i(6,0),Vector2i(7,0),Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1)]
 var alternative_id = 0
 var contador = -1
 enum TileTransform {
