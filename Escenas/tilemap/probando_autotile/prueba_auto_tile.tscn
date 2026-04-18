@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cxvmlqbtjqsws"]
+[gd_scene format=3 uid="uid://cxvmlqbtjqsws"]
 
 [ext_resource type="Texture2D" uid="uid://bri30snq21y3g" path="res://Assets/tilemap/PruebaAutoTile/primerresultado.png" id="1_ae07t"]
 [ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Escenas/tilemap/probando_autotile/prueba_rotacion_tile.gd" id="2_uvo03"]
@@ -69,6 +69,7 @@ texture_region_size = Vector2i(72, 72)
 10:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fbdi5"]
+tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(72, 72)
 terrain_set_0/mode = 0
@@ -80,7 +81,7 @@ sources/2 = SubResource("TileSetAtlasSource_uvo03")
 font_size = 32
 
 [node name="PruebaAutoTile" type="TileMapLayer" unique_id=169452657]
-tile_map_data = PackedByteArray("AAAAAAAAAgACAAAAAAD4/wEAAgAAAAEAAAD5/wEAAgABAAIAAAD6/wEAAgACAAEAAAD6/wAAAgACAAAAAAD5/wAAAgABAAEAAAA=")
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 248, 255, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0, 250, 255, 1, 0, 2, 0, 2, 0, 1, 0, 0, 0, 250, 255, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 249, 255, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_fbdi5")
 script = ExtResource("2_uvo03")
 
