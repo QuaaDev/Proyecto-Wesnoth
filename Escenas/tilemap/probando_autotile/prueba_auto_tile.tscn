@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://b7fkkp3w8rnq2" path="res://Escenas/tilemap/recurso_tile_set.tres" id="1_uvo03"]
 [ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Escenas/tilemap/probando_autotile/prueba_rotacion_tile.gd" id="2_uvo03"]
+[ext_resource type="TileSet" uid="uid://d3whrv1kuby2b" path="res://Escenas/tilemap/probando_autotile/terreno_efecto.tres" id="3_fbdi5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uvo03"]
 font_size = 32
@@ -15,16 +16,22 @@ limite_del_mapa = Vector2i(5, 4)
 [node name="TerrainCarpet" type="Node" parent="." unique_id=1641483768]
 
 [node name="Layer0" type="TileMapLayer" parent="TerrainCarpet" unique_id=1126308]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Layer1" type="TileMapLayer" parent="TerrainCarpet" unique_id=861952165]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Layer2" type="TileMapLayer" parent="TerrainCarpet" unique_id=2114570888]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Layer3" type="TileMapLayer" parent="TerrainCarpet" unique_id=372196041]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Layer4" type="TileMapLayer" parent="TerrainCarpet" unique_id=260953442]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Layer5" type="TileMapLayer" parent="TerrainCarpet" unique_id=47655942]
+tile_set = ExtResource("3_fbdi5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1238675161]
 
