@@ -46,15 +46,27 @@ func aplicar_terreno():
 			var tipo_terreno_id = custom_data.get_custom_data("tipo_terreno_id")#Almacena el id del terreno
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
 			var vecinos = get_neighbors(coordenada)#Almacena los vecinos en formato 0,1,2,3,4,5 del template
+			print("--------------------------")
+			print("Calculando, ",coordenada)
 			for i in vecinos:#Va del 0 al 5
-				if !(get_cell_source_id(i) == -1):
+				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
+					contador_posicion_bit = 0
+				if get_cell_source_id(i) == -1:
 					#Si el tile vecino es invalido, lo saltea 
 					print("Vecino sin tile definido, aplicando continue")
 					continue
-				
+				var vecino_tipo_terreno_id = get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
+				if tipo_terreno_id != vecino_tipo_terreno_id:
+					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
+					var nombre_variable = "layer" + str(contador_posicion_bit)
+					print("Edito la variable: ",nombre_variable)
+					pass
+				contador_posicion_bit += 1
+				print("mio ",tipo_terreno_id)
+				print("vecino ",vecino_tipo_terreno_id)
+			print("------------------------")
 			#set_cell(coordenada, source_id, atlascoordenada, alternative_id | FlipEnum.fliph)#aplica fliph
-			print("vecinos de :",coordenada," son: ")
-			print("Mi Modelo: ", get_neighbors(coordenada))
+			#print("vecinos de :", coordenada," son ",get_neighbors(coordenada))
 
 
 func prueba_rotaciones():
