@@ -11,10 +11,10 @@ extends TileMapLayer
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 var coordenadas = Vector2i(0, 0)
-var source_id = 5
+#var source_id = 5
 var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
 Vector2i(6,0),Vector2i(7,0),Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1)]
-var alternative_id = 0
+#var alternative_id = 0
 var contador = -1
 enum TileTransform {
 	ROTATE_0 = 0,
@@ -28,34 +28,50 @@ enum FlipEnum{
 	flipv_and_h = TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_FLIP_H,
 }
 func rotar():
-	prueba_rotaciones()
-	pass
+	aplicar_terreno()
+	#prueba_rotaciones()
+
+func aplicar_terreno():
+	#Explora todas las coordenadas dentro del area del limite (incluyendo el limite)
+	#+1 para que incluya completamente el limite del mapa, si no queda 1 por debajo
+	for x in range(0,limite_del_mapa.x+1):
+		for y in range(0,limite_del_mapa.y+1):
+			var coordenada = Vector2i(x,y)
+			var source_id = get_cell_source_id(coordenada)
+			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
+				continue
+			var atlas_coordenada = get_cell_atlas_coords(coordenada)
+			var alternative_id = 0
+			#set_cell(coordenada, source_id, atlascoordenada, alternative_id | FlipEnum.fliph)#aplica fliph
+			#Array[Vector2i] get_surrounding_cells(coords: Vector2i)
+			print(coordenada,source_id,atlas_coordenada,alternative_id)
+
 
 func prueba_rotaciones():
 	contador += 1
-	if contador == 0:
-		label.text = "horizontal flip"
-		for i in atlas_coordenadas:
-			set_cell(i, source_id, i, alternative_id | 0) #Devuelve la orientacion original
-			set_cell(i, source_id, i, alternative_id | FlipEnum.fliph)#aplica fliph
-		#0,0,1,1,1,0 -> 1,1,0,0,0,1 horizontal flip 
-	elif contador == 1:
-		label.text = "vertical flip"
-		for i in atlas_coordenadas:
-			set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
-			set_cell(i, source_id, i, alternative_id | FlipEnum.flipv)#aplica flipv
-			#,1,1,1,0,0,0 -> 0,0,0,1,1,1 vertical flip
-	elif contador == 2:
-		label.text = "diagonal flip"
-		for i in atlas_coordenadas:
-			set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
-			set_cell(i, source_id, i, alternative_id | FlipEnum.flipv_and_h)#aplica flipv
-		#0,1,1,1,0,0 -> 1,0,0,0,1,1 diagonal flip
-	elif contador == 3:
-		label.text = "Original position"
-		for i in atlas_coordenadas:
-			set_cell(i, source_id, i, alternative_id | 0)
-		contador = -1
+	#if contador == 0:
+		#label.text = "horizontal flip"
+		#for i in atlas_coordenadas:
+			#set_cell(i, source_id, i, alternative_id | 0) #Devuelve la orientacion original
+			#set_cell(i, source_id, i, alternative_id | FlipEnum.fliph)#aplica fliph
+		##0,0,1,1,1,0 -> 1,1,0,0,0,1 horizontal flip 
+	#elif contador == 1:
+		#label.text = "vertical flip"
+		#for i in atlas_coordenadas:
+			#set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
+			#set_cell(i, source_id, i, alternative_id | FlipEnum.flipv)#aplica flipv
+			##,1,1,1,0,0,0 -> 0,0,0,1,1,1 vertical flip
+	#elif contador == 2:
+		#label.text = "diagonal flip"
+		#for i in atlas_coordenadas:
+			#set_cell(i, source_id, i, alternative_id | 0)#Devuelve la orientacion original
+			#set_cell(i, source_id, i, alternative_id | FlipEnum.flipv_and_h)#aplica flipv
+		##0,1,1,1,0,0 -> 1,0,0,0,1,1 diagonal flip
+	#elif contador == 3:
+		#label.text = "Original position"
+		#for i in atlas_coordenadas:
+			#set_cell(i, source_id, i, alternative_id | 0)
+		#contador = -1
 	
 #https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
