@@ -2,12 +2,12 @@ extends TileMapLayer
 @onready var button: Button = $Button
 @onready var label: Label = $Label
 #-------Referencias layers-------------
-@onready var layer_0: TileMapLayer = $TerrainCarpet/Layer0
-@onready var layer_1: TileMapLayer = $TerrainCarpet/Layer1
-@onready var layer_2: TileMapLayer = $TerrainCarpet/Layer2
-@onready var layer_3: TileMapLayer = $TerrainCarpet/Layer3
-@onready var layer_4: TileMapLayer = $TerrainCarpet/Layer4
-@onready var layer_5: TileMapLayer = $TerrainCarpet/Layer5
+@onready var Layer0: TileMapLayer = $TerrainCarpet/Layer0
+@onready var Layer1: TileMapLayer = $TerrainCarpet/Layer1
+@onready var Layer2: TileMapLayer = $TerrainCarpet/Layer2
+@onready var Layer3: TileMapLayer = $TerrainCarpet/Layer3
+@onready var Layer4: TileMapLayer = $TerrainCarpet/Layer4
+@onready var Layer5: TileMapLayer = $TerrainCarpet/Layer5
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 var coordenadas = Vector2i(0, 0)
@@ -40,8 +40,8 @@ func aplicar_terreno():
 			var source_id = get_cell_source_id(coordenada)
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
-			var atlas_coordenada = get_cell_atlas_coords(coordenada)
-			var alternative_id = 0
+			#var atlas_coordenada = get_cell_atlas_coords(coordenada)
+			#var alternative_id = 0
 			var custom_data = get_cell_tile_data(coordenada)
 			var tipo_terreno_id = custom_data.get_custom_data("tipo_terreno_id")#Almacena el id del terreno
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
@@ -54,13 +54,38 @@ func aplicar_terreno():
 				if get_cell_source_id(i) == -1:
 					#Si el tile vecino es invalido, lo saltea 
 					print("Vecino sin tile definido, aplicando continue")
+					contador_posicion_bit += 1
 					continue
 				var vecino_tipo_terreno_id = get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
-					var nombre_variable = "layer" + str(contador_posicion_bit)
+					var nombre_variable = "Layer" + str(contador_posicion_bit)
 					print("Edito la variable: ",nombre_variable)
-					pass
+					var efecto_a_aplicar
+					match nombre_variable: 
+						#Segun el layer a editar, es el efecto que se le asigna
+						"Layer0":
+							efecto_a_aplicar = 0
+						"Layer1":
+							efecto_a_aplicar = 0
+						"Layer2":
+							efecto_a_aplicar = FlipEnum.fliph
+						"Layer3":
+							efecto_a_aplicar = FlipEnum.flipv_and_h
+						"Layer4":
+							efecto_a_aplicar = FlipEnum.flipv
+						"Layer5":
+							efecto_a_aplicar = FlipEnum.flipv
+					if tipo_terreno_id == 1:
+						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
+							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,2), 0 | efecto_a_aplicar)
+						else:
+							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,2), 0 | efecto_a_aplicar)
+					else:
+						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
+							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,3), 0 | efecto_a_aplicar)
+						else:
+							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,3), 0 | efecto_a_aplicar)
 				contador_posicion_bit += 1
 				print("mio ",tipo_terreno_id)
 				print("vecino ",vecino_tipo_terreno_id)
