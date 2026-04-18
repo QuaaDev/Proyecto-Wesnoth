@@ -12,8 +12,8 @@ extends TileMapLayer
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 var coordenadas = Vector2i(0, 0)
 #var source_id = 5
-var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
-Vector2i(6,0),Vector2i(7,0),Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1)]
+#var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
+#Vector2i(6,0),Vector2i(7,0),Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1)]
 #var alternative_id = 0
 var contador = -1
 enum TileTransform {
@@ -42,9 +42,14 @@ func aplicar_terreno():
 				continue
 			var atlas_coordenada = get_cell_atlas_coords(coordenada)
 			var alternative_id = 0
+			var custom_data = get_cell_tile_data(coordenada)
+			var tipo_terreno_id = custom_data.get_custom_data("tipo_terreno_id")#Almacena el id del terreno
+			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
+			for i in range(0,7):#Va del 0 al 6
+				print(i)
 			#set_cell(coordenada, source_id, atlascoordenada, alternative_id | FlipEnum.fliph)#aplica fliph
-			#Array[Vector2i] get_surrounding_cells(coords: Vector2i)
-			print(coordenada,source_id,atlas_coordenada,alternative_id)
+			print("vecinos de :",coordenada," son: ")
+			print("Mi Modelo: ", get_neighbors(coordenada))
 
 
 func prueba_rotaciones():
@@ -76,25 +81,25 @@ func prueba_rotaciones():
 #https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
 #Puedo usar fliph y flipv de forma individual para cubrir 3 casos con un solo sprite! Hora de hacer todo de cero el template...
-func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de X tile hex
+func get_neighbors(origen : Vector2i) -> Array: #Devuelve la lista de vecinos de X tile hex
 	#Modelo odd-q
 	var vecinos = []
 	#even = par , odd = impar
 	if int(origen.x) % 2 == 0: #Si la columna es par
 		#print("Columna par")
-		vecinos.append(Vector2(origen.x - 1, origen.y - 1))#NO
-		vecinos.append(Vector2(origen.x , origen.y - 1))#N
-		vecinos.append(Vector2(origen.x + 1 , origen.y - 1))#NE
-		vecinos.append(Vector2(origen.x + 1 , origen.y)) #SE
-		vecinos.append(Vector2(origen.x , origen.y + 1))#S
-		vecinos.append(Vector2(origen.x - 1, origen.y))#SO
+		vecinos.append(Vector2i(origen.x - 1, origen.y - 1))#NO
+		vecinos.append(Vector2i(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2i(origen.x + 1 , origen.y - 1))#NE
+		vecinos.append(Vector2i(origen.x + 1 , origen.y)) #SE
+		vecinos.append(Vector2i(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2i(origen.x - 1, origen.y))#SO
 	else:
 		#print("columna impar")
-		vecinos.append(Vector2(origen.x- 1 , origen.y))#NO
-		vecinos.append(Vector2(origen.x , origen.y - 1))#N
-		vecinos.append(Vector2(origen.x + 1, origen.y)) #NE
-		vecinos.append(Vector2(origen.x + 1 , origen.y + 1)) #SE
-		vecinos.append(Vector2(origen.x , origen.y + 1))#S
-		vecinos.append(Vector2(origen.x - 1, origen.y + 1))#SO
+		vecinos.append(Vector2i(origen.x- 1 , origen.y))#NO
+		vecinos.append(Vector2i(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2i(origen.x + 1, origen.y)) #NE
+		vecinos.append(Vector2i(origen.x + 1 , origen.y + 1)) #SE
+		vecinos.append(Vector2i(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2i(origen.x - 1, origen.y + 1))#SO
 	#editado para que NO sea primero para el patron 0,1,2,3,4,5
 	return vecinos
