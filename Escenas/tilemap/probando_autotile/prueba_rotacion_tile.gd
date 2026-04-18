@@ -1,9 +1,16 @@
 extends TileMapLayer
 @onready var button: Button = $Button
 @onready var label: Label = $Label
-
+#-------Referencias layers-------------
+@onready var layer_0: TileMapLayer = $TerrainCarpet/Layer0
+@onready var layer_1: TileMapLayer = $TerrainCarpet/Layer1
+@onready var layer_2: TileMapLayer = $TerrainCarpet/Layer2
+@onready var layer_3: TileMapLayer = $TerrainCarpet/Layer3
+@onready var layer_4: TileMapLayer = $TerrainCarpet/Layer4
+@onready var layer_5: TileMapLayer = $TerrainCarpet/Layer5
+#--------------------------------------
 var coordenadas = Vector2i(0, 0)
-var source_id = 2
+var source_id = 5
 var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
 Vector2i(6,0),Vector2i(7,0),Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1)]
 var alternative_id = 0
@@ -20,6 +27,10 @@ enum FlipEnum{
 	flipv_and_h = TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_FLIP_H,
 }
 func rotar():
+	prueba_rotaciones()
+	pass
+
+func prueba_rotaciones():
 	contador += 1
 	if contador == 0:
 		label.text = "horizontal flip"
@@ -44,6 +55,7 @@ func rotar():
 		for i in atlas_coordenadas:
 			set_cell(i, source_id, i, alternative_id | 0)
 		contador = -1
+	
 #https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
 #Puedo usar fliph y flipv de forma individual para cubrir 3 casos con un solo sprite! Hora de hacer todo de cero el template...

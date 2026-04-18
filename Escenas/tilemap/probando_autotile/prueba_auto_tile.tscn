@@ -1,89 +1,29 @@
-[gd_scene format=3 uid="uid://cxvmlqbtjqsws"]
+[gd_scene format=4 uid="uid://cxvmlqbtjqsws"]
 
-[ext_resource type="Texture2D" uid="uid://bri30snq21y3g" path="res://Assets/tilemap/PruebaAutoTile/primerresultado.png" id="1_ae07t"]
+[ext_resource type="TileSet" uid="uid://b7fkkp3w8rnq2" path="res://Escenas/tilemap/recurso_tile_set.tres" id="1_uvo03"]
 [ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Escenas/tilemap/probando_autotile/prueba_rotacion_tile.gd" id="2_uvo03"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvo03"]
-texture = ExtResource("1_ae07t")
-texture_region_size = Vector2i(72, 72)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 0
-0:0/0/terrains_peering_bit/bottom_right_corner = 0
-0:0/0/terrains_peering_bit/bottom_side = 0
-0:0/0/terrains_peering_bit/bottom_left_corner = 0
-0:0/0/terrains_peering_bit/top_right_corner = 0
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/terrains_peering_bit/bottom_right_corner = 0
-1:0/0/terrains_peering_bit/bottom_side = 0
-1:0/0/terrains_peering_bit/bottom_left_corner = 0
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/terrains_peering_bit/bottom_right_corner = 0
-2:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0/terrains_peering_bit/bottom_left_corner = 0
-2:0/0/terrains_peering_bit/top_left_corner = 0
-0:1/0 = 0
-0:1/0/terrain_set = 0
-0:1/0/terrain = 0
-0:1/0/terrains_peering_bit/bottom_right_corner = 0
-0:1/0/terrains_peering_bit/top_left_corner = 0
-0:1/0/terrains_peering_bit/top_side = 0
-0:1/0/terrains_peering_bit/top_right_corner = 0
-1:1/0 = 0
-1:1/0/terrain_set = 0
-1:1/0/terrain = 0
-1:1/0/terrains_peering_bit/bottom_right_corner = 0
-1:1/0/terrains_peering_bit/bottom_side = 0
-1:1/0/terrains_peering_bit/bottom_left_corner = 0
-1:1/0/terrains_peering_bit/top_left_corner = 0
-1:1/0/terrains_peering_bit/top_side = 0
-1:1/0/terrains_peering_bit/top_right_corner = 0
-2:1/0 = 0
-2:1/0/terrain_set = 0
-2:1/0/terrain = 0
-2:1/0/terrains_peering_bit/bottom_left_corner = 0
-2:1/0/terrains_peering_bit/top_left_corner = 0
-2:1/0/terrains_peering_bit/top_side = 0
-2:1/0/terrains_peering_bit/top_right_corner = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-6:1/0 = 0
-5:1/0 = 0
-4:1/0 = 0
-3:1/0 = 0
-7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-11:0/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-11:1/0 = 0
-10:1/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_fbdi5"]
-tile_shape = 3
-tile_offset_axis = 1
-tile_size = Vector2i(72, 72)
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Prueba0"
-terrain_set_0/terrain_0/color = Color(0.7137255, 0, 0, 1)
-sources/2 = SubResource("TileSetAtlasSource_uvo03")
 
 [sub_resource type="LabelSettings" id="LabelSettings_uvo03"]
 font_size = 32
 
 [node name="PruebaAutoTile" type="TileMapLayer" unique_id=169452657]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 248, 255, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0, 250, 255, 1, 0, 2, 0, 2, 0, 1, 0, 0, 0, 250, 255, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 249, 255, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0)
-tile_set = SubResource("TileSet_fbdi5")
+tile_map_data = PackedByteArray("AAAAAAAABQAAAAIAAAABAAAABQAAAAMAAAAAAAEABQAAAAMAAAD//wAABQAAAAMAAAD/////BQAAAAMAAAAAAP//BQAAAAMAAAABAP//BQAAAAMAAAA=")
+tile_set = ExtResource("1_uvo03")
 script = ExtResource("2_uvo03")
+
+[node name="TerrainCarpet" type="Node" parent="." unique_id=1641483768]
+
+[node name="Layer0" type="TileMapLayer" parent="TerrainCarpet" unique_id=1126308]
+
+[node name="Layer1" type="TileMapLayer" parent="TerrainCarpet" unique_id=861952165]
+
+[node name="Layer2" type="TileMapLayer" parent="TerrainCarpet" unique_id=2114570888]
+
+[node name="Layer3" type="TileMapLayer" parent="TerrainCarpet" unique_id=372196041]
+
+[node name="Layer4" type="TileMapLayer" parent="TerrainCarpet" unique_id=260953442]
+
+[node name="Layer5" type="TileMapLayer" parent="TerrainCarpet" unique_id=47655942]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1238675161]
 
