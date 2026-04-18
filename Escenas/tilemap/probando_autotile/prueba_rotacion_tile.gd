@@ -34,8 +34,8 @@ func rotar():
 func aplicar_terreno():
 	#Explora todas las coordenadas dentro del area del limite (incluyendo el limite)
 	#+1 para que incluya completamente el limite del mapa, si no queda 1 por debajo
-	for x in range(0,limite_del_mapa.x+1):
-		for y in range(0,limite_del_mapa.y+1):
+	for x in range(-1,limite_del_mapa.x+1):
+		for y in range(-1,limite_del_mapa.y+1):
 			var coordenada = Vector2i(x,y)
 			var source_id = get_cell_source_id(coordenada)
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
