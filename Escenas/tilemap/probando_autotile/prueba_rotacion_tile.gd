@@ -9,6 +9,7 @@ extends TileMapLayer
 @onready var layer_4: TileMapLayer = $TerrainCarpet/Layer4
 @onready var layer_5: TileMapLayer = $TerrainCarpet/Layer5
 #--------------------------------------
+@export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 var coordenadas = Vector2i(0, 0)
 var source_id = 5
 var atlas_coordenadas = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),
@@ -59,3 +60,25 @@ func prueba_rotaciones():
 #https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html#constants
 #Las rotaciones de 90 y 270 no me sirven de nada prq rompe la forma del hexagono, tienen que ser siempre de 0 o 180
 #Puedo usar fliph y flipv de forma individual para cubrir 3 casos con un solo sprite! Hora de hacer todo de cero el template...
+func get_neighbors(origen : Vector2) -> Array: #Devuelve la lista de vecinos de X tile hex
+	#Modelo odd-q
+	var vecinos = []
+	#even = par , odd = impar
+	if int(origen.x) % 2 == 0: #Si la columna es par
+		#print("Columna par")
+		vecinos.append(Vector2(origen.x - 1, origen.y - 1))#NO
+		vecinos.append(Vector2(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2(origen.x + 1 , origen.y - 1))#NE
+		vecinos.append(Vector2(origen.x + 1 , origen.y)) #SE
+		vecinos.append(Vector2(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2(origen.x - 1, origen.y))#SO
+	else:
+		#print("columna impar")
+		vecinos.append(Vector2(origen.x- 1 , origen.y))#NO
+		vecinos.append(Vector2(origen.x , origen.y - 1))#N
+		vecinos.append(Vector2(origen.x + 1, origen.y)) #NE
+		vecinos.append(Vector2(origen.x + 1 , origen.y + 1)) #SE
+		vecinos.append(Vector2(origen.x , origen.y + 1))#S
+		vecinos.append(Vector2(origen.x - 1, origen.y + 1))#SO
+	#editado para que NO sea primero para el patron 0,1,2,3,4,5
+	return vecinos

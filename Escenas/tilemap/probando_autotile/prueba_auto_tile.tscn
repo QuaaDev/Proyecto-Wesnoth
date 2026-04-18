@@ -7,9 +7,10 @@
 font_size = 32
 
 [node name="PruebaAutoTile" type="TileMapLayer" unique_id=169452657]
-tile_map_data = PackedByteArray("AAAAAAAABQAAAAIAAAABAAAABQAAAAMAAAAAAAEABQAAAAMAAAD//wAABQAAAAMAAAD/////BQAAAAMAAAAAAP//BQAAAAMAAAABAP//BQAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAADAAEABQAAAAIAAAACAAIABQAAAAMAAAACAAEABQAAAAMAAAADAAAABQAAAAMAAAAEAAEABQAAAAMAAAAEAAIABQAAAAMAAAADAAIABQAAAAMAAAA=")
 tile_set = ExtResource("1_uvo03")
 script = ExtResource("2_uvo03")
+limite_del_mapa = Vector2i(5, 4)
 
 [node name="TerrainCarpet" type="Node" parent="." unique_id=1641483768]
 
