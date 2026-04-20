@@ -46,21 +46,21 @@ func aplicar_terreno():
 			var tipo_terreno_id = custom_data.get_custom_data("tipo_terreno_id")#Almacena el id del terreno
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
 			var vecinos = get_neighbors(coordenada)#Almacena los vecinos en formato 0,1,2,3,4,5 del template
-			print("--------------------------")
-			print("Calculando, ",coordenada)
+			#print("--------------------------")
+			#print("Calculando, ",coordenada)
 			for i in vecinos:#Va del 0 al 5
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
 				if get_cell_source_id(i) == -1:
 					#Si el tile vecino es invalido, lo saltea 
-					print("Vecino sin tile definido, aplicando continue")
+					#print("Vecino sin tile definido, aplicando continue")
 					contador_posicion_bit += 1
 					continue
 				var vecino_tipo_terreno_id = get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
 					var nombre_variable = "Layer" + str(contador_posicion_bit)
-					print("Edito la variable: ",nombre_variable)
+					#print("Edito la variable: ",nombre_variable)
 					var efecto_a_aplicar
 					match nombre_variable: 
 						#Segun el layer a editar, es el efecto que se le asigna
@@ -87,9 +87,9 @@ func aplicar_terreno():
 						else:
 							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,3), 0 | efecto_a_aplicar)
 				contador_posicion_bit += 1
-				print("mio ",tipo_terreno_id)
-				print("vecino ",vecino_tipo_terreno_id)
-			print("------------------------")
+				#print("mio ",tipo_terreno_id)
+				#print("vecino ",vecino_tipo_terreno_id)
+			#print("------------------------")
 			#set_cell(coordenada, source_id, atlascoordenada, alternative_id | FlipEnum.fliph)#aplica fliph
 			#print("vecinos de :", coordenada," son ",get_neighbors(coordenada))
 
