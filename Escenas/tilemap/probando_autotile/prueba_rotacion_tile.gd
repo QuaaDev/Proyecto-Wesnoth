@@ -17,10 +17,7 @@ enum FlipEnum{
 }
 func rotar():
 	aplicar_terreno()
-func _ready() -> void:
-	print(FlipEnum.fliph)
-	print(FlipEnum.flipv)
-	print(FlipEnum.flipv_and_h)
+
 func aplicar_terreno():
 	#Explora todas las coordenadas dentro del area del limite (incluyendo el limite)
 	#+1 para que incluya completamente el limite del mapa, si no queda 1 por debajo
@@ -52,21 +49,8 @@ func aplicar_terreno():
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
 					var nombre_variable = "Layer" + str(contador_posicion_bit)
 					#print("Edito la variable: ",nombre_variable)
-					var efecto_a_aplicar
-					match nombre_variable: 
-						#Segun el layer a editar, es el efecto que se le asigna
-						"Layer0":
-							efecto_a_aplicar = 0
-						"Layer1":
-							efecto_a_aplicar = 0
-						"Layer2":
-							efecto_a_aplicar = FlipEnum.fliph
-						"Layer3":
-							efecto_a_aplicar = FlipEnum.flipv_and_h
-						"Layer4":
-							efecto_a_aplicar = FlipEnum.flipv
-						"Layer5":
-							efecto_a_aplicar = FlipEnum.flipv
+					var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
+					#--------------Volver mas modular el terreno a elegir-------------------------------
 					if tipo_terreno_id == 1:
 						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
 							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,2), 0 | efecto_a_aplicar)
@@ -77,13 +61,33 @@ func aplicar_terreno():
 							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,3), 0 | efecto_a_aplicar)
 						else:
 							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,3), 0 | efecto_a_aplicar)
+					#------------------------------------------------------------------------------------
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
 				#print("mio ",tipo_terreno_id)
 				#print("vecino ",vecino_tipo_terreno_id)
 			#print("------------------------")
 			#print("vecinos de :", coordenada," son ",get_neighbors(coordenada))
 
-#func aplicar_efecto(Layer : String) -> 
+func aplicar_efecto(Layer : String) -> int:
+	match Layer: 
+		#Segun el layer a editar, es el efecto que se le asigna
+		"Layer0":
+			return 0
+		"Layer1":
+			return 0
+		"Layer2":
+			return FlipEnum.fliph
+		"Layer3":
+			return FlipEnum.flipv_and_h
+		"Layer4":
+			return FlipEnum.flipv
+		"Layer5":
+			return FlipEnum.flipv
+		_:
+			push_error("Layer no identificado, valor: ",Layer)
+			return 0
+
+
 func get_neighbors(origen : Vector2i) -> Array: #Devuelve la lista de vecinos de X tile hex
 	#Modelo odd-q
 	var vecinos = []
