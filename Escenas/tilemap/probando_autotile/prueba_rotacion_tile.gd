@@ -10,6 +10,8 @@ extends TileMapLayer
 @onready var Layer5: TileMapLayer = $TerrainCarpet/Layer5
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
+
+#https://docs.godotengine.org/en/stable/classes/class_tileset.html#class-tileset-method-add-source
 enum FlipEnum{
 	fliph = TileSetAtlasSource.TRANSFORM_FLIP_H,
 	flipv = TileSetAtlasSource.TRANSFORM_FLIP_V,
