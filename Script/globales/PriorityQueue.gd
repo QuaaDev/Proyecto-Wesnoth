@@ -9,7 +9,7 @@ Based on: https://en.wikipedia.org/wiki/Binary_heap
 var _data: Array = []
 
 func insert(element: Vector2, cost: float) -> void:
-	# Add the element to the bottom level of the heap at the leftmost open space
+	# Add the element to the bottom level of the heap at the leftmost open space.
 	self._data.push_back(Vector3(element.x, element.y, cost))
 	var new_element_index: int = self._data.size() - 1
 	self._up_heap(new_element_index)
