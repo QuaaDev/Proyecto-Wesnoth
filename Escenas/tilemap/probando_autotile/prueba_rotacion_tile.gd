@@ -10,13 +10,33 @@ extends TileMapLayer
 @onready var Layer5: TileMapLayer = $TerrainCarpet/Layer5
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
-
+@onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
+#Solo hace falta una prq alterar uno altera a todos los layers
 #https://docs.godotengine.org/en/stable/classes/class_tileset.html#class-tileset-method-add-source
 enum FlipEnum{
 	fliph = TileSetAtlasSource.TRANSFORM_FLIP_H,
 	flipv = TileSetAtlasSource.TRANSFORM_FLIP_V,
 	flipv_and_h = TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_FLIP_H,
 }
+
+func _ready() -> void:
+	agregar_source()#Agrega un tilesetatlassource al tileset
+	pass
+
+func agregar_source():
+	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas blabla
+	source.texture = load("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Textura a cargar
+	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
+	#-----------Creacion de los tile-------------
+	source.create_tile(Vector2i(1, 2))
+	source.create_tile(Vector2i(1, 3))
+	source.create_tile(Vector2i(2, 2))
+	source.create_tile(Vector2i(2, 3))
+	#-----------Creacion de los tile-------------
+	tileset.add_source(source)#Agrega el nuevo source
+
+
+
 func rotar():
 	aplicar_terreno()
 
@@ -55,14 +75,14 @@ func aplicar_terreno():
 					#--------------Volver mas modular el terreno a elegir-------------------------------
 					if tipo_terreno_id == 1:
 						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,2), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, 1, Vector2i(1,2), 0 | efecto_a_aplicar)
 						else:
-							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,2), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, 1, Vector2i(2,2), 0 | efecto_a_aplicar)
 					else:
 						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, 0, Vector2i(1,3), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, 1, Vector2i(1,3), 0 | efecto_a_aplicar)
 						else:
-							get(nombre_variable).set_cell(coordenada, 0, Vector2i(2,3), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, 1, Vector2i(2,3), 0 | efecto_a_aplicar)
 					#------------------------------------------------------------------------------------
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
 				#print("mio ",tipo_terreno_id)
