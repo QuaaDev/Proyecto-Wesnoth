@@ -22,20 +22,18 @@ enum FlipEnum{
 
 func _ready() -> void:
 	#agregar_terreno_compuesto("Blanco", "Negro")
-	agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
+	#agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
 	pass
 
-func agregar_source(path_png : String):
+func agregar_source(path_png : String, id : int):
 	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas blabla
 	source.texture = load(path_png)#Textura a cargar
 	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
 	#-----------Creacion de los tile-------------
-	source.create_tile(Vector2i(1, 2))
-	source.create_tile(Vector2i(1, 3))
-	source.create_tile(Vector2i(2, 2))
-	source.create_tile(Vector2i(2, 3))
+	source.create_tile(Vector2i(1, 0))
+	source.create_tile(Vector2i(2, 0))
 	#-----------Creacion de los tile-------------
-	tileset.add_source(source)#Agrega el nuevo source
+	tileset.add_source(source,id)#Agrega el nuevo source
 
 
 func rotar():
@@ -74,22 +72,16 @@ func aplicar_terreno():
 						pass
 					else:
 						agregar_terreno_compuesto(tipo_terreno_id, vecino_tipo_terreno_id)#Si no existe lo carga
+					var source_id_del_terrain = obtener_source_id_terrain(tipo_terreno_id + "-" + vecino_tipo_terreno_id) #Almacena el id 
 					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					var nombre_variable = "Layer" + str(contador_posicion_bit)
 					#print("Edito la variable: ",nombre_variable)
 					var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
-					#--------------Volver mas modular el terreno a elegir-------------------------------
-					if tipo_terreno_id == "Blanco":
-						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, 1, Vector2i(1,2), 0 | efecto_a_aplicar)
-						else:
-							get(nombre_variable).set_cell(coordenada, 1, Vector2i(2,2), 0 | efecto_a_aplicar)
+					#Dependiendo del layer, es el tile que elige 
+					if nombre_variable == "Layer1" or nombre_variable == "Layer4":
+						get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
 					else:
-						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, 1, Vector2i(1,3), 0 | efecto_a_aplicar)
-						else:
-							get(nombre_variable).set_cell(coordenada, 1, Vector2i(2,3), 0 | efecto_a_aplicar)
-					#------------------------------------------------------------------------------------
+						get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(2, 0), 0 | efecto_a_aplicar)
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
 	for i in lista_terrenos_compuestos_cargados:
 		print(i.terreno_compuesto)
@@ -105,12 +97,22 @@ func verificar_si_existe_terreno_compuesto(terreno_compuesto : String) -> bool:
 		else:
 			continue
 	return false
-
 func agregar_terreno_compuesto(origen : String, vecino : String):
 	var nuevo_terreno_compuesto = terrain_compuesto.new()#Crea un nuevo terrain compuesto
 	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)#Le carga la informacion al objeto
 	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)#Guarda la referencia en la lista
+	nuevo_terreno_compuesto.cargar_id(lista_terrenos_compuestos_cargados.find(nuevo_terreno_compuesto))
+	agregar_source(CargaTerrainAssets.obtener_path(origen, vecino),nuevo_terreno_compuesto.id)#Obtiene el path del png y luego lo carga al source
+	print(nuevo_terreno_compuesto.id)
 	#El index del objeto DEBERIA de estar sincronizado con el index del source.
+
+func obtener_source_id_terrain(terreno_compuesto : String) -> int:
+	for i in lista_terrenos_compuestos_cargados: #Explora la lista
+		if i.terreno_compuesto == terreno_compuesto: #Buscando un terreno compuesto que coincida
+			return i.id #Si coincide, devuelve su id
+	push_error("Terreno compuesto no encontrado, devolviendo error")
+	return -1
+
 
 func aplicar_efecto(Layer : String) -> int:
 	match Layer: 
