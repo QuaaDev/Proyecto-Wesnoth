@@ -20,12 +20,12 @@ enum FlipEnum{
 }
 
 func _ready() -> void:
-	agregar_source()#Agrega un tilesetatlassource al tileset
+	agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
 	pass
 
-func agregar_source():
+func agregar_source(path_png : String):
 	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas blabla
-	source.texture = load("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Textura a cargar
+	source.texture = load(path_png)#Textura a cargar
 	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
 	#-----------Creacion de los tile-------------
 	source.create_tile(Vector2i(1, 2))
