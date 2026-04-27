@@ -11,6 +11,7 @@ extends TileMapLayer
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
+var lista_terrenos_compuestos_cargados : Array[terrain_compuesto]
 #Solo hace falta una prq alterar uno altera a todos los layers
 #https://docs.godotengine.org/en/stable/classes/class_tileset.html#class-tileset-method-add-source
 enum FlipEnum{
@@ -20,6 +21,7 @@ enum FlipEnum{
 }
 
 func _ready() -> void:
+	agregar_terreno_compuesto("Blanco", "Negro")
 	agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
 	pass
 
@@ -36,7 +38,6 @@ func agregar_source(path_png : String):
 	tileset.add_source(source)#Agrega el nuevo source
 
 
-
 func rotar():
 	aplicar_terreno()
 
@@ -49,8 +50,7 @@ func aplicar_terreno():
 			var source_id = get_cell_source_id(coordenada)#Obtiene su source id
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
-			#var atlas_coordenada = get_cell_atlas_coords(coordenada)
-			#var alternative_id = 0
+			#------------------seccion elegir terreno-----------------------
 			var tipo_terreno_id = get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
@@ -67,13 +67,15 @@ func aplicar_terreno():
 					contador_posicion_bit += 1#Avanza en uno la posicion del bit
 					continue
 				var vecino_tipo_terreno_id = get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
+				
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
+					print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					var nombre_variable = "Layer" + str(contador_posicion_bit)
 					#print("Edito la variable: ",nombre_variable)
 					var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
 					#--------------Volver mas modular el terreno a elegir-------------------------------
-					if tipo_terreno_id == 1:
+					if tipo_terreno_id == "Blanco":
 						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
 							get(nombre_variable).set_cell(coordenada, 1, Vector2i(1,2), 0 | efecto_a_aplicar)
 						else:
@@ -89,6 +91,19 @@ func aplicar_terreno():
 				#print("vecino ",vecino_tipo_terreno_id)
 			#print("------------------------")
 			#print("vecinos de :", coordenada," son ",get_neighbors(coordenada))
+			
+func verificar_si_existe_terreno_compuesto(terreno_compuesto : String) -> bool:
+	for i in lista_terrenos_compuestos_cargados:
+		if i.terreno_compuesto == terreno_compuesto:
+			return true
+		else:
+			continue
+	return false
+
+func agregar_terreno_compuesto(origen : String, vecino : String):
+	var nuevo_terreno_compuesto = terrain_compuesto.new()
+	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)
+	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)
 
 func aplicar_efecto(Layer : String) -> int:
 	match Layer: 
