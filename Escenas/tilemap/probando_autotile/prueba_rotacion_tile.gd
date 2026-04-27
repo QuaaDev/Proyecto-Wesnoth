@@ -21,7 +21,7 @@ enum FlipEnum{
 }
 
 func _ready() -> void:
-	agregar_terreno_compuesto("Blanco", "Negro")
+	#agregar_terreno_compuesto("Blanco", "Negro")
 	agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
 	pass
 
@@ -70,7 +70,11 @@ func aplicar_terreno():
 				
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
-					print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
+					if verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id): #si existe no lo vuelve a cargar
+						pass
+					else:
+						agregar_terreno_compuesto(tipo_terreno_id, vecino_tipo_terreno_id)#Si no existe lo carga
+					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					var nombre_variable = "Layer" + str(contador_posicion_bit)
 					#print("Edito la variable: ",nombre_variable)
 					var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
@@ -87,23 +91,26 @@ func aplicar_terreno():
 							get(nombre_variable).set_cell(coordenada, 1, Vector2i(2,3), 0 | efecto_a_aplicar)
 					#------------------------------------------------------------------------------------
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
+	for i in lista_terrenos_compuestos_cargados:
+		print(i.terreno_compuesto)
 				#print("mio ",tipo_terreno_id)
 				#print("vecino ",vecino_tipo_terreno_id)
 			#print("------------------------")
 			#print("vecinos de :", coordenada," son ",get_neighbors(coordenada))
 			
 func verificar_si_existe_terreno_compuesto(terreno_compuesto : String) -> bool:
-	for i in lista_terrenos_compuestos_cargados:
-		if i.terreno_compuesto == terreno_compuesto:
+	for i in lista_terrenos_compuestos_cargados: #Explora toda la lista
+		if i.terreno_compuesto == terreno_compuesto:#Verifica si esta cargado actualmente en la lista
 			return true
 		else:
 			continue
 	return false
 
 func agregar_terreno_compuesto(origen : String, vecino : String):
-	var nuevo_terreno_compuesto = terrain_compuesto.new()
-	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)
-	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)
+	var nuevo_terreno_compuesto = terrain_compuesto.new()#Crea un nuevo terrain compuesto
+	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)#Le carga la informacion al objeto
+	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)#Guarda la referencia en la lista
+	#El index del objeto DEBERIA de estar sincronizado con el index del source.
 
 func aplicar_efecto(Layer : String) -> int:
 	match Layer: 
