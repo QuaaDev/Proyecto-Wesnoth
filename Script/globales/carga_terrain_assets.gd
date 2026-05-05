@@ -28,4 +28,5 @@ const Verde : Dictionary = {
 	
 }
 func obtener_path (origen : String, vecino : String) -> String:
+	print("brr")
 	return get(origen)[vecino]

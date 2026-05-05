@@ -54,8 +54,8 @@ func aplicar_terreno():
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
 			var vecinos = get_neighbors(coordenada)#Almacena los vecinos en formato 0,1,2,3,4,5 del template
-			#print("--------------------------")
-			#print("Calculando, ",coordenada)
+			print("--------------------------")
+			print("Calculando, ",coordenada)
 			for i in vecinos:#Va del 0 al 5
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
