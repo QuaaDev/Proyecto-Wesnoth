@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cxvmlqbtjqsws"]
 
 [ext_resource type="Texture2D" uid="uid://b3qh4ybvqg6qi" path="res://Assets/tilemap/TilesTerreno/Terreno/tiles_basicos.png" id="1_fbdi5"]
-[ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Script/tilemap/prueba_rotacion_tile.gd" id="2_uvo03"]
+[ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Script/tilemap/autotile.gd" id="2_uvo03"]
 [ext_resource type="TileSet" uid="uid://d3whrv1kuby2b" path="res://Escenas/tilemap/probando_autotile/terreno_efecto.tres" id="3_fbdi5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_atdcd"]
