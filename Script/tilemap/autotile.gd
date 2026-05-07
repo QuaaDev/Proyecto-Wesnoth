@@ -1,13 +1,14 @@
-extends TileMapLayer
-@onready var button: Button = $Button
-@onready var label: Label = $Label
+extends Node
+@onready var button: Button = $"../Button"
+@onready var label: Label = $"../Label"
 #-------Referencias layers-------------
-@onready var Layer0: TileMapLayer = $TerrainCarpet/Layer0
-@onready var Layer1: TileMapLayer = $TerrainCarpet/Layer1
-@onready var Layer2: TileMapLayer = $TerrainCarpet/Layer2
-@onready var Layer3: TileMapLayer = $TerrainCarpet/Layer3
-@onready var Layer4: TileMapLayer = $TerrainCarpet/Layer4
-@onready var Layer5: TileMapLayer = $TerrainCarpet/Layer5
+@onready var TileBase: TileMapLayer = get_parent()
+@onready var Layer0: TileMapLayer = $Layer0
+@onready var Layer1: TileMapLayer = $Layer1
+@onready var Layer2: TileMapLayer = $Layer2
+@onready var Layer3: TileMapLayer = $Layer3
+@onready var Layer4: TileMapLayer = $Layer4
+@onready var Layer5: TileMapLayer = $Layer5
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
@@ -39,17 +40,20 @@ func agregar_source(path_png : String, id : int):
 func rotar():
 	aplicar_terreno()
 
-func aplicar_terreno():
+func aplicar_terreno() -> void:
+	if (limite_del_mapa.x == 0 or limite_del_mapa.y == 0): #Caso de error de que no se definio los limites
+		push_error("Limite del mapa seteado en 0, no se va a aplicar terreno")
+		return
 	#Explora todas las coordenadas dentro del area del limite (incluyendo el limite)
 	#+1 para que incluya completamente el limite del mapa, si no queda 1 por debajo
 	for x in range(-1,limite_del_mapa.x+1):
 		for y in range(-1,limite_del_mapa.y+1):
 			var coordenada = Vector2i(x,y)#Las coordenadas del hexagono actual
-			var source_id = get_cell_source_id(coordenada)#Obtiene su source id
+			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
 			#------------------seccion elegir terreno-----------------------
-			var tipo_terreno_id = get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
+			var tipo_terreno_id = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
@@ -59,12 +63,12 @@ func aplicar_terreno():
 			for i in vecinos:#Va del 0 al 5
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
-				if get_cell_source_id(i) == -1:
+				if TileBase.get_cell_source_id(i) == -1:
 					#Si el tile vecino es invalido, lo saltea 
 					#print("Vecino sin tile definido, aplicando continue")
 					contador_posicion_bit += 1#Avanza en uno la posicion del bit
 					continue
-				var vecino_tipo_terreno_id = get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
+				var vecino_tipo_terreno_id = TileBase.get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
 				
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
