@@ -1,5 +1,7 @@
 extends Node
 class_name carga_terrain_assets
+
+var imprimir_errores : bool = true #Interruptor para el debug
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
 #Si un valor no existe en el get, que sucede? Como se procede?
@@ -27,6 +29,25 @@ const Verde : Dictionary = {
 	 Rojo = "uid://drnpukd1sgcu2"
 	
 }
+
+func _ready() -> void:
+	pass
+	#print(obtener_path("Bosque", "brbrbr"))
 func obtener_path (origen : String, vecino : String) -> String:
-	print("brr")
-	return get(origen)[vecino]
+	if existe_la_variable(origen):#Comprueba si existe la variable para evitar errores
+		if get(origen).has(vecino):#Comprueba si existe la key en el diccionario para evitar errores
+			return get(origen)[vecino]#----------return-------------------
+		else:
+			if imprimir_errores:
+				push_error("No existe la key ",vecino," en el diccionario ", origen)
+	else:
+		if imprimir_errores:
+			push_error("No existe la constante ",origen," devolviendo error")
+	return "Error"
+	
+
+func existe_la_variable(nombre: String) -> bool:
+	if get(nombre) == null: #Si es null, la constante no existe
+		return false
+	else: 
+		return true

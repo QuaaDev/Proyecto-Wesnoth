@@ -74,14 +74,17 @@ func aplicar_terreno():
 						agregar_terreno_compuesto(tipo_terreno_id, vecino_tipo_terreno_id)#Si no existe lo carga
 					var source_id_del_terrain = obtener_source_id_terrain(tipo_terreno_id + "-" + vecino_tipo_terreno_id) #Almacena el id 
 					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
-					var nombre_variable = "Layer" + str(contador_posicion_bit)
-					#print("Edito la variable: ",nombre_variable)
-					var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
-					#Dependiendo del layer, es el tile que elige 
-					if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-						get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
+					if source_id_del_terrain != -1: #Si el source id es diferente a -1, es valido
+						var nombre_variable = "Layer" + str(contador_posicion_bit)
+						#print("Edito la variable: ",nombre_variable)
+						var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
+						#Dependiendo del layer, es el tile que elige 
+						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
+							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
+						else:
+							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(2, 0), 0 | efecto_a_aplicar)
 					else:
-						get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(2, 0), 0 | efecto_a_aplicar)
+						push_error("source_id_del_terrain -1, devolviendo error")
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
 	for i in lista_terrenos_compuestos_cargados:
 		print(i.terreno_compuesto)
@@ -97,12 +100,15 @@ func verificar_si_existe_terreno_compuesto(terreno_compuesto : String) -> bool:
 		else:
 			continue
 	return false
-func agregar_terreno_compuesto(origen : String, vecino : String):
+func agregar_terreno_compuesto(origen : String, vecino : String) -> void:
+	var path_del_terreno = CargaTerrainAssets.obtener_path(origen, vecino)
+	if path_del_terreno == "Error":#Si ocurrio un error, cancela el procedimiento
+		return
 	var nuevo_terreno_compuesto = terrain_compuesto.new()#Crea un nuevo terrain compuesto
 	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)#Le carga la informacion al objeto
 	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)#Guarda la referencia en la lista
 	nuevo_terreno_compuesto.cargar_id(lista_terrenos_compuestos_cargados.find(nuevo_terreno_compuesto))
-	agregar_source(CargaTerrainAssets.obtener_path(origen, vecino),nuevo_terreno_compuesto.id)#Obtiene el path del png y luego lo carga al source
+	agregar_source(path_del_terreno,nuevo_terreno_compuesto.id)#Obtiene el path del png y luego lo carga al source
 	print(nuevo_terreno_compuesto.id)
 	#El index del objeto DEBERIA de estar sincronizado con el index del source.
 
