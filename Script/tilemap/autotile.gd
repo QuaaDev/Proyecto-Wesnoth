@@ -52,13 +52,13 @@ func aplicar_terreno() -> void:
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
 			#------------------seccion elegir terreno-----------------------
-			var tipo_terreno_id = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
+			var tipo_terreno_id_original = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
 			var vecinos = get_neighbors(coordenada)#Almacena los vecinos en formato 0,1,2,3,4,5 del template
-			print("--------------------------")
-			print("Calculando, ",coordenada)
+			#print("--------------------------")
+			#print("Calculando, ",coordenada)
 			for i in vecinos:#Va del 0 al 5
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
@@ -69,10 +69,13 @@ func aplicar_terreno() -> void:
 					continue
 				var vecino_tipo_terreno_id = TileBase.get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
 				
-				if tipo_terreno_id != vecino_tipo_terreno_id:
+				if tipo_terreno_id_original != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
+					var tipo_terreno_id : String
 					if any_debug_interruptor: #Aplica el Any
-						vecino_tipo_terreno_id = "Any"
+						tipo_terreno_id = "Any"
+					else:#Si no se tiene que aplicar el Any, inserta el terreno original
+						tipo_terreno_id = tipo_terreno_id_original
 					if verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id): #si existe no lo vuelve a cargar
 						pass
 					else:
