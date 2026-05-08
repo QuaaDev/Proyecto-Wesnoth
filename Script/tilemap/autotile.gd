@@ -29,8 +29,8 @@ func agregar_source(path_png : String, id : int):
 	source.texture = load(path_png)#Textura a cargar
 	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
 	#-----------Creacion de los tile-------------
+	source.create_tile(Vector2i(0, 0))
 	source.create_tile(Vector2i(1, 0))
-	source.create_tile(Vector2i(2, 0))
 	#-----------Creacion de los tile-------------
 	tileset.add_source(source,id)#Agrega el nuevo source
 
@@ -39,6 +39,7 @@ func rotar():
 	aplicar_terreno()
 
 func aplicar_terreno() -> void:
+	var any_debug_interruptor : bool = true #Interruptor para usar el any de forma automatica o no
 	if (limite_del_mapa.x == 0 or limite_del_mapa.y == 0): #Caso de error de que no se definio los limites
 		push_error("Limite del mapa seteado en 0, no se va a aplicar terreno")
 		return
@@ -70,6 +71,8 @@ func aplicar_terreno() -> void:
 				
 				if tipo_terreno_id != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
+					if any_debug_interruptor: #Aplica el Any
+						vecino_tipo_terreno_id = "Any"
 					if verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id): #si existe no lo vuelve a cargar
 						pass
 					else:
@@ -82,9 +85,9 @@ func aplicar_terreno() -> void:
 						var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
 						#Dependiendo del layer, es el tile que elige 
 						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(0, 0), 0 | efecto_a_aplicar)
 						else:
-							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(2, 0), 0 | efecto_a_aplicar)
+							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
 					else:
 						push_error("source_id_del_terrain -1, devolviendo error")
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
