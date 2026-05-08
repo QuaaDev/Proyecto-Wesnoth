@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxwuph5467cgt"
-path="res://.godot/imported/tilemap-hex-prueba.png-4769d756b54a6d48721bbe2616d3265e.ctex"
+uid="uid://cpj5320o8mkve"
+path="res://.godot/imported/water-n.png-e40b7a33493385f447e18b0a4a94ea7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilemap/tilemap-hex-prueba.png"
-dest_files=["res://.godot/imported/tilemap-hex-prueba.png-4769d756b54a6d48721bbe2616d3265e.ctex"]
+source_file="res://Assets/tilemap/tiles_de_wesnoth/terrenos/water/water-n.png"
+dest_files=["res://.godot/imported/water-n.png-e40b7a33493385f447e18b0a4a94ea7c.ctex"]
 
 [params]
 
