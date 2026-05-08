@@ -84,13 +84,14 @@ func aplicar_terreno() -> void:
 					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					if source_id_del_terrain != -1: #Si el source id es diferente a -1, es valido
 						var nombre_variable = "Layer" + str(contador_posicion_bit)
-						#print("Edito la variable: ",nombre_variable)
-						var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
-						#Dependiendo del layer, es el tile que elige 
-						if nombre_variable == "Layer1" or nombre_variable == "Layer4":
-							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(0, 0), 0 | efecto_a_aplicar)
-						else:
-							get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
+						if verificar_si_vecino_tiene_terrain(coordenada, coordenada_vecino, contador_posicion_bit): # HEREEEEEEEEEEEEEEEEEEEEE
+							#print("Edito la variable: ",nombre_variable)
+							var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
+							#Dependiendo del layer, es el tile que elige 
+							if nombre_variable == "Layer1" or nombre_variable == "Layer4":
+								get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(0, 0), 0 | efecto_a_aplicar)
+							else:
+								get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
 					else:
 						push_error("source_id_del_terrain -1, devolviendo error")
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
@@ -117,7 +118,7 @@ func agregar_terreno_compuesto(origen : String, vecino : String) -> void:
 	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)#Guarda la referencia en la lista
 	nuevo_terreno_compuesto.cargar_id(lista_terrenos_compuestos_cargados.find(nuevo_terreno_compuesto))
 	agregar_source(path_del_terreno,nuevo_terreno_compuesto.id)#Obtiene el path del png y luego lo carga al source
-	print(nuevo_terreno_compuesto.id)
+	#print(nuevo_terreno_compuesto.id)
 	#El index del objeto DEBERIA de estar sincronizado con el index del source.
 
 func obtener_source_id_terrain(terreno_compuesto : String) -> int:
@@ -126,8 +127,22 @@ func obtener_source_id_terrain(terreno_compuesto : String) -> int:
 			return i.id #Si coincide, devuelve su id
 	push_error("Terreno compuesto no encontrado, devolviendo error")
 	return -1
-func verificar_si_vecino_tiene_terrain(): #Verifica si el vecino del tile origen 
-	pass
+func verificar_si_vecino_tiene_terrain(local : Vector2i, vecino : Vector2i, numero_layer : int) -> bool: #Verifica si el vecino del tile origen 
+	var nombre_layer_vecino = "Layer" + str(calcular_layer_espejo(numero_layer)) #Este es el layer que consultara de su vecino
+	var nombre_layer_local = "Layer" + str(numero_layer)#Este es el layer del local
+	#Verifica si el layer del vecino y el layer local tienen terrenos aplicados. Si alguno lo tiene, devuelve false.
+	#Source -1 significa source invalido
+	if get(nombre_layer_vecino).get_cell_source_id(vecino) == -1 and get(nombre_layer_local).get_cell_source_id(local) == -1:
+		return true
+	else:
+		return false
+	
+func calcular_layer_espejo(valor : int) -> int:
+	var valor_actualizado = valor
+	valor_actualizado += 3 #Aplica el espejo
+	if valor_actualizado > 5: #Si supera 5, le resta 5 para devolverlo al rango de 0-5
+		valor_actualizado -= 6
+	return valor_actualizado
 
 func aplicar_efecto(Layer : String) -> int:
 	match Layer: 
