@@ -6,10 +6,13 @@
 texture = ExtResource("1_vt5do")
 texture_region_size = Vector2i(72, 72)
 3:0/0 = 0
+3:0/0/custom_data_0 = "Desierto"
 3:0/0/custom_data_2 = 3
 7:0/0 = 0
+7:0/0/custom_data_0 = "Agua"
 7:0/0/custom_data_2 = 5
 1:0/0 = 0
+1:0/0/custom_data_0 = "Bosque"
 1:0/0/custom_data_2 = 1
 
 [resource]

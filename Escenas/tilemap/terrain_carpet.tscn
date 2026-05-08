@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ct1t2j7liiekk"]
+
+[ext_resource type="Script" uid="uid://0hvwler70omt" path="res://Script/tilemap/autotile.gd" id="1_uw33f"]
+[ext_resource type="TileSet" uid="uid://d3whrv1kuby2b" path="res://Escenas/tilemap/probando_autotile/terreno_efecto.tres" id="2_4ovy8"]
+
+[node name="TerrainCarpet" type="Node" unique_id=1294418875]
+script = ExtResource("1_uw33f")
+limite_del_mapa = Vector2i(10, 10)
+
+[node name="Layer0" type="TileMapLayer" parent="." unique_id=955301939]
+tile_set = ExtResource("2_4ovy8")
+
+[node name="Layer1" type="TileMapLayer" parent="." unique_id=1293646605]
+tile_set = ExtResource("2_4ovy8")
+
+[node name="Layer2" type="TileMapLayer" parent="." unique_id=214407287]
+tile_set = ExtResource("2_4ovy8")
+
+[node name="Layer3" type="TileMapLayer" parent="." unique_id=1990063170]
+tile_set = ExtResource("2_4ovy8")
+
+[node name="Layer4" type="TileMapLayer" parent="." unique_id=343016093]
+tile_set = ExtResource("2_4ovy8")
+
+[node name="Layer5" type="TileMapLayer" parent="." unique_id=121544860]
+tile_set = ExtResource("2_4ovy8")

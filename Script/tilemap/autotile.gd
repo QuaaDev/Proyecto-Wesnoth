@@ -1,6 +1,5 @@
 extends Node
-@onready var button: Button = $"../Button"
-@onready var label: Label = $"../Label"
+#@onready var button: Button = $"../Button"
 #-------Referencias layers-------------
 @onready var TileBase: TileMapLayer = get_parent()
 @onready var Layer0: TileMapLayer = $Layer0
@@ -22,9 +21,8 @@ enum FlipEnum{
 }
 
 func _ready() -> void:
-	#agregar_terreno_compuesto("Blanco", "Negro")
-	#agregar_source("res://Assets/tilemap/PruebaAutoTile/primerresultado111.png")#Agrega un tilesetatlassource al tileset
-	pass
+	await TileBase.ready #Espera a que el tile base este ready
+	aplicar_terreno()#Aplica terreno
 
 func agregar_source(path_png : String, id : int):
 	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas blabla
