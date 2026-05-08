@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1j0j7durtvji"
-path="res://.godot/imported/grid.png-52584bcb9551177ac02923a626cbf717.ctex"
+uid="uid://c26runelcofr0"
+path="res://.godot/imported/ui_can_atack.png-bcd8b9a80ff7cffd34cab67448cdd869.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilemap/grid.png"
-dest_files=["res://.godot/imported/grid.png-52584bcb9551177ac02923a626cbf717.ctex"]
+source_file="res://Assets/tilemap/hud/ui_can_atack.png"
+dest_files=["res://.godot/imported/ui_can_atack.png-bcd8b9a80ff7cffd34cab67448cdd869.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjj6fff3bcfc"
-path="res://.godot/imported/contorno_hex_tilemap.png-098b85e63bc1c45af977be861f9509f0.ctex"
+uid="uid://c1j0j7durtvji"
+path="res://.godot/imported/grid.png-09a2bd391d79d98b01990e626d19e10e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilemap/contorno_hex_tilemap.png"
-dest_files=["res://.godot/imported/contorno_hex_tilemap.png-098b85e63bc1c45af977be861f9509f0.ctex"]
+source_file="res://Assets/tilemap/hud/grid.png"
+dest_files=["res://.godot/imported/grid.png-09a2bd391d79d98b01990e626d19e10e.ctex"]
 
 [params]
 

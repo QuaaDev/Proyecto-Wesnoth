@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
-		tile_map_hud.set_cell(cuadricula_seleccionada_mouse,2,Vector2(0,0),0)#Dibuja el tilemap  de contorno
+		tile_map_hud.set_cell(cuadricula_seleccionada_mouse,1,Vector2(0,0),0)#Dibuja el tilemap  de contorno
 		cuadricula_seleccionada_mouse = coordenada_global_del_mouse_a_tilemap() #Actualiza la coordenada de la nueva seleccionada
 		tile_map_hud.set_cell(cuadricula_seleccionada_mouse, 0, Vector2i(0,0), 0) #Dibuja el hud de la cuadricula seleccionada
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------
@@ -37,7 +37,7 @@ func map_to_local(valor : Vector2) -> Vector2:
 #---------func de tilemap-----------
 func limpiar_tiles_movimiento(tiles : Dictionary) -> void: #Limpia el tilemap de los tile de movimiento
 	for i in tiles:
-		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)
+		tile_map_hud.set_cell(i, 1, Vector2i(0,0), 0)
 func dibujar_tiles_de_ataque(tiles: Dictionary) -> void:
 	for i in tiles:
-		tile_map_hud.set_cell(i, 4, Vector2i(0,0), 0)
+		tile_map_hud.set_cell(i, 2, Vector2i(0,0), 0)

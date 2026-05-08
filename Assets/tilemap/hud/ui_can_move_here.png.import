@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c26runelcofr0"
-path="res://.godot/imported/ui_can_atack.png-6d92a739f48ba33c6d31781fa33b7b15.ctex"
+uid="uid://c47aehovk22mn"
+path="res://.godot/imported/ui_can_move_here.png-268fc7d368af4039eed9b86ba582dd0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilemap/ui_can_atack.png"
-dest_files=["res://.godot/imported/ui_can_atack.png-6d92a739f48ba33c6d31781fa33b7b15.ctex"]
+source_file="res://Assets/tilemap/hud/ui_can_move_here.png"
+dest_files=["res://.godot/imported/ui_can_move_here.png-268fc7d368af4039eed9b86ba582dd0d.ctex"]
 
 [params]
 
