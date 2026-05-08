@@ -59,15 +59,15 @@ func aplicar_terreno() -> void:
 			var vecinos = get_neighbors(coordenada)#Almacena los vecinos en formato 0,1,2,3,4,5 del template
 			#print("--------------------------")
 			#print("Calculando, ",coordenada)
-			for i in vecinos:#Va del 0 al 5
+			for coordenada_vecino in vecinos:#Va del 0 al 5
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
-				if TileBase.get_cell_source_id(i) == -1:
+				if TileBase.get_cell_source_id(coordenada_vecino) == -1:
 					#Si el tile vecino es invalido, lo saltea 
 					#print("Vecino sin tile definido, aplicando continue")
 					contador_posicion_bit += 1#Avanza en uno la posicion del bit
 					continue
-				var vecino_tipo_terreno_id = TileBase.get_cell_tile_data(i).get_custom_data("tipo_terreno_id")
+				var vecino_tipo_terreno_id = TileBase.get_cell_tile_data(coordenada_vecino).get_custom_data("tipo_terreno_id")
 				
 				if tipo_terreno_id_original != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
@@ -126,7 +126,8 @@ func obtener_source_id_terrain(terreno_compuesto : String) -> int:
 			return i.id #Si coincide, devuelve su id
 	push_error("Terreno compuesto no encontrado, devolviendo error")
 	return -1
-
+func verificar_si_vecino_tiene_terrain(): #Verifica si el vecino del tile origen 
+	pass
 
 func aplicar_efecto(Layer : String) -> int:
 	match Layer: 
