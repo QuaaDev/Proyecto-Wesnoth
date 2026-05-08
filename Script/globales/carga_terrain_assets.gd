@@ -29,6 +29,15 @@ const Verde : Dictionary = {
 	 Rojo = "uid://drnpukd1sgcu2"
 	
 }
+const Bosque : Dictionary = {
+	Any = "uid://du6e3pfiqfr6h"
+}
+const Desierto : Dictionary = {
+	Any = "uid://7evul0ioo4dw"
+}
+const Agua : Dictionary = {
+	Any = "uid://crx8t2eq05dvm"
+}
 
 func _ready() -> void:
 	pass
