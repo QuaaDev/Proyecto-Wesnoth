@@ -4,8 +4,13 @@ class_name carga_terrain_assets
 var imprimir_errores : bool = true #Interruptor para el debug
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
-#Si un valor no existe en el get, que sucede? Como se procede?
-
+#Valores mas altos tendran prioridad sobre valores mas bajos
+enum Prioridad {
+	Any = 0,
+	Bosque = 2,
+	Agua = 1,
+	Desierto = 10
+}
 const Blanco : Dictionary = {
 	Negro = "uid://d0a42yhqderap",#blanco-negro
 	Rojo = "uid://m7wtfl36bpe5",#blanco-rojo
@@ -49,6 +54,32 @@ func obtener_path (origen : String, vecino : String) -> String:
 			push_error("No existe la constante ",origen," devolviendo error")
 	return "Error"
 	
+func obtener_prioridad_terreno(terreno_x : String, terreno_y : String) -> String:
+	#Compara ambos terrenos y devuelve el que tenga prioridad mas alta
+	var valor_x : int = -1
+	var valor_y : int = 0
+	if terreno_x in Prioridad:
+		valor_x = Prioridad[terreno_x]
+	if terreno_y in Prioridad:
+		valor_y = Prioridad[terreno_y]
+	if valor_x >= valor_y:
+		return terreno_x
+	else:
+		return terreno_y
+
+func mayor_prioridad_que_vecino(terreno_x : String, terreno_y : String) -> bool:
+	#Si el terreno X tiene menor prioridad que el terreno Y, este toma el terreno de Y en su layer.
+	#Si el terreno X tiene mayor prioridad que el terreno Y, este saltea la ejecucion para que Y tome su layer luego
+	var valor_x : int = -1
+	var valor_y : int = 0
+	if terreno_x in Prioridad:
+		valor_x = Prioridad[terreno_x]
+	if terreno_y in Prioridad:
+		valor_y = Prioridad[terreno_y]
+	if valor_x >= valor_y:
+		return false
+	else:
+		return true
 
 func existe_la_variable(nombre: String) -> bool:
 	if get(nombre) == null: #Si es null, la constante no existe

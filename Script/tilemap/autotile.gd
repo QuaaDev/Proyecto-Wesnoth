@@ -76,6 +76,13 @@ func aplicar_terreno() -> void:
 						tipo_terreno_id = "Any"
 					else:#Si no se tiene que aplicar el Any, inserta el terreno original
 						tipo_terreno_id = tipo_terreno_id_original
+					#probando
+					if !CargaTerrainAssets.mayor_prioridad_que_vecino(tipo_terreno_id_original,vecino_tipo_terreno_id):
+						#Si devuelve true
+						contador_posicion_bit += 1#Avanza el contador de bits
+						continue
+					#Iria aca el code
+					
 					if verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id): #si existe no lo vuelve a cargar
 						pass
 					else:
@@ -84,7 +91,7 @@ func aplicar_terreno() -> void:
 					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					if source_id_del_terrain != -1: #Si el source id es diferente a -1, es valido
 						var nombre_variable = "Layer" + str(contador_posicion_bit)
-						if verificar_si_vecino_tiene_terrain(coordenada, coordenada_vecino, contador_posicion_bit): # HEREEEEEEEEEEEEEEEEEEEEE
+						if verificar_si_vecino_tiene_terrain(coordenada, coordenada_vecino, contador_posicion_bit): #Verifica si el vecino ya aplico un terrain
 							#print("Edito la variable: ",nombre_variable)
 							var efecto_a_aplicar = aplicar_efecto(nombre_variable)#Almacena que efecto se va a aplicar
 							#Dependiendo del layer, es el tile que elige 
