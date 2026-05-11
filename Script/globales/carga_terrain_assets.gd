@@ -54,18 +54,6 @@ func obtener_path (origen : String, vecino : String) -> String:
 			push_error("No existe la constante ",origen," devolviendo error")
 	return "Error"
 	
-func obtener_prioridad_terreno(terreno_x : String, terreno_y : String) -> String:
-	#Compara ambos terrenos y devuelve el que tenga prioridad mas alta
-	var valor_x : int = -1
-	var valor_y : int = 0
-	if terreno_x in Prioridad:
-		valor_x = Prioridad[terreno_x]
-	if terreno_y in Prioridad:
-		valor_y = Prioridad[terreno_y]
-	if valor_x >= valor_y:
-		return terreno_x
-	else:
-		return terreno_y
 
 func mayor_prioridad_que_vecino(terreno_x : String, terreno_y : String) -> bool:
 	#Si el terreno X tiene menor prioridad que el terreno Y, este toma el terreno de Y en su layer.
