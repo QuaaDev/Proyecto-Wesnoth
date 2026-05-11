@@ -1,4 +1,5 @@
 extends Node
+class_name autotile
 #@onready var button: Button = $"../Button"
 #-------Referencias layers-------------
 @onready var TileBase: TileMapLayer = get_parent()
@@ -11,8 +12,8 @@ extends Node
 #--------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
-var lista_terrenos_compuestos_cargados : Array[terrain_compuesto]
 #Solo hace falta una prq alterar uno altera a todos los layers
+var lista_terrenos_compuestos_cargados : Array[terrain_compuesto]
 #https://docs.godotengine.org/en/stable/classes/class_tileset.html#class-tileset-method-add-source
 enum FlipEnum{
 	fliph = TileSetAtlasSource.TRANSFORM_FLIP_H,
@@ -25,7 +26,7 @@ func _ready() -> void:
 	aplicar_terreno()#Aplica terreno
 
 func agregar_source(path_png : String, id : int):
-	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas blabla
+	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas el cual contiene la informacion del asset
 	source.texture = load(path_png)#Textura a cargar
 	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
 	#-----------Creacion de los tile-------------
@@ -39,7 +40,6 @@ func rotar():
 	aplicar_terreno()
 
 func aplicar_terreno() -> void:
-	var any_debug_interruptor : bool = true #Interruptor para usar el any de forma automatica o no
 	if (limite_del_mapa.x == 0 or limite_del_mapa.y == 0): #Caso de error de que no se definio los limites
 		push_error("Limite del mapa seteado en 0, no se va a aplicar terreno")
 		return
@@ -47,6 +47,7 @@ func aplicar_terreno() -> void:
 	#+1 para que incluya completamente el limite del mapa, si no queda 1 por debajo
 	for x in range(-1,limite_del_mapa.x+1):
 		for y in range(-1,limite_del_mapa.y+1):
+			#-----------Seccion obtener informacion tile local----------------
 			var coordenada = Vector2i(x,y)#Las coordenadas del hexagono actual
 			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
@@ -131,6 +132,7 @@ func agregar_terreno_compuesto(origen : String, vecino : String) -> void:
 	#El index del objeto DEBERIA de estar sincronizado con el index del source.
 
 func obtener_source_id_terrain(terreno_compuesto : String) -> int:
+	#Recibe las palabras clave LOCAL-VECINO y devuelve el ID de la combinacion
 	for i in lista_terrenos_compuestos_cargados: #Explora la lista
 		if i.terreno_compuesto == terreno_compuesto: #Buscando un terreno compuesto que coincida
 			return i.id #Si coincide, devuelve su id

@@ -1,0 +1,102 @@
+Explicacion de como usar el autotile de forma facil y sencilla.
+---------------------------------------------------------------------------------------
+								 CARGA_TERRAIN_ASSETS
+SCRIPT GLOBAL
+Primero voy a documentar la clase carga_terrain_assets:
+	Aca es donde se guarda toda la informacion de la conexion entre un terreno y su asset.
+	Esta informacion es la conexion entre los assets en archivos y el codigo en ejecucion.
+	Basicamente se hace un dictionary con el nombre del terreno LOCAL, y dentro se definen los terrenos VECINOS.
+	Los terrenos vecinos almacenan el path del asset a utilizar.
+	Ejemplo:
+	const LOCAL : Dictionary ={
+		VECINO = PathAsset : String
+	}
+	La logica es basicamente: LOCAL va a dibujar sobre si mismo el asset de VECINO.
+	En caso de utilizar Any, ANY actua como el local y el VECINO dibuja sobre ANY
+	En ambos casos el terrain vecino DIBUJA sobre el local.
+	RECIBEDIBUJO-DIBUJA
+	
+	Definir Terrenos en el TileMapLayer.
+	Para que este sistema funcione, el tile que funciona como BASE debe de tener custom_data que defina su ID de terreno.
+	Este ID es un String, el nombre del ID, el que se guarda dentro de carga_terrain_assets y en Prioridad 
+	deben de ser IDENTICOS.
+	Cada mayuscula cuenta (lo tengo que arreglar eso)
+	
+	Prioridades
+	Para que el mapa tenga una coherencia, hay un sistema de prioridades. Un terreno con mayor prioridad siempre dibujara
+	sobre los que tienen menos prioridad. De esta forma se logra coherencia al transicionar entre terrenos.
+	Esto se compone de: 
+		Enum Prioridad {
+			TERRENO = PRIORIDAD : int
+		}
+	Valores mas altos tienen mas prioridad.
+------------------------------------------------------------------------------------------------------------------
+							  CONTENEDOR_TERRAIN_COMPUESTO
+Este es un objeto que almacena informacion. Va registrando activamente que terrenos se han guardado en la memoria
+junto a sus source ID para que de forma dinamica se pueda acceder a ellos en tiempo de ejecucion. Al ser todo dinamico,
+si un terreno no es utilizado no se cargara en la VRAM. Esto es para optimizar principalmente.
+------------------------------------------------------------------------------------------------------------------
+												  AUTOTILE
+Uy uy uy la parte divertida, aca ocurre toda la magia.
+Esta clase es la que agarra la informacion y la dibuja sobre la pantalla segun los terrenos que hay.
+Este Script va a adjuntado al nodo TerrainCarpet, el cual es SIEMPRE hijo del tilemapbase.
+El tilemapbase es donde se dibuja el mapa en el editor de godot.
+
+Se utilizan dos assets para todo el autotile, estos assets se configuran de la siguiente forma tanto en el codigo
+como al crear el asset.
+El asset debe de ser 144x72, le entran dos sprites de 72x72 de forma horizontal.
+El primer sprite SIEMPRE debe de representar el Norte. El segundo sprite siempre representa el NorOeste.
+Diseñar el asset mal, hara que todo se vea desordenado y nadie quiere eso.
+
+Esta clase tiene 6 tilemaplayers hijos, cada uno controla una direccion del asset que actua como terreno.
+Van de NW hasta SW o de 0 a 5 si NW representa el 0.
+Al asset NW se le pueden aplicar 3 transformaciones para que cubra 4 direcciones en 
+total(Original, EspejoX, EspejoY, Diagonal)
+Al asset N se le aplica 1 transformacion haciendo que cubra 2 direcciones en total(Original, EspejoY)
+
+Cada Layer representa una direccion: 0 = NW, 1 = N, 2 = NE, 3 = SE, 4 = S y 5 = SW
+
+Limite del mapa
+En la variable export se define de donde hasta donde se va a aplicar terreno, eso es todo lo que hace.
+El tilemapbase debe de ser dibujado desde la coordenada 0 a +infinito, todas las coordenadas negativas seran ignoradas
+
+func ready: Espera a que el tilemapbase este iniciado para aplicar el terreno
+
+func agregar_source(path_png : String, id : int): Agrega un nuevo sourceid al recurso tileset 
+que se comparte entre todas las capas. Tambien crea los tiles 0,0 y 0,1 para poder utilizarlos
+
+rotar(): funcion obsoleta, antes iba por un botoncito pero ese botoncito ya no existe
+
+func aplicar_terreno():
+	Donde ocurre la magia.
+	Segun los limites de mapa definidos, con dos bucles for recorre todos los tiles dentro de su area para aplicarles
+	terreno.
+		Primero obtiene informacion del tile local, si el tile local tiene sourceid -1 es prq es invalido y lo saltea.
+		Por default los -1 son tiles invalidos SIEMPRE.
+		Almacena el id del terreno local 
+		Declara el contador de bits (Cada bit representa un layer de terraincarpet)
+		Luego obtiene todos los vecinos del tile local y luego los recorre uno a uno.
+			Primero verifica que el source id del vecino sea valido, si no lo es saltea la ejecucion.
+			Luego obtiene su ID de terreno.
+			Si el terreno local y el del vecino son diferentes, significa que hay que crear un terrain aca 
+			Se crea una variable que se adapta segun el terreno que se definira (Local o ANY)
+			Comprueba si la combinacion entre terreno LOCAL y VECINO existe dentro de carga_terrain_assets.
+			Si existe, el codigo continua con esa combinacion. Si no existe, se continua con un ANY-VECINO
+			Comprueba la prioridad de los terrenos. Si el terreno LOCAL tiene mayor prioridad sobre el vecino,
+			este salteara su ejecucion en espera de que VECINO pueda dibujarse sobre si mismo.
+			Esto se hace prq se evita poner mas de un terrain para una misma frontera, eso da resultados feos.
+			Por lo tanto en una frontera entre dos tiles, solo uno sera dibujado. Y ese es el que tenga menor prioridad.
+			Verifica si se almaceno ese terreno compuesto como contenedor_terrain_compuesto. Si no se almaceno, lo crea.
+			Si ya existe no hace nada.
+			Luego busca en la lista de terrenos compuestos el sourceid del que se utiliza actualmente.
+			Si el source id es -1, hubo un error y saltea la ejecucion
+			Si es correcto, continua con la ejecucion.
+			Aca identifica a que layer va a pertenecer este terreno, segun el valor del contador de bits actual.
+			Verifica si el vecino ya se aplico un terrain, si lo hizo se saltea la ejecucion.
+			Averigua que efecto de rotacion se debe de aplicar, dependiendo de cual layer es el destinatario
+			Luego basandose en el nombre del layer, elige si es el asset N o el NW que se debe de utilizar para dibujar
+			el terrain.
+	Todo esto es puro tecnico y realmente no hay que tocar nada de esto. El unico lugar donde hay que meter mano
+	es en carga_terrain_assets.
+esta medio codigo spaguetti y deberia de refactorizarlo, pero q pereza
+11/05/2026
