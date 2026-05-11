@@ -72,10 +72,12 @@ func aplicar_terreno() -> void:
 				if tipo_terreno_id_original != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto
 					var tipo_terreno_id : String
-					if any_debug_interruptor: #Aplica el Any
-						tipo_terreno_id = "Any"
-					else:#Si no se tiene que aplicar el Any, inserta el terreno original
+					if CargaTerrainAssets.existe_la_combinacion(tipo_terreno_id_original,vecino_tipo_terreno_id):
+						#Si existe la combinacion, utiliza la combinacion: TerrainA-TerrainB
 						tipo_terreno_id = tipo_terreno_id_original
+					else:
+						#Si no existe la combinacion, utiliza el recurso Any - TerrainB
+						tipo_terreno_id = "Any"
 					#probando
 					if !CargaTerrainAssets.mayor_prioridad_que_vecino(tipo_terreno_id_original,vecino_tipo_terreno_id):
 						#Si devuelve true

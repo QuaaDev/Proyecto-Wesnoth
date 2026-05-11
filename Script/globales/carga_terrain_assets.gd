@@ -1,7 +1,7 @@
 extends Node
 class_name carga_terrain_assets
 
-var imprimir_errores : bool = true #Interruptor para el debug
+var imprimir_errores : bool = false #Interruptor para el debug
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
 #Valores mas altos tendran prioridad sobre valores mas bajos
@@ -24,21 +24,27 @@ const Desierto : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }
 func _ready() -> void:
-	pass
+	if !imprimir_errores:
+		print("No se imprimiran errores sobre carga_terrain_assets")
 	#print(obtener_path("Bosque", "brbrbr"))
+	
 func obtener_path (origen : String, vecino : String) -> String:
+	if existe_la_combinacion(origen, vecino):
+		return get(origen)[vecino]
+	else:
+		return "Error"
+	
+func existe_la_combinacion(origen : String, vecino : String) -> bool:
 	if existe_la_variable(origen):#Comprueba si existe la variable para evitar errores
 		if get(origen).has(vecino):#Comprueba si existe la key en el diccionario para evitar errores
-			return get(origen)[vecino]#----------return-------------------
+			return true#----------return-------------------
 		else:
 			if imprimir_errores:
 				push_error("No existe la key ",vecino," en el diccionario ", origen)
 	else:
 		if imprimir_errores:
 			push_error("No existe la constante ",origen," devolviendo error")
-	return "Error"
-	
-
+	return false
 func mayor_prioridad_que_vecino(terreno_x : String, terreno_y : String) -> bool:
 	#Si el terreno X tiene menor prioridad que el terreno Y, este toma el terreno de Y en su layer.
 	#Si el terreno X tiene mayor prioridad que el terreno Y, este saltea la ejecucion para que Y tome su layer luego
