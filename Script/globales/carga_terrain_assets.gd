@@ -12,29 +12,7 @@ enum Prioridad {
 	Pasto = 5,
 	Desierto = 10
 }
-const Blanco : Dictionary = {
-	Negro = "uid://d0a42yhqderap",#blanco-negro
-	Rojo = "uid://m7wtfl36bpe5",#blanco-rojo
-	Verde = "uid://dersk2j5ltlxq"#blanco-verde
-}
-const Negro : Dictionary = {
-	Blanco = "uid://dm3jpurp47x04", #negro-blanco
-	Rojo = "uid://qxu7gbsjy6x0",#negro-rojo
-	Verde = "uid://d4i7ljw0c5ovb"#negro-verde
-}
-const Rojo : Dictionary = {
-	 Blanco = "uid://bijnbi605ss1a",
-	 Negro = "uid://dy6qu6n7x5h57",
-	 Verde = "uid://80r73n0c8bgg"
-	
-}
 
-const Verde : Dictionary = {
-	 Blanco = "uid://bbcupc8rq7alb",
-	 Negro = "uid://dnsptjgwq1wyo",
-	 Rojo = "uid://drnpukd1sgcu2"
-	
-}
 const Any : Dictionary = {
 	Bosque = "uid://du6e3pfiqfr6h",
 	Desierto = "uid://7evul0ioo4dw",
