@@ -105,8 +105,8 @@ func aplicar_terreno() -> void:
 					else:
 						push_error("source_id_del_terrain -1, devolviendo error")
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
-	for i in lista_terrenos_compuestos_cargados:
-		print(i.terreno_compuesto)
+	#for i in lista_terrenos_compuestos_cargados:
+		#print(i.terreno_compuesto)
 				#print("mio ",tipo_terreno_id)
 				#print("vecino ",vecino_tipo_terreno_id)
 			#print("------------------------")
