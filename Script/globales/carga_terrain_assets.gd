@@ -9,7 +9,7 @@ enum Prioridad {
 	Any = 0,
 	Bosque = 2,
 	Agua = 1,
-	Pasto = 5,
+	Pasto = 15,
 	Desierto = 10
 }
 
@@ -18,6 +18,10 @@ const Any : Dictionary = {
 	Desierto = "uid://7evul0ioo4dw",
 	Agua = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71"
+}
+
+const Desierto : Dictionary = {
+	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }
 func _ready() -> void:
 	pass
