@@ -28,13 +28,14 @@ func _ready() -> void:
 	await TileBase.ready #Espera a que el tile base este ready
 	aplicar_terreno()#Aplica terreno
 
-func agregar_source(path_png : String, id : int):
+func agregar_source(path_png : String, id : int, aplicar_doble_tile : bool):
 	var source := TileSetAtlasSource.new() #Hace un nuevo tilesetatlas el cual contiene la informacion del asset
 	source.texture = load(path_png)#Textura a cargar
 	source.texture_region_size = Vector2i(72,72)#La configuracion de mi tileset
 	#-----------Creacion de los tile-------------
 	source.create_tile(Vector2i(0, 0))
-	source.create_tile(Vector2i(1, 0))
+	if aplicar_doble_tile:
+		source.create_tile(Vector2i(1, 0))
 	#-----------Creacion de los tile-------------
 	tileset.add_source(source,id)#Agrega el nuevo source
 
@@ -55,8 +56,20 @@ func aplicar_terreno() -> void:
 			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
-			#------------------seccion elegir terreno-----------------------
 			var tipo_terreno_id_original = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
+			#-----------Seccion aplicar altura-------------------------------
+			if CargaTerrainAssets.existe_la_combinacion(tipo_terreno_id_original,"Altura"): 
+				#Si tiene un asset cargado para la altura
+				if !verificar_si_existe_terreno_compuesto(tipo_terreno_id_original + "-" + "Altura"):
+					#Si no esta registrado, lo registra
+					agregar_terreno_compuesto(tipo_terreno_id_original, "Altura",false)
+				#Aplica el asset de altura al tile actual.
+				var sourceid_altura = obtener_source_id_terrain(tipo_terreno_id_original + "-" + "Altura")
+				layer_altura.set_cell(coordenada, sourceid_altura, Vector2i(0, 0), 0)
+					
+					
+				
+			#------------------seccion elegir terreno-----------------------
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
 			var contador_posicion_bit := 0#Almacena cual bit del terreno es el que se esta analizando
@@ -92,7 +105,7 @@ func aplicar_terreno() -> void:
 					if verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id): #si existe no lo vuelve a cargar
 						pass
 					else:
-						agregar_terreno_compuesto(tipo_terreno_id, vecino_tipo_terreno_id)#Si no existe lo carga
+						agregar_terreno_compuesto(tipo_terreno_id, vecino_tipo_terreno_id,true)#Si no existe lo carga
 					var source_id_del_terrain = obtener_source_id_terrain(tipo_terreno_id + "-" + vecino_tipo_terreno_id) #Almacena el id 
 					#print(verificar_si_existe_terreno_compuesto(tipo_terreno_id + "-" + vecino_tipo_terreno_id))
 					if source_id_del_terrain != -1: #Si el source id es diferente a -1, es valido
@@ -122,7 +135,7 @@ func verificar_si_existe_terreno_compuesto(terreno_compuesto : String) -> bool:
 		else:
 			continue
 	return false
-func agregar_terreno_compuesto(origen : String, vecino : String) -> void:
+func agregar_terreno_compuesto(origen : String, vecino : String, aplicar_doble_tile : bool) -> void:
 	var path_del_terreno = CargaTerrainAssets.obtener_path(origen, vecino)
 	if path_del_terreno == "Error":#Si ocurrio un error, cancela el procedimiento
 		return
@@ -130,7 +143,7 @@ func agregar_terreno_compuesto(origen : String, vecino : String) -> void:
 	nuevo_terreno_compuesto.cargar_terrenos(origen, vecino)#Le carga la informacion al objeto
 	lista_terrenos_compuestos_cargados.append(nuevo_terreno_compuesto)#Guarda la referencia en la lista
 	nuevo_terreno_compuesto.cargar_id(lista_terrenos_compuestos_cargados.find(nuevo_terreno_compuesto))
-	agregar_source(path_del_terreno,nuevo_terreno_compuesto.id)#Obtiene el path del png y luego lo carga al source
+	agregar_source(path_del_terreno,nuevo_terreno_compuesto.id, aplicar_doble_tile)#Obtiene el path del png y luego lo carga al source
 	#print(nuevo_terreno_compuesto.id)
 	#El index del objeto DEBERIA de estar sincronizado con el index del source.
 

@@ -9,12 +9,18 @@ Primero voy a documentar la clase carga_terrain_assets:
 	Los terrenos vecinos almacenan el path del asset a utilizar.
 	Ejemplo:
 	const LOCAL : Dictionary ={
+		ALTURA = PathAsset : String,
 		VECINO = PathAsset : String
 	}
 	La logica es basicamente: LOCAL va a dibujar sobre si mismo el asset de VECINO.
 	En caso de utilizar Any, ANY actua como el local y el VECINO dibuja sobre ANY
 	En ambos casos el terrain vecino DIBUJA sobre el local.
 	RECIBEDIBUJO-DIBUJA
+	
+	----------------------EXCEPCION ALTURA-----------------
+	Si un LOCAL tiene configurado un ALTURA, cuando el script llegue a este tile le aplicara el asset de altura.
+	El asset de altura se dibuja por encima de tilemapbase y por encima de terrain. Da esa simulacion de altura justamente.
+	Si un LOCAL no tiene configurado ALTURA, significa que no se le debe de poner ningun asset de altura.
 	
 	Definir Terrenos en el TileMapLayer.
 	Para que este sistema funcione, el tile que funciona como BASE debe de tener custom_data que defina su ID de terreno.

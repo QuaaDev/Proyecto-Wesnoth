@@ -21,6 +21,7 @@ const Any : Dictionary = {
 }
 
 const Bosque : Dictionary = {
+	Altura = "uid://csuswnd5dkiyq",#Aplica un asset con altura 
 	Pasto = "uid://djkmepytgxmbh"
 }
 
