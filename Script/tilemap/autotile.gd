@@ -10,6 +10,9 @@ class_name autotile
 @onready var Layer4: TileMapLayer = $Layer4
 @onready var Layer5: TileMapLayer = $Layer5
 #--------------------------------------
+@onready var layer_altura: TileMapLayer = $LayerAltura
+#Aplica los elementos con altura por ejemplo bosques, lamparas y etc
+#-----------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
 #Solo hace falta una prq alterar uno altera a todos los layers

@@ -1,14 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://b7fkkp3w8rnq2"]
 
-[ext_resource type="Texture2D" uid="uid://b1iecrx2pw02s" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/grass/grass_base.png" id="1_nsys4"]
 [ext_resource type="Texture2D" uid="uid://dxwuph5467cgt" path="res://Assets/tilemap/tiles_de_wesnoth/tilemap-hex-prueba.png" id="1_vt5do"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acwoj"]
-texture = ExtResource("1_nsys4")
-texture_region_size = Vector2i(72, 72)
-0:0/0 = 0
-0:0/0/custom_data_0 = "Pasto"
-0:0/0/custom_data_2 = 1
+[ext_resource type="Texture2D" uid="uid://bv0vla4ef6ao" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/probando_merge_atlas.png" id="2_nsys4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ie3gl"]
 texture = ExtResource("1_vt5do")
@@ -26,6 +19,16 @@ texture_region_size = Vector2i(72, 72)
 5:0/0/custom_data_0 = "Desierto"
 5:0/0/custom_data_2 = 3
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acwoj"]
+texture = ExtResource("2_nsys4")
+texture_region_size = Vector2i(72, 72)
+0:0/0 = 0
+0:0/0/custom_data_0 = "Pasto"
+0:0/0/custom_data_2 = 1
+1:0/0 = 0
+1:0/0/custom_data_0 = "Bosque"
+1:0/0/custom_data_2 = 2
+
 [resource]
 tile_shape = 3
 tile_offset_axis = 1
@@ -37,4 +40,5 @@ custom_data_layer_1/type = 2
 custom_data_layer_2/name = "resistencia_movimiento"
 custom_data_layer_2/type = 2
 sources/1 = SubResource("TileSetAtlasSource_ie3gl")
-sources/0 = SubResource("TileSetAtlasSource_acwoj")
+sources/3 = SubResource("TileSetAtlasSource_acwoj")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [3, Vector2i(0, 0)], [2, Vector2i(0, 0)], [3, Vector2i(1, 0)]]

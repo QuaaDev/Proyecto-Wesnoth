@@ -20,6 +20,10 @@ const Any : Dictionary = {
 	Pasto = "uid://b37wdxv6qwx71"
 }
 
+const Bosque : Dictionary = {
+	Pasto = "uid://djkmepytgxmbh"
+}
+
 const Desierto : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }

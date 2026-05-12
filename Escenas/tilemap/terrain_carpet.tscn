@@ -23,3 +23,5 @@ tile_set = ExtResource("2_4ovy8")
 
 [node name="Layer5" type="TileMapLayer" parent="." unique_id=121544860]
 tile_set = ExtResource("2_4ovy8")
+
+[node name="LayerAltura" type="TileMapLayer" parent="." unique_id=204679215]
