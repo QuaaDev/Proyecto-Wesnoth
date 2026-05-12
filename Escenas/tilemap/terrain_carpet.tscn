@@ -5,7 +5,6 @@
 
 [node name="TerrainCarpet" type="Node" unique_id=1294418875]
 script = ExtResource("1_uw33f")
-limite_del_mapa = Vector2i(10, 10)
 
 [node name="Layer0" type="TileMapLayer" parent="." unique_id=955301939]
 tile_set = ExtResource("2_4ovy8")
