@@ -114,30 +114,6 @@ script = ExtResource("4_ly0wt")
 position = Vector2(363, 33)
 equipo = 1
 
-[node name="unidad_dragon6" parent="." unique_id=2009352179 instance=ExtResource("6_gv8d2")]
-position = Vector2(796, 110)
-equipo = 1
-
-[node name="unidad_dragon9" parent="." unique_id=1330619164 instance=ExtResource("6_gv8d2")]
-position = Vector2(198, 573)
-equipo = 1
-
 [node name="unidad_dragon13" parent="." unique_id=844868248 instance=ExtResource("6_gv8d2")]
 position = Vector2(418, 433)
 equipo = 2
-
-[node name="unidad_dragon10" parent="." unique_id=1363739100 instance=ExtResource("6_gv8d2")]
-position = Vector2(358, 177)
-equipo = 1
-
-[node name="unidad_dragon11" parent="." unique_id=641515950 instance=ExtResource("6_gv8d2")]
-position = Vector2(306, 219)
-equipo = 1
-
-[node name="unidad_dragon12" parent="." unique_id=2079913597 instance=ExtResource("6_gv8d2")]
-position = Vector2(955, 212)
-equipo = 1
-
-[node name="unidad_dragon7" parent="." unique_id=1322307210 instance=ExtResource("6_gv8d2")]
-position = Vector2(191, 145)
-equipo = 1

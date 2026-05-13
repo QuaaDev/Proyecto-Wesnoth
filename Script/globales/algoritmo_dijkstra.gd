@@ -58,6 +58,8 @@ dibujar_movimientos : bool, una_celda_mas : bool) -> void:
 		if distancia_actual >= cantidad_de_movimiento_maximo: #Si alcanza el limite de movimiento
 			continue#Omite esta ejecucion del while
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
+			if !es_tile_transitable(next):#Si el tile no es transitable, ignora este tile y lo saltea
+				continue
 			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
 			if (not reached.has(next) or nuevo_costo < reached[next]) and !(ubicaciones_ocupadas.has(next)):
 				#(Si el nodo ya fue explorado, lo omite) AND (Si la ubicacion ya fue ocupada, la omite)
