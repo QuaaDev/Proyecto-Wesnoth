@@ -28,8 +28,19 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 	if data:
 		return data.get_custom_data("resistencia_movimiento")
 	else:
-		#print("Error data no encontrada obtener_coste_movimiento_tile")
+		push_error("No se pudo obtener el custom data de resistencia_movimiento")
 		return 1
+
+
+
+func es_tile_transitable(coordenadas : Vector2) -> bool:
+	#Si el tile se puede caminar, devuelve true
+	var data = tile_map_base.get_cell_tile_data(coordenadas)
+	if data:
+		return !(data.get_custom_data("terreno_intransitable"))
+	push_error("No se pudo obtener el custom data terreno_intransitable")
+	return false
+
 
 func moviendo_unidad(unidad : unidad_base, ubicaciones_ocupadas : Dictionary, 
 dibujar_movimientos : bool, una_celda_mas : bool) -> void:
