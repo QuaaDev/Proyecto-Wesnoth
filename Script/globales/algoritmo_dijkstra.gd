@@ -202,6 +202,8 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 			return reconstruir_camino(came_from, current,movimiento_maximo)
 		#Si no se llega al destino, se expande la busqueda
 		for next in get_neighbors(current):
+			if !es_tile_transitable(current):#Si el tile no es transitable, ignora esta frontera
+				continue
 			#Next es un Vector2
 			if ubicaciones_ocupadas.has(next) and next != destino:#Ignora los nodos ocupados por unidades, almenos que ese sea el objetivo. Posible bug aqui si esta ocupado? 
 				continue
@@ -223,6 +225,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 					return reconstruir_camino(came_from, next, movimiento_maximo) #<-----------
 				frontier.insert(next, prioridad)
 	print("Camino no encontrado") # No encontró camino
+	call_deferred_thread_group("emit_signal","resultado_estrella_obtenido")#Activa la señal de que termino de calcular
 	return []
 
 func reconstruir_camino(came_from: Dictionary, destino: Vector2, movimiento_maximo: int) -> Array:

@@ -20,9 +20,10 @@ func ejecutar_ia(equipo : int):
 		await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
 		if decision_final == decision_IA.no_definido and !ubicaciones_ocupadas_enemigos.is_empty(): 
 			#Si no esta definido su estado, significa que no pudo atacar AND si hay enemigos aun vivos
-			avanzar_hacia_un_enemigo(unidad)#Avanza hacia algun enemigo
-			await unidad.animacion_movimiento_terminada
-			decision_final = decision_IA.moviendose
+			if await avanzar_hacia_un_enemigo(unidad):#Verifica si es posible avanzar a un enemigo
+				#Avanza hacia algun enemigo
+				await unidad.animacion_movimiento_terminada #Espera la animacion de la unidad
+				decision_final = decision_IA.moviendose#Actualiza el estado
 		print("Decision final de la IA: ",decision_final)
 		print("-------------------")
 	nodo_mundo.pasar_turno(false)#Pasa el turno al terminar de procesar todo
@@ -101,7 +102,7 @@ func realizar_ataque(unidad : unidad_base):
 	AlgoritmoCombate.ejecutar_ataque(daño_unidad_atacante, daño_unidad_defensora)#Envia la informacion a algoritmo combate para que vuelva real el combate
 func obtener_nodo_mundo (nodo : Node):
 	nodo_mundo = nodo
-func avanzar_hacia_un_enemigo(unidad : unidad_base):
+func avanzar_hacia_un_enemigo(unidad : unidad_base) -> bool:
 	var origen = unidad.coordenada_local_tilemap#Ubicacion de la unidad
 	var heuristica_distancia_enemiga : Array
 	for i in ubicaciones_ocupadas_enemigos:
@@ -113,4 +114,7 @@ func avanzar_hacia_un_enemigo(unidad : unidad_base):
 	await AlgoritmoDijkstra.resultado_estrella_obtenido#Espera a que el multihilo termine
 	var resultado = AlgoritmoDijkstra.resultado_a_estrella#Almacena el resultado
 	print("Seguire el siguiente camino:",resultado)
+	if resultado.is_empty():#Si no hay ningun camino posible, corta la funcion
+		return false#Devuelve que la funcion fue un fracaso
 	nodo_mundo.mover_unidad_con_a_estrella(unidad,resultado) #mueve la unidad con la funcion de A*
+	return true#Devuelve que se pudo aplicar el movimiento

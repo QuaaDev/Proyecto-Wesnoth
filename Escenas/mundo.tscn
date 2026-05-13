@@ -110,10 +110,10 @@ anchor_bottom = 0.5
 position = Vector2(576, 323)
 script = ExtResource("4_ly0wt")
 
-[node name="unidad_dragon4" parent="." unique_id=240753784 instance=ExtResource("6_gv8d2")]
-position = Vector2(367, -107)
-equipo = 1
-
 [node name="unidad_dragon13" parent="." unique_id=844868248 instance=ExtResource("6_gv8d2")]
 position = Vector2(418, 433)
 equipo = 2
+
+[node name="unidad_dragon14" parent="." unique_id=596515625 instance=ExtResource("6_gv8d2")]
+position = Vector2(362, 101)
+equipo = 1
