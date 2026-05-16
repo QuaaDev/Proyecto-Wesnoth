@@ -8,6 +8,7 @@ extends Control
 
 func salir_presionado() -> void:
 	print("Salir")
+	get_tree().quit()
 
 
 func opciones_presionado() -> void:
