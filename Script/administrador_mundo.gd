@@ -134,6 +134,8 @@ func _input(event):
 					#Error
 					print("Click Izquierdo condicion no reconocida, valores: ")
 					print(mouse_sobre_unidad,unidad_a_mover)
+					#Cuando queda un menu por detras del tilemap, como que se roba la atencion y deja todos los valores en null.
+					#Si vuelve a aparecer este error, esta podria ser una causa
 					
 func mover_unidad(unidad : unidad_base, coordenada_objetivo : Vector2):
 	#AlgoritmoDijkstra.movimientos_disponibles
