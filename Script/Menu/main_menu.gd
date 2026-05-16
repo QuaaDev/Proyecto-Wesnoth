@@ -26,3 +26,4 @@ func nueva_partida_presionado() -> void:
 	get_parent().add_child(mundo_instanciado)
 	self.visible = false #Desactiva el menu para evitar errores
 	
+	
