@@ -110,7 +110,7 @@ anchor_bottom = 0.5
 position = Vector2(576, 323)
 limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 10.0
+position_smoothing_speed = 20.0
 script = ExtResource("4_ly0wt")
 
 [node name="unidad_dragon13" parent="." unique_id=844868248 instance=ExtResource("6_gv8d2")]
