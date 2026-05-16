@@ -20,3 +20,8 @@ func cargar_presionado() -> void:
 
 func nueva_partida_presionado() -> void:
 	print("Nueva partida")
+	var mundo = load("uid://bpkd4wjvywj2s")
+	var mundo_instanciado = mundo.instantiate()
+	get_parent().add_child(mundo_instanciado)
+	self.visible = false #Desactiva el menu 
+	

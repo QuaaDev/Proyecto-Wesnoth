@@ -133,6 +133,7 @@ func _input(event):
 				else:
 					#Error
 					print("Click Izquierdo condicion no reconocida, valores: ")
+					print(mouse_sobre_unidad,unidad_a_mover)
 					
 func mover_unidad(unidad : unidad_base, coordenada_objetivo : Vector2):
 	#AlgoritmoDijkstra.movimientos_disponibles
