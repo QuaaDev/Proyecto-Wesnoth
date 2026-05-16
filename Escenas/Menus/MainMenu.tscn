@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cmg8pggyrxcfa"]
 
+[ext_resource type="Script" uid="uid://0jq7c8styiey" path="res://Script/Menu/main_menu.gd" id="1_wwj4p"]
+
 [node name="MainMenu" type="Control" unique_id=674327815]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wwj4p")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=146447899]
 layout_mode = 1
@@ -34,3 +37,8 @@ text = "Opciones"
 [node name="Salir" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2118221798]
 layout_mode = 2
 text = "Salir"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Nueva" to="." method="nueva_partida_presionado"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Cargar" to="." method="cargar_presionado"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Opciones" to="." method="opciones_presionado"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Salir" to="." method="salir_presionado"]
