@@ -4,14 +4,14 @@ signal todas_las_unidades_procesadas #Cuando se agota la lista de unidades a apl
 var nodo_mundo
 var ubicaciones_ocupadas_enemigos : Dictionary#Almacena las ubicaciones de los enemigos
 var movimientos_disponibles_incluyendo_ocupados
-var unidades_almacenadas
+var unidades_almacenadas : Array
 enum decision_IA {no_definido = 0,atacando = 1, moviendose = 2}
 var decision_final : decision_IA
 func ejecutar_ia(equipo : int):
 	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
 	for unidad in unidades_almacenadas: #Se ejecuta cada unidad de forma independiente.
 		ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate() #Actualiza la informacion
-		descartar_unidades_aliadas(unidades_almacenadas)
+		descartar_unidades_aliadas(cargar_unidades(equipo))
 		decision_final= decision_IA.no_definido#Resetea el valor del estado
 		print("-------------------")
 		print(unidad.name)

@@ -151,6 +151,7 @@ func recibir_daño(cantidad : int) -> void:
 		morir()
 
 func aplicando_animacion_movimiento(camino_a_seguir : Array) -> void:
+	estoy_sobre_fog()
 	if tween and tween.is_running():#Si ya hay una animacion corriendo, espera a que termine
 		await tween.finished
 	tween = create_tween()
@@ -232,9 +233,8 @@ func limpiar_objetivos_ataque() -> void:
 	
 func estoy_sobre_fog():
 	if tile_map.es_tile_con_fog(coordenada_local_tilemap):
-		for i in nodo_mundo.grupos_bajo_ia:
-			if self.is_in_group(str(i)):
-				self.visible = false
+		if equipo in nodo_mundo.grupos_bajo_ia:
+			self.visible = false
 	else:
 		self.visible = true
 	
