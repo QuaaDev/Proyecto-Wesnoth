@@ -43,11 +43,17 @@ func es_tile_transitable(coordenadas : Vector2) -> bool:
 
 
 func moviendo_unidad(unidad : unidad_base, ubicaciones_ocupadas : Dictionary, 
-dibujar_movimientos : bool, una_celda_mas : bool) -> void:
+dibujar_movimientos : bool, una_celda_mas : bool, usar_movimiento_maximo : bool) -> void:
 	#Una celda mas aumenta la busqueda en 1 celda para la IA
+	#Usar movimiento maximo utiliza el movimiento maximo en vez del actual.
 	limpiar_movimientos() #Limpia la anterior lista de movimientos
 	var start = unidad.coordenada_local_tilemap
 	var cantidad_de_movimiento_maximo = unidad.puntos_movimiento
+	if usar_movimiento_maximo:
+		#Verifica si usar el movimiento maximo o el actual de la unidad
+		cantidad_de_movimiento_maximo = unidad.puntos_movimiento_maximo
+	else:
+		cantidad_de_movimiento_maximo = unidad.puntos_movimiento
 	var frontier = [] #Almacena las fronteras que hay que explorar
 	frontier.append(start) #Donde empieza la ejecucion
 	var reached = {} #Almacena las casillas ya exploradas

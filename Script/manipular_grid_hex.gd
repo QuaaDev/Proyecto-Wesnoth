@@ -41,7 +41,7 @@ func actualizar_fog() -> void:
 	var diccionario_bufon : Dictionary#Esto es para que el algoritmodijkstra ignore las posiciones de unidades
 	var unidades_jugador = get_parent().get_unidades_del_jugador()
 	for unidad in unidades_jugador:#Explora todas las unidades
-		AlgoritmoDijkstra.moviendo_unidad(unidad, diccionario_bufon, false, true)
+		AlgoritmoDijkstra.moviendo_unidad(unidad, diccionario_bufon, false, true,true)
 		#Obtiene el rango de movimiento, ya que movimiento = vision
 		var rango_movimiento = AlgoritmoDijkstra.movimientos_disponibles#Almacena el rango de movimiento
 		for i in rango_movimiento:
