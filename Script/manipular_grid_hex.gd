@@ -17,8 +17,8 @@ func _ready() -> void:
 	dibujar_fog(terrain_carpet.limite_del_mapa)
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
-		if tile_map_hud.get_cell_source_id(coordenada_global_del_mouse_a_tilemap()) == 4:
-			#Si es el source ID del fog
+		if es_tile_con_fog(coordenada_global_del_mouse_a_tilemap()):
+			#Verifica si este tile tiene fog
 			if cuadricula_seleccionada_mouse != Vector2(-100,-100):
 				tile_map_hud.set_cell(cuadricula_seleccionada_mouse,1,Vector2(0,0),0)#Dibuja el tilemap  de contorno
 				cuadricula_seleccionada_mouse = Vector2(-100,-100)#Valor default para cuando no quiero dibujar
@@ -48,7 +48,11 @@ func actualizar_fog() -> void:
 			tile_map_hud.set_cell(i,1,Vector2i(0,0),0)
 			#Elimina el fog de la casilla
 		
-
+func es_tile_con_fog(coordenadas : Vector2i) -> bool:
+	#Si el source id del tile es 4 significa que tiene fog
+	if tile_map_hud.get_cell_source_id(coordenadas) == 4:
+		return true
+	return false
 
 
 
