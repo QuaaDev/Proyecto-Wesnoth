@@ -264,7 +264,6 @@ func get_unidades_del_jugador()-> Array:
 				#Agrega nodo por nodo al array de unidades
 				unidades.append(i)
 	return unidades
-
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
@@ -300,6 +299,8 @@ func pasar_turno (llamado_desde_jugador : bool) -> void:
 			print("terminando turno")
 			turno_actual += 1
 			equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
+		if llamado_desde_jugador:
+			tile_map.actualizar_fog()#Cuando termina el turno del jugador, actualiza el fog
 		get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
 		get_tree().call_group(str(equipo_actual),"estoy_sobre_fog")#Les pide que actualicen el fog
 		turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
@@ -309,7 +310,7 @@ func pasar_turno (llamado_desde_jugador : bool) -> void:
 			ia_empieza_a_jugar()
 			IA01.ejecutar_ia(equipo_actual)
 		else:
-			tile_map.actualizar_fog()#Cuando empieza el turno del jugador, actualiza el fog
+			#tile_map.actualizar_fog()#Cuando empieza el turno del jugador, actualiza el fog
 			ia_deja_de_jugar()
 	else:
 		print("No es posible pasar turno mientras juega la IA")
