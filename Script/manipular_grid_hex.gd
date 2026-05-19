@@ -31,9 +31,11 @@ func dibujar_fog(limite_del_mapa : Vector2i) -> void:
 			tile_map_hud.set_cell(Vector2i(x,y),4,Vector2i(0,0),0)
 
 func actualizar_fog() -> void:
+	dibujar_fog(terrain_carpet.limite_del_mapa)
+	var diccionario_bufon : Dictionary#Esto es para que el algoritmodijkstra ignore las posiciones de unidades
 	var unidades_jugador = get_parent().get_unidades_del_jugador()
 	for unidad in unidades_jugador:#Explora todas las unidades
-		AlgoritmoDijkstra.moviendo_unidad(unidad, get_parent().ubicaciones_ocupadas, false, true)
+		AlgoritmoDijkstra.moviendo_unidad(unidad, diccionario_bufon, false, true)
 		#Obtiene el rango de movimiento, ya que movimiento = vision
 		var rango_movimiento = AlgoritmoDijkstra.movimientos_disponibles#Almacena el rango de movimiento
 		for i in rango_movimiento:
