@@ -116,8 +116,10 @@ func _ready() -> void:
 
 func morir():
 	nodo_mundo.ubicaciones_ocupadas.erase(coordenada_local_tilemap) #Libera su posicion del mundo
+	self.remove_from_group(str(equipo))#Se remueve del grupo
 	activar_animacion_morir()
 	await get_tree().create_timer(2.0).timeout
+	tile_map.actualizar_fog()#Actualiza el fog luego de morir
 	self.queue_free()
 	
 func animacion_morir():
@@ -228,7 +230,17 @@ func limpiar_objetivos_ataque() -> void:
 	objetivos_a_atacar.clear()
 	objetivo_final.clear()
 	
+func estoy_sobre_fog():
+	if tile_map.es_tile_con_fog(coordenada_local_tilemap):
+		for i in nodo_mundo.grupos_bajo_ia:
+			if self.is_in_group(str(i)):
+				self.visible = false
+	else:
+		self.visible = true
 	
+
+
+
 func _on_area_2d_mouse_entered() -> void: #Actualiza la informacion de administrador mundo para informarle de que esta unidad esta bajo el mouse
 	nodo_mundo.obtener_unidad_bajo_mouse(self)#Envia la informacion de la unidad
 

@@ -53,6 +53,8 @@ func _ready() -> void:
 	equipo_actual = empieza_x_equipo
 	turno_actual_y_equipo.text = "turno actual 0, equipo actual: " + str(equipo_actual)
 	tile_map.actualizar_fog()#Actualiza el fog
+	for i in ubicaciones_ocupadas:#Aplica fog a las unidades
+		ubicaciones_ocupadas[i].estoy_sobre_fog()
 	comprobar_errores_ready() #Siempre al final 
 	#Si la IA tiene el primer turno, lo ejecuta
 	if equipo_actual in grupos_bajo_ia:
@@ -299,6 +301,7 @@ func pasar_turno (llamado_desde_jugador : bool) -> void:
 			turno_actual += 1
 			equipo_actual = empieza_x_equipo #Reinicia el ciclo de equipos
 		get_tree().call_group(str(equipo_actual), "empezo_mi_turno")#Empieza el turno del equipo
+		get_tree().call_group(str(equipo_actual),"estoy_sobre_fog")#Les pide que actualicen el fog
 		turno_actual_y_equipo.text = "turno actual: "+str(turno_actual) + " equipo actual " + str(equipo_actual) 
 		#------IA----------------
 		if equipo_actual in grupos_bajo_ia:
