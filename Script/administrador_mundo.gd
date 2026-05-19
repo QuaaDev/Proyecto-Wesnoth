@@ -52,6 +52,7 @@ func _ready() -> void:
 	get_tree().call_group(str(empieza_x_equipo), "empezo_mi_turno")
 	equipo_actual = empieza_x_equipo
 	turno_actual_y_equipo.text = "turno actual 0, equipo actual: " + str(equipo_actual)
+	tile_map.actualizar_fog()#Actualiza el fog
 	comprobar_errores_ready() #Siempre al final 
 	#Si la IA tiene el primer turno, lo ejecuta
 	if equipo_actual in grupos_bajo_ia:
@@ -60,8 +61,6 @@ func _ready() -> void:
 		IA01.ejecutar_ia(equipo_actual)
 	else:
 		ia_deja_de_jugar()
-	#DEBUG
-	get_unidades_del_jugador()
 func _input(event):
 	if event is InputEventMouseButton:
 			if (event.button_index == MOUSE_BUTTON_LEFT and event.pressed) and (!mouse_sobre_hud and !ia_jugando): 
@@ -307,6 +306,7 @@ func pasar_turno (llamado_desde_jugador : bool) -> void:
 			ia_empieza_a_jugar()
 			IA01.ejecutar_ia(equipo_actual)
 		else:
+			tile_map.actualizar_fog()#Cuando empieza el turno del jugador, actualiza el fog
 			ia_deja_de_jugar()
 	else:
 		print("No es posible pasar turno mientras juega la IA")

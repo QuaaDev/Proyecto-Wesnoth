@@ -30,6 +30,16 @@ func dibujar_fog(limite_del_mapa : Vector2i) -> void:
 		for y in range(-1,limite_del_mapa.y+1):
 			tile_map_hud.set_cell(Vector2i(x,y),4,Vector2i(0,0),0)
 
+func actualizar_fog() -> void:
+	var unidades_jugador = get_parent().get_unidades_del_jugador()
+	for unidad in unidades_jugador:#Explora todas las unidades
+		AlgoritmoDijkstra.moviendo_unidad(unidad, get_parent().ubicaciones_ocupadas, false, true)
+		#Obtiene el rango de movimiento, ya que movimiento = vision
+		var rango_movimiento = AlgoritmoDijkstra.movimientos_disponibles#Almacena el rango de movimiento
+		for i in rango_movimiento:
+			tile_map_hud.set_cell(i,1,Vector2i(0,0),0)
+			#Elimina el fog de la casilla
+		
 
 
 
