@@ -17,9 +17,15 @@ func _ready() -> void:
 	dibujar_fog(terrain_carpet.limite_del_mapa)
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
-		tile_map_hud.set_cell(cuadricula_seleccionada_mouse,1,Vector2(0,0),0)#Dibuja el tilemap  de contorno
-		cuadricula_seleccionada_mouse = coordenada_global_del_mouse_a_tilemap() #Actualiza la coordenada de la nueva seleccionada
-		tile_map_hud.set_cell(cuadricula_seleccionada_mouse, 0, Vector2i(0,0), 0) #Dibuja el hud de la cuadricula seleccionada
+		if tile_map_hud.get_cell_source_id(coordenada_global_del_mouse_a_tilemap()) == 4:
+			#Si es el source ID del fog
+			if cuadricula_seleccionada_mouse != Vector2(-100,-100):
+				tile_map_hud.set_cell(cuadricula_seleccionada_mouse,1,Vector2(0,0),0)#Dibuja el tilemap  de contorno
+				cuadricula_seleccionada_mouse = Vector2(-100,-100)#Valor default para cuando no quiero dibujar
+		else:
+			tile_map_hud.set_cell(cuadricula_seleccionada_mouse,1,Vector2(0,0),0)#Dibuja el tilemap  de contorno
+			cuadricula_seleccionada_mouse = coordenada_global_del_mouse_a_tilemap() #Actualiza la coordenada de la nueva seleccionada
+			tile_map_hud.set_cell(cuadricula_seleccionada_mouse, 0, Vector2i(0,0), 0) #Dibuja el hud de la cuadricula seleccionada
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------
 	label_coordenadas.text = "coordenadas del tilemap: " + str(coordenada_global_del_mouse_a_tilemap())
 	#imprime en la pantalla las coordenadas exactas segun la posicion del mouse
