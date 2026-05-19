@@ -120,3 +120,11 @@ equipo = 2
 [node name="unidad_dragon14" parent="." unique_id=596515625 instance=ExtResource("6_gv8d2")]
 position = Vector2(362, 101)
 equipo = 1
+
+[node name="unidad_dragon15" parent="." unique_id=1186195093 instance=ExtResource("6_gv8d2")]
+position = Vector2(738, 209)
+equipo = 1
+
+[node name="unidad_dragon16" parent="." unique_id=1461602863 instance=ExtResource("6_gv8d2")]
+position = Vector2(687, 539)
+equipo = 1

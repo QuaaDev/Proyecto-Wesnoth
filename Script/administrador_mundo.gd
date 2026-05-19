@@ -60,6 +60,8 @@ func _ready() -> void:
 		IA01.ejecutar_ia(equipo_actual)
 	else:
 		ia_deja_de_jugar()
+	#DEBUG
+	get_unidades_del_jugador()
 func _input(event):
 	if event is InputEventMouseButton:
 			if (event.button_index == MOUSE_BUTTON_LEFT and event.pressed) and (!mouse_sobre_hud and !ia_jugando): 
@@ -251,6 +253,17 @@ func limpiar_unidad_seleccionada() -> void:
 func verificar_cantidad_grupos(grupo : int):
 	if !grupo in cantidad_total_equipos:
 		cantidad_total_equipos.append(grupo)
+
+func get_unidades_del_jugador()-> Array:
+	#Devuelve un array con las unidades controladas por un jugador
+	var unidades : Array[unidad_base] = []#Declara el array
+	for equipo in cantidad_total_equipos:#Explora todos los equipos
+		if !(equipo in grupos_bajo_ia):#Si no esta bajo el mando de la IA
+			for i in get_tree().get_nodes_in_group(str(equipo)):
+				#Agrega nodo por nodo al array de unidades
+				unidades.append(i)
+	return unidades
+
 #------------------señañes-----------------------
 func mouse_en_hud() -> void:
 	mouse_sobre_hud = true
@@ -272,6 +285,7 @@ func boton_pasar_turno() -> void:
 func pasar_turno (llamado_desde_jugador : bool) -> void:
 	#Si es llamado por el jugador o la IA, actua de forma diferente
 	if not(llamado_desde_jugador and ia_jugando):
+		#Evita que el player pase turno mientras juega la IA
 		#Si la llamada la hace el jugador y la IA esta jugando, false
 		#Si la llamada la hace el jugador y la IA no esta jugando, true
 		#Si la llamada la hace la IA y la IA esta jugando, true
