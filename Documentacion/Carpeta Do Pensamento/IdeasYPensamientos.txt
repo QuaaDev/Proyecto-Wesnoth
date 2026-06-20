@@ -1,0 +1,19 @@
+Objetivo: Creador de niveles simple
+Mundo almacena y administra las cosas jugables
+La UI siempre sera la misma
+El Tilemap es el mismo, pero cambia el mapa a jugar
+Las unidades cambian segun el nivel
+
+
+La idea es que al cargar un nivel, este cargue todos esos recursos necesarios para 
+funcionar de forma automatica
+
+El nodo TileMap actuara como el contenedor del nivel. Ahi es donde se definira el nivel.
+Mundo cargara el nivel que se le asigne. Si no se le asigna o hay error, que cargue uno default.
+
+
+El nodo TIleMap es un node2d sin funcionalidades mas alla que contener el resto. Puedo usar este nodo
+para hacer diferentes mapas reutilizando los nodos tile_map_base y tile_map_hud
+
+TileMap podria tener una carpeta de Unidades donde insertar las unidades. De esa forma, a la hora
+de diseñar un nivel se diseña junto a la disposicion de las unidades.
