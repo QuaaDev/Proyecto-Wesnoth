@@ -37,7 +37,7 @@ var ubicaciones_ocupadas = {} #Diccionario que almacena las ubicaciones ocupadas
 var casillas_a_atacar = {} #Diccionario que almacena las ubicaciones que se pueden atacar junto a su unidad
 func _ready() -> void:
 	IA01.obtener_nodo_mundo(self) #Envia una referencia de si mismo a la IA
-	for i in get_children():
+	for i in get_children():#----------Esto quedara obsoleto-------------
 		#if i.name.contains("Unidad"):
 		if i is unidad_base: #En vez de verificar los nombres, ahora verifica la clase
 			ubicaciones_ocupadas[i.coordenada_local_tilemap] = i

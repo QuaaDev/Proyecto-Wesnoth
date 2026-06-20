@@ -3,8 +3,8 @@ class_name unidad_base
 signal animacion_terminada_combate #Conectada a algoritmo_combate
 signal animacion_movimiento_terminada #Conectada a IA
 #region parametros esenciales
-@onready var nodo_mundo = self.get_parent()
-@onready var tile_map: Node2D = $"../TileMap"
+@onready var nodo_mundo : Mundo = self.get_parent().get_parent().get_parent()
+@onready var nivel: Node2D = nodo_mundo.tile_map #Obtiene referencia del nivel desde mundo
 @onready var sprite: Sprite2D = $sprite
 var ejecutar_animacion_muerte = false
 var coordenada_local_tilemap : Vector2 #La coordenada local del tilemap
@@ -101,6 +101,8 @@ func _process(delta: float) -> void:
 	
 		
 func _ready() -> void:
+	await nivel.ready #Espera a que el nivel haya cargado para inicializar las unidades
+	
 	vida_actual = vida_maxima
 	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))
@@ -108,10 +110,11 @@ func _ready() -> void:
 	#Le envia su grupo a mundo para verificar si su grupo esta registrado en mundo
 	#print(self.get_groups())
 	actualizar_coordenada_local_tilemap()
-	var coordenada_global = tile_map.map_to_local(coordenada_local_tilemap)
+	var coordenada_global = nivel.map_to_local(coordenada_local_tilemap)
 	self.position = coordenada_global #Centra a la unidad en la celda
 	sprite.texture = load(sprite_unidad_UID)
 	sprite.cambiar_color(equipo) #recolorización por máscara de color
+	nodo_mundo.ubicaciones_ocupadas[self.coordenada_local_tilemap] = self
 	#print(opciones_de_combate)
 
 func morir():
@@ -119,7 +122,7 @@ func morir():
 	self.remove_from_group(str(equipo))#Se remueve del grupo
 	activar_animacion_morir()
 	await get_tree().create_timer(2.0).timeout
-	tile_map.actualizar_fog()#Actualiza el fog luego de morir
+	nivel.actualizar_fog()#Actualiza el fog luego de morir
 	self.queue_free()
 	
 func animacion_morir():
@@ -158,7 +161,7 @@ func aplicando_animacion_movimiento(camino_a_seguir : Array) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
 	for i in camino_a_seguir:
-		var new_position = tile_map.map_to_local(i)
+		var new_position = nivel.map_to_local(i)
 		tween.tween_property(self,"position",new_position, .5)
 	await tween.finished
 	animacion_movimiento_terminada.emit()
@@ -207,7 +210,7 @@ func aplicar_animacion_combate(coordenadas : Vector2) -> void:
 	#Cuando toda la animacion termina, emite la señal para que algoritmo_combate se siga ejecutando
 
 func actualizar_coordenada_local_tilemap() -> void: #Actualiza la variable coordenada_local_tilemap
-	coordenada_local_tilemap = tile_map.local_to_map(position)#Posicion local del tilemap
+	coordenada_local_tilemap = nivel.local_to_map(position)#Posicion local del tilemap
 	
 func siendo_movido() -> void:
 	self.modulate = Color(18.892, 0.0, 0.0, 0.448)
@@ -232,7 +235,7 @@ func limpiar_objetivos_ataque() -> void:
 	objetivo_final.clear()
 	
 func estoy_sobre_fog():
-	if tile_map.es_tile_con_fog(coordenada_local_tilemap):
+	if nivel.es_tile_con_fog(coordenada_local_tilemap):
 		if equipo in nodo_mundo.grupos_bajo_ia:
 			self.visible = false
 	else:

@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cy6n6c5id53ol" path="res://Escenas/tilemap/tile_map_base.tscn" id="2_wstun"]
 [ext_resource type="PackedScene" uid="uid://ct1t2j7liiekk" path="res://Escenas/tilemap/terrain_carpet.tscn" id="3_bvlkg"]
 [ext_resource type="TileSet" uid="uid://cbtewxntolj73" path="res://Escenas/tilemap/tile_set_hudt.tres" id="4_0aidv"]
+[ext_resource type="PackedScene" uid="uid://ccyln6xtlndhn" path="res://Escenas/Unidad/murcielago/murcielago_unidad.tscn" id="5_bvlkg"]
+[ext_resource type="PackedScene" uid="uid://btdj0ckytx6lu" path="res://Escenas/Unidad/dragon/unidad_dragon.tscn" id="6_0aidv"]
 
 [node name="NivelTest" type="Node2D" unique_id=451765604]
 script = ExtResource("1_5nloc")
@@ -20,3 +22,27 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAA
 tile_set = ExtResource("4_0aidv")
 
 [node name="UnidadesCarpet" type="Node" parent="." unique_id=443389148]
+
+[node name="murcielago_unidad" parent="UnidadesCarpet" unique_id=1030529905 instance=ExtResource("5_bvlkg")]
+position = Vector2(630, 721)
+equipo = 1
+
+[node name="murcielago_unidad2" parent="UnidadesCarpet" unique_id=365660539 instance=ExtResource("5_bvlkg")]
+position = Vector2(793, 835)
+equipo = 1
+
+[node name="murcielago_unidad3" parent="UnidadesCarpet" unique_id=236816298 instance=ExtResource("5_bvlkg")]
+position = Vector2(946, 941)
+equipo = 1
+
+[node name="unidad_dragon" parent="UnidadesCarpet" unique_id=844868248 instance=ExtResource("6_0aidv")]
+position = Vector2(1124, 474)
+equipo = 2
+
+[node name="unidad_dragon2" parent="UnidadesCarpet" unique_id=181732238 instance=ExtResource("6_0aidv")]
+position = Vector2(1438, 329)
+equipo = 2
+
+[node name="unidad_dragon3" parent="UnidadesCarpet" unique_id=1983305002 instance=ExtResource("6_0aidv")]
+position = Vector2(1708, 358)
+equipo = 2
