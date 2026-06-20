@@ -1,0 +1,12 @@
+Pasos para hacer un nivel desde cero:
+	Crear un Node2D vacio
+	Asignarle el script "manipular_grid_hex" que es de la clase Nivel
+	Configurar si se quiere o no Fog
+	
+	Asignarle un tile_map_base:
+		a la base, asignarle un TerrainCarpet
+		a terraincarpet, asignarle los limites del mapa.
+	Asignarle un tile_map_hud
+	Asignarle un nodo que actua como carpeta de las unidades (UnidadesCarpet):
+		Aca se asignan las unidades.
+	
