@@ -114,7 +114,7 @@ func _ready() -> void:
 	self.position = coordenada_global #Centra a la unidad en la celda
 	sprite.texture = load(sprite_unidad_UID)
 	sprite.cambiar_color(equipo) #recolorización por máscara de color
-	nodo_mundo.ubicaciones_ocupadas[self.coordenada_local_tilemap] = self
+	nodo_mundo.agregar_ubicacion_ocupada(self)#Solicita ocupar una ubicacion en nodo mundo
 	#print(opciones_de_combate)
 
 func morir():

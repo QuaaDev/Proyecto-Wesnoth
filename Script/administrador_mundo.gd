@@ -191,6 +191,16 @@ func verificar_si_son_aliados() -> bool:
 		return true
 	else: 
 		return false
+
+func agregar_ubicacion_ocupada(unidad : unidad_base) -> void:
+	if !(ubicaciones_ocupadas.has(unidad.coordenada_local_tilemap)):
+		#Si la ubicacion esta libre, es ocupada por la unidad
+		ubicaciones_ocupadas[unidad.coordenada_local_tilemap] = unidad
+	else:
+		#Si no, push error
+		push_error("Ubicacion ocupada por multiples unidades, coordenada",unidad.coordenada_local_tilemap,
+		"pertenece a ", ubicaciones_ocupadas[unidad.coordenada_local_tilemap].name, " pero la siguiente
+		unidad solicita la posicion ",unidad.name)
 #-------Seccion Combate-----------
 func unidad_prepara_ataque() -> void: 
 	almacenar_unidad()#Almacena la unidad como seleccionada
