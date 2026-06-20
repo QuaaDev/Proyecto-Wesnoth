@@ -1,6 +1,7 @@
 extends Node2D
+class_name Nivel
 var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadricula que fue seleccionada por el codigo
-
+@export var implementar_fog : bool #Activa/desactiva la niebla de guerra
 @onready var tile_map_hud: TileMapLayer = $tile_map_hud
 @onready var tile_map_base: TileMapLayer = $tile_map_base
 @onready var label_coordenadas: Label = $"../CanvasLayer/VBoxContainer/coordenadas_local"
@@ -31,10 +32,11 @@ func _process(_delta: float) -> void:
 	#imprime en la pantalla las coordenadas exactas segun la posicion del mouse
 
 func dibujar_fog(limite_del_mapa : Vector2i) -> void:
-	#Carga todo el mapa con un fog
-	for x in range(-1,limite_del_mapa.x+1):
-		for y in range(-1,limite_del_mapa.y+1):
-			tile_map_hud.set_cell(Vector2i(x,y),4,Vector2i(0,0),0)
+	if implementar_fog: #Si el fog esta activado:
+		#Carga todo el mapa con un fog
+		for x in range(-1,limite_del_mapa.x+1):
+			for y in range(-1,limite_del_mapa.y+1):
+				tile_map_hud.set_cell(Vector2i(x,y),4,Vector2i(0,0),0)
 
 func actualizar_fog() -> void:
 	dibujar_fog(terrain_carpet.limite_del_mapa)

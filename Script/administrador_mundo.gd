@@ -1,8 +1,9 @@
 extends Node
+class_name Mundo
 var mouse_sobre_unidad : unidad_base
 var unidad_a_mover : unidad_base
 var ia_jugando : bool = false#Interruptor para cuando la IA este jugando
-@onready var tile_map: Node2D = $TileMap
+var tile_map: Node2D#Almacena el nivel
 
 #----------Seccion hud derecho----------
 @onready var label_unidad_moviendose: Label = $CanvasLayer/hud_derecho/VBoxContainer/nombre_unidad_moviendose
