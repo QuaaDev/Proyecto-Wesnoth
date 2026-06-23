@@ -26,6 +26,12 @@ texture_region_size = Vector2i(72, 72)
 5:0/0 = 0
 5:0/0/custom_data_0 = "Desierto"
 5:0/0/custom_data_2 = 3
+0:0/0 = 0
+0:0/0/custom_data_0 = "Bosque_Otoño"
+0:0/0/custom_data_2 = 2
+2:0/0 = 0
+2:0/0/custom_data_0 = "Bosque_Muerto"
+2:0/0/custom_data_2 = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acwoj"]
 texture = ExtResource("2_nsys4")

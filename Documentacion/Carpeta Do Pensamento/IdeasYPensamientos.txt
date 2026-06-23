@@ -17,3 +17,5 @@ para hacer diferentes mapas reutilizando los nodos tile_map_base y tile_map_hud
 
 TileMap podria tener una carpeta de Unidades donde insertar las unidades. De esa forma, a la hora
 de diseñar un nivel se diseña junto a la disposicion de las unidades.
+---------------------------------------------------------------------------------------------------------------
+Siguiente por hacer: Re-hacer el asset de tile_map_base para tener todos los assets en una sola imagen
