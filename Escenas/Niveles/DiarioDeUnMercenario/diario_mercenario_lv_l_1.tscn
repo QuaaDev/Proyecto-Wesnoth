@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cnaqp36hgglr5"]
+
+[ext_resource type="Script" uid="uid://bcnj516tnkngj" path="res://Script/manipular_grid_hex.gd" id="1_hnk81"]
+[ext_resource type="PackedScene" uid="uid://cy6n6c5id53ol" path="res://Escenas/tilemap/tile_map_base.tscn" id="2_okvtr"]
+[ext_resource type="PackedScene" uid="uid://ct1t2j7liiekk" path="res://Escenas/tilemap/terrain_carpet.tscn" id="3_577ss"]
+[ext_resource type="PackedScene" uid="uid://dwp71ugal6w1k" path="res://Escenas/tilemap/tile_map_hud.tscn" id="4_7wmtk"]
+
+[node name="DiarioMercenarioLvL1" type="Node2D" unique_id=905788773]
+script = ExtResource("1_hnk81")
+
+[node name="tile_map_base" parent="." unique_id=2087022431 instance=ExtResource("2_okvtr")]
+
+[node name="TerrainCarpet" parent="tile_map_base" unique_id=1294418875 instance=ExtResource("3_577ss")]
+
+[node name="tile_map_hud" parent="." unique_id=886965225 instance=ExtResource("4_7wmtk")]
+
+[node name="UnidadesCarpet" type="Node" parent="." unique_id=871407335]
