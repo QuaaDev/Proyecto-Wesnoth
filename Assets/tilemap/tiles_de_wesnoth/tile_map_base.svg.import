@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1vmt3m0x21da"
-path="res://.godot/imported/plantilla_hex_144.svg-4770aa2785eb0f27cde1eff606fdb959.ctex"
+uid="uid://rc8j4fsbcg5x"
+path="res://.godot/imported/tile_map_base.svg-f8f4557b88190415fed14b058aec7d67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilemap/TilesTerreno/plantilla_hex_144.svg"
-dest_files=["res://.godot/imported/plantilla_hex_144.svg-4770aa2785eb0f27cde1eff606fdb959.ctex"]
+source_file="res://Assets/tilemap/tiles_de_wesnoth/tile_map_base.svg"
+dest_files=["res://.godot/imported/tile_map_base.svg-f8f4557b88190415fed14b058aec7d67.ctex"]
 
 [params]
 

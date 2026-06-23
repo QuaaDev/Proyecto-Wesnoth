@@ -37,7 +37,6 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://Assets/": "yellow",
 "res://Assets/tilemap/PruebaAutoTile/": "yellow",
-"res://Assets/tilemap/TilesTerreno/": "red",
 "res://Documentacion/": "red",
 "res://Escenas/": "blue",
 "res://Script/": "gray"
