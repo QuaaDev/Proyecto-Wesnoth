@@ -119,7 +119,8 @@ func aplicar_terreno() -> void:
 							else:
 								get(nombre_variable).set_cell(coordenada, source_id_del_terrain, Vector2i(1, 0), 0 | efecto_a_aplicar)
 					else:
-						push_error("source_id_del_terrain -1, devolviendo error")
+						#push_error("source_id_del_terrain -1, devolviendo error")
+						pass
 				contador_posicion_bit += 1#Avanza en uno la posicion del bit
 	#for i in lista_terrenos_compuestos_cargados:
 		#print(i.terreno_compuesto)
@@ -152,7 +153,7 @@ func obtener_source_id_terrain(terreno_compuesto : String) -> int:
 	for i in lista_terrenos_compuestos_cargados: #Explora la lista
 		if i.terreno_compuesto == terreno_compuesto: #Buscando un terreno compuesto que coincida
 			return i.id #Si coincide, devuelve su id
-	push_error("Terreno compuesto no encontrado, devolviendo error")
+	#push_error("Terreno compuesto no encontrado, devolviendo error")
 	return -1
 func verificar_si_vecino_tiene_terrain(local : Vector2i, vecino : Vector2i, numero_layer : int) -> bool: #Verifica si el vecino del tile origen 
 	var nombre_layer_vecino = "Layer" + str(calcular_layer_espejo(numero_layer)) #Este es el layer que consultara de su vecino

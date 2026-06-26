@@ -2,6 +2,7 @@ extends Node
 class_name carga_terrain_assets
 
 var imprimir_errores : bool = true #Interruptor para el debug
+var almacenar_errores : Array#Almacena que errores ya fueron reportados para no spamear
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
 #Valores mas altos tendran prioridad sobre valores mas bajos
@@ -51,10 +52,14 @@ func existe_la_combinacion(origen : String, vecino : String) -> bool:
 			return true#----------return-------------------
 		else:
 			if imprimir_errores:
-				push_error("No existe la key ",vecino," en el diccionario ", origen)
+				if !(origen+vecino in almacenar_errores):
+					almacenar_errores.append(origen+vecino)
+					push_error("No existe la key ",vecino," en el diccionario ", origen)
 	else:
 		if imprimir_errores:
-			push_error("No existe la constante ",origen," devolviendo error")
+			if !(origen in almacenar_errores):
+				almacenar_errores.append(origen)
+				push_error("No existe la constante ",origen," devolviendo error")
 	return false
 func mayor_prioridad_que_vecino(terreno_x : String, terreno_y : String) -> bool:
 	#Si el terreno X tiene menor prioridad que el terreno Y, este toma el terreno de Y en su layer.
