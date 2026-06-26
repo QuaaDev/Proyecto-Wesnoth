@@ -10,7 +10,7 @@ enum Prioridad {
 	Any = 0,
 	Bosque = 2,
 	Agua = 1,
-	Pasto = 14,
+	Pasto = 15,
 	PastoSeco = 15,
 	Desierto = 10,
 	Limite_mapa = 10000
@@ -67,13 +67,13 @@ func existe_la_combinacion(origen : String, vecino : String) -> bool:
 func mayor_prioridad_que_vecino(terreno_x : String, terreno_y : String) -> bool:
 	#Si el terreno X tiene menor prioridad que el terreno Y, este toma el terreno de Y en su layer.
 	#Si el terreno X tiene mayor prioridad que el terreno Y, este saltea la ejecucion para que Y tome su layer luego
-	var valor_x : int = -1
-	var valor_y : int = 0
+	var valor_x : int = 0
+	var valor_y : int = -1
 	if terreno_x in Prioridad:
 		valor_x = Prioridad[terreno_x]
 	if terreno_y in Prioridad:
 		valor_y = Prioridad[terreno_y]
-	if valor_x >= valor_y:
+	if valor_x > valor_y:
 		return false
 	else:
 		return true
