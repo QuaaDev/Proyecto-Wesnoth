@@ -10,7 +10,8 @@ enum Prioridad {
 	Any = 0,
 	Bosque = 2,
 	Agua = 1,
-	Pasto = 15,
+	Pasto = 14,
+	PastoSeco = 15,
 	Desierto = 10,
 	Limite_mapa = 10000
 }
@@ -20,14 +21,14 @@ const Any : Dictionary = {
 	Desierto = "uid://7evul0ioo4dw",
 	Agua = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71",
-	Limite_mapa = "uid://dp2uyikk8hxiq"
+	Limite_mapa = "uid://dp2uyikk8hxiq",
+	PastoSeco = "uid://bq40gohw0uy7p"
 }
 
 const PastoBosque : Dictionary = {
 	Altura = "uid://csuswnd5dkiyq",#Aplica un asset con altura 
 	Pasto = "uid://djkmepytgxmbh"
 }
-
 const PastoSecoBosque : Dictionary = {
 	Altura = "uid://cv3n4ccur3670"
 }
@@ -35,6 +36,8 @@ const PastoSecoBosque : Dictionary = {
 const Desierto : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }
+
+const Camino : Dictionary = {}
 func _ready() -> void:
 	if !imprimir_errores:
 		print("No se imprimiran errores sobre carga_terrain_assets")
