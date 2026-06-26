@@ -1,0 +1,32 @@
+tilemapbase maneja lo mas importante del tilemap, el como todo se va a ver.
+Pero puede ser medio tramite acordarse a usar todo, asique aca una pequeña guia de como agregar un tile junto a terrain y altura.
+
+1- Primero hace falta el asset, asique hay que crearlo.
+2-Una vez tenemos el asset, hay que configurar varios parametros de el:
+	tipo_terreno_id es lo que se usara para el autotile, esto es lo mas importante
+	terreno_intransitable, generalmente se deja en false esto.
+	resistencia_movimiento es cuantos puntos de movimiento consume pasar por este tile
+3- una vez configurado eso desde el tileset, si queremos que tenga autotile hay que configurar dicha informacion
+en el script carga_terrain_assets. Aca es donde manejamos que assets usamos para el autotile
+El funcionamiento es el siguiente:
+	LOCAL-VECINO
+	LOCAL es el tile que recibe el autotile, y VECINO es quien escribe sobre local.
+	Por ejemplo PASTO - DESIERTO, sobre pasto se escribira el autotile de desierto (osea, pasto manchado con arena)
+	
+	Cada autotile puede tener diferente prioridad, esto es para que el dibujado tenga una coherencia en el mapa y no sea desordenado.
+	Si PASTO tiene prioridad 10 y DESIERTO prioridad 5, el codigo NO va a dibujar ese autotile, va a esperar a que el algoritmo llegue
+	al LOCAL desierto para dibujar un DESIERTO-PASTO y asi dibujar sobre el desierto.
+	Quienes tienen mas prioridad dibujan sobre quienes tienen menos prioridad.
+	Si no se quiere configurar, no pasa nada. Pero aveces puede tener comportamientos raros.
+	
+	ANY
+	El factor ANY se utiliza cuando no hay un autotile configurado, por lo que en ese caso se utiliza un autotile predeterminado dentro 
+	del diccionario ANY. Util para cuando se quiere reutilizar un solo autotile en varios terrenos, por defecto ANY tiene prioridad 0
+	Solo se utiliza ANY si no hay un LOCAL-VECINO configurado con anterioridad.
+	
+	ALTURA
+	Esto es para poner un asset sobre una mayor altura que el tilemapbase. Cualquier tile que tenga un ALTURA configurado, siempre colocara
+	el asset sobre si mismo. Esto no interfiere con luego utilizar el autotile, solo sirve para crear un efecto de profundidad.
+	Por ejemplo:
+		const PASTOCASA blabla{ ALTURA = PATH_CASA}
+	Ese caso dibujara sobre el pasto una casa siempre.
