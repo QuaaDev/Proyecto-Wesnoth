@@ -12,6 +12,7 @@ enum Prioridad {
 	Agua = 1,
 	Pasto = 15,
 	PastoSeco = 15,
+	PastoSecoBosque = 15,
 	Desierto = 10,
 	Limite_mapa = 10000
 }
@@ -22,7 +23,8 @@ const Any : Dictionary = {
 	Agua = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
-	PastoSeco = "uid://bq40gohw0uy7p"
+	PastoSeco = "uid://bq40gohw0uy7p",
+	PastoSecoBosque = "uid://bq40gohw0uy7p"
 }
 
 const PastoBosque : Dictionary = {
