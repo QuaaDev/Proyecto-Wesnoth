@@ -23,7 +23,7 @@ func nueva_partida_presionado() -> void:
 	print("Nueva partida")
 	var mundo = load("uid://bpkd4wjvywj2s") #Agrega mundo a la escena
 	var mundo_instanciado : Mundo = mundo.instantiate()
-	var nivel = load("uid://b354kyd3cmkhh")#Agrega el nivel a la escena
+	var nivel = load("uid://cnaqp36hgglr5")#Agrega el nivel a la escena
 	var nivel_instanciado : Nivel = nivel.instantiate()
 	mundo_instanciado.add_child(nivel_instanciado)#Agrega el nivel a mundo
 	mundo_instanciado.tile_map = nivel_instanciado#Le agrega una referencia del nivel

@@ -1,7 +1,7 @@
 extends Node
 class_name carga_terrain_assets
 
-var imprimir_errores : bool = false #Interruptor para el debug
+var imprimir_errores : bool = true #Interruptor para el debug
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
 #Valores mas altos tendran prioridad sobre valores mas bajos
@@ -22,9 +22,13 @@ const Any : Dictionary = {
 	Limite_mapa = "uid://dp2uyikk8hxiq"
 }
 
-const Bosque : Dictionary = {
+const PastoBosque : Dictionary = {
 	Altura = "uid://csuswnd5dkiyq",#Aplica un asset con altura 
 	Pasto = "uid://djkmepytgxmbh"
+}
+
+const PastoSecoBosque : Dictionary = {
+	Altura = "uid://cv3n4ccur3670"
 }
 
 const Desierto : Dictionary = {
