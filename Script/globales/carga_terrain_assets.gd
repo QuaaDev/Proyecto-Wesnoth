@@ -11,8 +11,9 @@ enum Prioridad {
 	Bosque = 2,
 	Agua = 1,
 	Pasto = 15,
-	PastoSeco = 15,
-	PastoSecoBosque = 15,
+	PastoCasa = 15,
+	PastoSeco = 16,
+	PastoSecoBosque = 16,
 	Desierto = 10,
 	Limite_mapa = 10000
 }
@@ -22,17 +23,27 @@ const Any : Dictionary = {
 	Desierto = "uid://7evul0ioo4dw",
 	Agua = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71",
+	PastoCasa = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
 	PastoSeco = "uid://bq40gohw0uy7p",
-	PastoSecoBosque = "uid://bq40gohw0uy7p"
+	PastoSecoBosque = "uid://bq40gohw0uy7p",
+	PastoSecoCasa = "uid://bq40gohw0uy7p"
 }
 
 const PastoBosque : Dictionary = {
 	Altura = "uid://csuswnd5dkiyq",#Aplica un asset con altura 
 	Pasto = "uid://djkmepytgxmbh"
 }
+
+const PastoCasa : Dictionary = {
+	Altura = "uid://cysws0mwu8apl"
+}
 const PastoSecoBosque : Dictionary = {
 	Altura = "uid://cv3n4ccur3670"
+}
+
+const PastoSecoCasa : Dictionary = {
+	Altura = "uid://cysws0mwu8apl"
 }
 
 const Desierto : Dictionary = {
