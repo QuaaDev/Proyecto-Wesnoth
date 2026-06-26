@@ -14,7 +14,7 @@ func _ready() -> void:
 	AlgoritmoDijkstra.tile_map = self
 	AlgoritmoDijkstra.tile_map_hud = tile_map_hud
 	AlgoritmoDijkstra.tile_map_base = tile_map_base
-	#Fog
+	dibujar_cuadricula_hexagonal(terrain_carpet.limite_del_mapa)
 	dibujar_fog(terrain_carpet.limite_del_mapa)
 func _process(_delta: float) -> void:
 	if coordenada_global_del_mouse_a_tilemap() != cuadricula_seleccionada_mouse: #Si la coordenada actual no esta seleccionada
@@ -30,6 +30,11 @@ func _process(_delta: float) -> void:
 	#----------Todo lo que interactue con cuadricula_seleccionada_mouse que se ejecute por debajo de esto-------------
 	label_coordenadas.text = "coordenadas del tilemap: " + str(coordenada_global_del_mouse_a_tilemap())
 	#imprime en la pantalla las coordenadas exactas segun la posicion del mouse
+
+func dibujar_cuadricula_hexagonal(limite_del_mapa : Vector2i) -> void:
+	for x in range(-1,limite_del_mapa.x+1):
+			for y in range(-1,limite_del_mapa.y+1):
+				tile_map_hud.set_cell(Vector2i(x,y),1,Vector2i(0,0),0)
 
 func dibujar_fog(limite_del_mapa : Vector2i) -> void:
 	if implementar_fog: #Si el fog esta activado:
