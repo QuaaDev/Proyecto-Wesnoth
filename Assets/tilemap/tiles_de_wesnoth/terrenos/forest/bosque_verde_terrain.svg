@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="144"
+   height="72"
+   viewBox="0 0 144 72"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="limite_mapa_terrain.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   sodipodi:docname="bosque_verde_terrain.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="9.2709556"
+     inkscape:cx="61.212676"
+     inkscape:cy="44.224136"
+     inkscape:window-width="1680"
+     inkscape:window-height="978"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="144"
+       height="72"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="display:none;fill:#d32500;fill-opacity:0;stroke:#c80000;stroke-width:0.706"
+       id="path1"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="28.446215"
+       sodipodi:cy="34.183266"
+       sodipodi:r1="43.123402"
+       sodipodi:r2="37.345959"
+       sodipodi:arg1="0.066568164"
+       sodipodi:arg2="0.59016694"
+       inkscape:rounded="-3.469447e-18"
+       inkscape:randomized="2.7755576e-17"
+       d="M 71.474105,37.051792 47.475943,72.880775 4.4480532,70.012249 -14.581675,31.31474 9.416486,-4.5142432 l 43.02789,2.868526 z"
+       transform="matrix(0.8242384,-0.06439461,0.06892033,0.95240014,10.203615,5.2816956)" />
+    <path
+       sodipodi:type="star"
+       style="display:none;fill:#d32500;fill-opacity:0;stroke:#c80000;stroke-width:0.706"
+       id="path2"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="28.446215"
+       sodipodi:cy="34.183266"
+       sodipodi:r1="43.123402"
+       sodipodi:r2="37.345959"
+       sodipodi:arg1="0.066568164"
+       sodipodi:arg2="0.59016694"
+       inkscape:rounded="-3.469447e-18"
+       inkscape:randomized="2.7755576e-17"
+       d="M 71.474105,37.051792 47.475943,72.880775 4.4480532,70.012249 -14.581675,31.31474 9.416486,-4.5142432 l 43.02789,2.868526 z"
+       transform="matrix(0.8242384,-0.06439461,0.06892033,0.95240014,82.197646,5.2816956)" />
+    <image
+       width="72"
+       height="72"
+       preserveAspectRatio="none"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAGnRFWHRBcnRpc3QASi5XLiBCamVy ayhFbGVhemFyKcpKJKcAAAAVdEVYdENvcHlyaWdodABHTlUgR1BMIHYyK/6KzPwAAAAfdEVYdGNy ZWF0ZS1kYXRlADIwMTQtMTItMjFUMDA6MDA6MDA8Xbq5AAAAB3RJTUUH6AgYBTMpIww4SQAAAvpJ REFUeNrt2c9LFGEYwPH3fWdm3R+t4C5u1iqalYEh1s0IQupiVlaHIAmRqC5BFyGoQ9ChQ/9Chzp0 q0NCFNGhzkF0MSqCoLwVdYiikJKdvtBIy+iMu+si7bzP4YPgzgrz9X2fmdlVvu+v2a+FBYWTGINu 4P0GOvTe/0KzAhXQDzfmmBTyVUFMxLEJCNRYxBL6q1eMBEqARlZCo6vnAQYTHkgFAxmoCpBFH9yI QA4KSCc70DzHf8Y7FQ4wgKforGE16cQG+vrMqG+vjPr4wlnpxGfQbu0MOnyqS506V1KzN3PKn6sj 7HfV6/9UO31fx6+uRWVaMtDSvCHQkpr/OCF34YL/Xo36FVNc/H1lxe31+lGq/dNzZ8j/ohzrLvME OlR5qY8sfPBSK70+MVVOnTi9cfLOjdwQxxobA7n37u4zEdtWYwd6W3EGhS/pDbl1e7wYM9ccBCvL 3kCZOm8qj+MNTJK2mEauSc9sIygmaQZpeMjBJP0+aNUtxWubcAZe8DuDbgzWchcNJxGBEHWSe3EV 6Tq3joMRuC0ZKBwHzZgnBpvhIhV+FrP+8yBi5DGJo9VXJQkUQQLFiR/cRgLFz6mzyEkgK7fYnNqN vHWBgtng1vB5z0OkbAw0g9E650kG+20JNIaBOgOlkUlsIE5uva5cHjqg5T7oHxflIFAbhmGS+M1q AQca+O97KNnw1fNlDDdhm7WhA6alA3ECPbiP4hpi6NAgn8EWzGOo1QP1YQIbmvl4EfwswsiQlqf5 v5fuSqWSqfHh1IG2JlDwqeF55GUFBUM3NHjbrNhiU+XH7uzFH9ueXPM922dP5Aq6Pv7W2B6l3su8 ruGYMnK2BnJgVjlmD1wrAh2b7tFohw5FyKI3bkXZEiiDnvA2w0FMw5UZtHyLlbAdaRnSywPlsBXZ ULSsBIoPpyWQkEDr+TTfj04JFB2oG54Eki0W+fFGWgLFf5PRJYGiA11CQQLJjaEMaQkkgSSQBJJA EkgCCQkkgSSQBJJAEkgCSSDL/QHyfT38NZ69DQAAAABJRU5ErkJggg== "
+       id="image402"
+       x="72"
+       y="0" />
+    <image
+       width="72"
+       height="72"
+       preserveAspectRatio="none"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAGnRFWHRBcnRpc3QASi5XLiBCamVy ayhFbGVhemFyKcpKJKcAAAAVdEVYdENvcHlyaWdodABHTlUgR1BMIHYyK/6KzPwAAAAfdEVYdGNy ZWF0ZS1kYXRlADIwMTQtMTItMjFUMDA6MDA6MDA8Xbq5AAAAB3RJTUUH6AgYBTMpIww4SQAABBlJ REFUeNrtmnlIFUEcx2f3PZ+lppY+tcwrUCEo01d0YaVRiJUdkglhWRYdRHT/ZSUV0WFYFEn/dFFR 0fFHZAcYBUJEBFJkKaFCEQVdEIWluH0HVliW1X37dn272g/84Cw782bms7/5zRtXJkmSaf52dHDi gQcE0r4A+MA44AKeXuqNBNtBCL8OBlYKAr3LkeUNk8thoBrUADeIBukgQqefIRxedp4g8xLjuAS5 7AZZIBYIOu1cZvsuS3zAbu/8xeoP2CDIhDARCH1Eig/MVEYMrw8mA7dRQYcKm9nRBS3OFCRHzyMw U7HcBI16o8AwkAO2yb8FZTSBDcocJJd1BW33PWM1S1p5FCnTgS5mco76Okr9ZFUTG9GTY2QJMUBU 1asGkYpoEfwYSwIoV0sDbuUYSyfuZcWl2cEQBN4xLQE7gNePCXnBfhDHr/HjAdkgzMKIjQFepYRF K5N66P8l9umFS2tQc0GkzsAFsBHUgRRZUCqoAmOAINfLA7Ea7d3+7mK8noagIOWglwba/WRJ0m+2 RJKEhq7OqikY9CQQrvgsr/SR+aQuNoFHkSzxCijoRVCeBTub5UssUJHp4KrUxlqlbrG5q3N3sTLK UPZ0fr0zvumeZ//n564S6QsL9SPZbwLuXvt7zdr/tAm585cn2CTIuKTF3a+Exo72kDbkzqnq+0Vl ifOWroq/fu1MeArqijqTCuujH0FqYae6v7EfH5rcsyFI1BmbYwR5bl2fUXnp8pwU9T1MIg6cBGkW 9CN+fypu3r0nYd7x0/kJZy8WDgxBGGgmqAIuDUERIMqqvtZuzVx2+HjuLPSl/HIZAUQnC/JwDCTP xeA9CDXa166qnIMHj00frto1t4AM5wgyv7tMBxkBPIiYE7X5C7UOyTYsMWeC5So44jTPwx+4Amgn AJcfW/kkRT9e433ZLygRhAZwYL0JjOSjMJAMxH5YytFWCjJzqHXJRPWUzf8hzjx8PE4RxAkBtuUm StKDWZCcuEmQzjIUAQkaiFhxGM0CyQFGzuAWBDGJ4BHwBtJ+4AsyPuEiMI2WmDaqNxvGl5j6nZlO +0gQ50xB5kXqCRoNjoGh6vdbeG3D4XVSQSb4HwTpw+Wsz3zCbmz7KUCQYMMSc/YOxAWty3jMKnMb EUF6su0XFPQo4oJWJN1na8be1BI0MJeY/M8HE8B81butcMAU6MqpPVnCag5UsDdv6wKSourPfkHy jrYPRGrcM/T0K8bUsyMV59m5C0XKSZqUY78gN0iy4rO2+hpY5YKr7G61nH+CmDf7bWeSy4IVT3J1 Wj0rT33Il5pZQcoyHVbpNE+CSBAJIkEkiAQRJIgEkSASRIJIEAkiQQQJIkEkiASRIBJEgkgQQYJI EAkiQSSIBJEgEiSRIIIEkSASZBf/AGW68Q3oCn2gAAAAAElFTkSuQmCC "
+       id="image144"
+       x="0"
+       y="0" />
+  </g>
+</svg>

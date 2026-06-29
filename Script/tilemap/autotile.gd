@@ -40,6 +40,16 @@ func agregar_source(path_png : String, id : int, aplicar_doble_tile : bool):
 func rotar():
 	aplicar_terreno()
 
+func elegir_base_o_altura(coordenadas : Vector2i) -> TileMapLayer:
+	#TileMapAltura tiene mayor prioridad que TileBase
+	if TileMapAltura.get_cell_source_id(coordenadas) != -1: #Si es un tile valido
+		if TileMapAltura.get_cell_tile_data(coordenadas).get_custom_data("tipo_terreno_id") != "":
+			#Y tiene un valor en el terreno
+			return TileMapAltura
+			#Devuelve tilemapaltura
+	#Si tilemapaltura no tiene valor, entonces usa el base
+	return TileBase
+
 func aplicar_terreno() -> void:
 	if (limite_del_mapa.x == 0 or limite_del_mapa.y == 0): #Caso de error de que no se definio los limites
 		push_error("Limite del mapa seteado en 0, no se va a aplicar terreno")
@@ -50,12 +60,12 @@ func aplicar_terreno() -> void:
 		for y in range(-1,limite_del_mapa.y+1):
 			#-----------Seccion obtener informacion tile local----------------
 			var coordenada = Vector2i(x,y)#Las coordenadas del hexagono actual
-			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
-			
+			var tile_map_a_usar = elegir_base_o_altura(coordenada)#Elige que tilemap usar de LOCAL
+			var source_id = tile_map_a_usar.get_cell_source_id(coordenada)#Obtiene su source id
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
 			
-			var tipo_terreno_id_original = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
+			var tipo_terreno_id_original = tile_map_a_usar.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
 			#------------------seccion elegir terreno-----------------------
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es
@@ -64,14 +74,15 @@ func aplicar_terreno() -> void:
 			#print("--------------------------")
 			#print("Calculando, ",coordenada)
 			for coordenada_vecino in vecinos:#Va del 0 al 5
+				var tile_map_vecino = elegir_base_o_altura(coordenada_vecino)#Elige que tilemap usar de VECINO
 				if contador_posicion_bit == 6:#Reinicia el contador si supera las 6 ejecuciones
 					contador_posicion_bit = 0
-				if TileBase.get_cell_source_id(coordenada_vecino) == -1:
+				if tile_map_vecino.get_cell_source_id(coordenada_vecino) == -1:
 					#Si el tile vecino es invalido, lo saltea 
 					#print("Vecino sin tile definido, aplicando continue")
 					contador_posicion_bit += 1#Avanza en uno la posicion del bit
 					continue
-				var vecino_tipo_terreno_id = TileBase.get_cell_tile_data(coordenada_vecino).get_custom_data("tipo_terreno_id")
+				var vecino_tipo_terreno_id = tile_map_vecino.get_cell_tile_data(coordenada_vecino).get_custom_data("tipo_terreno_id")
 				
 				if tipo_terreno_id_original != vecino_tipo_terreno_id:
 					#Si el origen y el vecino tienen diferente terreno, aplica el efecto

@@ -11,13 +11,11 @@ enum Prioridad {
 	Bosque = 2,
 	AguaCosta = 1,
 	Pasto = 15,
-	PastoCasa = 15,
-	PastoSeco = 16,
-	PastoSecoBosque = 16,
+	PastoSeco = 21,
 	Arena = 10,
+	BosqueVerde = 23,
 	Limite_mapa = 10000
 }
-
 const Any : Dictionary = {
 	Bosque = "uid://du6e3pfiqfr6h",
 	Arena = "uid://7evul0ioo4dw",
@@ -25,28 +23,13 @@ const Any : Dictionary = {
 	Pasto = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
 	PastoSeco = "uid://bq40gohw0uy7p",
-	Casa = "uid://cysws0mwu8apl"
+	BosqueVerde = "uid://c18h3lfi2flap"
 }
-
-const BosqueVerde : Dictionary = {
-	Pasto = "uid://djkmepytgxmbh"
+#const LOCAL que recibe el tile { Terreno que dibuja sobre el tile}
+#Si quiero que el pasto seco tenga custom asset de bosque, se hace de la siguiente forma:
+const PastoSeco : Dictionary = {
+	BosqueVerde = "uid://du6e3pfiqfr6h"
 }
-
-const CaminoCasa : Dictionary = {
-	Altura = "uid://cysws0mwu8apl"
-}
-
-const PastoCasa : Dictionary = {
-	Altura = "uid://cysws0mwu8apl"
-}
-const PastoSecoBosque : Dictionary = {
-	Altura = "uid://cv3n4ccur3670"
-}
-
-const PastoSecoCasa : Dictionary = {
-	Altura = "uid://cysws0mwu8apl"
-}
-
 const Arena : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }

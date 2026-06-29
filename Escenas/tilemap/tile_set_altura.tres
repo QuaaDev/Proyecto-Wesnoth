@@ -8,7 +8,6 @@
 texture = ExtResource("1_mfnd2")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
-0:0/0/custom_data_0 = "Casa"
 0:0/0/custom_data_1 = true
 0:0/0/custom_data_2 = 1
 
@@ -22,6 +21,7 @@ texture_region_size = Vector2i(72, 72)
 texture = ExtResource("3_s3n3x")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
+0:0/0/custom_data_0 = "BosqueVerde"
 0:0/0/custom_data_2 = 5
 
 [resource]
