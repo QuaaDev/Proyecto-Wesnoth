@@ -9,7 +9,7 @@ var almacenar_errores : Array#Almacena que errores ya fueron reportados para no 
 enum Prioridad {
 	Any = 0,
 	Bosque = 2,
-	Agua = 1,
+	AguaCosta = 1,
 	Pasto = 15,
 	PastoCasa = 15,
 	PastoSeco = 16,
