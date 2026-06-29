@@ -11,6 +11,7 @@ class_name autotile
 @onready var Layer5: TileMapLayer = $Layer5
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
+@onready var TileMapAltura: TileMapLayer = $"../../TileMapAltura"
 #Solo hace falta una prq alterar uno altera a todos los layers
 var lista_terrenos_compuestos_cargados : Array[terrain_compuesto]
 #https://docs.godotengine.org/en/stable/classes/class_tileset.html#class-tileset-method-add-source
@@ -50,7 +51,6 @@ func aplicar_terreno() -> void:
 			#-----------Seccion obtener informacion tile local----------------
 			var coordenada = Vector2i(x,y)#Las coordenadas del hexagono actual
 			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
-			var tile_alternativo = TileBase.get_cell_alternative_tile(coordenada)
 			
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
