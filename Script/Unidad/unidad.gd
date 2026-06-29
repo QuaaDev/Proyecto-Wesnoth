@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 		
 func _ready() -> void:
 	await nivel.ready #Espera a que el nivel haya cargado para inicializar las unidades
-	
+	self.z_index = 2
 	vida_actual = vida_maxima
 	instanciar_cosas_esenciales() #<<<------ inicia los nodos hijos de sprite, area2d y etc.
 	self.add_to_group(str(equipo))

@@ -9,10 +9,6 @@ class_name autotile
 @onready var Layer3: TileMapLayer = $Layer3
 @onready var Layer4: TileMapLayer = $Layer4
 @onready var Layer5: TileMapLayer = $Layer5
-#--------------------------------------
-@onready var layer_altura: TileMapLayer = $LayerAltura
-#Aplica los elementos con altura por ejemplo bosques, lamparas y etc
-#-----------------------------------------
 @export var limite_del_mapa : Vector2i #Define los limites del mapa para limitar los algoritmos
 @onready var tileset : TileSet = Layer0.tile_set#Referencia al tileset
 #Solo hace falta una prq alterar uno altera a todos los layers
@@ -59,24 +55,7 @@ func aplicar_terreno() -> void:
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
 			
-			if tile_alternativo != 0: #Si es un tile alternativo
-				#Revierte el modulate para que se vea normal
-				if TileBase.get_cell_tile_data(coordenada).modulate != Color.WHITE:
-					#Verifica si se actualizo o no el color para evitar ejecuciones innecesarias
-					TileBase.get_cell_tile_data(coordenada).modulate = Color.WHITE
 			var tipo_terreno_id_original = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
-			#-----------Seccion aplicar altura-------------------------------
-			if CargaTerrainAssets.existe_la_combinacion(tipo_terreno_id_original,"Altura"): 
-				#Si tiene un asset cargado para la altura
-				if !verificar_si_existe_terreno_compuesto(tipo_terreno_id_original + "-" + "Altura"):
-					#Si no esta registrado, lo registra
-					agregar_terreno_compuesto(tipo_terreno_id_original, "Altura",false)
-				#Aplica el asset de altura al tile actual.
-				var sourceid_altura = obtener_source_id_terrain(tipo_terreno_id_original + "-" + "Altura")
-				layer_altura.set_cell(coordenada, sourceid_altura, Vector2i(0, 0), 0)
-					
-					
-				
 			#------------------seccion elegir terreno-----------------------
 			#Los bit representan las fronteras que pueden tener los hexagonos -> (0,0,0,0,0,0)
 			#Un bit positivo es una frontera activa, la posicion de ese bit representa que parte del hexagono es

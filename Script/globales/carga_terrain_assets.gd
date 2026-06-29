@@ -1,7 +1,7 @@
 extends Node
 class_name carga_terrain_assets
 
-var imprimir_errores : bool = true #Interruptor para el debug
+var imprimir_errores : bool = false #Interruptor para el debug
 var almacenar_errores : Array#Almacena que errores ya fueron reportados para no spamear
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas

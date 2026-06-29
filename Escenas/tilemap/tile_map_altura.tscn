@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b8r720cpbjcsp"]
+
+[ext_resource type="TileSet" uid="uid://csaw2uaf8hio" path="res://Escenas/tilemap/tile_set_altura.tres" id="1_s2usp"]
+
+[node name="TileMapAltura" type="TileMapLayer" unique_id=1380164514]
+z_index = 1
+tile_set = ExtResource("1_s2usp")
