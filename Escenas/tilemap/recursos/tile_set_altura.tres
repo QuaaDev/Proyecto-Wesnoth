@@ -1,28 +1,35 @@
 [gd_resource type="TileSet" format=3 uid="uid://csaw2uaf8hio"]
 
-[ext_resource type="Texture2D" uid="uid://cysws0mwu8apl" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/PastoSeco/PastoSeco_Casa.png" id="1_mfnd2"]
-[ext_resource type="Texture2D" uid="uid://cv3n4ccur3670" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/PastoSeco/PastoSeco_Bosque.png" id="2_1rddp"]
-[ext_resource type="Texture2D" uid="uid://csuswnd5dkiyq" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/forest/forest_altura.png" id="3_s3n3x"]
+[ext_resource type="Texture2D" uid="uid://cysws0mwu8apl" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/PastoSeco/PastoSeco_Casa.png" id="1_qa2s8"]
+[ext_resource type="Texture2D" uid="uid://cv3n4ccur3670" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/PastoSeco/PastoSeco_Bosque.png" id="2_exnlp"]
+[ext_resource type="Texture2D" uid="uid://csuswnd5dkiyq" path="res://Assets/tilemap/tiles_de_wesnoth/terrenos/forest/forest_altura.png" id="3_0d8tp"]
+[ext_resource type="Texture2D" uid="uid://c28mnqrgwu34u" path="res://Assets/tilemap/tiles_de_wesnoth/farm-veg-spring.png" id="4_n8qnu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0m2u6"]
-texture = ExtResource("1_mfnd2")
+texture = ExtResource("1_qa2s8")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
 0:0/0/custom_data_1 = true
 0:0/0/custom_data_2 = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3aqh8"]
-texture = ExtResource("2_1rddp")
+texture = ExtResource("2_exnlp")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
 0:0/0/custom_data_2 = 5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7vjeq"]
-texture = ExtResource("3_s3n3x")
+texture = ExtResource("3_0d8tp")
 texture_region_size = Vector2i(72, 72)
 0:0/0 = 0
 0:0/0/custom_data_0 = "BosqueVerde"
 0:0/0/custom_data_2 = 5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lgxvw"]
+texture = ExtResource("4_n8qnu")
+texture_region_size = Vector2i(72, 72)
+0:0/0 = 0
+0:0/0/custom_data_2 = 1
 
 [resource]
 tile_shape = 3
@@ -37,3 +44,4 @@ custom_data_layer_2/type = 2
 sources/0 = SubResource("TileSetAtlasSource_0m2u6")
 sources/1 = SubResource("TileSetAtlasSource_3aqh8")
 sources/2 = SubResource("TileSetAtlasSource_7vjeq")
+sources/3 = SubResource("TileSetAtlasSource_lgxvw")

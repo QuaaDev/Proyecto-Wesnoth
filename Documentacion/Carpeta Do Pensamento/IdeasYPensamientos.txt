@@ -31,3 +31,4 @@ Como se manejara la informacion:
 	Si TileMapAltura tiene un valor en ResistenciaMovimiento, Intransitable o TipoTerrenoID:
 		El codigo priorizara el valor de TileMapAltura sobre el de base.
 	Si TileMapAltura no tiene ningun valor asignado a dicha ubicacion, se selecciona el valor de TileMapBase.
+-------------------------------------------------------------------------------------------------------------------------

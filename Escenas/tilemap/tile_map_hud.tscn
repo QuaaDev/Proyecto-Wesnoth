@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwp71ugal6w1k"]
 
-[ext_resource type="TileSet" uid="uid://cbtewxntolj73" path="res://Escenas/tilemap/tile_set_hudt.tres" id="1_tcrlg"]
+[ext_resource type="TileSet" uid="uid://cbtewxntolj73" path="res://Escenas/tilemap/recursos/tile_set_hudt.tres" id="1_tcrlg"]
 
 [node name="tile_map_hud" type="TileMapLayer" unique_id=886965225]
 z_index = 1
