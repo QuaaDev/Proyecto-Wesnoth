@@ -30,3 +30,6 @@ El funcionamiento es el siguiente:
 	Por ejemplo:
 		const PASTOCASA blabla{ ALTURA = PATH_CASA}
 	Ese caso dibujara sobre el pasto una casa siempre.
+4- Tiles alternativos:
+	Para no tener que hacer 200 mil assets, ahora se puede introducir tiles alternativos. Son como los normales, pero con datos diferentes
+	La unica diferencia es que hay que cambiar su modulate para diferenciar si son o no alternativos, el resto es todo igual.
