@@ -3,6 +3,7 @@ signal resultado_estrella_obtenido
 var tile_map : Node2D
 var tile_map_hud : TileMapLayer
 var tile_map_base : TileMapLayer
+var tile_map_altura : TileMapLayer
 var movimientos_disponibles : Dictionary #Almacena el resultado del algoritmo Dijkstra para su posterior uso
 var movimientos_disponibles_incluyendo_ocupados : Dictionary#Almacena las posiciones descartadas por tener una unidad sobre ellas.
 var hilo_path_finding : Thread #Variable para el multi hilo del pathfinding
@@ -24,9 +25,17 @@ func dibujando_tile_individual(ubicacion : Vector2) -> void:
 	tile_map_hud.set_cell(ubicacion,3,Vector2(0,0),0)
 	
 func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el coste de movimiento de cada tile
-	var data = tile_map_base.get_cell_tile_data(coordenadas)
-	if data:
-		return data.get_custom_data("resistencia_movimiento")
+	var data_base = tile_map_base.get_cell_tile_data(coordenadas)
+	var data_altura = tile_map_altura.get_cell_tile_data(coordenadas)
+	if data_altura: #Si existen los datos
+		if !(data_altura.get_custom_data("resistencia_movimiento") == 0):
+			#Si no vale 0
+			return data_altura.get_custom_data("resistencia_movimiento")
+			#Devuelve el valor de tilemapaltura
+	
+	#Si altura no tiene valor, saca el valor de tilemapbase
+	if data_base:
+		return data_base.get_custom_data("resistencia_movimiento")
 	else:
 		push_error("No se pudo obtener el custom data de resistencia_movimiento")
 		return 1

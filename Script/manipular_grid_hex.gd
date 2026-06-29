@@ -6,12 +6,13 @@ var cuadricula_seleccionada_mouse : Vector2 = Vector2(-1,-1) #Almacena la cuadri
 @onready var tile_map_base: TileMapLayer = $tile_map_base
 @onready var label_coordenadas: Label = $"../CanvasLayer/VBoxContainer/coordenadas_local"
 @onready var terrain_carpet: autotile = $tile_map_base/TerrainCarpet
-
+@onready var tile_map_altura: TileMapLayer = $TileMapAltura
 func _input(_event):
 	pass
 
 func _ready() -> void:
 	AlgoritmoDijkstra.tile_map = self
+	AlgoritmoDijkstra.tile_map_altura = tile_map_altura
 	AlgoritmoDijkstra.tile_map_hud = tile_map_hud
 	AlgoritmoDijkstra.tile_map_base = tile_map_base
 	dibujar_cuadricula_hexagonal(terrain_carpet.limite_del_mapa)
