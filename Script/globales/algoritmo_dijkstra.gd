@@ -44,9 +44,15 @@ func obtener_coste_movimiento_tile(coordenadas : Vector2) -> int: #Obtiene el co
 
 func es_tile_transitable(coordenadas : Vector2) -> bool:
 	#Si el tile se puede caminar, devuelve true
-	var data = tile_map_base.get_cell_tile_data(coordenadas)
-	if data:
-		return !(data.get_custom_data("terreno_intransitable"))
+	var data_base = tile_map_base.get_cell_tile_data(coordenadas)
+	var data_altura = tile_map_altura.get_cell_tile_data(coordenadas)
+	if data_altura:#Si existe la data
+		if data_altura.get_custom_data("terreno_intransitable") == true:
+			#Si el terreno de altura es intransitable, hace todo intransitable
+			return false
+	#Si altura es transitable, ahora averigua si database tambien es transitable
+	if data_base:
+		return !(data_base.get_custom_data("terreno_intransitable"))
 	push_error("No se pudo obtener el custom data terreno_intransitable")
 	return false
 
@@ -74,6 +80,7 @@ dibujar_movimientos : bool, una_celda_mas : bool, usar_movimiento_maximo : bool)
 			continue#Omite esta ejecucion del while
 		for next in get_neighbors(current):#Obtiene todos los vecinos de la ubicacion actual
 			if !es_tile_transitable(next):#Si el tile no es transitable, ignora este tile y lo saltea
+				#tremendo quilombo de trues falses que se hacen false true y true devuelta, la q te espera santiago del mañana
 				continue
 			var nuevo_costo = distancia_actual + obtener_coste_movimiento_tile(next)
 			if (not reached.has(next) or nuevo_costo < reached[next]) and !(ubicaciones_ocupadas.has(next)):

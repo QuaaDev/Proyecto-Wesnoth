@@ -45,16 +45,17 @@ func dibujar_fog(limite_del_mapa : Vector2i) -> void:
 				tile_map_hud.set_cell(Vector2i(x,y),4,Vector2i(0,0),0)
 
 func actualizar_fog() -> void:
-	dibujar_fog(terrain_carpet.limite_del_mapa)
-	var diccionario_bufon : Dictionary#Esto es para que el algoritmodijkstra ignore las posiciones de unidades
-	var unidades_jugador = get_parent().get_unidades_del_jugador()
-	for unidad in unidades_jugador:#Explora todas las unidades
-		AlgoritmoDijkstra.moviendo_unidad(unidad, diccionario_bufon, false, true,true)
-		#Obtiene el rango de movimiento, ya que movimiento = vision
-		var rango_movimiento = AlgoritmoDijkstra.movimientos_disponibles#Almacena el rango de movimiento
-		for i in rango_movimiento:
-			tile_map_hud.set_cell(i,1,Vector2i(0,0),0)
-			#Elimina el fog de la casilla
+	if implementar_fog:
+		dibujar_fog(terrain_carpet.limite_del_mapa)
+		var diccionario_bufon : Dictionary#Esto es para que el algoritmodijkstra ignore las posiciones de unidades
+		var unidades_jugador = get_parent().get_unidades_del_jugador()
+		for unidad in unidades_jugador:#Explora todas las unidades
+			AlgoritmoDijkstra.moviendo_unidad(unidad, diccionario_bufon, false, true,true)
+			#Obtiene el rango de movimiento, ya que movimiento = vision
+			var rango_movimiento = AlgoritmoDijkstra.movimientos_disponibles#Almacena el rango de movimiento
+			for i in rango_movimiento:
+				tile_map_hud.set_cell(i,1,Vector2i(0,0),0)
+				#Elimina el fog de la casilla
 		
 func es_tile_con_fog(coordenadas : Vector2i) -> bool:
 	#Si el source id del tile es 4 significa que tiene fog
