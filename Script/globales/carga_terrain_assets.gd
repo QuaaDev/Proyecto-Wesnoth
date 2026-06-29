@@ -23,15 +23,12 @@ const Any : Dictionary = {
 	Arena = "uid://7evul0ioo4dw",
 	AguaCosta = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71",
-	PastoCasa = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
 	PastoSeco = "uid://bq40gohw0uy7p",
-	PastoSecoBosque = "uid://bq40gohw0uy7p",
-	PastoSecoCasa = "uid://bq40gohw0uy7p"
+	Casa = "uid://cysws0mwu8apl"
 }
 
-const PastoBosque : Dictionary = {
-	Altura = "uid://csuswnd5dkiyq",#Aplica un asset con altura 
+const BosqueVerde : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"
 }
 
