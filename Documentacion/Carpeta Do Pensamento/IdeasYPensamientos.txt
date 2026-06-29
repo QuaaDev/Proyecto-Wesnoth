@@ -19,3 +19,15 @@ TileMap podria tener una carpeta de Unidades donde insertar las unidades. De esa
 de diseñar un nivel se diseña junto a la disposicion de las unidades.
 ---------------------------------------------------------------------------------------------------------------
 Siguiente por hacer: Re-hacer el asset de tile_map_base para tener todos los assets en una sola imagen
+-------------------------------------------------------------------------------------------------------------------
+Toi podrido de tener 200 tiles alternativos y no poder ver el resultado en el editor. 29/6/26
+Vamo a cambiar como funciona.
+Nuevo nodo: TileMapAltura:
+	Dedicado para dibujar superficies que van por arriba de tilemapbase
+Como se manejara la informacion:
+	TileMapAltura tendra mayor prioridad que TileMapBase.
+	Esto funciona con la logica de: Si se le define un valor a TileMapAltura es con la intencion de remplazar
+	la funcionalidad de tilemapbase. Por lo tanto...
+	Si TileMapAltura tiene un valor en ResistenciaMovimiento, Intransitable o TipoTerrenoID:
+		El codigo priorizara el valor de TileMapAltura sobre el de base.
+	Si TileMapAltura no tiene ningun valor asignado a dicha ubicacion, se selecciona el valor de TileMapBase.
