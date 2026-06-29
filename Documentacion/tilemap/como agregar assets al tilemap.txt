@@ -1,6 +1,7 @@
 tilemapbase maneja lo mas importante del tilemap, el como todo se va a ver.
 Pero puede ser medio tramite acordarse a usar todo, asique aca una pequeña guia de como agregar un tile junto a terrain y altura.
 
+Dicha informacion aplica tanto para TileMapBase y TileMapAltura
 1- Primero hace falta el asset, asique hay que crearlo.
 2-Una vez tenemos el asset, hay que configurar varios parametros de el:
 	tipo_terreno_id es lo que se usara para el autotile, esto es lo mas importante
@@ -23,13 +24,16 @@ El funcionamiento es el siguiente:
 	El factor ANY se utiliza cuando no hay un autotile configurado, por lo que en ese caso se utiliza un autotile predeterminado dentro 
 	del diccionario ANY. Util para cuando se quiere reutilizar un solo autotile en varios terrenos, por defecto ANY tiene prioridad 0
 	Solo se utiliza ANY si no hay un LOCAL-VECINO configurado con anterioridad.
-	
-	ALTURA
-	Esto es para poner un asset sobre una mayor altura que el tilemapbase. Cualquier tile que tenga un ALTURA configurado, siempre colocara
-	el asset sobre si mismo. Esto no interfiere con luego utilizar el autotile, solo sirve para crear un efecto de profundidad.
-	Por ejemplo:
-		const PASTOCASA blabla{ ALTURA = PATH_CASA}
-	Ese caso dibujara sobre el pasto una casa siempre.
-4- Tiles alternativos:
-	Para no tener que hacer 200 mil assets, ahora se puede introducir tiles alternativos. Son como los normales, pero con datos diferentes
-	La unica diferencia es que hay que cambiar su modulate para diferenciar si son o no alternativos, el resto es todo igual.
+
+4- TileMapAltura:
+	Para agregar efecto de profundidad y detalles pequeños al mapa, existe este tilemap.
+	Este tilemap tiene los mismos parametros que TileMapBase.
+5- Prioridad de los tilemaps
+TileMapAltura tiene prioridad sobre tilemapbase. Eso significa que si estos dos ocupan un mismo tile, se usara la informacion de TileMapAltura en vez de TileMapBase.
+Funciona de la siguiente manera la prioridad:
+	Esto funciona con la logica de: Si se le define un valor a TileMapAltura es con la intencion de remplazar
+	la funcionalidad de tilemapbase. Por lo tanto...
+	Si TileMapAltura tiene un valor en ResistenciaMovimiento, Intransitable o TipoTerrenoID:
+		El codigo priorizara el valor de TileMapAltura sobre el de base.
+	Si TileMapAltura no tiene ningun valor asignado a dicha ubicacion, se selecciona el valor de TileMapBase.
+	Esto aplica para algoritmo dijkstra, para autotile y para intransitable.
