@@ -35,6 +35,10 @@ const PastoBosque : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"
 }
 
+const CaminoCasa : Dictionary = {
+	Altura = "uid://cysws0mwu8apl"
+}
+
 const PastoCasa : Dictionary = {
 	Altura = "uid://cysws0mwu8apl"
 }

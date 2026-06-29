@@ -54,6 +54,13 @@ func aplicar_terreno() -> void:
 			#-----------Seccion obtener informacion tile local----------------
 			var coordenada = Vector2i(x,y)#Las coordenadas del hexagono actual
 			var source_id = TileBase.get_cell_source_id(coordenada)#Obtiene su source id
+			var tile_alternativo = TileBase.get_cell_alternative_tile(coordenada)
+			
+			if tile_alternativo != 0: #Si es un tile alternativo
+				#Revierte el modulate para que se vea normal
+				if TileBase.get_cell_tile_data(coordenada).modulate != Color.WHITE:
+					#Verifica si se actualizo o no el color para evitar ejecuciones innecesarias
+					TileBase.get_cell_tile_data(coordenada).modulate = Color.WHITE
 			if source_id == -1: #Si el tile actual es invalido, saltea su procesamiento
 				continue
 			var tipo_terreno_id_original = TileBase.get_cell_tile_data(coordenada).get_custom_data("tipo_terreno_id")#Almacena el id del terreno actual
