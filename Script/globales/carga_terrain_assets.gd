@@ -1,7 +1,7 @@
 extends Node
 class_name carga_terrain_assets
 
-var imprimir_errores : bool = false #Interruptor para el debug
+var imprimir_errores : bool = true #Interruptor para el debug
 var almacenar_errores : Array#Almacena que errores ya fueron reportados para no spamear
 #Cosas a arreglar:
 #Tema de mayusculas/minusculas
@@ -14,14 +14,14 @@ enum Prioridad {
 	PastoCasa = 15,
 	PastoSeco = 16,
 	PastoSecoBosque = 16,
-	Desierto = 10,
+	Arena = 10,
 	Limite_mapa = 10000
 }
 
 const Any : Dictionary = {
 	Bosque = "uid://du6e3pfiqfr6h",
-	Desierto = "uid://7evul0ioo4dw",
-	Agua = "uid://crx8t2eq05dvm",
+	Arena = "uid://7evul0ioo4dw",
+	AguaCosta = "uid://crx8t2eq05dvm",
 	Pasto = "uid://b37wdxv6qwx71",
 	PastoCasa = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
@@ -46,7 +46,7 @@ const PastoSecoCasa : Dictionary = {
 	Altura = "uid://cysws0mwu8apl"
 }
 
-const Desierto : Dictionary = {
+const Arena : Dictionary = {
 	Pasto = "uid://djkmepytgxmbh"#Desierto-Pasto
 }
 
