@@ -14,6 +14,7 @@ enum Prioridad {
 	PastoSeco = 21,
 	Arena = 10,
 	BosqueVerde = 23,
+	AguaProfunda = 20,
 	Limite_mapa = 10000
 }
 const Any : Dictionary = {
@@ -23,7 +24,8 @@ const Any : Dictionary = {
 	Pasto = "uid://b37wdxv6qwx71",
 	Limite_mapa = "uid://dp2uyikk8hxiq",
 	PastoSeco = "uid://bq40gohw0uy7p",
-	BosqueVerde = "uid://c18h3lfi2flap"
+	BosqueVerde = "uid://c18h3lfi2flap",
+	AguaProfunda = "uid://crx8t2eq05dvm"
 }
 #const LOCAL que recibe el tile { Terreno que dibuja sobre el tile}
 #Si quiero que el pasto seco tenga custom asset de bosque, se hace de la siguiente forma:
