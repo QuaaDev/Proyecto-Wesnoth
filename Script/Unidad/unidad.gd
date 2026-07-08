@@ -13,7 +13,9 @@ var objetivos_a_atacar : Dictionary #Almacena los posibles objetivos que puede a
 var objetivo_final : Array#Almacena el objetivo al que le ejecutara el ataque >:D
 var tween : Tween
 #endregion
-
+enum IA_a_utilizar {Default, Patrullar} #Define el enum de la IA
+##Elige que estado utilizar
+@export var tipo_IA : IA_a_utilizar 
 @export var puntos_movimiento_maximo : int #Cantidad maxima de movimientos por turno
 var puntos_movimiento : int #Cantidad de movimientos en ejecucion
 @export var equipo : int

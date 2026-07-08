@@ -29,8 +29,10 @@ equipo = 1
 
 [node name="unidad_dragon2" parent="UnidadesCarpet" unique_id=1529299162 instance=ExtResource("6_j3ph2")]
 position = Vector2(1174, 3821)
+tipo_IA = 1
 equipo = 2
 
 [node name="unidad_dragon3" parent="UnidadesCarpet" unique_id=773165269 instance=ExtResource("6_j3ph2")]
 position = Vector2(909, 3860)
+tipo_IA = 1
 equipo = 2
