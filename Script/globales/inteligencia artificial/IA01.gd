@@ -5,11 +5,11 @@ var nodo_mundo
 var ubicaciones_ocupadas_enemigos : Dictionary#Almacena las ubicaciones de los enemigos
 var movimientos_disponibles_incluyendo_ocupados
 var unidades_almacenadas : Array
-enum decision_IA {no_definido = 0,atacando = 1, moviendose = 2}
+enum decision_IA {no_definido = 0,atacando = 1, moviendose = 2, patrullando = 3}
 var decision_final : decision_IA
 func ejecutar_ia(equipo : int):
 	unidades_almacenadas = cargar_unidades(equipo) #Almacena las unidades a aplicarle IA
-	for unidad in unidades_almacenadas: #Se ejecuta cada unidad de forma independiente.
+	for unidad : unidad_base in unidades_almacenadas: #Se ejecuta cada unidad de forma independiente.
 		ubicaciones_ocupadas_enemigos = nodo_mundo.ubicaciones_ocupadas.duplicate() #Actualiza la informacion
 		descartar_unidades_aliadas(cargar_unidades(equipo))
 		decision_final= decision_IA.no_definido#Resetea el valor del estado
@@ -17,15 +17,35 @@ func ejecutar_ia(equipo : int):
 		print(unidad.name)
 		unidad.limpiar_objetivos_ataque() #Limpia la lista de objetivos
 		obtener_datos(unidad)#Obtiene informacion del entorno
-		await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
-		if decision_final == decision_IA.no_definido and !ubicaciones_ocupadas_enemigos.is_empty(): 
-			#Si no esta definido su estado, significa que no pudo atacar AND si hay enemigos aun vivos
-			if await avanzar_hacia_un_enemigo(unidad):#Verifica si es posible avanzar a un enemigo
-				#Avanza hacia algun enemigo
-				await unidad.animacion_movimiento_terminada #Espera la animacion de la unidad
-				decision_final = decision_IA.moviendose#Actualiza el estado
-		print("Decision final de la IA: ",decision_final)
-		print("-------------------")
+		#Decide que tipo de IA utilizar
+		match unidad.tipo_IA:
+			unidad.IA_a_utilizar.Default:#Si se configuro como Default
+				await ejecutar_ataque(unidad)#Ejecuta el ataque Y espera a que todo el ataque termine
+				if decision_final == decision_IA.no_definido and !ubicaciones_ocupadas_enemigos.is_empty(): 
+					#Si no esta definido su estado, significa que no pudo atacar AND si hay enemigos aun vivos
+					if await avanzar_hacia_un_enemigo(unidad):#Verifica si es posible avanzar a un enemigo
+						#Avanza hacia algun enemigo
+						await unidad.animacion_movimiento_terminada #Espera la animacion de la unidad
+						decision_final = decision_IA.moviendose#Actualiza el estado
+				print("Decision final de la IA: ",decision_final)
+				print("-------------------")
+			unidad.IA_a_utilizar.Patrullar:#Si se configuro como Patrullar
+				await ejecutar_ataque(unidad)#Intenta ejecutar algun ataque si es posible
+				if decision_final == decision_IA.no_definido:#Si no pudo ejecutar un ataque, empieza a patrullar
+					@warning_ignore("integer_division") 
+					unidad.puntos_movimiento = unidad.puntos_movimiento/2 #Divide a la mitad su movimiento para que no se vaya muy lejos
+					AlgoritmoDijkstra.moviendo_unidad(unidad,nodo_mundo.ubicaciones_ocupadas.duplicate(),false,false,false)#Obtiene los posibles movimientos
+					AlgoritmoDijkstra.movimientos_disponibles.erase(unidad.coordenada_local_tilemap)#Elimina su propia posicion de entre las opciones
+					var ubicacion_aleatoria = AlgoritmoDijkstra.movimientos_disponibles.keys().pick_random()#Elige una aleatoria
+					AlgoritmoDijkstra.a_estrella_multi_hilo(unidad.coordenada_local_tilemap,ubicacion_aleatoria,nodo_mundo.ubicaciones_ocupadas.duplicate(),unidad.puntos_movimiento_maximo)#Conecta el origen y destino con A*
+					await AlgoritmoDijkstra.resultado_estrella_obtenido#Espera a que termine de procesar
+					var resultado = AlgoritmoDijkstra.resultado_a_estrella#Almacena el resultado
+					print("Seguire el siguiente camino:",resultado)
+					if !(resultado.is_empty()):#Si hay un camino disponible, aplica el movimiento
+						nodo_mundo.mover_unidad_con_a_estrella(unidad,resultado) #mueve la unidad con la funcion de A*
+					else:
+						push_error("Patrullar no encontro ningun camino para patrullar")
+				print("Patrullo patrullo wiu wiu")
 	nodo_mundo.pasar_turno(false)#Pasa el turno al terminar de procesar todo
 	todas_las_unidades_procesadas.emit() #<- actualmente sin funcionalidad
 

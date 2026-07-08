@@ -198,6 +198,11 @@ func a_estrella_multi_hilo(origen: Vector2,destino: Vector2,ubicaciones_ocupadas
 #https://web.archive.org/web/20190411040123/http://aigamedev.com/open/article/clearance-based-pathfinding/
 var contador_nodos_debug : int #<------- puramente debug esto
 func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas: Dictionary, limpiar_tiles : bool, movimiento_maximo : int) -> Array:
+	if origen == destino:
+		push_error("Origen y Destino tienen el mismo valor, cancelando funcion")
+		print("Camino no encontrado") # No encontró camino
+		call_deferred_thread_group("emit_signal","resultado_estrella_obtenido")#Activa la señal de que termino de calcular
+		return []
 	var inicio := Time.get_ticks_usec() #<---- debug
 	limpiar_movimientos()
 	var frontier := PriorityQueue.new() #Fronteras a calcular, utilizando la libreria PriorityQueue
@@ -212,7 +217,7 @@ func algoritmo_a_estrella(origen: Vector2,destino: Vector2,ubicaciones_ocupadas:
 	while not frontier.empty(): #Mientras hay fronteras para explorar
 		#  Priorizar el nodo más prometedor
 		var current: Vector2 = frontier.extract()#Toma la frontera con mayor prioridad
-		#dibujando_tile_individual(current)<---- Ocasiona error remove: Condition "p_elem->_root != this" is true
+		#dibujando_tile_individual(current)#<---- Ocasiona error remove: Condition "p_elem->_root != this" is true
 		#  Si llegamos al destino, reconstruimos camino
 		if current == destino:
 			if limpiar_tiles:
@@ -296,6 +301,7 @@ func calcular_coste_salto(origen: Vector2, destino: Vector2) -> float:
 
 func oddq_to_cube(hex: Vector2i) -> Vector3: #Convierte las coordenadas odd-q a Cube
 	var x = hex.x
+	@warning_ignore("integer_division") 
 	var z = hex.y - (hex.x - (hex.x & 1)) / 2
 	var y = -x - z
 	#print(Vector3i(x, y, z),"x,y,z")
