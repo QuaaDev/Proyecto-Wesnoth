@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ct1t2j7liiekk" path="res://Escenas/tilemap/terrain_carpet.tscn" id="2_padnj"]
 [ext_resource type="PackedScene" uid="uid://b8r720cpbjcsp" path="res://Escenas/tilemap/tile_map_altura.tscn" id="3_j3ph2"]
 [ext_resource type="PackedScene" uid="uid://dwp71ugal6w1k" path="res://Escenas/tilemap/tile_map_hud.tscn" id="4_c8r43"]
+[ext_resource type="PackedScene" uid="uid://btdj0ckytx6lu" path="res://Escenas/Unidad/dragon/unidad_dragon.tscn" id="6_j3ph2"]
 
 [node name="diario_mercenario_lvl_3" type="Node2D" unique_id=1983946691]
 script = ExtResource("1_padnj")
@@ -21,3 +22,15 @@ tile_map_data = PackedByteArray("AAANADoAAQAAAAAAAAAOADoAAQAAAAAAAAANADkAAQAAAAA
 [node name="tile_map_hud" parent="." unique_id=886965225 instance=ExtResource("4_c8r43")]
 
 [node name="UnidadesCarpet" type="Node" parent="." unique_id=442925150]
+
+[node name="unidad_dragon" parent="UnidadesCarpet" unique_id=844868248 instance=ExtResource("6_j3ph2")]
+position = Vector2(900, 4286)
+equipo = 1
+
+[node name="unidad_dragon2" parent="UnidadesCarpet" unique_id=1529299162 instance=ExtResource("6_j3ph2")]
+position = Vector2(1174, 3821)
+equipo = 2
+
+[node name="unidad_dragon3" parent="UnidadesCarpet" unique_id=773165269 instance=ExtResource("6_j3ph2")]
+position = Vector2(909, 3860)
+equipo = 2
